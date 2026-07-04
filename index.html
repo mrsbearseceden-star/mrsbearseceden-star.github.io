@@ -147,6 +147,9 @@
     transition:transform .3s ease,box-shadow .3s ease;}
   .cap:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
   .cap .ico{font-size:26px;}
+  .icn{width:26px;height:26px;stroke:var(--honey-deep);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle;}
+  .icn.sm{width:19px;height:19px;vertical-align:-3px;margin-right:6px;}
+  .icn.sage{stroke:var(--sage);}
   .cap h3{font-size:18px;margin:8px 0 10px;}
   .cap ul{list-style:none;}
   .cap li{font-size:13.5px;color:var(--ink-soft);padding:4px 0 4px 20px;position:relative;line-height:1.45;}
@@ -342,7 +345,7 @@
       <div class="mc-bar"><span></span><span></span><span></span><em>Bear Mission Control — the live dashboard</em></div>
       <div class="mc-body">
         <div class="mc-head">
-          <div class="mc-title">🐻 Mission Control</div>
+          <div class="mc-title">Mission Control</div>
           <div class="mc-date">Thursday · 7:42 AM · both schools</div>
         </div>
         <div class="mc-stats">
@@ -353,7 +356,7 @@
         </div>
         <div class="mc-cols">
           <div class="mc-col">
-            <h4>🌟 Today at a Glance</h4>
+            <h4>Today at a Glance</h4>
             <div class="mc-row"><span class="tm">4:30 AM</span>Login &amp; connection readiness check<span class="pill done">DONE</span></div>
             <div class="mc-row"><span class="tm">5:45 AM</span>Daily financial briefing<span class="pill done">DONE</span></div>
             <div class="mc-row"><span class="tm">6:00 AM</span>Director briefings + weather<span class="pill done">DONE</span></div>
@@ -364,7 +367,7 @@
             <div class="mc-row"><span class="tm">6:00 PM</span>Photos → social posts<span class="pill next">NEXT</span></div>
           </div>
           <div class="mc-col">
-            <h4>🗓️ The Week at a Glance</h4>
+            <h4>The Week at a Glance</h4>
             <div class="mc-chart">
               <div class="cbar" style="height:78%;"><i>28</i></div>
               <div class="cbar" style="height:88%;"><i>31</i></div>
@@ -373,7 +376,7 @@
               <div class="cbar" style="height:70%;"><i>26</i></div>
             </div>
             <div class="mc-days"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div>
-            <div class="mc-special">📌 <b>This week:</b> payroll signatures Tue · grocery cart loads Wed · directors review &amp; order Thu · delivery + sanitizer spray-down Fri</div>
+            <div class="mc-special"><b>This week:</b> payroll signatures Tue · grocery cart loads Wed · directors review &amp; order Thu · delivery + sanitizer spray-down Fri</div>
           </div>
         </div>
       </div>
@@ -413,7 +416,7 @@
       <h2>Everything it carries — in every area.</h2>
       <p class="lede">Not one corner of the operation is left out. Here's the honest inventory of what runs at a school on this system.</p></div>
     <div class="cap-grid">
-      <div class="cap reveal d1"><div class="ico">⏰</div><h3>Reminders That Never Sleep</h3><ul>
+      <div class="cap reveal d1"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Reminders That Never Sleep</h3><ul>
         <li>Daily mail check for directors</li>
         <li>Thursday food-cart review before delivery day</li>
         <li>Monthly reports due — reminded on the 1st</li>
@@ -423,7 +426,7 @@
         <li>Supply-order inventory on the 25th</li>
         <li>Newsletter reminder on the 24th</li>
       </ul></div>
-      <div class="cap reveal d2"><div class="ico">🧽</div><h3>Cleaning, Safety &amp; Facility</h3><ul>
+      <div class="cap reveal d2"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div><h3>Cleaning, Safety &amp; Facility</h3><ul>
         <li>Daily classroom cleaning charts</li>
         <li>Bathroom cleaning logs</li>
         <li>Friday sanitizer spray-down reminder to all staff</li>
@@ -432,7 +435,7 @@
         <li>Handwashing, diapering &amp; illness posters</li>
         <li>Allergy action plans &amp; cover sheets</li>
       </ul></div>
-      <div class="cap reveal d3"><div class="ico">🏛️</div><h3>Compliance &amp; Licensing</h3><ul>
+      <div class="cap reveal d3"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div><h3>Compliance &amp; Licensing</h3><ul>
         <li>License &amp; inspection watch — 60-day warnings</li>
         <li>Staff certification tracker, checked weekly</li>
         <li>Child &amp; staff file audits — missing docs flagged</li>
@@ -440,7 +443,7 @@
         <li>Monthly Food Program / SR / VPK walkthroughs</li>
         <li>Attendance records that build up for audits</li>
       </ul></div>
-      <div class="cap reveal d1"><div class="ico">💵</div><h3>Finance &amp; Payroll</h3><ul>
+      <div class="cap reveal d1"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Finance &amp; Payroll</h3><ul>
         <li>Daily financial briefing — both schools</li>
         <li>Payroll % of revenue watched against target</li>
         <li>Hours gathered every other week for payroll entry</li>
@@ -448,7 +451,7 @@
         <li>Who's-behind-on-tuition owner summary</li>
         <li>Monthly subsidy deposit reconciliation</li>
       </ul></div>
-      <div class="cap reveal d2"><div class="ico">💌</div><h3>Family Connection</h3><ul>
+      <div class="cap reveal d2"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><h3>Family Connection</h3><ul>
         <li>Mid-week "Teddy Bear Talk" parenting tips</li>
         <li>Friday recap — theme, schedule, field trips</li>
         <li>Monthly newsletter, written &amp; sent</li>
@@ -457,7 +460,7 @@
         <li>Tour package for prospective families</li>
         <li>Weekend auto-reply with your registration link</li>
       </ul></div>
-      <div class="cap reveal d3"><div class="ico">🤝</div><h3>Staff Building, Every Day</h3><ul>
+      <div class="cap reveal d3"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Staff Building, Every Day</h3><ul>
         <li>Daily inspirational quote — in each teacher's language</li>
         <li>Bilingual weekly heads-up (theme, trips, schedule)</li>
         <li>Clock-in celebrations &amp; warm reminders</li>
@@ -465,21 +468,21 @@
         <li>Staff birthdays &amp; milestones celebrated</li>
         <li>Directors briefed daily — never guessing</li>
       </ul></div>
-      <div class="cap reveal d1"><div class="ico">🍎</div><h3>Food &amp; Supplies</h3><ul>
+      <div class="cap reveal d1"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div><h3>Food &amp; Supplies</h3><ul>
         <li>Menus turned into age-band-sized shopping lists</li>
         <li>Grocery carts auto-loaded weekly, per school</li>
         <li>Directors review &amp; place — you stay in control</li>
         <li>Monthly bulk supply order with inventory check</li>
         <li>Delivery rhythm that never misses a week</li>
       </ul></div>
-      <div class="cap reveal d2"><div class="ico">📸</div><h3>Social Media &amp; Marketing</h3><ul>
+      <div class="cap reveal d2"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><h3>Social Media &amp; Marketing</h3><ul>
         <li>Classroom photos → captioned, branded posts</li>
         <li>Three content streams, always 2 weeks ahead</li>
         <li>Branded event &amp; closure flyers</li>
         <li>Instant posting for in-the-moment magic</li>
         <li>Queue health monitored — refills itself</li>
       </ul></div>
-      <div class="cap reveal d3"><div class="ico">🧭</div><h3>Your Command Center</h3><ul>
+      <div class="cap reveal d3"><div class="ico"><svg class="icn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div><h3>Your Command Center</h3><ul>
         <li>Morning action board — approvals first, then the day</li>
         <li>Twice-daily "waiting on you" digest</li>
         <li>Mission-control dashboard of every task</li>
@@ -510,7 +513,7 @@
       <div class="feat reveal d3" style="border-top-color:var(--sage);"><h3>Honest &amp; in your control</h3><p>Some steps use secure sites that need a real login — so you (or your director) sign in, and the system does the rest. You always hold the keys.</p></div>
     </div>
     <div class="reveal" style="max-width:860px;margin:36px auto 0;background:var(--ink);color:#f3ead9;border-radius:10px;padding:30px 34px;box-shadow:var(--shadow);">
-      <h3 style="color:#fff;font-size:22px;margin-bottom:8px;">👀 Never a black box.</h3>
+      <h3 style="color:#fff;font-size:22px;margin-bottom:8px;"><svg class="icn sm" style="stroke:var(--honey);" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Never a black box.</h3>
       <p style="font-size:15.5px;color:#e6dcc8;">This is not a blind operation. Any time a task is running, you can open it and <b style="color:var(--honey);">watch it work — live</b>. Every step is narrated in real time: what it's reading, what it's recording, what it decided and why. Most days you won't need to look — that's the beauty of it. But the window is always open, and the full step-by-step record of every single run is saved, so you can review anything, any time.</p>
     </div>
   </div>
@@ -523,12 +526,12 @@
       <h2>Your families' trust is the whole business.</h2>
       <p class="lede">This was built by an owner who answers to licensing, subsidy programs, and — most importantly — parents. Security isn't a feature bolted on at the end; it's how the system is designed.</p></div>
     <div class="feat-grid">
-      <div class="feat reveal d1" style="border-top-color:var(--sage);"><h3>🔑 You hold every key</h3><p>Your passwords are never stored, shared, or handed to the system. Secure portals — banking, subsidy, licensing — always get a real human sign-in from you or your director.</p></div>
-      <div class="feat reveal d2" style="border-top-color:var(--sage);"><h3>🛡️ Children's data stays put</h3><p>Child records are never copied into outside services. The system works inside the platforms you already use and trust — your childcare software, food program, and subsidy portals.</p></div>
-      <div class="feat reveal d3" style="border-top-color:var(--sage);"><h3>✋ Approval gates on everything public</h3><p>Nothing reaches parents, social media, or the public without your explicit yes — every photo, every post, every message is approved by a human first.</p></div>
-      <div class="feat reveal d1" style="border-top-color:var(--sage);"><h3>🧾 Official filings stay human</h3><p>Government claims and subsidy submissions are prepared and organized for you — but a person always reviews and presses submit. The system records; you certify.</p></div>
-      <div class="feat reveal d2" style="border-top-color:var(--sage);"><h3>💵 It never moves money</h3><p>The system watches your finances and preps payroll — but it never places orders on its own, never transfers funds, never touches your books. Your accountant's lane stays your accountant's lane.</p></div>
-      <div class="feat reveal d3" style="border-top-color:var(--sage);"><h3>📓 A full audit trail</h3><p>Every action is logged nightly — what ran, when, and what it touched. Privacy-first publishing too: first names only, photo-by-photo approval, and no-photo lists honored.</p></div>
+      <div class="feat reveal d1" style="border-top-color:var(--sage);"><h3><svg class="icn sm sage" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>You hold every key</h3><p>Your passwords are never stored, shared, or handed to the system. Secure portals — banking, subsidy, licensing — always get a real human sign-in from you or your director.</p></div>
+      <div class="feat reveal d2" style="border-top-color:var(--sage);"><h3><svg class="icn sm sage" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Children's data stays put</h3><p>Child records are never copied into outside services. The system works inside the platforms you already use and trust — your childcare software, food program, and subsidy portals.</p></div>
+      <div class="feat reveal d3" style="border-top-color:var(--sage);"><h3><svg class="icn sm sage" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Approval gates on everything public</h3><p>Nothing reaches parents, social media, or the public without your explicit yes — every photo, every post, every message is approved by a human first.</p></div>
+      <div class="feat reveal d1" style="border-top-color:var(--sage);"><h3><svg class="icn sm sage" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Official filings stay human</h3><p>Government claims and subsidy submissions are prepared and organized for you — but a person always reviews and presses submit. The system records; you certify.</p></div>
+      <div class="feat reveal d2" style="border-top-color:var(--sage);"><h3><svg class="icn sm sage" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>It never moves money</h3><p>The system watches your finances and preps payroll — but it never places orders on its own, never transfers funds, never touches your books. Your accountant's lane stays your accountant's lane.</p></div>
+      <div class="feat reveal d3" style="border-top-color:var(--sage);"><h3><svg class="icn sm sage" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>A full audit trail</h3><p>Every action is logged nightly — what ran, when, and what it touched. Privacy-first publishing too: first names only, photo-by-photo approval, and no-photo lists honored.</p></div>
     </div>
   </div>
 </section>
@@ -543,7 +546,7 @@
       <div class="res"><div class="cover">The Preschool Professional</div><h3>The Book</h3><p>The foundational guide to running an excellent school.</p><a href="https://www.amazon.com/stores/Mrs-Bear/author/B0DNG9XXVD/allbooks" target="_blank">View on Amazon →</a></div>
       <div class="res"><div class="cover">Bear Phonics Program</div><h3>Reading Curriculum</h3><p>A complete decodable reading system with character development.</p><a href="https://youtube.com/@bearseceden" target="_blank">Watch on YouTube →</a></div>
       <div class="res"><div class="cover">Feelings Matter</div><h3>Social-Emotional</h3><p>Helping little ones name and navigate big emotions.</p><a href="https://www.amazon.com/stores/Mrs-Bear/author/B0DNG9XXVD/allbooks" target="_blank">View on Amazon →</a></div>
-      <div class="res"><div class="cover">🧸 The Milestone Wizard</div><h3>Milestone Tool</h3><p>Milestones, activities &amp; materials by age and state — for any teacher, any classroom.</p><a href="https://mrsbearseceden-star.github.io/milestone-wizard.html" target="_blank">Open the Wizard →</a></div>
+      <div class="res"><div class="cover">The Milestone Wizard</div><h3>Milestone Tool</h3><p>Milestones, activities &amp; materials by age and state — for any teacher, any classroom.</p><a href="https://mrsbearseceden-star.github.io/milestone-wizard.html" target="_blank">Open the Wizard →</a></div>
       <div class="res"><div class="cover">Mrs. Bear's ECE Den</div><h3>The ECE Den Hub</h3><p>Books, music, events &amp; more — everything Mrs. Bear, all in one place.</p><a href="https://new-interface-a4c4b3.zapier.app/" target="_blank">Visit the Den →</a></div>
     </div>
     <p class="note">Books live on Amazon · programs live on YouTube — real resources, in classrooms today.</p>
@@ -557,12 +560,12 @@
       <h2>Your automations do the work. These let you <em style="color:var(--honey-deep);">see</em> it.</h2>
       <p class="lede">The Command Center is a set of live, pinnable visual dashboards — your school's vital signs, always one glance away, on any device. No scrolling through chat history, no wondering "did it run?" You open a board, and in five seconds you know. It's the difference between owning automations and truly commanding them.</p></div>
     <div class="feat-grid">
-      <div class="feat reveal d1"><div class="n">🐻 THE HEARTBEAT</div><h3>Mission Control</h3><p>Every automation, its live status, and your whole week on one organized board — green ran, orange is waiting on you, blue is up next, red never slips by unseen. You saw it earlier on this page; it's the screen owners check with their morning coffee.</p></div>
-      <div class="feat reveal d2"><div class="n">📇 THE MEMORY</div><h3>Skills Reference</h3><p>Every automation you own in a searchable card grid, each with the exact phrase that triggers it — click to copy, paste, done. Built for owners who are new or juggling too much to memorize commands (so, all of us).</p></div>
-      <div class="feat reveal d3"><div class="n">🧮 THE MONEY-SAVER</div><h3>Staffing &amp; Ratios</h3><p>Who's signed in vs. who's on the floor vs. your state's ratios — live, as the day changes. Spot the moment you can trim hours or combine rooms, and see gaps before they become violations. This board alone can pay for your whole system.</p></div>
-      <div class="feat reveal d1"><div class="n">💵 THE PULSE</div><h3>Finance Snapshot</h3><p>Cash position, revenue picture, and payroll pace at a glance — the numbers that actually drive decisions, without opening the books or waiting on your accountant.</p></div>
-      <div class="feat reveal d2"><div class="n">📸 THE LOOKOUT</div><h3>Social Queue Health</h3><p>All your content streams on one board — what's queued, what posts next, and an early warning before any stream runs dry. Your pages stay alive without you thinking about them.</p></div>
-      <div class="feat reveal d3"><div class="n">✅ THE SHIELD</div><h3>Onboarding &amp; Compliance</h3><p>Every child file, staff file, certification, and expiration date on one board — see exactly what's missing <em>before</em> licensing walks in, not after. Sleep-at-night visibility.</p></div>
+      <div class="feat reveal d1"><div class="n"><svg class="icn sm" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>THE HEARTBEAT</div><h3>Mission Control</h3><p>Every automation, its live status, and your whole week on one organized board — green ran, orange is waiting on you, blue is up next, red never slips by unseen. You saw it earlier on this page; it's the screen owners check with their morning coffee.</p></div>
+      <div class="feat reveal d2"><div class="n"><svg class="icn sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>THE MEMORY</div><h3>Skills Reference</h3><p>Every automation you own in a searchable card grid, each with the exact phrase that triggers it — click to copy, paste, done. Built for owners who are new or juggling too much to memorize commands (so, all of us).</p></div>
+      <div class="feat reveal d3"><div class="n"><svg class="icn sm" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>THE MONEY-SAVER</div><h3>Staffing &amp; Ratios</h3><p>Who's signed in vs. who's on the floor vs. your state's ratios — live, as the day changes. Spot the moment you can trim hours or combine rooms, and see gaps before they become violations. This board alone can pay for your whole system.</p></div>
+      <div class="feat reveal d1"><div class="n"><svg class="icn sm" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>THE PULSE</div><h3>Finance Snapshot</h3><p>Cash position, revenue picture, and payroll pace at a glance — the numbers that actually drive decisions, without opening the books or waiting on your accountant.</p></div>
+      <div class="feat reveal d2"><div class="n"><svg class="icn sm" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>THE LOOKOUT</div><h3>Social Queue Health</h3><p>All your content streams on one board — what's queued, what posts next, and an early warning before any stream runs dry. Your pages stay alive without you thinking about them.</p></div>
+      <div class="feat reveal d3"><div class="n"><svg class="icn sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>THE SHIELD</div><h3>Onboarding &amp; Compliance</h3><p>Every child file, staff file, certification, and expiration date on one board — see exactly what's missing <em>before</em> licensing walks in, not after. Sleep-at-night visibility.</p></div>
     </div>
     <div class="reveal" style="max-width:900px;margin:40px auto 0;background:#fff;border:2px solid var(--honey-deep);border-radius:10px;padding:26px 30px;box-shadow:var(--shadow);">
       <h3 style="font-size:21px;margin-bottom:14px;text-align:center;">Three ways to get the Command Center</h3>
@@ -607,17 +610,17 @@
       <p class="lede">From free resources to a fully guided setup with Mrs. Bear herself. Every paid tier is a single installable plugin — no videos to watch, no manual to memorize — and a one-time purchase, no subscription for the system itself.</p></div>
     <div class="price-grid">
       <div class="plan free reveal d1"><h3>Free Resource Library</h3><div class="tagline">"Browse the Hive"</div><div class="price">Free</div>
-        <ul><li><em>The Preschool Professional</em> — the book</li><li>Bear Phonics reading program</li><li><em>Feelings Matter</em> — social-emotional book</li><li><a href="https://mrsbearseceden-star.github.io/milestone-wizard.html" target="_blank" style="color:inherit;text-decoration:underline;"><b>🧸 The Milestone Wizard</b></a> — milestones, activities &amp; materials by age and state</li><li><a href="https://new-interface-a4c4b3.zapier.app/" target="_blank" style="color:inherit;text-decoration:underline;">Mrs. Bear's ECE Den hub</a></li><li>No purchase or install needed</li><li>Open to everyone, always</li></ul>
+        <ul><li><em>The Preschool Professional</em> — the book</li><li>Bear Phonics reading program</li><li><em>Feelings Matter</em> — social-emotional book</li><li><a href="https://mrsbearseceden-star.github.io/milestone-wizard.html" target="_blank" style="color:inherit;text-decoration:underline;"><b>The Milestone Wizard</b></a> — milestones, activities &amp; materials by age and state</li><li><a href="https://new-interface-a4c4b3.zapier.app/" target="_blank" style="color:inherit;text-decoration:underline;">Mrs. Bear's ECE Den hub</a></li><li>No purchase or install needed</li><li>Open to everyone, always</li></ul>
         <a href="#library" class="btn ghost">Browse the Free Library</a></div>
       <div class="plan reveal d2"><h3>The Playbook</h3><div class="tagline">"Welcome to the Hive!"</div><div class="price">$100<span> one-time</span></div>
         <div class="roi"><b>~3 hrs/day back</b> · ~$7,500+/yr saved.* Pays for itself in under a week.</div>
         <ul><li>Step-by-step setup guide</li><li><b>5 automations</b> — attendance &amp; food program, director briefing, staffing ratio check, good-morning briefing, end-of-day log</li><li>Runs on Claude Pro ($20/mo)</li><li>Best for one school, self-starters</li></ul>
-        <div class="addon">➕ <b>+ <a href="https://payhip.com/b/RWmjr" target="_blank" style="color:inherit;">Command Center — $20</a></b><br>Mission Control + Skills Reference dashboards</div>
+        <div class="addon"><b>+ <a href="https://payhip.com/b/RWmjr" target="_blank" style="color:inherit;">Command Center — $20</a></b><br>Mission Control + Skills Reference dashboards</div>
         <a href="https://payhip.com/b/DKjcR" target="_blank" class="btn ghost">Buy Now — $100</a></div>
       <div class="plan pop reveal d3"><span class="ribbon">Most Popular</span><h3>The Full System</h3><div class="tagline">"Sweet as Honey"</div><div class="price">$250<span> one-time</span></div>
         <div class="roi"><b>~5 hrs/day back</b> (avg) · ~$12,500+/yr saved.* Pays back within the first week.</div>
         <ul><li>Everything in The Playbook</li><li><b>40 automations</b> total — finance, social media, parent comms &amp; compliance added</li><li>Runs on Claude Max 5x ($100/mo)</li></ul>
-        <div class="addon">➕ <b>+ <a href="https://payhip.com/b/MwuZs" target="_blank" style="color:inherit;">Command Center — $50</a></b><br>All 6 dashboards, incl. Finance &amp; Staffing</div>
+        <div class="addon"><b>+ <a href="https://payhip.com/b/MwuZs" target="_blank" style="color:inherit;">Command Center — $50</a></b><br>All 6 dashboards, incl. Finance &amp; Staffing</div>
         <a href="https://payhip.com/b/zdwWG" target="_blank" class="btn solid">Buy Now — $250</a></div>
       <div class="plan reveal d1"><h3>Professional Bundle</h3><div class="tagline">"Mrs. Bear's Den"</div><div class="price">$500<span> one-time</span></div>
         <div class="roi"><b>~8 hrs/day back</b> · ~$20,000+/yr saved.* Like reliable part-time office help — without the hire.</div>
@@ -625,46 +628,4 @@
         <a href="https://payhip.com/b/DsRAb" target="_blank" class="btn ghost">Buy Now — $500</a></div>
       <div class="plan custom reveal d2"><h3>One-on-One</h3><div class="tagline">"Straight From the Hive"</div><div class="price">Custom</div>
         <ul><li>Mrs. Bear personally trains your team</li><li>Installed alongside you, live</li><li>Tailored to your schools &amp; tools</li><li>Tell her about your school first</li></ul>
-        <a href="https://form.jotform.com/261834211759056" target="_blank" class="btn solid" style="background:var(--honey-deep);">Inquire</a></div>
-    </div>
-    <p class="note" style="margin-top:16px;">*Estimated value based on typical time spent on these tasks, benchmarked at $20/hr (2026 U.S. administrative-assistant wage average, PayScale) — shown at half the raw hours-saved calculation to reflect the equivalent of reliable part-time help, not an assumed full-time hire. A conservative, transparent estimate, not a guarantee. Even after the Claude subscription each tier runs on, the time and money saved comfortably outweighs the cost for most owners.</p>
-
-    <div class="reveal" style="max-width:900px;margin:36px auto 0;background:#fff;border:2px solid var(--honey-deep);border-radius:10px;padding:30px 34px;box-shadow:var(--shadow);">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:280px;">
-          <div style="font-style:italic;color:var(--honey-deep);font-size:13px;margin-bottom:4px;">Stay in the hive, all year</div>
-          <h3 style="font-size:24px;margin-bottom:8px;">The Buzz <span style="font-size:13px;font-weight:400;color:var(--ink-soft);font-style:italic;">— an optional membership, not one of the five tiers above</span></h3>
-          <p style="font-size:15px;color:var(--ink-soft);margin-bottom:10px;">A standalone monthly membership, open to anyone — whichever tier you own, or none yet. Keeps your system growing instead of going stale.</p>
-          <ul style="list-style:none;font-size:14px;color:var(--ink-soft);">
-            <li style="padding:5px 0 5px 22px;position:relative;">— <b>Teacher Bundles</b> — monthly classroom printables: lesson plans, wall alphabet &amp; number cards, worksheets &amp; setup materials (Drop #1 is live inside)</li>
-            <li style="padding:5px 0 5px 22px;position:relative;">— New automation drops added to your library over time</li>
-            <li style="padding:5px 0 5px 22px;position:relative;">— Ongoing additions to the resource &amp; template library</li>
-            <li style="padding:5px 0 5px 22px;position:relative;">— A short tips newsletter — ECE &amp; ops ideas worth knowing</li>
-            <li style="padding:5px 0 5px 22px;position:relative;">— Priority access whenever something new ships</li>
-            <li style="padding:5px 0 5px 22px;position:relative;">— A monthly live Q&amp;A — bring your questions, hear what's new</li>
-          </ul>
-        </div>
-        <div style="text-align:center;flex-shrink:0;">
-          <div class="price" style="margin:0;font-size:34px;">$19<span style="font-size:14px;">/mo</span></div>
-          <div style="font-size:12.5px;color:var(--ink-soft);margin-bottom:14px;">or $190/yr</div>
-          <a href="https://payhip.com/b/Kcw8r" target="_blank" class="btn solid">Join The Buzz</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIAL -->
-<section class="testi">
-  <div class="wrap reveal">
-    <span class="eyebrow">What Owners Say</span>
-    <p class="quote">"I got my afternoons back. Attendance and the food program simply happen now — and I finally have the time to actually lead my school."
-      <span class="who">— A future Preschool Professional</span></p>
-    <p class="ph">Placeholder — real testimonials from your pilot schools will live here.</p>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="wrap">
-    <div cl
+        <a href="https://form.jotform.com/261834211759056" target="_blank" class="btn solid" style="backgrou
