@@ -154,7 +154,9 @@
 
   /* ECOSYSTEM / RESOURCE LIBRARY */
   .eco{background:#fff;}
-  .eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:10px;}
+  .eco-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:10px;}
+  .eco-grid.paid{grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:1080px){.eco-grid{grid-template-columns:repeat(3,1fr);}}
   .res{background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:24px 20px;text-align:center;
     transition:transform .3s ease,box-shadow .3s ease;}
   .res:hover{transform:translateY(-6px);box-shadow:var(--shadow-sm);}
@@ -164,6 +166,7 @@
   .res:nth-child(2) .cover{background:linear-gradient(150deg,#6E8B6A,#47603f);}
   .res:nth-child(3) .cover{background:linear-gradient(150deg,#5F9BB3,#356b80);}
   .res:nth-child(4) .cover{background:linear-gradient(150deg,#A0729A,#6b4166);}
+  .res:nth-child(5) .cover{background:linear-gradient(150deg,#C98A3B,#7a4f1d);}
   .res h3{font-size:17px;margin-bottom:6px;}
   .res p{font-size:13.5px;color:var(--ink-soft);}
   .res a{display:inline-block;margin-top:10px;font-size:13px;color:var(--honey-deep);text-decoration:none;font-weight:700;}
@@ -237,7 +240,8 @@
     <a class="navlink" href="#system">The System</a>
     <a class="navlink" href="#day">A Day Inside</a>
     <a class="navlink" href="#carries">Everything</a>
-    <a class="navlink" href="#library">Resources</a>
+    <a class="navlink" href="#library">Free Library</a>
+    <a class="navlink" href="#pro-library">Pro Library</a>
     <a class="navlink" href="#pricing">Pricing</a>
     <a class="navlink" href="#faq">FAQ</a>
     <a class="navlink" href="#waitlist">Early Access</a>
@@ -252,7 +256,7 @@
     <h1>Run your preschool like a <span class="accent">professional</span> — in about an hour a day.</h1>
     <p class="sub">An intelligent operations system that carries the daily grind for you — attendance, the food program, compliance, payroll, parent updates, staff culture, safety routines — so one owner can run multiple schools with a fraction of the hands-on work. Less busywork. Less stress.</p>
     <div class="btns">
-      <a href="#pricing" class="btn solid">Get Early Access</a>
+      <a href="#pricing" class="btn solid">Get the System Today</a>
       <a href="#day" class="btn ghost">See a Day Inside</a>
     </div>
     <p class="founder">Created by a working preschool owner running two schools with it every day — and author of <em>The Preschool Professional</em>.</p>
@@ -532,16 +536,35 @@
 <!-- RESOURCE LIBRARY / ECOSYSTEM -->
 <section id="library" class="eco">
   <div class="wrap">
-    <div class="center reveal"><span class="eyebrow">The Professional Library</span>
-      <h2>More than software — a whole ecosystem.</h2>
-      <p class="lede">Once your operations run themselves, level up what happens in the classroom. Add proven resources from a fellow preschool professional — available on their own or as a bundle.</p></div>
+    <div class="center reveal"><span class="eyebrow">The Free Resource Library</span>
+      <h2>Free for every teacher and owner.</h2>
+      <p class="lede">Mrs. Bear's books, the Bear Phonics program, the Milestone Wizard, and the ECE Den hub — free to explore, no purchase needed. Ever.</p></div>
     <div class="eco-grid reveal">
       <div class="res"><div class="cover">The Preschool Professional</div><h3>The Book</h3><p>The foundational guide to running an excellent school.</p><a href="https://www.amazon.com/stores/Mrs-Bear/author/B0DNG9XXVD/allbooks" target="_blank">View on Amazon →</a></div>
       <div class="res"><div class="cover">Bear Phonics Program</div><h3>Reading Curriculum</h3><p>A complete decodable reading system with character development.</p><a href="https://youtube.com/@bearseceden" target="_blank">Watch on YouTube →</a></div>
       <div class="res"><div class="cover">Feelings Matter</div><h3>Social-Emotional</h3><p>Helping little ones name and navigate big emotions.</p><a href="https://www.amazon.com/stores/Mrs-Bear/author/B0DNG9XXVD/allbooks" target="_blank">View on Amazon →</a></div>
-      <div class="res"><div class="cover">Forms &amp; Facility Kit</div><h3>Ready-to-Print Library</h3><p>Cleaning charts, emergency plans, tour packages, sign-in sheets, binder system &amp; more.</p><a href="#pricing">Included in the System →</a></div>
+      <div class="res"><div class="cover">🧸 The Milestone Wizard</div><h3>Milestone Tool</h3><p>Milestones, activities &amp; materials by age and state — for any teacher, any classroom.</p><a href="https://mrsbearseceden-star.github.io/milestone-wizard.html" target="_blank">Open the Wizard →</a></div>
+      <div class="res"><div class="cover">Mrs. Bear's ECE Den</div><h3>The ECE Den Hub</h3><p>Books, music, events &amp; more — everything Mrs. Bear, all in one place.</p><a href="https://new-interface-a4c4b3.zapier.app/" target="_blank">Visit the Den →</a></div>
     </div>
     <p class="note">Books live on Amazon · programs live on YouTube — real resources, in classrooms today.</p>
+  </div>
+</section>
+
+<!-- PROFESSIONAL LIBRARY (PAID) -->
+<section id="pro-library" style="background:linear-gradient(160deg,#F6EAD0,#FBF6EC);">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">The Professional Library</span>
+      <h2>The paid collection.</h2>
+      <p class="lede">The complete operations system, the visual dashboards, and the membership that keeps it all growing — every product ready to buy today.</p></div>
+    <div class="eco-grid paid reveal">
+      <div class="res"><div class="cover" style="background:linear-gradient(150deg,#E8A317,#C6820C);">The Playbook · $100</div><h3>The Playbook</h3><p>Your first 5 automations + step-by-step setup guide. "Welcome to the Hive!"</p><a href="https://payhip.com/b/DKjcR" target="_blank">Buy Now — $100 →</a></div>
+      <div class="res"><div class="cover" style="background:linear-gradient(150deg,#C6820C,#8a5a06);">The Full System · $250</div><h3>The Full System</h3><p>40 automations — finance, social media, parent comms &amp; compliance. Most popular. "Sweet as Honey"</p><a href="https://payhip.com/b/zdwWG" target="_blank">Buy Now — $250 →</a></div>
+      <div class="res"><div class="cover" style="background:linear-gradient(150deg,#2B2117,#5c4d3a);">Professional Bundle · $500</div><h3>The Professional Bundle</h3><p>60 automations + 8 templates + all 6 dashboards free. "Mrs. Bear's Den"</p><a href="https://payhip.com/b/DsRAb" target="_blank">Buy Now — $500 →</a></div>
+      <div class="res"><div class="cover" style="background:linear-gradient(150deg,#6E8B6A,#47603f);">Command Center Lite · $20</div><h3>Command Center Lite</h3><p>Mission Control + Skills Reference dashboards — add-on for The Playbook.</p><a href="https://payhip.com/b/RWmjr" target="_blank">Add for $20 →</a></div>
+      <div class="res"><div class="cover" style="background:linear-gradient(150deg,#55704F,#374933);">Command Center Full · $50</div><h3>Command Center Full</h3><p>All 6 live dashboards, incl. Finance &amp; Staffing — add-on for The Full System.</p><a href="https://payhip.com/b/MwuZs" target="_blank">Add for $50 →</a></div>
+      <div class="res"><div class="cover" style="background:linear-gradient(150deg,#F4C95D,#E8A317);">The Buzz · $19/mo</div><h3>The Buzz Membership</h3><p>Monthly Teacher Bundles, automation drops, templates, newsletter &amp; live Q&amp;A.</p><a href="https://payhip.com/b/Kcw8r" target="_blank">Join — $19/mo →</a></div>
+    </div>
+    <p class="note">One-time purchases, no subscription for the system itself · The Buzz is the only recurring product.</p>
   </div>
 </section>
 
@@ -563,9 +586,9 @@
       <h2>Five ways to start.</h2>
       <p class="lede">From free resources to a fully guided setup with Mrs. Bear herself. Every paid tier is a single installable plugin — no videos to watch, no manual to memorize — and a one-time purchase, no subscription for the system itself.</p></div>
     <div class="price-grid">
-      <div class="plan free reveal d1"><h3>Resource Library</h3><div class="tagline">"Browse the Hive"</div><div class="price">Free</div>
+      <div class="plan free reveal d1"><h3>Free Resource Library</h3><div class="tagline">"Browse the Hive"</div><div class="price">Free</div>
         <ul><li><em>The Preschool Professional</em> — the book</li><li>Bear Phonics reading program</li><li><em>Feelings Matter</em> — social-emotional book</li><li><a href="https://mrsbearseceden-star.github.io/milestone-wizard.html" target="_blank" style="color:inherit;text-decoration:underline;"><b>🧸 The Milestone Wizard</b></a> — milestones, activities &amp; materials by age and state</li><li><a href="https://new-interface-a4c4b3.zapier.app/" target="_blank" style="color:inherit;text-decoration:underline;">Mrs. Bear's ECE Den hub</a></li><li>No purchase or install needed</li><li>Open to everyone, always</li></ul>
-        <a href="#library" class="btn ghost">Browse Free</a></div>
+        <a href="#library" class="btn ghost">Browse the Free Library</a></div>
       <div class="plan reveal d2"><h3>The Playbook</h3><div class="tagline">"Welcome to the Hive!"</div><div class="price">$100<span> one-time</span></div>
         <div class="roi"><b>~3 hrs/day back</b> · ~$7,500+/yr saved.* Pays for itself in under a week.</div>
         <ul><li>Step-by-step setup guide</li><li><b>5 automations</b> — attendance &amp; food program, director briefing, staffing ratio check, good-morning briefing, end-of-day log</li><li>Runs on Claude Pro ($20/mo)</li><li>Best for one school, self-starters</li></ul>
@@ -632,25 +655,4 @@
       <div class="faq-item"><h3>Do I stay in control?</h3><p>Always. It handles the routine work and brings anything that needs a decision or approval straight to you.</p></div>
       <div class="faq-item"><h3>Is my families' information safe?</h3><p>Yes — by design. Children's records never leave the platforms you already use, passwords stay with you, anything public requires your approval, official submissions are always finished by a person, and every action is logged. See the Security &amp; Privacy section above for the full picture.</p></div>
       <div class="faq-item"><h3>Can I add or remove pieces of the system?</h3><p>Absolutely — that's the design. Every automation is its own building block. Don't do social media? Turn it off. Want the food program chain but not the finance briefings? Keep just what serves your school. You can add, remove, or adjust any piece at any time — the system bends to your program, not the other way around.</p></div>
-      <div class="faq-item"><h3>How do I get access to all the automations, tasks &amp; skills?</h3><p>Each tier ships as a single installable Cowork plugin — no separate files to juggle. The Playbook installs 5 automations, The Full System installs 40, and The Professional Bundle installs the complete library — 60 automations plus 8 ready-to-use templates, and all 6 Command Center dashboards included — plus new releases as they ship. You upload one file, and every automation in it shows up ready to set up, with plain-English instructions.</p></div>
-      <div class="faq-item"><h3>What is The Command Center?</h3><p>A set of live, pinnable visual dashboards — Mission Control (what ran, what's waiting on you, what's next), Staffing &amp; Ratios, Finance Snapshot, Social Queue Health, an Onboarding/Compliance board, and a searchable Skills Reference (every automation you own, with the exact phrase to trigger it — click to copy). They turn the automations you've already installed into an at-a-glance board instead of something you have to scroll chat history to check. Included free with The Professional Bundle; available as an add-on for The Playbook (+$20, Mission Control + Skills Reference) and The Full System (+$50, all 6 dashboards).</p></div>
-      <div class="faq-item"><h3>What's The Buzz?</h3><p>A separate monthly membership ($19/mo or $190/yr) open to anyone, on any tier. It's how the system keeps growing after you buy it — monthly Teacher Bundles (classroom-ready printables: lesson plans, wall alphabet &amp; number cards, worksheets, setup materials), new automation drops, ongoing additions to the template library, a short tips newsletter, priority access to whatever ships next, and a monthly live Q&amp;A. Not required to use what you already bought — your tier works standalone, forever. This is for owners who want to keep building.</p></div>
-      <div class="faq-item"><h3>Do I need anything else to run this?</h3><p>Yes — an active Claude account, since this runs as a Cowork plugin. The Playbook is built to run comfortably on Claude Pro ($20/mo), The Full System on Claude Max 5x ($100/mo), and The Professional Bundle on Claude Max 20x ($200/mo). Even with that subscription added in, the time and money these automations save comfortably outweighs the cost for most owners — often within the first couple of weeks.</p></div>
-      <div class="faq-item"><h3>What if I don't already use some of the connected tools, like Slack?</h3><p>No problem. If an automation needs something you don't have yet — team chat is the most common example — you can add a free option (like a free Slack workspace) right inside Cowork in a couple of minutes. The setup guide tells you exactly which connections each automation needs and walks you through adding them, step by step.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL -->
-<section id="waitlist" class="final">
-  <div class="wrap reveal">
-    <h2>Become the Preschool Professional.</h2>
-    <p>Join the early-access list and be first in line when it opens. It's free, and the form takes 30 seconds.</p>
-    <a href="https://form.jotform.com/261832960444056" target="_blank" class="btn solid" style="background:var(--honey-deep);">Join the Early-Access List</a>
-    <p style="margin-top:16px;font-size:13.5px;"><a href="https://new-interface-a4c4b3.zapier.app/" target="_blank" style="color:var(--honey);text-decoration:none;">Or visit Mrs. Bear's ECE Den for books, music &amp; more →</a></p>
-  </div>
-</section>
-
-<footer>
-  <div class="brand">The Preschool Professional</div>
-  Created by Mrs. Bear ·
+      <div class="faq-item"><h3>How do I get access to all the automations, tasks &amp; skills?</h3><p>Each tier ships as a single installable Cowork plugin — no separate files to juggle. The Playbook installs 5 automations, The Full System installs 40, and The Professional Bundle installs the complete library — 60 automations plus 8 ready-to-use templates, and all 6 Command Center dashboards included — plus new releases as 
