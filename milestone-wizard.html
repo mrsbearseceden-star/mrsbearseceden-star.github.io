@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Milestone Wizard — Free from The Preschool Professional</title>
+<style>
+  :root{
+    --honey:#E8A317;
+    --honey-deep:#C6820C;
+    --ink:#2B2117;
+    --ink-soft:#5c4d3a;
+    --cream:#FBF6EC;
+    --sage:#6E8B6A;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:Helvetica,Arial,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;color:var(--ink);}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px 60px;}
+
+  /* ---------- Header ---------- */
+  header{
+    text-align:center;
+    padding:44px 20px 30px;
+    background:linear-gradient(180deg,#FDF9F0 0%,var(--cream) 100%);
+    border-bottom:3px solid var(--honey);
+  }
+  .brand-tag{
+    display:inline-block;
+    background:var(--honey);
+    color:var(--white);
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-weight:bold;
+    padding:5px 14px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  header h1{font-size:40px;line-height:1.15;margin-bottom:10px;}
+  header .subtitle{
+    color:var(--ink-soft);
+    font-size:18px;
+    max-width:640px;
+    margin:0 auto;
+  }
+  @media(max-width:600px){header h1{font-size:30px;}header .subtitle{font-size:16px;}}
+
+  /* ---------- Steps ---------- */
+  .step-card{
+    background:var(--white);
+    border:1px solid #eadfc9;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(43,33,23,.06);
+    padding:24px 26px;
+    margin-top:26px;
+  }
+  .step-label{
+    font-family:Georgia,serif;
+    color:var(--honey-deep);
+    font-size:14px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-weight:bold;
+    margin-bottom:6px;
+  }
+  .step-card h2{font-size:24px;margin-bottom:14px;}
+  select#stateSelect{
+    width:100%;
+    max-width:420px;
+    font-size:17px;
+    padding:12px 14px;
+    border:2px solid var(--honey);
+    border-radius:10px;
+    background:var(--white);
+    color:var(--ink);
+    font-family:Helvetica,Arial,sans-serif;
+  }
+  select#stateSelect:focus{outline:3px solid rgba(232,163,23,.35);}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    border:2px solid var(--honey);
+    background:var(--white);
+    color:var(--ink);
+    font-size:15px;
+    font-weight:bold;
+    padding:10px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    font-family:Helvetica,Arial,sans-serif;
+    transition:background .15s,color .15s;
+  }
+  .chip:hover{background:#FCEFD3;}
+  .chip.active{background:var(--honey);color:var(--white);}
+
+  /* ---------- State note ---------- */
+  .state-note{
+    margin-top:26px;
+    border-left:5px solid var(--sage);
+    background:#F1F4EF;
+    border-radius:0 12px 12px 0;
+    padding:16px 20px;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .state-note strong{color:var(--ink);}
+  .state-note a{color:var(--honey-deep);font-weight:bold;}
+  .state-note.fl{border-left-color:var(--honey);background:#FCF3DD;}
+
+  /* ---------- Toolbar / profile ---------- */
+  .toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-top:26px;
+  }
+  .profile-fields{display:flex;flex-wrap:wrap;gap:12px;}
+  .profile-fields label{
+    display:block;font-size:12px;font-weight:bold;color:var(--ink-soft);
+    text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;
+  }
+  .profile-fields input{
+    border:1px solid #d8caae;border-radius:8px;padding:8px 10px;
+    font-size:15px;background:var(--white);color:var(--ink);
+    font-family:Helvetica,Arial,sans-serif;width:180px;
+  }
+  .print-btn{
+    background:var(--honey);
+    color:var(--white);
+    border:none;
+    font-size:16px;
+    font-weight:bold;
+    padding:12px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:Helvetica,Arial,sans-serif;
+    box-shadow:0 2px 6px rgba(198,130,12,.35);
+  }
+  .print-btn:hover{background:var(--honey-deep);}
+
+  /* ---------- Results ---------- */
+  .results-heading{margin-top:30px;}
+  .results-heading h2{font-size:28px;}
+  .results-heading p{color:var(--ink-soft);font-size:15px;margin-top:4px;}
+
+  .domain-card{
+    background:var(--white);
+    border:1px solid #eadfc9;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(43,33,23,.05);
+    padding:24px 26px;
+    margin-top:22px;
+    page-break-inside:avoid;
+    break-inside:avoid;
+  }
+  .domain-card h3{
+    font-size:21px;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--honey);
+    margin-bottom:14px;
+  }
+  .domain-card h4{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:var(--honey-deep);
+    margin:18px 0 8px;
+  }
+  ul.milestones{list-style:none;}
+  ul.milestones li{
+    display:flex;align-items:flex-start;gap:10px;
+    padding:5px 0;font-size:15px;
+  }
+  ul.milestones input[type=checkbox]{
+    width:19px;height:19px;flex-shrink:0;margin-top:2px;
+    accent-color:var(--honey);
+    cursor:pointer;
+  }
+  ul.plain{list-style:none;}
+  ul.plain li{
+    position:relative;padding:4px 0 4px 24px;font-size:15px;color:var(--ink-soft);
+  }
+  ul.plain li::before{content:"›";position:absolute;left:6px;color:var(--sage);font-weight:bold;}
+  .materials{
+    background:#F1F4EF;
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin-top:8px;
+  }
+  .materials strong{color:var(--ink);}
+
+  /* ---------- Empty state ---------- */
+  .empty{
+    text-align:center;color:var(--ink-soft);
+    padding:44px 20px;font-size:16px;
+  }
+  .empty .bear{font-size:44px;display:block;margin-bottom:10px;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:50px;
+    border-top:2px solid var(--honey);
+    padding:26px 20px 40px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:13px;
+  }
+  footer .disclaimer{max-width:720px;margin:0 auto 14px;}
+  footer a{color:var(--honey-deep);}
+  footer .copy{font-family:Georgia,serif;color:var(--ink);font-size:14px;}
+
+  /* ---------- Print ---------- */
+  @media print{
+    body{background:#fff;}
+    header{border-bottom:2px solid #000;padding:10px 0;}
+    .brand-tag{border:1px solid #000;background:#fff;color:#000;}
+    #stepState,#stepAge,.print-btn,.empty{display:none !important;}
+    .step-card,.domain-card{box-shadow:none;border:1px solid #999;}
+    .toolbar{margin-top:10px;}
+    .profile-fields input{border:none;border-bottom:1px solid #666;border-radius:0;}
+    .state-note{background:#fff;border:1px solid #999;border-left:4px solid #666;}
+    .materials{background:#fff;border:1px solid #ccc;}
+    a{color:#000;text-decoration:none;}
+    footer{border-top:1px solid #000;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="brand-tag">Free from The Preschool Professional</span>
+  <h1>🧸 The Milestone Wizard</h1>
+  <p class="subtitle">Every child, on track and thriving — milestones, activities &amp; materials by age and state.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="step-card" id="stepState">
+    <div class="step-label">Step 1</div>
+    <h2>Choose your state</h2>
+    <select id="stateSelect" aria-label="Choose your state">
+      <option value="">— Select a state —</option>
+    </select>
+  </div>
+
+  <div class="step-card" id="stepAge">
+    <div class="step-label">Step 2</div>
+    <h2>Choose the child's age</h2>
+    <div class="chips" id="ageChips"></div>
+  </div>
+
+  <div id="stateNote"></div>
+
+  <div class="toolbar" id="toolbar" style="display:none;">
+    <div class="profile-fields">
+      <div>
+        <label for="childName">Child's name (optional)</label>
+        <input type="text" id="childName" placeholder="e.g., Amelia B.">
+      </div>
+      <div>
+        <label for="obsDate">Date</label>
+        <input type="text" id="obsDate" placeholder="MM/DD/YYYY">
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Print this profile</button>
+  </div>
+
+  <div id="results">
+    <div class="empty">
+      <span class="bear">🧸</span>
+      Pick a state and an age band above to see milestones, activity ideas, and material picks.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="disclaimer">
+    <strong>Please note:</strong> The Milestone Wizard is an educational reference for teachers and preschool
+    owners only. Milestones are paraphrased summaries drawn from publicly available early learning standards
+    and widely-used developmental frameworks — they are not the official standards text, and this tool is
+    <em>not</em> a diagnostic, screening, or medical instrument. Children develop at their own pace. Always
+    consult <a href="https://flbt5.floridaearlylearning.com/" target="_blank" rel="noopener">your state's official
+    early learning standards</a> for teaching requirements, and talk with a pediatrician or early intervention
+    program about any developmental concerns.
+  </p>
+  <p class="copy">© The Preschool Professional · Built with 💛 by Mrs. Bear</p>
+</footer>
+
+<script>
+/* =========================================================
+   THE MILESTONE WIZARD v1 — data + rendering
+   Milestones are paraphrased, teacher-friendly summaries
+   informed by the Florida Early Learning and Developmental
+   Standards: Birth to Kindergarten (2017) and widely-used
+   developmental frameworks. Not official standards text.
+   ========================================================= */
+
+var DIRECTORY_URL = "https://childcareta.acf.hhs.gov/resource/state-early-learning-standards-and-guidelines";
+
+var LINKED_STATES = {
+  "Florida":        { name: "Florida Early Learning and Developmental Standards: Birth to Kindergarten (2017)", url: "https://flbt5.floridaearlylearning.com/" },
+  "Georgia":        { name: "Georgia Early Learning and Development Standards (GELDS)", url: "https://gelds.decal.ga.gov/" },
+  "Texas":          { name: "Texas Prekindergarten Guidelines (2022) + Infant, Toddler & Three-Year-Old Early Learning Guidelines", url: "https://tea.texas.gov/academics/early-childhood-education/educator-resources/texas-prekindergarten-guidelines" },
+  "California":     { name: "California Preschool/Transitional Kindergarten Learning Foundations (PTKLF)", url: "https://www.cde.ca.gov/sp/cd/re/psfoundations.asp" },
+  "New York":       { name: "New York State Early Learning Guidelines + Next Generation Early Learning Standards", url: "https://www.nysed.gov/early-learning" },
+  "Ohio":           { name: "Ohio Early Learning and Development Standards: Birth to Kindergarten Entry (PDF)", url: "https://dam.assets.ohio.gov/image/upload/v1734897158/childrenandyouth.ohio.gov/For%20Providers/Early%20Learning%20and%20Development%20Standards/Early-Learning-and-Development-Standards.pdf" },
+  "Pennsylvania":   { name: "Pennsylvania Learning Standards for Early Childhood", url: "https://www.pakeys.org/early-learning-standards/" },
+  "Illinois":       { name: "Illinois Early Learning and Development Standards (IELDS)", url: "https://www.isbe.net/Pages/Early-Learning-Standards.aspx" },
+  "North Carolina": { name: "North Carolina Foundations for Early Learning and Development", url: "https://ncchildcare.ncdhhs.gov/Foundations-for-Early-Learning-and-Development" },
+  "Michigan":       { name: "Michigan Early Childhood Standards of Quality: Birth to Kindergarten (ECSQ)", url: "https://www.michigan.gov/mileap/early-childhood-education/early-learners-and-care/gsrp/early-childhood-standards-of-quality" },
+  "Virginia":       { name: "Virginia Early Learning and Development Standards (ELDS): Birth-Five Learning Guidelines", url: "https://www.doe.virginia.gov/teaching-learning-assessment/early-childhood-care-education/early-childhood-standards-instructional-supports" }
+};
+
+var ALL_STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+
+var DOMAINS = [
+  { id: "pd",  icon: "🤸", name: "Physical Development" },
+  { id: "atl", icon: "💡", name: "Approaches to Learning" },
+  { id: "sed", icon: "💛", name: "Social & Emotional Development" },
+  { id: "ll",  icon: "📚", name: "Language & Literacy" },
+  { id: "mt",  icon: "🔢", name: "Mathematical Thinking" },
+  { id: "si",  icon: "🔬", name: "Scientific Inquiry" },
+  { id: "ss",  icon: "🌍", name: "Social Studies" },
+  { id: "ce",  icon: "🎨", name: "Creative Expression Through the Arts" }
+];
+
+var BANDS = [
+  { id: "b8",  label: "Birth – 8 months" },
+  { id: "m18", label: "8 – 18 months" },
+  { id: "m24", label: "18 – 24 months" },
+  { id: "y23", label: "2 – 3 years" },
+  { id: "y34", label: "3 – 4 years" },
+  { id: "y4k", label: "4 years – Kindergarten" }
+];
+
+/* m = milestones · a = "Try this" activities · mat = materials & sensory picks */
+var CONTENT = {
+
+  /* ---------------- BIRTH TO 8 MONTHS ---------------- */
+  b8: {
+    pd: {
+      m: [
+        "Lifts and turns head during supervised tummy time, then pushes up on arms",
+        "Rolls from tummy to back and back to tummy",
+        "Sits with support, working toward brief independent sitting",
+        "Reaches for, grasps, and passes objects from one hand to the other",
+        "Brings hands and safe objects to the mouth to explore",
+        "Follows a slowly moving toy or face with the eyes"
+      ],
+      a: [
+        "Do short, frequent tummy-time sessions with a mirror or high-contrast card just out of reach to encourage lifting and reaching.",
+        "Hold a soft rattle a few inches away and let the baby track it side to side, then guide it into their reach.",
+        "During floor play, place toys slightly to each side to invite rolling and weight-shifting."
+      ],
+      mat: ["Non-breakable floor mirror", "High-contrast black-and-white cards", "Soft grasping rattles and rings", "Firm play mat with a boppy-style support pillow"]
+    },
+    atl: {
+      m: [
+        "Turns toward new sounds, faces, and objects with clear interest",
+        "Repeats an action that made something interesting happen (shakes a rattle again)",
+        "Holds attention briefly on a toy, book page, or caregiver's face",
+        "Shows preferences for familiar people and favorite objects"
+      ],
+      a: [
+        "Offer one new sensory object at a time (crinkle cloth, textured ball) and narrate what the baby notices.",
+        "Play repeat-after-me games: when baby bangs or shakes something, copy it and pause so they do it again."
+      ],
+      mat: ["Crinkle fabric squares", "Textured sensory balls", "Cause-and-effect baby toys (press-and-pop)", "Board books with bold pictures"]
+    },
+    sed: {
+      m: [
+        "Calms more easily with a familiar caregiver's voice, face, or touch",
+        "Smiles socially and laughs during play with people",
+        "Shows attachment — reaches toward or leans into trusted adults",
+        "Uses different cries, coos, and expressions to signal needs",
+        "Enjoys simple back-and-forth games like peekaboo"
+      ],
+      a: [
+        "Build serve-and-return moments: when baby coos, respond with words and expressions, then wait for their reply.",
+        "Keep consistent primary caregivers for feeding and soothing so secure attachment can grow."
+      ],
+      mat: ["Soft lovey or comfort cloth (supervised)", "Family photo cards laminated at baby eye level", "Peekaboo scarves"]
+    },
+    ll: {
+      m: [
+        "Coos, squeals, and babbles with a growing variety of sounds",
+        "Turns toward familiar voices and responds to talking",
+        "Begins responding to their own name",
+        "Takes vocal 'turns' — pauses and answers when an adult talks",
+        "Attends briefly to picture books, songs, and lap reading"
+      ],
+      a: [
+        "Narrate routines out loud (diapering, feeding) using the baby's name often.",
+        "Read one sturdy book at close range daily, pointing to a picture and naming it with warmth.",
+        "Echo the baby's babble back, then add a real word: 'Ba-ba? Ball!'"
+      ],
+      mat: ["Chunky board books", "Song and fingerplay cards for caregivers", "Photo books of familiar faces and objects"]
+    },
+    mt: {
+      m: [
+        "Notices 'more' in everyday moments, like wanting more food or more bounces",
+        "Explores the size and shape of objects with hands and mouth",
+        "Anticipates the next step of a familiar routine (opens mouth when the spoon appears)",
+        "Begins searching for a toy that moves out of sight (early object permanence)"
+      ],
+      a: [
+        "Play hide-the-toy under a light cloth and let the baby uncover it.",
+        "Use routine words like more, all done, big, and little during feeding and play."
+      ],
+      mat: ["Nesting cups", "Soft blocks in graduated sizes", "Lightweight scarves for hiding games"]
+    },
+    si: {
+      m: [
+        "Explores objects with all the senses — looking, mouthing, touching, listening",
+        "Discovers cause and effect (kicks and the play-gym toy swings)",
+        "Reacts to changes in the environment: light, sound, temperature, texture",
+        "Watches people, pets, and moving objects with focused interest"
+      ],
+      a: [
+        "Offer a supervised texture tour: let baby touch a cold teether, a soft blanket, and a bumpy ball while you name each feeling.",
+        "Set up a floor gym where kicking or batting reliably makes something move or chime."
+      ],
+      mat: ["Baby-safe texture books", "Play gym with batting toys", "Sealed sensory bottles with floating glitter or beads"]
+    },
+    ss: {
+      m: [
+        "Tells familiar caregivers apart from strangers",
+        "Responds differently to familiar places and new settings",
+        "Joins daily routines in small ways (lifts arms to be picked up)",
+        "Shows interest in watching other babies and children"
+      ],
+      a: [
+        "Keep predictable daily rhythms and narrate them: 'After your bottle, we rock and sing.'",
+        "Hold 'baby social time' — place infants safely facing each other for a few supervised minutes."
+      ],
+      mat: ["Laminated photos of each child's family", "Predictable visual routine (same song for the same transition)"]
+    },
+    ce: {
+      m: [
+        "Quiets or brightens when hearing music and singing",
+        "Moves arms, legs, or body in response to rhythm",
+        "Experiments with making sounds — banging, shaking, vocal play",
+        "Enjoys safe sensory-art experiences like touching finger-paint textures (taste-safe, supervised)"
+      ],
+      a: [
+        "Sing the same two or three songs daily with gentle motions so babies begin anticipating them.",
+        "Offer a shaker to grasp during music time and celebrate every sound they make."
+      ],
+      mat: ["Wrist bells and easy-grip shakers", "Lullaby and rhythm playlists", "Taste-safe sensory paint (yogurt-based) for supervised exploration"]
+    }
+  },
+
+  /* ---------------- 8 TO 18 MONTHS ---------------- */
+  m18: {
+    pd: {
+      m: [
+        "Crawls, pulls to stand, cruises along furniture, and begins walking",
+        "Uses a thumb-and-finger pincer grasp to pick up small foods",
+        "Stacks two or three blocks and puts objects into containers",
+        "Feeds self finger foods and begins using a spoon",
+        "Climbs onto low, safe surfaces and squats to pick things up"
+      ],
+      a: [
+        "Build a soft obstacle path (cushions, low ramp, tunnel) for crawling and cruising practice.",
+        "Offer a 'posting' station: a container with a slot to drop large pom-poms or lids through.",
+        "Give a chunky crayon and big paper taped to the table for first marks."
+      ],
+      mat: ["Push walkers and sturdy pull toys", "Soft climbing shapes", "Chunky knob puzzles", "Stacking rings and drop-in shape buckets"]
+    },
+    atl: {
+      m: [
+        "Keeps trying briefly when something is tricky, like fitting a shape in a hole",
+        "Imitates new actions seen from adults and other children",
+        "Actively explores the room, opening, emptying, and investigating",
+        "Uses trial and error to make toys work",
+        "Shows delight when accomplishing something and looks to share it"
+      ],
+      a: [
+        "Rotate a few 'figure it out' toys weekly — flaps, latches, lids — and resist fixing it for them too soon.",
+        "Model a simple two-step action (put the bear in the cup, tip it out) and invite them to copy."
+      ],
+      mat: ["Busy boards with latches and flaps", "Containers with different lids", "Simple shape sorters"]
+    },
+    sed: {
+      m: [
+        "May show separation worry and stranger wariness — checks back with a trusted adult",
+        "Looks at a caregiver's face to decide how to react to something new (social referencing)",
+        "Expresses a wide range of emotions clearly",
+        "Begins simple caring gestures, like hugging a doll or patting a friend",
+        "Starts following simple social expectations with help ('gentle hands')"
+      ],
+      a: [
+        "Create a consistent goodbye ritual (wave at the window, one hug, one kiss) to make separations predictable.",
+        "Name feelings in the moment: 'You are frustrated. The block fell. Let's try again together.'"
+      ],
+      mat: ["Soft baby dolls", "Feelings-faces board book", "Cozy calm-down corner with familiar comfort items"]
+    },
+    ll: {
+      m: [
+        "Says first words and steadily adds new ones",
+        "Understands far more than they can say — follows a one-step direction with a gesture",
+        "Points to ask for things and to show interest",
+        "Jabbers with the rhythm and tone of real conversation",
+        "Points to familiar pictures in books and helps turn pages",
+        "Waves bye-bye and uses other social gestures"
+      ],
+      a: [
+        "Do daily lap reading with sturdy books, asking 'Where's the dog?' and celebrating every point.",
+        "Add simple signs (more, all done, milk) alongside spoken words at meals.",
+        "Stretch their words: when a child says 'ball,' answer 'Yes — a big red ball!'"
+      ],
+      mat: ["Sturdy lift-the-flap books", "First-words picture cards", "Puppets for naming games"]
+    },
+    mt: {
+      m: [
+        "Understands and responds to 'more' during meals and play",
+        "Loves filling and dumping — moving objects in and out of containers",
+        "Begins nesting and stacking by size with help",
+        "Anticipates what comes next in familiar routines",
+        "Fits large shapes into a sorter with adult support"
+      ],
+      a: [
+        "Set up a fill-and-dump station with buckets and large safe objects; count aloud as they drop each one in.",
+        "Sing counting songs with fingers ('One, two, three little bears') during transitions."
+      ],
+      mat: ["Nesting cups and stacking rings", "Large counting bears or pop-beads (choke-safe size)", "Buckets and scoops"]
+    },
+    si: {
+      m: [
+        "Experiments on purpose — drops a spoon repeatedly to watch what happens",
+        "Explores water, sand, and other safe materials with fascination",
+        "Notices animals, wind, rain, and other outdoor happenings",
+        "Uses simple tools like a spoon, hammer toy, or scoop"
+      ],
+      a: [
+        "Offer shallow-tray water play with cups and a sponge; narrate pouring, splashing, squeezing.",
+        "Take a daily 'noticing walk' — stop at one flower, one truck, one bird and talk about it."
+      ],
+      mat: ["Texture bins with large safe items (fabric scraps, silicone brushes)", "Water table or shallow tray", "Toy hammer bench", "Sensory bottles"]
+    },
+    ss: {
+      m: [
+        "Joins daily routines, like helping put a toy in the bin when asked",
+        "Recognizes familiar people in photos",
+        "Imitates everyday household and classroom tasks",
+        "Begins noticing and moving toward other children"
+      ],
+      a: [
+        "Post family photos at child height and visit them daily, naming each person.",
+        "Give every toddler a tiny real job — carrying a napkin, pushing in a chair — and thank them by name."
+      ],
+      mat: ["Family photo wall or book", "Toddler-size brooms and cleaning props", "Baby dolls and simple home-living props"]
+    },
+    ce: {
+      m: [
+        "Bounces, rocks, and claps to music",
+        "Makes marks on paper on purpose with a chunky crayon",
+        "Explores instruments and sound-makers with enthusiasm",
+        "Joins fingerplays and action songs with a few motions"
+      ],
+      a: [
+        "Hold a two-minute daily 'band time' with shakers and drums, going loud, then soft, then stopping together.",
+        "Tape big paper to the floor for whole-arm scribbling to music."
+      ],
+      mat: ["Chunky crayons and jumbo paper", "Toddler drums, shakers, and bells", "Scarves for movement play"]
+    }
+  },
+
+  /* ---------------- 18 TO 24 MONTHS ---------------- */
+  m24: {
+    pd: {
+      m: [
+        "Walks well and starts to run, though stopping and turning is still wobbly",
+        "Kicks a large ball forward",
+        "Walks up steps holding a hand or rail",
+        "Scribbles spontaneously and turns board-book pages",
+        "Uses a spoon with less spilling and drinks from an open cup with help",
+        "Helps with dressing — pushes arms into sleeves, pulls off socks"
+      ],
+      a: [
+        "Set up a kick-and-chase zone with soft playground balls outdoors.",
+        "Practice steps daily on a low, railed climber with spotting.",
+        "Make self-help part of the routine: toddlers pull off their own socks at rest time."
+      ],
+      mat: ["Soft playground balls", "Low climber with rail", "Jumbo crayons", "Open cups (small pours) and toddler spoons"]
+    },
+    atl: {
+      m: [
+        "Insists on doing things independently — 'me do it!'",
+        "Stays with a chosen activity for a few minutes at a time",
+        "Tries more than one way to solve a problem before seeking help",
+        "Imitates longer sequences of actions from adults and peers",
+        "Makes simple choices between two offered options"
+      ],
+      a: [
+        "Offer two-option choices all day: 'Red cup or blue cup?' — real decisions build persistence.",
+        "Slow down transitions so toddlers can do one real step themselves (zip started, they pull it up)."
+      ],
+      mat: ["Simple 2–4 piece knob puzzles", "Dressing frames or dolls with big zippers", "Choice boards with two picture options"]
+    },
+    sed: {
+      m: [
+        "Uses words or signs to make wants known",
+        "Tests limits and says 'no!' as a sense of self grows",
+        "Plays alongside other children (parallel play)",
+        "Shows affection openly to familiar people",
+        "Recognizes self in a mirror or photo",
+        "Has big feelings and needs an adult's help to calm"
+      ],
+      a: [
+        "Practice calm-down steps together before meltdowns: breathe like blowing bubbles, hug a pillow, get help.",
+        "Set up duplicate toys side by side so parallel players succeed near each other without forced sharing."
+      ],
+      mat: ["Duplicate favorite toys (two of each)", "Unbreakable mirrors", "Calm-down basket (squeeze ball, board book, soft toy)"]
+    },
+    ll: {
+      m: [
+        "Vocabulary grows quickly toward 50 or more words",
+        "Combines two words ('more milk,' 'daddy go')",
+        "Follows a one-step direction without needing a gesture",
+        "Names familiar objects, people, and pictures",
+        "Asks for the same favorite book again and again",
+        "Fills in the last word of well-known rhymes and songs"
+      ],
+      a: [
+        "Pause at the end of familiar song lines and let toddlers shout the missing word.",
+        "Play 'bring me' games: 'Bring me the ball… now bring me your shoe!'",
+        "Read favorite books on repeat — repetition is how this age builds language."
+      ],
+      mat: ["Repetitive, rhyming board books", "Picture-naming cards", "Song cube or fingerplay ring"]
+    },
+    mt: {
+      m: [
+        "Understands the ideas of 'one' and 'all' ('take one cracker')",
+        "Fits basic shapes into a shape sorter",
+        "Uses simple size words like 'big' with support",
+        "Starts reciting number words in play ('one, two!')",
+        "Follows simple position words: in, on, under"
+      ],
+      a: [
+        "Play 'take one' at snack: each child takes exactly one item from the bowl as you count around the table.",
+        "Do position games with a teddy bear: 'Put teddy IN the box… UNDER the chair!'"
+      ],
+      mat: ["Shape sorters", "Big/little object pairs", "Stacking cups", "Small boxes and baskets for in/on/under play"]
+    },
+    si: {
+      m: [
+        "Explores cause and effect deliberately — switches, buttons, pop-up toys",
+        "Investigates leaves, bugs, puddles, and other nature finds",
+        "Imitates caring for plants, animals, and babies",
+        "Notices and reacts to changes like rain, wind, or darkness"
+      ],
+      a: [
+        "Plant one hardy classroom plant and let toddlers help water it with a tiny cup each week.",
+        "After rain, take a supervised puddle-and-worm walk with magnifying viewers."
+      ],
+      mat: ["Toddler-safe magnifiers", "Watering cans", "Texture bins with dry pasta or large shells (supervised)", "Pop-up and press-button toys"]
+    },
+    ss: {
+      m: [
+        "Follows simple classroom routines with picture or song cues",
+        "Names family members and points to them in photos",
+        "Begins turn-taking with heavy adult support",
+        "Helps with simple community jobs like putting toys in the bin"
+      ],
+      a: [
+        "Use the same clean-up song every day and give each toddler one item to put away.",
+        "Make a class family book each child can revisit when missing home."
+      ],
+      mat: ["Class-made family photo books", "Picture routine cards", "Toy bins with picture labels"]
+    },
+    ce: {
+      m: [
+        "Begins pretend play — feeds a doll, holds a phone to the ear",
+        "Dances spontaneously when music plays",
+        "Makes deliberate marks: dots, lines, and loops",
+        "Sings recognizable parts of familiar songs"
+      ],
+      a: [
+        "Seed pretend play by joining in: rock a baby doll, stir a pot, answer the toy phone dramatically.",
+        "Offer one new art tool weekly — dot markers, chunky chalk, sponge dabbers — with big paper."
+      ],
+      mat: ["Play food, pots, and baby dolls", "Dot markers and sidewalk chalk", "Simple dress-up hats", "Music player with movement songs"]
+    }
+  },
+
+  /* ---------------- 2 TO 3 YEARS ---------------- */
+  y23: {
+    pd: {
+      m: [
+        "Jumps in place with both feet and runs with better control",
+        "Walks up and down stairs, one foot per step emerging",
+        "Pedals a tricycle by around age three",
+        "Strings large beads and builds towers of six or more blocks",
+        "Snips with child-safe scissors and imitates drawing lines and circles",
+        "Uses a fork, and toilet learning is under way"
+      ],
+      a: [
+        "Create a daily movement circuit: jump over a tape river, tiptoe on a line, hop like bunnies.",
+        "Offer playdough with rollers and cutters to strengthen little hands before scissor work.",
+        "Set up a trike path with simple 'road signs' outside."
+      ],
+      mat: ["Tricycles and helmets", "Large lacing beads", "Child-safe scissors and snipping strips", "Playdough with rollers", "Balance beam tape lines"]
+    },
+    atl: {
+      m: [
+        "Asks 'why?' and wants to know how things work",
+        "Engages in pretend scenarios with simple storylines",
+        "Sticks with a puzzle or building project for several minutes",
+        "Tries new activities with encouragement",
+        "Remembers where classroom materials belong"
+      ],
+      a: [
+        "Answer one 'why' each day by investigating together instead of just telling: 'Let's find out!'",
+        "Use picture labels on shelves so children succeed at finding and returning materials themselves."
+      ],
+      mat: ["4–12 piece puzzles", "Open-ended blocks", "Labeled low shelves", "Prop boxes for pretend themes (kitchen, doctor)"]
+    },
+    sed: {
+      m: [
+        "Plays near peers and begins short episodes of playing with them",
+        "Names basic feelings — happy, sad, mad — in self and others",
+        "Follows simple rules with reminders",
+        "Shows empathy, like patting a crying friend or bringing a comfort item",
+        "Handles transitions with warnings and routines",
+        "Grows more independent in hand-washing, eating, and dressing"
+      ],
+      a: [
+        "Read a feelings book at circle and have children make each face in a mirror.",
+        "Give two-minute warnings with a visual timer before every transition.",
+        "Coach empathy in real moments: 'Look at Maya's face. How can we help her feel better?'"
+      ],
+      mat: ["Feelings picture cards and mirrors", "Visual sand or dial timers", "Cozy corner with soft seating", "Puppets for social stories"]
+    },
+    ll: {
+      m: [
+        "Speaks in three- to four-word sentences",
+        "Is understood by familiar adults most of the time",
+        "Follows two-step directions ('Get your cup and sit down')",
+        "Asks and answers simple who/what/where questions",
+        "Joins in rhymes, songs, and fingerplays",
+        "Holds books right-side up, turns pages, and 'pretend reads'",
+        "Names pictures and begins noticing print in the room"
+      ],
+      a: [
+        "Do interactive read-alouds twice daily, pausing to ask 'What do you see? What happens next?'",
+        "Add print with purpose: name cards at cubbies, picture-word labels on centers.",
+        "Play two-step direction games like 'Simon Says' (no eliminations at this age)."
+      ],
+      mat: ["Rich classroom library at child height", "Name cards with photos", "Flannel-board story sets", "Puppets and story props"]
+    },
+    mt: {
+      m: [
+        "Rote counts toward five or ten",
+        "Counts two or three objects touching each one (emerging one-to-one)",
+        "Matches and sorts by color and shape",
+        "Uses comparison words: more, less, big, little",
+        "Completes simple inset puzzles",
+        "Begins recognizing circles and other basic shapes in the room"
+      ],
+      a: [
+        "Count real things all day: steps to the playground, crackers at snack, friends at the table.",
+        "Set out sorting trays with pom-poms and tongs — sort by color, then dump and sort again.",
+        "Go on a shape hunt: find three circles in the classroom."
+      ],
+      mat: ["Counting bears and sorting bowls", "Jumbo tweezers or tongs", "Shape puzzles", "Measuring cups for water and sand play"]
+    },
+    si: {
+      m: [
+        "Asks questions about animals, machines, and the natural world",
+        "Observes insects, plants, and weather closely",
+        "Explores water, sand, and ramps with purpose — pouring, damming, rolling",
+        "Names simple weather (sunny, rainy) and notices changes",
+        "Sorts natural objects like leaves, rocks, and shells"
+      ],
+      a: [
+        "Build a ramp station with cardboard tubes and cars: which one rolls farther?",
+        "Keep a simple class weather chart the children help update each morning.",
+        "Fill a discovery table with leaves and pinecones plus magnifiers."
+      ],
+      mat: ["Texture bins with dry pasta, rice, or shredded paper", "Ramps, tubes, and small cars", "Magnifying glasses", "Nature collection trays"]
+    },
+    ss: {
+      m: [
+        "States own name and age",
+        "Participates in group routines like circle time and clean-up",
+        "Names family members and talks about family roles",
+        "Begins sharing and turn-taking with adult support",
+        "Starts recognizing familiar community helpers"
+      ],
+      a: [
+        "Assign rotating classroom jobs with picture badges — line leader, plant waterer, table wiper.",
+        "Set up a community-helper dress-up week: firefighter Monday, doctor Tuesday, and talk about how each one helps."
+      ],
+      mat: ["Job chart with photos", "Community-helper dress-up props", "Family photo displays", "Simple books about neighborhoods"]
+    },
+    ce: {
+      m: [
+        "Pretend play grows richer, with roles and props",
+        "Draws circles and lines and tells you what the scribbles are",
+        "Sings whole songs, roughly on tune",
+        "Moves differently to fast, slow, loud, and quiet music",
+        "Explores playdough, painting, tearing, and gluing"
+      ],
+      a: [
+        "Ask 'Tell me about your picture' instead of 'What is it?' — then write their words on the art.",
+        "Hold freeze-dance with contrasting music styles: march, tiptoe, stomp, float.",
+        "Offer process art (no model to copy): big brushes, tearing paper, glue-and-collage trays."
+      ],
+      mat: ["Easels with chunky brushes", "Playdough and tools", "Collage trays with paper scraps and glue sticks", "Rhythm instruments and scarves"]
+    }
+  },
+
+  /* ---------------- 3 TO 4 YEARS ---------------- */
+  y34: {
+    pd: {
+      m: [
+        "Balances on one foot briefly and begins hopping",
+        "Catches a large ball with arms and body",
+        "Climbs playground equipment with confidence",
+        "Cuts along a straight line with scissors",
+        "Draws a person with two to four body parts",
+        "Manages large buttons and pours their own drink with few spills"
+      ],
+      a: [
+        "Play catch with a beach ball, stepping back one step at a time as skills grow.",
+        "Set up a cutting station with lines, curves, and old greeting cards to snip.",
+        "Let children pour their own water from small pitchers at snack — spills are part of learning."
+      ],
+      mat: ["Beach balls and playground balls", "Child scissors with cutting-line strips", "Small pitchers and cups", "Balance beams and stepping stones", "Buttoning and lacing boards"]
+    },
+    atl: {
+      m: [
+        "Makes a plan for play ('Let's build a zoo!') and follows it",
+        "Persists five to ten minutes on a challenging task",
+        "Plays cooperatively in small groups",
+        "Asks questions on purpose to learn new things",
+        "Uses imagination flexibly — a block becomes a phone, then a sandwich",
+        "Adjusts to changes in routine with support"
+      ],
+      a: [
+        "Start center time with a plan: each child says or draws what they will do first.",
+        "When frustration hits, coach the 'try three ways' habit before offering the answer.",
+        "Offer open-ended loose parts and watch one object become ten different things."
+      ],
+      mat: ["Loose parts trays (lids, spools, fabric squares)", "Unit blocks", "Plan-do-review drawing sheets", "Challenge puzzles (12–24 pieces)"]
+    },
+    sed: {
+      m: [
+        "Takes turns and shares with occasional reminders",
+        "Names feelings in self and others and their causes",
+        "Prefers particular friends and seeks them out",
+        "Resolves simple conflicts with adult coaching",
+        "Follows classroom rules most of the time",
+        "Separates from family with ease on most days"
+      ],
+      a: [
+        "Teach a simple conflict script: 'Can I have it when you're done?' and practice it with puppets.",
+        "Do a daily feelings check-in chart where each child moves their name to a feeling face.",
+        "Catch kind acts publicly: 'I saw Jordan help Ava carry the basket!'"
+      ],
+      mat: ["Feelings check-in chart", "Turn-taking timers", "Puppets for role-play", "Kindness tree or jar for noticing helpers"]
+    },
+    ll: {
+      m: [
+        "Speaks in full sentences of four to five or more words",
+        "Tells simple stories about real and pretend events",
+        "Is understood by unfamiliar adults most of the time",
+        "Recognizes their own name in print",
+        "Identifies some letters, especially those in their name",
+        "Notices and plays with rhyme",
+        "Retells favorite books using the pictures",
+        "Makes letter-like marks and 'writes' during play"
+      ],
+      a: [
+        "Do a name-work routine daily: find your name card, trace it, stamp it, build it with letter tiles.",
+        "Play rhyme games at line-up: 'If your name rhymes with hat... hop to the door!'",
+        "Add writing tools to every center — waiter pads in dramatic play, clipboards in blocks."
+      ],
+      mat: ["Name cards and letter tiles", "Rhyming picture cards", "Clipboards, notepads, and chunky pencils in every center", "Alphabet puzzles", "Big books for shared reading"]
+    },
+    mt: {
+      m: [
+        "Rote counts to ten or beyond",
+        "Counts four to five objects accurately with one-to-one touch",
+        "Begins recognizing written numerals 1–5",
+        "Names basic shapes: circle, square, triangle",
+        "Compares length, size, and weight with words like longer and heavier",
+        "Copies and continues simple AB patterns",
+        "Uses position words: on, under, next to, behind"
+      ],
+      a: [
+        "Do 'count and check' snack math: count out five crackers, eat one, recount — what changed?",
+        "Build pattern trains with colored cubes: red-blue-red-blue... what comes next?",
+        "Hide numeral cards around the room for a number hunt, matching each to a dot card."
+      ],
+      mat: ["Linking cubes and pattern cards", "Numeral and dot cards", "Balance scale with objects to weigh", "Shape blocks and attribute blocks"]
+    },
+    si: {
+      m: [
+        "Makes predictions ('I think it will sink!') and tests them",
+        "Uses senses and simple tools like magnifiers to investigate",
+        "Begins sorting living things from nonliving things",
+        "Observes life cycles — seeds sprouting, caterpillars changing",
+        "Asks how and why questions about nature and machines",
+        "Describes weather and dresses for it"
+      ],
+      a: [
+        "Run a sink-or-float lab: predict, test, and sort objects into two labeled tubs.",
+        "Plant bean seeds in clear cups against wet paper towels so roots stay visible.",
+        "Keep a class science journal — children draw what they observe each week."
+      ],
+      mat: ["Magnifying glasses and bug viewers", "Clear cups for planting", "Sink-and-float tubs", "Texture and smell jars", "Simple balance scales"]
+    },
+    ss: {
+      m: [
+        "Identifies self as part of a family and a classroom community",
+        "Names community helpers and what they do",
+        "Follows group rules and understands they keep everyone safe",
+        "Helps care for the classroom and its materials",
+        "Notices similarities and differences among people with curiosity and respect"
+      ],
+      a: [
+        "Create class rules WITH the children at the start of the year, drawing pictures for each one.",
+        "Invite real community helpers (or take walking field trips) and chart 'How do they help us?'",
+        "Read books featuring many kinds of families and let children share about their own."
+      ],
+      mat: ["Diverse family and community books", "Community-helper props and vehicles", "Class-made rule posters", "Maps and play traffic signs for block play"]
+    },
+    ce: {
+      m: [
+        "Acts out roles with storylines in dramatic play",
+        "Draws pictures that others can begin to recognize",
+        "Sings with a group and keeps a simple beat",
+        "Chooses art materials with a plan in mind",
+        "Acts out familiar stories with props or puppets"
+      ],
+      a: [
+        "Turn a favorite book into a play: assign roles, use simple props, perform at circle.",
+        "Set up an art studio shelf where children choose their own materials for open-ended creation.",
+        "Do echo-clapping rhythm games, letting children lead the pattern."
+      ],
+      mat: ["Dress-up clothes and story props", "Puppet theater", "Open art shelf (paper, tape, stamps, watercolors)", "Rhythm sticks and hand drums"]
+    }
+  },
+
+  /* ---------------- 4 YEARS TO KINDERGARTEN ---------------- */
+  y4k: {
+    pd: {
+      m: [
+        "Hops on one foot, gallops, and begins to skip",
+        "Throws overhand with aim and catches a bounced ball",
+        "Copies shapes like a cross and square; writes some letters",
+        "Writes most of their first name",
+        "Cuts out simple shapes with scissors",
+        "Manages buttons, zippers, and most self-care independently"
+      ],
+      a: [
+        "Run relay games mixing skills: gallop to the cone, hop back on one foot.",
+        "Offer daily fine-motor warm-ups before writing: playdough squeezes, clothespin games, bead stringing.",
+        "Practice name writing with multi-sensory options — sand trays, rainbow tracing, whiteboards."
+      ],
+      mat: ["Bean bags and targets", "Sand or salt writing trays", "Clothespins and tweezers games", "Scissors with shape-cutting sheets", "Jump ropes and hula hoops"]
+    },
+    atl: {
+      m: [
+        "Sets a simple goal and works across multiple steps to finish it",
+        "Persists through frustration on challenging tasks",
+        "Attends to an engaging activity for ten to fifteen minutes or more",
+        "Asks thoughtful questions and seeks out new information",
+        "Plays elaborate cooperative games with negotiated rules",
+        "Tries creative, flexible solutions when the first idea fails"
+      ],
+      a: [
+        "Launch multi-day projects — build a cardboard city over a week, revisiting and improving each day.",
+        "Teach the phrase 'I can't do it YET' and celebrate visible effort, not just results.",
+        "Play cooperative games where the group wins together (parachute games, group puzzles)."
+      ],
+      mat: ["Big cardboard boxes and tape for projects", "Cooperative board games", "Parachute", "Planning journals with drawing space"]
+    },
+    sed: {
+      m: [
+        "Negotiates, compromises, and trades roles with peers",
+        "Uses calming strategies with reminders — breathing, taking space, asking for help",
+        "Follows multi-step classroom rules and routines",
+        "Shows confidence in their own abilities and new challenges",
+        "Maintains friendships and shows loyalty to friends",
+        "Begins understanding that others think and feel differently"
+      ],
+      a: [
+        "Hold weekly class meetings where children raise problems and vote on solutions.",
+        "Practice a visible calm-down routine: smell the flower, blow out the candle, count to five.",
+        "Use perspective questions during stories: 'How does the wolf feel? How does the pig feel?'"
+      ],
+      mat: ["Calm-down corner with breathing visuals", "Solution wheel (share, take turns, ask a teacher)", "Emotion story books", "Class meeting talking stick"]
+    },
+    ll: {
+      m: [
+        "Speaks in complex sentences with mostly correct grammar",
+        "Tells detailed stories with a beginning, middle, and end",
+        "Recognizes and names most letters and many letter sounds",
+        "Hears and plays with rhyme, claps syllables, and identifies first sounds in words",
+        "Writes their own name and some other letters and words",
+        "Retells stories with key events in order",
+        "Knows print goes left to right and that words carry the message",
+        "Uses a rich, growing vocabulary"
+      ],
+      a: [
+        "Do daily phonological-awareness warm-ups: clap syllables in names, play I-Spy with beginning sounds.",
+        "Run a morning message routine — children help 'read' a short note and hunt for familiar letters.",
+        "Have children draw and 'write' their own books, then dictate the story for you to scribe."
+      ],
+      mat: ["Letter and sound sorting tubs", "Bookmaking station (paper, staplers, stamps)", "Pocket chart for morning message", "Decodable and predictable readers", "Syllable clap cards"]
+    },
+    mt: {
+      m: [
+        "Counts to twenty or beyond and counts ten or more objects accurately",
+        "Recognizes written numerals to ten",
+        "Compares sets using more, fewer, and same",
+        "Solves simple adding and taking-away problems with objects up to five",
+        "Creates and extends more complex patterns",
+        "Names and describes 2-D shapes and combines them into new shapes",
+        "Sorts by more than one attribute and explains the rule",
+        "Measures with nonstandard units like blocks or hands"
+      ],
+      a: [
+        "Tell story problems with real props: 'Three bears at the picnic, two more come — how many now?'",
+        "Measure everything with linking cubes: 'The table is 14 cubes long. Is the shelf longer?'",
+        "Play numeral-to-quantity matching games — numeral card to the right pile of buttons."
+      ],
+      mat: ["Ten frames and counters", "Numeral cards to 10 and dice", "Pattern blocks and tangrams", "Linking cubes for measuring", "Simple board games with counting moves"]
+    },
+    si: {
+      m: [
+        "Plans and carries out simple investigations with support",
+        "Predicts, observes, and describes what happened and why",
+        "Classifies objects, plants, and animals by observable features",
+        "Describes what living things need — food, water, light, care",
+        "Explores forces with ramps, magnets, and moving air",
+        "Records observations with drawings and early writing"
+      ],
+      a: [
+        "Run a week-long question investigation: 'Which freezes faster, water or juice?' Predict, test, chart, conclude.",
+        "Set up a magnet lab — test and sort items into 'sticks' and 'doesn't stick,' then look for the rule.",
+        "Adopt a class plant or pet and chart its care and changes over the year."
+      ],
+      mat: ["Magnet wands and mixed test items", "Ramps, marbles, and tubes", "Science journals with pencils", "Eyedroppers and color-mixing trays", "Thermometers and rain gauge for a weather station"]
+    },
+    ss: {
+      m: [
+        "Describes family and community roles, rules, and traditions",
+        "Explains why rules exist and helps make group decisions",
+        "Knows basic personal information like full name and age",
+        "Uses simple maps and location words to describe places",
+        "Shows respect and curiosity about different people, languages, and traditions",
+        "Begins basic economic ideas — trading, saving, wants versus needs"
+      ],
+      a: [
+        "Build a map of the classroom or playground together, then hide a treasure and mark it with an X.",
+        "Open a pretend class store with price tags of 1–5 'coins' to practice wants, needs, and trading.",
+        "Invite families to share a tradition, food, or song, and chart what is alike and different."
+      ],
+      mat: ["Simple maps and a class-made floor map", "Pretend money, cash register, and store props", "Books celebrating many cultures", "Voting chart with name clips"]
+    },
+    ce: {
+      m: [
+        "Creates detailed artwork with a plan and describes the ideas behind it",
+        "Sustains dramatic play with complex roles, scripts, and props",
+        "Sings many songs from memory and experiments with rhythm instruments",
+        "Moves with intention — matching movement to tempo, mood, and story",
+        "Combines materials inventively to build and represent ideas"
+      ],
+      a: [
+        "Hold an art-share circle where children present a piece and answer friends' questions about it.",
+        "Stock dramatic play with open props tied to your theme (vet clinic, bakery, post office) and rotate monthly.",
+        "Compose a class song: children choose instruments, decide loud/soft parts, and perform it."
+      ],
+      mat: ["Recycled-materials building bin", "Theme prop boxes (vet, bakery, post office)", "Full rhythm-instrument set", "Watercolors, oil pastels, and clay", "Scarves and ribbon wands for dance"]
+    }
+  }
+};
+
+/* ---------------- rendering (kept as pure functions for testability) ---------------- */
+
+function esc(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function bandById(id){
+  for (var i=0;i<BANDS.length;i++){ if(BANDS[i].id===id) return BANDS[i]; }
+  return null;
+}
+
+function buildStateNoteHTML(stateName){
+  if(!stateName) return "";
+  var info = LINKED_STATES[stateName];
+  if(stateName === "Florida"){
+    return '<div class="state-note fl">🌴 <strong>Florida:</strong> The milestones below are teacher-friendly summaries drawn from the ' +
+      '<strong>Florida Early Learning and Developmental Standards: Birth to Kindergarten (2017)</strong> (FDOE Division of Early Learning). ' +
+      '<a href="' + info.url + '" target="_blank" rel="noopener">View Florida’s official standards →</a>';
+  }
+  if(info){
+    return '<div class="state-note">📍 <strong>' + esc(stateName) + ':</strong> Your state’s official framework is the ' +
+      '<strong>' + esc(info.name) + '</strong>. ' +
+      '<a href="' + info.url + '" target="_blank" rel="noopener">View ' + esc(stateName) + '’s official standards →</a><br>' +
+      'The milestones shown below are drawn from widely-used developmental frameworks — always cross-check your state’s standards.</div>';
+  }
+  return '<div class="state-note">📍 <strong>' + esc(stateName) + ':</strong> The milestones shown below are drawn from widely-used ' +
+    'developmental frameworks — always cross-check your state’s standards. ' +
+    '<a href="' + DIRECTORY_URL + '" target="_blank" rel="noopener">Find your state’s official early learning standards →</a></div>';
+}
+
+function buildResultsHTML(stateName, bandId){
+  var band = bandById(bandId);
+  var data = CONTENT[bandId];
+  if(!stateName || !band || !data){
+    return '<div class="empty"><span class="bear">🧸</span>Pick a state and an age band above to see milestones, activity ideas, and material picks.</div>';
+  }
+  var html = '<div class="results-heading"><h2>' + esc(band.label) + ' · ' + esc(stateName) + '</h2>' +
+    '<p>Check off what you observe. Every child grows at their own pace — use this as a conversation starter, not a test.</p></div>';
+
+  for(var d=0; d<DOMAINS.length; d++){
+    var dom = DOMAINS[d];
+    var block = data[dom.id];
+    if(!block) continue;
+    html += '<div class="domain-card"><h3>' + dom.icon + ' ' + esc(dom.name) + '</h3>';
+
+    html += '<h4>Milestones to look for</h4><ul class="milestones">';
+    for(var i=0;i<block.m.length;i++){
+      var cbId = "cb-" + bandId + "-" + dom.id + "-" + i;
+      html += '<li><input type="checkbox" id="' + cbId + '"><label for="' + cbId + '">' + esc(block.m[i]) + '</label></li>';
+    }
+    html += '</ul>';
+
+    html += '<h4>Try this</h4><ul class="plain">';
+    for(var j=0;j<block.a.length;j++){
+      html += '<li>' + esc(block.a[j]) + '</li>';
+    }
+    html += '</ul>';
+
+    html += '<h4>Materials &amp; sensory picks</h4><div class="materials"><strong>Stock the shelf:</strong> ' + esc(block.mat.join(" · ")) + '</div>';
+    html += '</div>';
+  }
+  return html;
+}
+
+/* ---------------- DOM wiring ---------------- */
+if (typeof document !== "undefined") {
+  (function(){
+    var selectedState = "";
+    var selectedBand = "";
+
+    var stateSelect = document.getElementById("stateSelect");
+    var ageChips = document.getElementById("ageChips");
+    var stateNote = document.getElementById("stateNote");
+    var results = document.getElementById("results");
+    var toolbar = document.getElementById("toolbar");
+
+    // populate states
+    for(var i=0;i<ALL_STATES.length;i++){
+      var opt = document.createElement("option");
+      opt.value = ALL_STATES[i];
+      opt.textContent = ALL_STATES[i] + (ALL_STATES[i]==="Florida" ? " ⭐" : "");
+      stateSelect.appendChild(opt);
+    }
+
+    // populate age chips
+    for(var b=0;b<BANDS.length;b++){
+      (function(band){
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip";
+        btn.textContent = band.label;
+        btn.setAttribute("data-band", band.id);
+        btn.addEventListener("click", function(){
+          selectedBand = band.id;
+          var chips = ageChips.querySelectorAll(".chip");
+          for(var c=0;c<chips.length;c++){ chips[c].classList.remove("active"); }
+          btn.classList.add("active");
+          render();
+        });
+        ageChips.appendChild(btn);
+      })(BANDS[b]);
+    }
+
+    stateSelect.addEventListener("change", function(){
+      selectedState = stateSelect.value;
+      render();
+    });
+
+    function render(){
+      stateNote.innerHTML = buildStateNoteHTML(selectedState);
+      results.innerHTML = buildResultsHTML(selectedState, selectedBand);
+      toolbar.style.display = (selectedState && selectedBand) ? "flex" : "none";
+      // default the date field to today (only if empty)
+      var dateField = document.getElementById("obsDate");
+      if(dateField && !dateField.value && selectedState && selectedBand){
+        var t = new Date();
+        dateField.value = (t.getMonth()+1) + "/" + t.getDate() + "/" + t.getFullYear();
+      }
+    }
+  })();
+}
+</script>
+</body>
+</html>

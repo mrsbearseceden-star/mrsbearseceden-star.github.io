@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Preschool Professional</title>
+<style>
+  :root{
+    color-scheme: light;
+    --honey:#E8A317; --honey-deep:#C6820C; --ink:#2B2117; --ink-soft:#5c4d3a;
+    --cream:#FBF6EC; --card:#FFFFFF; --sage:#6E8B6A; --line:#EADFC8;
+    --shadow:0 18px 50px rgba(43,33,23,.10); --shadow-sm:0 6px 20px rgba(43,33,23,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Helvetica Neue',Arial,sans-serif;color:var(--ink);background:var(--cream);
+    line-height:1.65;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:Georgia,'Times New Roman',serif;line-height:1.18;letter-spacing:-.01em;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px;}
+  .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:700;color:var(--honey-deep);}
+  a.btn{display:inline-block;text-decoration:none;font-weight:700;padding:16px 38px;border-radius:4px;
+    font-size:16px;letter-spacing:.3px;transition:all .25s ease;font-family:'Helvetica Neue',Arial,sans-serif;}
+  a.btn.solid{background:var(--ink);color:#fff;}
+  a.btn.solid:hover{background:var(--honey-deep);transform:translateY(-3px);box-shadow:var(--shadow-sm);}
+  a.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
+  a.btn.ghost:hover{background:var(--ink);color:#fff;transform:translateY(-3px);}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,246,236,.88);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;}
+  nav .brand{font-family:Georgia,serif;font-weight:700;font-size:20px;letter-spacing:-.02em;}
+  nav .brand span{color:var(--honey-deep);}
+  nav a.navlink{text-decoration:none;color:var(--ink-soft);font-size:15px;margin-left:26px;transition:color .2s;}
+  nav a.navlink:hover{color:var(--honey-deep);}
+  @media(max-width:720px){nav .links{display:none;}}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:100px 0 110px;
+    background:linear-gradient(115deg,#FBF6EC 0%,#F6EAD0 100%);}
+  .hero .wrap{position:relative;z-index:2;max-width:820px;}
+  .hero h1{font-size:60px;margin:18px 0 22px;}
+  .hero h1 .accent{color:var(--honey-deep);font-style:italic;}
+  .hero p.sub{font-size:21px;color:var(--ink-soft);max-width:620px;margin-bottom:34px;}
+  .hero .btns{display:flex;gap:16px;flex-wrap:wrap;}
+  .hero .founder{margin-top:30px;font-size:15px;color:var(--ink-soft);border-left:3px solid var(--honey);padding-left:14px;}
+  /* floating orbs */
+  .orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;z-index:1;}
+  .orb.a{width:180px;height:180px;background:radial-gradient(circle at 30% 30%,#F4C95D,#E8A317);top:-40px;right:6%;animation:float1 9s ease-in-out infinite;}
+  .orb.b{width:110px;height:110px;background:radial-gradient(circle at 30% 30%,#Efd9a5,#D9B457);bottom:20px;right:24%;animation:float2 11s ease-in-out infinite;}
+  .orb.c{width:70px;height:70px;background:radial-gradient(circle at 30% 30%,#C9DcC2,#8FAe87);top:40%;right:2%;animation:float1 13s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translateY(0) translateX(0);}50%{transform:translateY(-26px) translateX(-14px);}}
+  @keyframes float2{0%,100%{transform:translateY(0) translateX(0);}50%{transform:translateY(22px) translateX(12px);}}
+
+  /* MARQUEE */
+  .marquee{background:var(--ink);color:#fff;overflow:hidden;padding:16px 0;white-space:nowrap;}
+  .marquee .track{display:inline-block;animation:scroll 32s linear infinite;}
+  .marquee span{font-family:Georgia,serif;font-size:18px;margin:0 30px;opacity:.85;}
+  .marquee span b{color:var(--honey);}
+  @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  section{padding:88px 0;}
+  section h2{font-size:40px;margin-bottom:14px;}
+  .center{text-align:center;}
+  .lede{font-size:19px;color:var(--ink-soft);max-width:640px;margin:0 auto 48px;}
+  .lede.left{margin-left:0;}
+
+  /* reveal animation */
+  .reveal{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease;}
+  .js-anim .reveal{opacity:0;transform:translateY(34px);}
+  .js-anim .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.1s;}.reveal.d2{transition-delay:.2s;}.reveal.d3{transition-delay:.3s;}
+
+  /* PAIN */
+  .pain{background:#fff;}
+  .pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;max-width:860px;margin:0 auto;}
+  .pain-item{background:#fff;padding:26px 28px;font-size:16px;color:var(--ink-soft);}
+  .pain-item b{color:var(--ink);font-family:Georgia,serif;}
+
+  /* FEATURES */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .feat{background:var(--card);border-radius:8px;padding:34px 30px;box-shadow:var(--shadow-sm);
+    border-top:3px solid var(--honey);transition:transform .3s ease,box-shadow .3s ease;}
+  .feat:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+  .feat .n{font-family:Georgia,serif;font-size:15px;color:var(--honey-deep);font-weight:700;letter-spacing:2px;}
+  .feat h3{font-size:21px;margin:10px 0 8px;}
+  .feat p{font-size:15px;color:var(--ink-soft);}
+
+  /* STEPS */
+  .steps{background:linear-gradient(160deg,#F6EAD0,#FBF6EC);}
+  .step-row{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+  .step{text-align:center;}
+  .step .num{width:64px;height:64px;border-radius:50%;border:2px solid var(--honey-deep);color:var(--honey-deep);
+    font-family:Georgia,serif;font-size:26px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+    transition:all .3s ease;}
+  .step:hover .num{background:var(--honey-deep);color:#fff;transform:scale(1.08);}
+  .step h3{font-size:20px;margin-bottom:8px;}
+  .step p{font-size:15px;color:var(--ink-soft);}
+
+  /* DAY IN THE LIFE TIMELINE */
+  .day{background:#fff;}
+  .timeline{max-width:800px;margin:0 auto;position:relative;padding-left:34px;}
+  .timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line);}
+  .tl{position:relative;padding:0 0 30px 22px;}
+  .tl::before{content:"";position:absolute;left:-32px;top:7px;width:14px;height:14px;border-radius:50%;
+    background:var(--honey-deep);border:3px solid #fff;box-shadow:0 0 0 2px var(--honey-deep);}
+  .tl .t{font-family:Georgia,serif;color:var(--honey-deep);font-weight:700;font-size:15px;letter-spacing:1.5px;}
+  .tl h3{font-size:19px;margin:4px 0 4px;}
+  .tl p{font-size:15px;color:var(--ink-soft);}
+  .tl.moon::before{background:var(--sage);box-shadow:0 0 0 2px var(--sage);}
+
+  /* MISSION CONTROL SHOWCASE */
+  .mc{max-width:920px;margin:0 auto 18px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);}
+  .mc-bar{background:#efe3cd;padding:10px 16px;display:flex;align-items:center;gap:7px;}
+  .mc-bar span{width:11px;height:11px;border-radius:50%;}
+  .mc-bar span:nth-child(1){background:#ff6b6b;}.mc-bar span:nth-child(2){background:#ffb13d;}.mc-bar span:nth-child(3){background:#46c97f;}
+  .mc-bar em{font-size:12px;color:var(--ink-soft);font-style:normal;margin-left:8px;font-family:'Helvetica Neue',Arial,sans-serif;}
+  .mc-body{background:#fffaf4;padding:22px 24px;}
+  .mc-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;gap:6px;}
+  .mc-title{font-family:Georgia,serif;font-weight:700;font-size:19px;}
+  .mc-date{font-size:12.5px;color:var(--ink-soft);}
+  .mc-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
+  .mc-stat{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11.5px;color:var(--ink-soft);border-top:3px solid;}
+  .mc-stat b{display:block;font-family:Georgia,serif;font-size:24px;color:var(--ink);}
+  .mc-stat.g{border-top-color:#46c97f;}.mc-stat.o{border-top-color:#ffb13d;}.mc-stat.b{border-top-color:#5aa9ff;}.mc-stat.r{border-top-color:#ff6b6b;}
+  .mc-cols{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;}
+  .mc-col{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+  .mc-col h4{font-family:Georgia,serif;font-size:14px;margin-bottom:10px;}
+  .mc-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-soft);padding:5px 0;border-bottom:1px dashed #f3e8d2;}
+  .mc-row:last-child{border-bottom:none;}
+  .mc-row .tm{font-family:Georgia,serif;color:var(--ink);width:58px;flex-shrink:0;font-size:11.5px;}
+  .mc-row .pill{margin-left:auto;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;color:#fff;flex-shrink:0;letter-spacing:.4px;}
+  .pill.done{background:#46c97f;}.pill.next{background:#5aa9ff;}.pill.wait{background:#ffb13d;}
+  .mc-chart{display:flex;align-items:flex-end;gap:10px;height:96px;margin:22px 0 6px;}
+  .mc-chart .cbar{flex:1;background:linear-gradient(180deg,#5fd191,#3aa96b);border-radius:4px 4px 0 0;position:relative;}
+  .mc-chart .cbar i{position:absolute;top:-18px;left:0;right:0;text-align:center;font-size:10.5px;font-style:normal;color:var(--ink-soft);font-weight:700;}
+  .mc-days{display:flex;gap:10px;font-size:10.5px;color:var(--ink-soft);text-align:center;margin-bottom:8px;}
+  .mc-days span{flex:1;}
+  .mc-special{margin-top:12px;font-size:11.5px;color:var(--ink-soft);line-height:1.8;border-top:1px dashed #f3e8d2;padding-top:10px;}
+  .mc-cap{text-align:center;font-size:14px;color:var(--ink-soft);font-style:italic;max-width:660px;margin:0 auto 56px;}
+  @media(max-width:820px){.mc-cols{grid-template-columns:1fr;}.mc-stats{grid-template-columns:1fr 1fr;}}
+
+  /* EVERYTHING IT CARRIES */
+  .carries{background:linear-gradient(160deg,#F6EAD0,#FBF6EC);}
+  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .cap{background:#fff;border:1px solid var(--line);border-radius:8px;padding:26px 24px;box-shadow:var(--shadow-sm);
+    transition:transform .3s ease,box-shadow .3s ease;}
+  .cap:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+  .cap .ico{font-size:26px;}
+  .cap h3{font-size:18px;margin:8px 0 10px;}
+  .cap ul{list-style:none;}
+  .cap li{font-size:13.5px;color:var(--ink-soft);padding:4px 0 4px 20px;position:relative;line-height:1.45;}
+  .cap li::before{content:"✓";position:absolute;left:0;color:var(--sage);font-weight:700;}
+
+  /* ECOSYSTEM / RESOURCE LIBRARY */
+  .eco{background:#fff;}
+  .eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:10px;}
+  .res{background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:24px 20px;text-align:center;
+    transition:transform .3s ease,box-shadow .3s ease;}
+  .res:hover{transform:translateY(-6px);box-shadow:var(--shadow-sm);}
+  .res .cover{height:120px;border-radius:6px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;color:#fff;font-size:15px;font-weight:700;padding:14px;line-height:1.25;text-align:center;}
+  .res:nth-child(1) .cover{background:linear-gradient(150deg,#C6820C,#8a5a06);}
+  .res:nth-child(2) .cover{background:linear-gradient(150deg,#6E8B6A,#47603f);}
+  .res:nth-child(3) .cover{background:linear-gradient(150deg,#5F9BB3,#356b80);}
+  .res:nth-child(4) .cover{background:linear-gradient(150deg,#A0729A,#6b4166);}
+  .res h3{font-size:17px;margin-bottom:6px;}
+  .res p{font-size:13.5px;color:var(--ink-soft);}
+  .res a{display:inline-block;margin-top:10px;font-size:13px;color:var(--honey-deep);text-decoration:none;font-weight:700;}
+
+  /* STORY */
+  .story{background:var(--ink);color:#f3ead9;}
+  .story .wrap{max-width:780px;}
+  .story h2{color:#fff;}
+  .story p{font-size:18px;margin-top:16px;color:#e6dcc8;}
+  .story .sig{margin-top:22px;font-family:Georgia,serif;font-style:italic;font-size:19px;color:var(--honey);}
+
+  /* PRICING */
+  .price-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;align-items:stretch;}
+  .plan{background:#fff;border-radius:8px;padding:22px 16px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;
+    border:1px solid var(--line);transition:transform .3s ease,box-shadow .3s ease;}
+  .plan:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+  .plan.pop{border:2px solid var(--honey-deep);position:relative;}
+  .plan.pop .ribbon{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--honey-deep);color:#fff;
+    font-size:9.5px;font-weight:700;padding:5px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap;}
+  .plan.free{border:1.5px dashed var(--sage);}
+  .plan.custom{background:var(--ink);border-color:var(--ink);}
+  .plan.custom h3, .plan.custom .price{color:#fff;}
+  .plan.custom p, .plan.custom li{color:#d8ccb4;}
+  .plan.custom li::before{color:var(--honey);}
+  .plan h3{font-size:17px;margin-bottom:2px;line-height:1.2;}
+  .plan .tagline{font-style:italic;color:var(--honey-deep);font-size:11.5px;margin:0 0 6px;}
+  .plan.custom .tagline{color:var(--honey);}
+  .plan .price{font-family:Georgia,serif;font-size:26px;color:var(--honey-deep);margin:6px 0;}
+  .plan .price span{font-size:12px;color:var(--ink-soft);}
+  .plan .roi{background:#eef5ec;border:1px solid var(--sage);border-radius:6px;padding:7px 8px;font-size:11px;color:#3f5c3a;margin-bottom:8px;line-height:1.4;}
+  .plan .addon{background:#FBF6EC;border:1px dashed var(--honey-deep);border-radius:6px;padding:7px 8px;font-size:11px;color:var(--ink-soft);margin-bottom:10px;line-height:1.4;}
+  .plan ul{list-style:none;margin:6px 0 14px;flex-grow:1;}
+  .plan li{padding:5px 0 5px 16px;position:relative;font-size:12.5px;color:var(--ink-soft);border-bottom:1px solid var(--cream);line-height:1.4;}
+  .plan li::before{content:"—";position:absolute;left:0;color:var(--honey-deep);}
+  .plan a.btn{width:100%;text-align:center;padding:11px 8px;font-size:13px;}
+  .note{text-align:center;margin-top:22px;font-size:14px;color:var(--ink-soft);font-style:italic;}
+  @media(max-width:1080px){.price-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:640px){.price-grid{grid-template-columns:1fr 1fr;}}
+
+  /* TESTI */
+  .testi{background:linear-gradient(160deg,#F6EAD0,#FBF6EC);text-align:center;}
+  .quote{font-family:Georgia,serif;font-size:27px;font-style:italic;max-width:760px;margin:0 auto;line-height:1.45;color:var(--ink);}
+  .quote .who{display:block;margin-top:22px;font-size:16px;font-style:normal;color:var(--honey-deep);font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif;}
+  .ph{margin-top:14px;font-size:13px;color:var(--ink-soft);opacity:.7;}
+
+  /* FAQ */
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px 26px;margin-bottom:14px;max-width:780px;margin-left:auto;margin-right:auto;}
+  .faq-item h3{font-size:18px;margin-bottom:6px;}
+  .faq-item p{font-size:15px;color:var(--ink-soft);}
+
+  /* FINAL */
+  .final{background:var(--ink);color:#fff;text-align:center;}
+  .final h2{color:#fff;font-size:38px;}
+  .final p{color:#e6dcc8;font-size:18px;max-width:560px;margin:14px auto 30px;}
+
+  footer{background:#1f1811;color:#b7a988;text-align:center;padding:30px;font-size:13px;}
+  footer .brand{font-family:Georgia,serif;color:#fff;font-size:16px;}
+
+  @media(max-width:820px){
+    .hero h1{font-size:40px;}.feat-grid,.step-row,.price-grid,.pain-grid,.cap-grid{grid-template-columns:1fr;}
+    .eco-grid{grid-template-columns:1fr 1fr;}section{padding:60px 0;}section h2{font-size:30px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav><div class="wrap">
+  <div class="brand">The Preschool <span>Professional</span></div>
+  <div class="links">
+    <a class="navlink" href="#system">The System</a>
+    <a class="navlink" href="#day">A Day Inside</a>
+    <a class="navlink" href="#carries">Everything</a>
+    <a class="navlink" href="#library">Resources</a>
+    <a class="navlink" href="#pricing">Pricing</a>
+    <a class="navlink" href="#faq">FAQ</a>
+    <a class="navlink" href="#waitlist">Early Access</a>
+  </div>
+</div></nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+  <div class="wrap">
+    <span class="eyebrow">For Owners &amp; Directors</span>
+    <h1>Run your preschool like a <span class="accent">professional</span> — in about an hour a day.</h1>
+    <p class="sub">An intelligent operations system that carries the daily grind for you — attendance, the food program, compliance, payroll, parent updates, staff culture, safety routines — so one owner can run multiple schools with a fraction of the hands-on work. Less busywork. Less stress.</p>
+    <div class="btns">
+      <a href="#pricing" class="btn solid">Get Early Access</a>
+      <a href="#day" class="btn ghost">See a Day Inside</a>
+    </div>
+    <p class="founder">Created by a working preschool owner running two schools with it every day — and author of <em>The Preschool Professional</em>.</p>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="track">
+  <span>Attendance <b>·</b> Food Program <b>·</b> ELC &amp; VPK <b>·</b> Payroll <b>·</b> Newsletters <b>·</b> Social Media <b>·</b> Staffing &amp; Ratios <b>·</b> Compliance <b>·</b> Reminders <b>·</b> Cleaning Charts <b>·</b> Emergency Plans <b>·</b> Tours <b>·</b> Staff Culture <b>·</b> Birthdays <b>·</b></span>
+  <span>Attendance <b>·</b> Food Program <b>·</b> ELC &amp; VPK <b>·</b> Payroll <b>·</b> Newsletters <b>·</b> Social Media <b>·</b> Staffing &amp; Ratios <b>·</b> Compliance <b>·</b> Reminders <b>·</b> Cleaning Charts <b>·</b> Emergency Plans <b>·</b> Tours <b>·</b> Staff Culture <b>·</b> Birthdays <b>·</b></span>
+</div></div>
+
+<!-- STATS -->
+<section class="stats" style="background:#fff;padding:54px 0;">
+  <div class="wrap">
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;">
+      <div><div style="font-family:Georgia,serif;font-size:44px;color:var(--honey-deep);">100+</div><div style="font-size:14px;color:var(--ink-soft);">tasks working behind the scenes</div></div>
+      <div><div style="font-family:Georgia,serif;font-size:44px;color:var(--honey-deep);">~1 hr</div><div style="font-size:14px;color:var(--ink-soft);">of hands-on work a day</div></div>
+      <div><div style="font-family:Georgia,serif;font-size:44px;color:var(--honey-deep);">2 schools</div><div style="font-size:14px;color:var(--ink-soft);">run by a single owner</div></div>
+      <div><div style="font-family:Georgia,serif;font-size:44px;color:var(--honey-deep);">real-time</div><div style="font-size:14px;color:var(--ink-soft);">ratios, records &amp; alerts</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">Sound Familiar</span>
+      <h2>You didn't open a school to do paperwork.</h2>
+      <p class="lede">Yet the admin never ends — and all of it lands on you.</p></div>
+    <div class="pain-grid reveal">
+      <div class="pain-item"><b>Attendance &amp; the food program</b> — every afternoon, without fail.</div>
+      <div class="pain-item"><b>ELC, VPK &amp; licensing deadlines</b> you can't afford to miss.</div>
+      <div class="pain-item"><b>Payroll, ordering &amp; staffing ratios</b> — all in your head at once.</div>
+      <div class="pain-item"><b>Parent newsletters &amp; social media</b> that never quite happen.</div>
+      <div class="pain-item"><b>Cleaning charts, drills &amp; safety routines</b> that slip when weeks get busy.</div>
+      <div class="pain-item"><b>Reminding everyone of everything</b> — because if you don't, who will?</div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM / FEATURES -->
+<section id="system">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">The System</span>
+      <h2>One system. Your entire operation.</h2>
+      <p class="lede">Set it up once; it works in the background — across every school you own. And every piece is modular: add what serves your school, turn off what doesn't, and shape the system around the way <em>you</em> run things.</p></div>
+    <div class="feat-grid">
+      <div class="feat reveal d1"><div class="n">01</div><h3>Attendance &amp; Food Program</h3><p>Daily check-ins pulled and meals recorded to the food program automatically. The afternoon scramble disappears.</p></div>
+      <div class="feat reveal d2"><div class="n">02</div><h3>ELC, VPK &amp; Compliance</h3><p>Deadlines tracked, monthly attendance prepared, certifications watched, and you stay ahead of every licensing and audit requirement.</p></div>
+      <div class="feat reveal d3"><div class="n">03</div><h3>Finance &amp; Payroll</h3><p>A live financial picture, payroll hours gathered for you, and a daily read on exactly where your business stands.</p></div>
+      <div class="feat reveal d1"><div class="n">04</div><h3>Parent Communication</h3><p>Newsletters, reminders, and weekly recaps written and sent in your voice — in each family's language.</p></div>
+      <div class="feat reveal d2"><div class="n">05</div><h3>Social Media</h3><p>Classroom photos become polished, captioned posts that keep your pages active without you lifting a finger.</p></div>
+      <div class="feat reveal d3"><div class="n">06</div><h3>Staffing &amp; Ratios</h3><p>Live ratio checks against state rules — know the moment you can trim hours or need coverage.</p></div>
+      <div class="feat reveal d1"><div class="n">07</div><h3>Staff Culture, Daily</h3><p>A morning quote translated into each teacher's language, bilingual weekly briefings, birthday celebrations, and warm nudges — team-building on autopilot, every single day.</p></div>
+      <div class="feat reveal d2"><div class="n">08</div><h3>Safety &amp; Facility Routines</h3><p>Daily cleaning charts, sanitizer spray-down reminders, emergency plans, drill schedules, and health posters — the safety rhythm that inspectors love to see.</p></div>
+      <div class="feat reveal d3"><div class="n">09</div><h3>Reminders That Never Sleep</h3><p>Mail checks, food carts, report deadlines, payroll signatures, supply orders — every recurring to-do reminded automatically, to the right person, in the right channel.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">How It Works</span>
+      <h2>Running in three steps.</h2></div>
+    <div class="step-row">
+      <div class="step reveal d1"><div class="num">1</div><h3>Connect</h3><p>Link the tools you already use — childcare software, email, calendar, team chat. Missing one? We'll help you add a free option right inside Cowork.</p></div>
+      <div class="step reveal d2"><div class="num">2</div><h3>Install</h3><p>Upload one plugin file. Every automation shows up ready to set up — it asks the right questions and tells you exactly what to connect. No technical skill required.</p></div>
+      <div class="step reveal d3"><div class="num">3</div><h3>Lead</h3><p>The system runs the daily work and checks in only when it needs you. You stay fully in control.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- A DAY IN THE LIFE -->
+<section id="day" class="day">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">A Day Inside</span>
+      <h2>While you sleep, it's already working.</h2>
+      <p class="lede">This is a real day at a school running the system — every item below happens automatically.</p></div>
+
+    <div class="mc reveal">
+      <div class="mc-bar"><span></span><span></span><span></span><em>Bear Mission Control — the live dashboard</em></div>
+      <div class="mc-body">
+        <div class="mc-head">
+          <div class="mc-title">🐻 Mission Control</div>
+          <div class="mc-date">Thursday · 7:42 AM · both schools</div>
+        </div>
+        <div class="mc-stats">
+          <div class="mc-stat g"><b>34</b>done today</div>
+          <div class="mc-stat o"><b>3</b>waiting on you</div>
+          <div class="mc-stat b"><b>12</b>up next</div>
+          <div class="mc-stat r"><b>0</b>missed</div>
+        </div>
+        <div class="mc-cols">
+          <div class="mc-col">
+            <h4>🌟 Today at a Glance</h4>
+            <div class="mc-row"><span class="tm">4:30 AM</span>Login &amp; connection readiness check<span class="pill done">DONE</span></div>
+            <div class="mc-row"><span class="tm">5:45 AM</span>Daily financial briefing<span class="pill done">DONE</span></div>
+            <div class="mc-row"><span class="tm">6:00 AM</span>Director briefings + weather<span class="pill done">DONE</span></div>
+            <div class="mc-row"><span class="tm">7:00 AM</span>Parent messages — both schools<span class="pill done">DONE</span></div>
+            <div class="mc-row"><span class="tm">9:00 AM</span>Staffing ratio check<span class="pill done">DONE</span></div>
+            <div class="mc-row"><span class="tm">10:00 AM</span>Photo approvals — 6 waiting<span class="pill wait">YOU</span></div>
+            <div class="mc-row"><span class="tm">3:00 PM</span>Attendance &amp; meal recording<span class="pill next">NEXT</span></div>
+            <div class="mc-row"><span class="tm">6:00 PM</span>Photos → social posts<span class="pill next">NEXT</span></div>
+          </div>
+          <div class="mc-col">
+            <h4>🗓️ The Week at a Glance</h4>
+            <div class="mc-chart">
+              <div class="cbar" style="height:78%;"><i>28</i></div>
+              <div class="cbar" style="height:88%;"><i>31</i></div>
+              <div class="cbar" style="height:84%;"><i>30</i></div>
+              <div class="cbar" style="height:100%;"><i>34</i></div>
+              <div class="cbar" style="height:70%;"><i>26</i></div>
+            </div>
+            <div class="mc-days"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div>
+            <div class="mc-special">📌 <b>This week:</b> payroll signatures Tue · grocery cart loads Wed · directors review &amp; order Thu · delivery + sanitizer spray-down Fri</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="mc-cap">A screen from Bear Mission Control — every task, its live status, and the whole week on one organized board. Green ran, orange is waiting on you, blue is up next. This dashboard is included with The Full System.</p>
+
+    <div class="timeline reveal">
+      <div class="tl"><span class="t">4:30 AM</span><h3>Readiness check</h3><p>Every login and connection the day depends on is verified — if anything needs you, it's the first thing you see, before problems can happen.</p></div>
+      <div class="tl"><span class="t">5:00 AM</span><h3>Phone dashboards refresh</h3><p>Today-at-a-glance, mission control, finance, and social dashboards regenerate — so you can check on everything from your phone, anywhere.</p></div>
+      <div class="tl"><span class="t">5:45 AM</span><h3>Financial briefing</h3><p>Yesterday's transactions pulled and categorized, cash position and payroll ratio posted — you know exactly where both schools stand before sunrise.</p></div>
+      <div class="tl"><span class="t">6:00 AM</span><h3>Director briefings, weather &amp; email triage #1</h3><p>Each director gets a school-specific action board — deadlines, follow-ups, today's forecast, and a GO / WATCH call on field-trip days. Your inbox gets its first of three daily sweeps: summarized, replies drafted, school items flagged.</p></div>
+      <div class="tl"><span class="t">6:10 AM</span><h3>Office inboxes triaged — both schools</h3><p>Each school's office email is read for you — licensing notices, food program letters, subsidy emails — actionable items flagged, obvious replies drafted, briefing items queued.</p></div>
+      <div class="tl"><span class="t">6:45 AM</span><h3>ProCare morning sync</h3><p>Check-in data syncs to the desktop system before doors open — so the day starts with clean records at both schools.</p></div>
+      <div class="tl"><span class="t">7:00 AM</span><h3>Your action board + families hear from you</h3><p>Your personal morning board lands — approvals first, then the day in priority order. Parent messages go out in your voice: the mid-week "Teddy Bear Talk" tip, the Friday recap, tuition reminders on the right days.</p></div>
+      <div class="tl"><span class="t">8:05 AM</span><h3>Staff culture moment</h3><p>The morning teacher quote posts to each school — translated into Spanish and Hindi so every teacher starts the day included and inspired. Fridays add the bilingual teacher heads-up for next week.</p></div>
+      <div class="tl"><span class="t">9:00 AM</span><h3>Parent message check #1 + ratio check</h3><p>Every ProCare parent message at both schools is read — absences routed straight to each school's to-do list, questions surfaced for a quick reply. First live staffing-ratio check against state rules.</p></div>
+      <div class="tl"><span class="t">9:30 AM</span><h3>Staff punches cleaned up</h3><p>Yesterday's time clocks finalized — overnight stuck punches, missing sign-ins, and no-shows flagged while directors can still fix them.</p></div>
+      <div class="tl"><span class="t">10 – 11 AM</span><h3>Hourly ratio checks + approvals digest</h3><p>Staffing re-checked as children arrive, and the first "waiting on you" digest lists everything that needs your yes — nothing sits forgotten.</p></div>
+      <div class="tl"><span class="t">12:00 PM</span><h3>Teachers get answers + payroll pull</h3><p>The lesson-plan assistant answers teachers' questions with the right plan and activity ideas. Every other Wednesday, payroll hours are gathered and checked against revenue for entry.</p></div>
+      <div class="tl"><span class="t">1:00 PM</span><h3>Email triage #2 — round two</h3><p>Your inbox and both office inboxes swept again — anything that landed since morning is summarized, drafted, or flagged before it can pile up.</p></div>
+      <div class="tl"><span class="t">2:30 PM</span><h3>After-nap ratio check</h3><p>The tricky after-nap window — children signed in vs staff on the floor vs state ratios, with combine / float / cut-hours advice if anything is off.</p></div>
+      <div class="tl"><span class="t">3:00 PM</span><h3>ProCare → KidKare attendance &amp; meals</h3><p>The daily attendance chain begins: check-ins pulled from ProCare, meals matched to serving windows and recorded in KidKare for the food program claim, running records updated for month-end. Afternoon punch check fixes time clocks before close.</p></div>
+      <div class="tl"><span class="t">4:00 PM</span><h3>School two + email triage #3 + ELC records</h3><p>The second school's attendance and meals are recorded, your inboxes get their third sweep, directors are reminded to check the mail, and SR attendance is kept ready for the ELC portal — subsidy records always audit-ready.</p></div>
+      <div class="tl"><span class="t">6:00 PM</span><h3>Photos become posts + hours pace</h3><p>Today's classroom photos are gathered and captioned for social media. Every staff member's hours are finalized and projected against schedules — overtime spotted days before it happens. Thursdays also capture the weekly billing reports.</p></div>
+      <div class="tl"><span class="t">7:00 PM</span><h3>Parent message check #2</h3><p>The evening sweep of ProCare messages — anything parents sent after pickup is routed and waiting for the right person by morning.</p></div>
+      <div class="tl moon"><span class="t">8:00 PM — MIDNIGHT</span><h3>Tomorrow gets prepped, today gets logged</h3><p>Tomorrow's director briefings are researched and staged, and the entire day — every task, every result — is written to a log so nothing is ever lost. Then it starts again.</p></div>
+      <div class="tl moon"><span class="t">WEEKENDS</span><h3>It covers you when you're closed</h3><p>Every inbox gets a warm "we're closed, back Monday" reply with your registration link, and the weekend family guide of free local events goes out — enrollment never sleeps, even when you do.</p></div>
+    </div>
+    <p class="note" style="margin-top:6px;">That's 30–40 automated runs every weekday — before counting the weekly, monthly, and seasonal work stacked on top.</p>
+  </div>
+</section>
+
+<!-- EVERYTHING IT CARRIES -->
+<section id="carries" class="carries">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">The Full Picture</span>
+      <h2>Everything it carries — in every area.</h2>
+      <p class="lede">Not one corner of the operation is left out. Here's the honest inventory of what runs at a school on this system.</p></div>
+    <div class="cap-grid">
+      <div class="cap reveal d1"><div class="ico">⏰</div><h3>Reminders That Never Sleep</h3><ul>
+        <li>Daily mail check for directors</li>
+        <li>Thursday food-cart review before delivery day</li>
+        <li>Monthly reports due — reminded on the 1st</li>
+        <li>Payroll signatures every other Tuesday</li>
+        <li>Weekly billing reports with the form link</li>
+        <li>Scholarship payments every Friday</li>
+        <li>Supply-order inventory on the 25th</li>
+        <li>Newsletter reminder on the 24th</li>
+      </ul></div>
+      <div class="cap reveal d2"><div class="ico">🧽</div><h3>Cleaning, Safety &amp; Facility</h3><ul>
+        <li>Daily classroom cleaning charts</li>
+        <li>Bathroom cleaning logs</li>
+        <li>Friday sanitizer spray-down reminder to all staff</li>
+        <li>Fire drill &amp; emergency procedure plans</li>
+        <li>Emergency codes posted &amp; ready</li>
+        <li>Handwashing, diapering &amp; illness posters</li>
+        <li>Allergy action plans &amp; cover sheets</li>
+      </ul></div>
+      <div class="cap reveal d3"><div class="ico">🏛️</div><h3>Compliance &amp; Licensing</h3><ul>
+        <li>License &amp; inspection watch — 60-day warnings</li>
+        <li>Staff certification tracker, checked weekly</li>
+        <li>Child &amp; staff file audits — missing docs flagged</li>
+        <li>E-signed enrollment packets auto-filed</li>
+        <li>Monthly Food Program / SR / VPK walkthroughs</li>
+        <li>Attendance records that build up for audits</li>
+      </ul></div>
+      <div class="cap reveal d1"><div class="ico">💵</div><h3>Finance &amp; Payroll</h3><ul>
+        <li>Daily financial briefing — both schools</li>
+        <li>Payroll % of revenue watched against target</li>
+        <li>Hours gathered every other week for payroll entry</li>
+        <li>Weekly billing verified before the weekend</li>
+        <li>Who's-behind-on-tuition owner summary</li>
+        <li>Monthly subsidy deposit reconciliation</li>
+      </ul></div>
+      <div class="cap reveal d2"><div class="ico">💌</div><h3>Family Connection</h3><ul>
+        <li>Mid-week "Teddy Bear Talk" parenting tips</li>
+        <li>Friday recap — theme, schedule, field trips</li>
+        <li>Monthly newsletter, written &amp; sent</li>
+        <li>Weekend guide of free local family events</li>
+        <li>Birthday celebrations posted every month</li>
+        <li>Tour package for prospective families</li>
+        <li>Weekend auto-reply with your registration link</li>
+      </ul></div>
+      <div class="cap reveal d3"><div class="ico">🤝</div><h3>Staff Building, Every Day</h3><ul>
+        <li>Daily inspirational quote — in each teacher's language</li>
+        <li>Bilingual weekly heads-up (theme, trips, schedule)</li>
+        <li>Clock-in celebrations &amp; warm reminders</li>
+        <li>Lesson-plan help on demand, any teacher</li>
+        <li>Staff birthdays &amp; milestones celebrated</li>
+        <li>Directors briefed daily — never guessing</li>
+      </ul></div>
+      <div class="cap reveal d1"><div class="ico">🍎</div><h3>Food &amp; Supplies</h3><ul>
+        <li>Menus turned into age-band-sized shopping lists</li>
+        <li>Grocery carts auto-loaded weekly, per school</li>
+        <li>Directors review &amp; place — you stay in control</li>
+        <li>Monthly bulk supply order with inventory check</li>
+        <li>Delivery rhythm that never misses a week</li>
+      </ul></div>
+      <div class="cap reveal d2"><div class="ico">📸</div><h3>Social Media &amp; Marketing</h3><ul>
+        <li>Classroom photos → captioned, branded posts</li>
+        <li>Three content streams, always 2 weeks ahead</li>
+        <li>Branded event &amp; closure flyers</li>
+        <li>Instant posting for in-the-moment magic</li>
+        <li>Queue health monitored — refills itself</li>
+      </ul></div>
+      <div class="cap reveal d3"><div class="ico">🧭</div><h3>Your Command Center</h3><ul>
+        <li>Morning action board — approvals first, then the day</li>
+        <li>Twice-daily "waiting on you" digest</li>
+        <li>Mission-control dashboard of every task</li>
+        <li>Phone dashboards — run it from anywhere</li>
+        <li>Nightly log — the whole day, captured</li>
+        <li>Idea parking lot, resurfaced so nothing is lost</li>
+      </ul></div>
+    </div>
+    <p class="note">Every item above runs today at two real schools — this is an inventory, not a wish list.</p>
+  </div>
+</section>
+
+<!-- THE REAL DIFFERENCE -->
+<section id="difference" style="background:#fff;">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">The Real Difference</span>
+      <h2>Not magic — just less on your plate.</h2>
+      <p class="lede">Be honest: running a school will always take a human. What this does is carry the repetitive weight, work in real time, and make the rest simple enough to hand off. Here's what that actually looks like.</p></div>
+    <div class="feat-grid">
+      <div class="feat reveal d1"><h3>About an hour a day</h3><p>Most of the daily grind runs on its own. What's left — the quick logins and approvals — takes roughly an hour, and it's the same short routine every day.</p></div>
+      <div class="feat reveal d2"><h3>Anyone can run it</h3><p>It's a simple, repeatable routine, not a skill. You can train any team member to run the daily steps in an afternoon — so it's never all on you.</p></div>
+      <div class="feat reveal d3"><h3>Real-time ratios</h3><p>See your staff-to-child ratios against state rules as the day changes — know instantly when you can cut hours or need coverage.</p></div>
+      <div class="feat reveal d1"><h3>Staff sign-in / sign-out</h3><p>Clock-ins and clock-outs are tracked and cleaned up daily, feeding straight into payroll and coverage — no more chasing the paper book.</p></div>
+      <div class="feat reveal d2"><h3>It fixes itself</h3><p>When something looks off — a stuck punch, a missing day, a wrong number — the system catches it, corrects what it can, and flags the rest instead of failing silently.</p></div>
+      <div class="feat reveal d3"><h3>Records that build up</h3><p>Daily attendance and meals are logged automatically, then roll up so month-end work like ELC is a quick review — not a from-scratch scramble.</p></div>
+      <div class="feat reveal d1"><h3>It all connects</h3><p>Attendance feeds the food program, staffing feeds payroll, payments feed your finances — one system, everything talking to everything.</p></div>
+      <div class="feat reveal d2"><h3>Run it from your phone</h3><p>Away from the school? Send a request from your phone and it happens in real time — post to parents, check a number, kick off a task — even when you're nowhere near a computer.</p></div>
+      <div class="feat reveal d3" style="border-top-color:var(--sage);"><h3>Honest &amp; in your control</h3><p>Some steps use secure sites that need a real login — so you (or your director) sign in, and the system does the rest. You always hold the keys.</p></div>
+    </div>
+    <div class="reveal" style="max-width:860px;margin:36px auto 0;background:var(--ink);color:#f3ead9;border-radius:10px;padding:30px 34px;box-shadow:var(--shadow);">
+      <h3 style="color:#fff;font-size:22px;margin-bottom:8px;">👀 Never a black box.</h3>
+      <p style="font-size:15.5px;color:#e6dcc8;">This is not a blind operation. Any time a task is running, you can open it and <b style="color:var(--honey);">watch it work — live</b>. Every step is narrated in real time: what it's reading, what it's recording, what it decided and why. Most days you won't need to look — that's the beauty of it. But the window is always open, and the full step-by-step record of every single run is saved, so you can review anything, any time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY & PRIVACY -->
+<section id="security" style="background:linear-gradient(160deg,#F6EAD0,#FBF6EC);">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">Security &amp; Privacy</span>
+      <h2>Your families' trust is the whole business.</h2>
+      <p class="lede">This was built by an owner who answers to licensing, subsidy programs, and — most importantly — parents. Security isn't a feature bolted on at the end; it's how the system is designed.</p></div>
+    <div class="feat-grid">
+      <div class="feat reveal d1" style="border-top-color:var(--sage);"><h3>🔑 You hold every key</h3><p>Your passwords are never stored, shared, or handed to the system. Secure portals — banking, subsidy, licensing — always get a real human sign-in from you or your director.</p></div>
+      <div class="feat reveal d2" style="border-top-color:var(--sage);"><h3>🛡️ Children's data stays put</h3><p>Child records are never copied into outside services. The system works inside the platforms you already use and trust — your childcare software, food program, and subsidy portals.</p></div>
+      <div class="feat reveal d3" style="border-top-color:var(--sage);"><h3>✋ Approval gates on everything public</h3><p>Nothing reaches parents, social media, or the public without your explicit yes — every photo, every post, every message is approved by a human first.</p></div>
+      <div class="feat reveal d1" style="border-top-color:var(--sage);"><h3>🧾 Official filings stay human</h3><p>Government claims and subsidy submissions are prepared and organized for you — but a person always reviews and presses submit. The system records; you certify.</p></div>
+      <div class="feat reveal d2" style="border-top-color:var(--sage);"><h3>💵 It never moves money</h3><p>The system watches your finances and preps payroll — but it never places orders on its own, never transfers funds, never touches your books. Your accountant's lane stays your accountant's lane.</p></div>
+      <div class="feat reveal d3" style="border-top-color:var(--sage);"><h3>📓 A full audit trail</h3><p>Every action is logged nightly — what ran, when, and what it touched. Privacy-first publishing too: first names only, photo-by-photo approval, and no-photo lists honored.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCE LIBRARY / ECOSYSTEM -->
+<section id="library" class="eco">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">The Professional Library</span>
+      <h2>More than software — a whole ecosystem.</h2>
+      <p class="lede">Once your operations run themselves, level up what happens in the classroom. Add proven resources from a fellow preschool professional — available on their own or as a bundle.</p></div>
+    <div class="eco-grid reveal">
+      <div class="res"><div class="cover">The Preschool Professional</div><h3>The Book</h3><p>The foundational guide to running an excellent school.</p><a href="https://www.amazon.com/stores/Mrs-Bear/author/B0DNG9XXVD/allbooks" target="_blank">View on Amazon →</a></div>
+      <div class="res"><div class="cover">Bear Phonics Program</div><h3>Reading Curriculum</h3><p>A complete decodable reading system with character development.</p><a href="https://youtube.com/@bearseceden" target="_blank">Watch on YouTube →</a></div>
+      <div class="res"><div class="cover">Feelings Matter</div><h3>Social-Emotional</h3><p>Helping little ones name and navigate big emotions.</p><a href="https://www.amazon.com/stores/Mrs-Bear/author/B0DNG9XXVD/allbooks" target="_blank">View on Amazon →</a></div>
+      <div class="res"><div class="cover">Forms &amp; Facility Kit</div><h3>Ready-to-Print Library</h3><p>Cleaning charts, emergency plans, tour packages, sign-in sheets, binder system &amp; more.</p><a href="#pricing">Included in the System →</a></div>
+    </div>
+    <p class="note">Books live on Amazon · programs live on YouTube — real resources, in classrooms today.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:var(--honey);">The Story Behind It</span>
+    <h2>I built this because I needed it.</h2>
+    <p>I own and run two preschools, and I wrote <em>The Preschool Professional</em> because I believe this work deserves excellence. But for years, the admin ran me — attendance, the food program, ELC, payroll, parent updates — all before I could focus on the children.</p>
+    <p>So I built a system that carries it for me. Today both schools run with excellence, largely on their own, and I get to lead. This is that system, paired with the resources I've created along the way — packaged so any owner can have what I have.</p>
+    <p class="sig">— Mrs. Bear, Owner, Director &amp; Author</p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">Get Started</span>
+      <h2>Five ways to start.</h2>
+      <p class="lede">From free resources to a fully guided setup with Mrs. Bear herself. Every paid tier is a single installable plugin — no videos to watch, no manual to memorize — and a one-time purchase, no subscription for the system itself.</p></div>
+    <div class="price-grid">
+      <div class="plan free reveal d1"><h3>Resource Library</h3><div class="tagline">"Browse the Hive"</div><div class="price">Free</div>
+        <ul><li><em>The Preschool Professional</em> — the book</li><li>Bear Phonics reading program</li><li><em>Feelings Matter</em> — social-emotional book</li><li><a href="milestone-wizard.html" target="_blank" style="color:inherit;text-decoration:underline;"><b>🧸 The Milestone Wizard</b></a> — milestones, activities &amp; materials by age and state</li><li><a href="https://new-interface-a4c4b3.zapier.app/" target="_blank" style="color:inherit;text-decoration:underline;">Mrs. Bear's ECE Den hub</a></li><li>No purchase or install needed</li><li>Open to everyone, always</li></ul>
+        <a href="#library" class="btn ghost">Browse Free</a></div>
+      <div class="plan reveal d2"><h3>The Playbook</h3><div class="tagline">"Welcome to the Hive!"</div><div class="price">$100<span> one-time</span></div>
+        <div class="roi"><b>~3 hrs/day back</b> · ~$7,500+/yr saved.* Pays for itself in under a week.</div>
+        <ul><li>Step-by-step setup guide</li><li><b>5 automations</b> — attendance &amp; food program, director briefing, staffing ratio check, good-morning briefing, end-of-day log</li><li>Runs on Claude Pro ($20/mo)</li><li>Best for one school, self-starters</li></ul>
+        <div class="addon">➕ <b>+ <a href="https://payhip.com/b/RWmjr" target="_blank" style="color:inherit;">Command Center — $20</a></b><br>Mission Control + Skills Reference dashboards</div>
+        <a href="https://payhip.com/b/DKjcR" target="_blank" class="btn ghost">Buy Now — $100</a></div>
+      <div class="plan pop reveal d3"><span class="ribbon">Most Popular</span><h3>The Full System</h3><div class="tagline">"Sweet as Honey"</div><div class="price">$250<span> one-time</span></div>
+        <div class="roi"><b>~5 hrs/day back</b> (avg) · ~$12,500+/yr saved.* Pays back within the first week.</div>
+        <ul><li>Everything in The Playbook</li><li><b>40 automations</b> total — finance, social media, parent comms &amp; compliance added</li><li>Runs on Claude Max 5x ($100/mo)</li></ul>
+        <div class="addon">➕ <b>+ <a href="https://payhip.com/b/MwuZs" target="_blank" style="color:inherit;">Command Center — $50</a></b><br>All 6 dashboards, incl. Finance &amp; Staffing</div>
+        <a href="https://payhip.com/b/zdwWG" target="_blank" class="btn solid">Buy Now — $250</a></div>
+      <div class="plan reveal d1"><h3>Professional Bundle</h3><div class="tagline">"Mrs. Bear's Den"</div><div class="price">$500<span> one-time</span></div>
+        <div class="roi"><b>~8 hrs/day back</b> · ~$20,000+/yr saved.* Like reliable part-time office help — without the hire.</div>
+        <ul><li>Everything in The Full System</li><li><b>60 automations + 8 templates</b>, all releases as they ship</li><li>All 6 Command Center dashboards <b>free</b></li><li>Runs on Claude Max 20x ($200/mo)</li></ul>
+        <a href="https://payhip.com/b/DsRAb" target="_blank" class="btn ghost">Buy Now — $500</a></div>
+      <div class="plan custom reveal d2"><h3>One-on-One</h3><div class="tagline">"Straight From the Hive"</div><div class="price">Custom</div>
+        <ul><li>Mrs. Bear personally trains your team</li><li>Installed alongside you, live</li><li>Tailored to your schools &amp; tools</li><li>Tell her about your school first</li></ul>
+        <a href="https://form.jotform.com/261834211759056" target="_blank" class="btn solid" style="background:var(--honey-deep);">Inquire</a></div>
+    </div>
+    <p class="note" style="margin-top:16px;">*Estimated value based on typical time spent on these tasks, benchmarked at $20/hr (2026 U.S. administrative-assistant wage average, PayScale) — shown at half the raw hours-saved calculation to reflect the equivalent of reliable part-time help, not an assumed full-time hire. A conservative, transparent estimate, not a guarantee. Even after the Claude subscription each tier runs on, the time and money saved comfortably outweighs the cost for most owners.</p>
+
+    <div class="reveal" style="max-width:900px;margin:36px auto 0;background:#fff;border:2px solid var(--honey-deep);border-radius:10px;padding:30px 34px;box-shadow:var(--shadow);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <div style="font-style:italic;color:var(--honey-deep);font-size:13px;margin-bottom:4px;">Stay in the hive, all year</div>
+          <h3 style="font-size:24px;margin-bottom:8px;">The Buzz <span style="font-size:13px;font-weight:400;color:var(--ink-soft);font-style:italic;">— an optional membership, not one of the five tiers above</span></h3>
+          <p style="font-size:15px;color:var(--ink-soft);margin-bottom:10px;">A standalone monthly membership, open to anyone — whichever tier you own, or none yet. Keeps your system growing instead of going stale.</p>
+          <ul style="list-style:none;font-size:14px;color:var(--ink-soft);">
+            <li style="padding:5px 0 5px 22px;position:relative;">— <b>Teacher Bundles</b> — monthly classroom printables: lesson plans, wall alphabet &amp; number cards, worksheets &amp; setup materials (Drop #1 is live inside)</li>
+            <li style="padding:5px 0 5px 22px;position:relative;">— New automation drops added to your library over time</li>
+            <li style="padding:5px 0 5px 22px;position:relative;">— Ongoing additions to the resource &amp; template library</li>
+            <li style="padding:5px 0 5px 22px;position:relative;">— A short tips newsletter — ECE &amp; ops ideas worth knowing</li>
+            <li style="padding:5px 0 5px 22px;position:relative;">— Priority access whenever something new ships</li>
+            <li style="padding:5px 0 5px 22px;position:relative;">— A monthly live Q&amp;A — bring your questions, hear what's new</li>
+          </ul>
+        </div>
+        <div style="text-align:center;flex-shrink:0;">
+          <div class="price" style="margin:0;font-size:34px;">$19<span style="font-size:14px;">/mo</span></div>
+          <div style="font-size:12.5px;color:var(--ink-soft);margin-bottom:14px;">or $190/yr</div>
+          <a href="https://payhip.com/b/Kcw8r" target="_blank" class="btn solid">Join The Buzz</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testi">
+  <div class="wrap reveal">
+    <span class="eyebrow">What Owners Say</span>
+    <p class="quote">"I got my afternoons back. Attendance and the food program simply happen now — and I finally have the time to actually lead my school."
+      <span class="who">— A future Preschool Professional</span></p>
+    <p class="ph">Placeholder — real testimonials from your pilot schools will live here.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">Questions</span><h2>The details.</h2></div>
+    <div class="reveal">
+      <div class="faq-item"><h3>Do I need to be technical?</h3><p>Not at all. It's built for preschool owners, not programmers. The setup walks you through every step.</p></div>
+      <div class="faq-item"><h3>Will it work with the software I already use?</h3><p>It's designed around the tools preschools rely on for childcare management, the food program, email, and calendars. You connect what you have.</p></div>
+      <div class="faq-item"><h3>Does it work across multiple schools?</h3><p>Yes — it was built to run more than one school at once, and each new location plugs right in.</p></div>
+      <div class="faq-item"><h3>Do I stay in control?</h3><p>Always. It handles the routine work and brings anything that needs a decision or approval straight to you.</p></div>
+      <div class="faq-item"><h3>Is my families' information safe?</h3><p>Yes — by design. Children's records never leave the platforms you already use, passwords stay with you, anything public requires your approval, official submissions are always finished by a person, and every action is logged. See the Security &amp; Privacy section above for the full picture.</p></div>
+      <div class="faq-item"><h3>Can I add or remove pieces of the system?</h3><p>Absolutely — that's the design. Every automation is its own building block. Don't do social media? Turn it off. Want the food program chain but not the finance briefings? Keep just what serves your school. You can add, remove, or adjust any piece at any time — the system bends to your program, not the other way around.</p></div>
+      <div class="faq-item"><h3>How do I get access to all the automations, tasks &amp; skills?</h3><p>Each tier ships as a single installable Cowork plugin — no separate files to juggle. The Playbook installs 5 automations, The Full System installs 40, and The Professional Bundle installs the complete library — 60 automations plus 8 ready-to-use templates, and all 6 Command Center dashboards included — plus new releases as they ship. You upload one file, and every automation in it shows up ready to set up, with plain-English instructions.</p></div>
+      <div class="faq-item"><h3>What is The Command Center?</h3><p>A set of live, pinnable visual dashboards — Mission Control (what ran, what's waiting on you, what's next), Staffing &amp; Ratios, Finance Snapshot, Social Queue Health, an Onboarding/Compliance board, and a searchable Skills Reference (every automation you own, with the exact phrase to trigger it — click to copy). They turn the automations you've already installed into an at-a-glance board instead of something you have to scroll chat history to check. Included free with The Professional Bundle; available as an add-on for The Playbook (+$20, Mission Control + Skills Reference) and The Full System (+$50, all 6 dashboards).</p></div>
+      <div class="faq-item"><h3>What's The Buzz?</h3><p>A separate monthly membership ($19/mo or $190/yr) open to anyone, on any tier. It's how the system keeps growing after you buy it — monthly Teacher Bundles (classroom-ready printables: lesson plans, wall alphabet &amp; number cards, worksheets, setup materials), new automation drops, ongoing additions to the template library, a short tips newsletter, priority access to whatever ships next, and a monthly live Q&amp;A. Not required to use what you already bought — your tier works standalone, forever. This is for owners who want to keep building.</p></div>
+      <div class="faq-item"><h3>Do I need anything else to run this?</h3><p>Yes — an active Claude account, since this runs as a Cowork plugin. The Playbook is built to run comfortably on Claude Pro ($20/mo), The Full System on Claude Max 5x ($100/mo), and The Professional Bundle on Claude Max 20x ($200/mo). Even with that subscription added in, the time and money these automations save comfortably outweighs the cost for most owners — often within the first couple of weeks.</p></div>
+      <div class="faq-item"><h3>What if I don't already use some of the connected tools, like Slack?</h3><p>No problem. If an automation needs something you don't have yet — team chat is the most common example — you can add a free option (like a free Slack workspace) right inside Cowork in a couple of minutes. The setup guide tells you exactly which connections each automation needs and walks you through adding them, step by step.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section id="waitlist" class="final">
+  <div class="wrap reveal">
+    <h2>Become the Preschool Professional.</h2>
+    <p>Join the early-access list and be first in line when it opens. It's free, and the form takes 30 seconds.</p>
+    <a href="https://form.jotform.com/261832960444056" target="_blank" class="btn solid" style="background:var(--honey-deep);">Join the Early-Access List</a>
+    <p style="margin-top:16px;font-size:13.5px;"><a href="https://new-interface-a4c4b3.zapier.app/" target="_blank" style="color:var(--honey);text-decoration:none;">Or visit Mrs. Bear's ECE Den for books, music &amp; more →</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">The Preschool Professional</div>
+  Created by Mrs. Bear · Owner, Director &amp; Author &nbsp;·&nbsp; <em>working draft — for your eyes only</em>
+</footer>
+
+<script>
+  try
