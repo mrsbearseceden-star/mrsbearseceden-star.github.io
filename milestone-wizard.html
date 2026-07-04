@@ -200,6 +200,11 @@
     margin-top:8px;
   }
   .materials strong{color:var(--ink);}
+  .materials a.matlink{color:var(--ink-soft);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;transition:color .2s;}
+  .materials a.matlink:hover{color:var(--honey-deep);}
+  .materials .shopnote{display:block;margin-top:8px;font-size:13.5px;}
+  .materials .shopnote a{color:var(--honey-deep);text-decoration:none;font-weight:bold;}
+  .materials .shopnote a:hover{text-decoration:underline;}
 
   /* ---------- Empty state ---------- */
   .empty{
@@ -299,6 +304,10 @@
     consult <a href="https://flbt5.floridaearlylearning.com/" target="_blank" rel="noopener">your state's official
     early learning standards</a> for teaching requirements, and talk with a pediatrician or early intervention
     program about any developmental concerns.
+  </p>
+  <p class="disclaimer">
+    As an Amazon Associate, The Preschool Professional earns from qualifying purchases. Material links above
+    open Amazon searches so you can compare options — choose what fits your program and budget.
   </p>
   <p class="copy">© The Preschool Professional · Built with love by Mrs. Bear</p>
 </footer>
@@ -1155,7 +1164,14 @@ function buildResultsHTML(stateName, bandId){
     }
     html += '</ul>';
 
-    html += '<h4>Materials &amp; sensory picks</h4><div class="materials"><strong>Stock the shelf:</strong> ' + esc(block.mat.join(" · ")) + '</div>';
+    html += '<h4>Materials &amp; sensory picks</h4><div class="materials"><strong>Stock the shelf:</strong> ';
+    var matLinks = [];
+    for(var k=0;k<block.mat.length;k++){
+      var q = block.mat[k].replace(/\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
+      matLinks.push('<a class="matlink" href="https://www.amazon.com/s?k=' + encodeURIComponent(q) + '&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">' + esc(block.mat[k]) + '</a>');
+    }
+    html += matLinks.join(" · ");
+    html += ' <span class="shopnote"><a href="center-bundles.html">Shop ready-made center bundles &rarr;</a></span></div>';
     html += '</div>';
   }
   return html;
@@ -1178,4 +1194,46 @@ if (typeof document !== "undefined") {
       var opt = document.createElement("option");
       opt.value = ALL_STATES[i];
       opt.textContent = ALL_STATES[i] + (ALL_STATES[i]==="Florida" ? " ⭐" : "");
-      sta
+      stateSelect.appendChild(opt);
+    }
+
+    // populate age chips
+    for(var b=0;b<BANDS.length;b++){
+      (function(band){
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip";
+        btn.textContent = band.label;
+        btn.setAttribute("data-band", band.id);
+        btn.addEventListener("click", function(){
+          selectedBand = band.id;
+          var chips = ageChips.querySelectorAll(".chip");
+          for(var c=0;c<chips.length;c++){ chips[c].classList.remove("active"); }
+          btn.classList.add("active");
+          render();
+        });
+        ageChips.appendChild(btn);
+      })(BANDS[b]);
+    }
+
+    stateSelect.addEventListener("change", function(){
+      selectedState = stateSelect.value;
+      render();
+    });
+
+    function render(){
+      stateNote.innerHTML = buildStateNoteHTML(selectedState);
+      results.innerHTML = buildResultsHTML(selectedState, selectedBand);
+      toolbar.style.display = (selectedState && selectedBand) ? "flex" : "none";
+      // default the date field to today (only if empty)
+      var dateField = document.getElementById("obsDate");
+      if(dateField && !dateField.value && selectedState && selectedBand){
+        var t = new Date();
+        dateField.value = (t.getMonth()+1) + "/" + t.getDate() + "/" + t.getFullYear();
+      }
+    }
+  })();
+}
+</script>
+</body>
+</html>
