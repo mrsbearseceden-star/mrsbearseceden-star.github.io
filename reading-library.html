@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Reading Library — Books by Age | The Preschool Professional</title>
+<meta name="description" content="A preschool owner's real bookshelf — the best read-aloud books for infants, toddlers, twos, preschool, and Pre-K/VPK, plus a professional shelf for teachers. Pick an age, get the list.">
+<style>
+  :root{
+    color-scheme: light;
+    --honey:#E8A317; --honey-deep:#C6820C; --ink:#2B2117; --ink-soft:#5c4d3a;
+    --cream:#FBF6EC; --card:#FFFFFF; --sage:#6E8B6A; --line:#EADFC8;
+    --shadow:0 18px 50px rgba(43,33,23,.10); --shadow-sm:0 6px 20px rgba(43,33,23,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Helvetica Neue',Arial,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;line-height:1.18;letter-spacing:-.01em;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px;}
+  .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:700;color:var(--honey-deep);}
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,246,236,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;}
+  nav .brand{font-family:Georgia,serif;font-weight:700;font-size:20px;letter-spacing:-.02em;}
+  nav .brand span{color:var(--honey-deep);}
+  nav .brand a{text-decoration:none;color:inherit;}
+  nav a.navlink{text-decoration:none;color:var(--ink-soft);font-size:15px;margin-left:26px;transition:color .2s;}
+  nav a.navlink:hover{color:var(--honey-deep);}
+  @media(max-width:720px){nav .links{display:none;}}
+  header.page{padding:70px 0 40px;background:linear-gradient(115deg,#FBF6EC 0%,#F6EAD0 100%);}
+  header.page h1{font-size:44px;margin:14px 0 16px;}
+  header.page h1 .accent{color:var(--honey-deep);font-style:italic;}
+  header.page p.sub{font-size:18px;color:var(--ink-soft);max-width:680px;}
+  .disclosure{max-width:1080px;margin:0 auto;padding:14px 26px;font-size:13.5px;color:var(--ink-soft);border-bottom:1px solid var(--line);background:#fff;}
+  .disclosure b{color:var(--ink);}
+  section.wizard{padding:50px 0 80px;}
+  .stepcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 30px;box-shadow:var(--shadow-sm);margin-bottom:26px;}
+  .stepcard .step{font-size:12.5px;text-transform:uppercase;letter-spacing:2px;color:var(--honey-deep);font-weight:700;margin-bottom:6px;}
+  .stepcard h2{font-size:26px;margin-bottom:14px;}
+  .chips{display:flex;flex-wrap:wrap;gap:12px;}
+  .chip{font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:700;padding:12px 22px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .2s;}
+  .chip:hover{border-color:var(--honey);color:var(--ink);}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .agehead{margin:8px 0 18px;}
+  .agehead h2{font-size:30px;}
+  .agehead p{color:var(--ink-soft);font-size:15.5px;max-width:720px;}
+  .mypick{background:linear-gradient(115deg,#FDF3DC 0%,#F6EAD0 100%);border:1.5px solid var(--honey);border-radius:12px;padding:22px 26px;margin-bottom:22px;box-shadow:var(--shadow-sm);}
+  .mypick .label{font-size:12px;text-transform:uppercase;letter-spacing:2.5px;font-weight:700;color:var(--honey-deep);margin-bottom:6px;}
+  .mypick h3{font-size:21px;margin-bottom:6px;}
+  .mypick p{font-size:14.5px;color:var(--ink-soft);margin-bottom:10px;}
+  .mypick a.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:10px 22px;border-radius:4px;transition:all .2s;}
+  .mypick a.btn:hover{background:var(--honey-deep);}
+  .booklist{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px 30px;box-shadow:var(--shadow-sm);}
+  .booklist h3{font-size:19px;margin-bottom:10px;}
+  .booklist ul{list-style:none;column-count:2;column-gap:40px;}
+  @media(max-width:720px){.booklist ul{column-count:1;}}
+  .booklist li{padding:7px 0 7px 22px;position:relative;font-size:15px;break-inside:avoid;border-bottom:1px dashed var(--line);}
+  .booklist li::before{content:"›";position:absolute;left:4px;color:var(--sage);font-weight:bold;}
+  .booklist a{color:var(--ink-soft);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;transition:color .2s;}
+  .booklist a:hover{color:var(--honey-deep);}
+  .tip{background:#F1F4EF;border-radius:10px;padding:12px 16px;font-size:13.5px;color:var(--ink-soft);margin-top:18px;}
+  .tip b{color:var(--ink);}
+  .authorbar{background:#fff;padding:56px 0;border-top:1px solid var(--line);}
+  .authorbar .wrap{max-width:820px;text-align:center;}
+  .authorbar h2{font-size:28px;margin-bottom:10px;}
+  .authorbar p{color:var(--ink-soft);font-size:16px;margin-bottom:16px;}
+  .authorbar a.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-size:15px;font-weight:700;padding:14px 30px;border-radius:4px;transition:all .2s;}
+  .authorbar a.btn:hover{background:var(--honey-deep);transform:translateY(-2px);}
+  footer{padding:44px 0 60px;text-align:center;font-size:13px;color:var(--ink-soft);border-top:1px solid var(--line);}
+  footer .disclaimer{max-width:720px;margin:0 auto 14px;}
+  footer a{color:var(--honey-deep);}
+  footer .copy{font-family:Georgia,serif;color:var(--ink);font-size:14px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><a href="index.html">The Preschool <span>Professional</span></a></div>
+    <div class="links">
+      <a class="navlink" href="index.html#library">Free Library</a>
+      <a class="navlink" href="milestone-wizard.html">Milestone Wizard</a>
+      <a class="navlink" href="center-bundles.html">Center Bundles</a>
+      <a class="navlink" href="learning-styles.html">Learning Styles</a>
+      <a class="navlink" href="index.html#pricing">Pricing</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="wrap">
+    <span class="eyebrow">Free Resource · Books by Age</span>
+    <h1>The <span class="accent">Reading Library</span></h1>
+    <p class="sub">The right book at the right age turns story time from crowd control into magic. This is a working preschool owner's real shelf — pick the age group you teach, and get the read-alouds that have earned their spot in actual classrooms. Pair it with the <a href="milestone-wizard.html" style="color:var(--honey-deep);">Milestone Wizard</a> to see the language milestones each book supports.</p>
+  </div>
+</header>
+
+<div class="disclosure"><b>Heads up, friend:</b> As an Amazon Associate, The Preschool Professional earns from qualifying purchases made through the links below — at no extra cost to you. Every book was chosen because children actually ask for it again, not because of the commission.</div>
+
+<section class="wizard">
+  <div class="wrap">
+
+    <div class="stepcard">
+      <div class="step">Step 1</div>
+      <h2>Choose your age group</h2>
+      <div class="chips">
+        <button class="chip active" data-panel="infants">Infants (0&ndash;12 mo)</button>
+        <button class="chip" data-panel="toddlers">Toddlers (1&ndash;2)</button>
+        <button class="chip" data-panel="twos">Twos (2&ndash;3)</button>
+        <button class="chip" data-panel="preschool">Preschool (3&ndash;4)</button>
+        <button class="chip" data-panel="prek">Pre-K / VPK (4&ndash;5)</button>
+        <button class="chip" data-panel="teachers">The Teacher's Shelf</button>
+      </div>
+    </div>
+
+    <!-- INFANTS -->
+    <div class="panel active" id="panel-infants">
+      <div class="agehead">
+        <h2>Infants (0&ndash;12 months)</h2>
+        <p>Babies read with their ears and eyes long before they read words. High-contrast pages, rhythm, and your voice are the whole curriculum. Short sessions, repeated daily, build the wiring everything else stands on.</p>
+      </div>
+      <div class="mypick">
+        <div class="label">Mrs. Bear's Pick</div>
+        <h3>&ldquo;Your Feelings Matter&rdquo; — A Journey Through Emotions with Mrs. Bear</h3>
+        <p>It is never too early to name feelings out loud. Reading emotion words to babies in a warm voice is exactly how emotional vocabulary starts — this is the book I wrote to do it.</p>
+        <a class="btn" href="https://www.amazon.com/s?k=Your+Feelings+Matter+Mrs+Bear+journey+through+emotions&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">See it on Amazon &rarr;</a>
+      </div>
+      <div class="booklist">
+        <h3>The classroom shelf</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=goodnight+moon+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Goodnight Moon (board book)</a></li>
+          <li><a href="https://www.amazon.com/s?k=brown+bear+brown+bear+what+do+you+see+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Brown Bear, Brown Bear, What Do You See?</a></li>
+          <li><a href="https://www.amazon.com/s?k=high+contrast+black+and+white+baby+books&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">High-contrast black &amp; white books</a></li>
+          <li><a href="https://www.amazon.com/s?k=peek+a+who+nina+laden&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Peek-a Who?</a></li>
+          <li><a href="https://www.amazon.com/s?k=dear+zoo+rod+campbell+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Dear Zoo (lift-the-flap)</a></li>
+          <li><a href="https://www.amazon.com/s?k=global+babies+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Global Babies</a></li>
+          <li><a href="https://www.amazon.com/s?k=indestructibles+baby+books&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Indestructibles (chew-proof books)</a></li>
+          <li><a href="https://www.amazon.com/s?k=moo+baa+la+la+la+sandra+boynton&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Moo, Baa, La La La!</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> in the infant room, books live in a low basket, not on a shelf — chewing the corner of a board book counts as early literacy. Buy titles you can wipe down.</div>
+      </div>
+    </div>
+
+    <!-- TODDLERS -->
+    <div class="panel" id="panel-toddlers">
+      <div class="agehead">
+        <h2>Toddlers (1&ndash;2 years)</h2>
+        <p>Toddlers want participation — flaps to lift, sounds to make, pages to turn themselves. Repetition is not boring to them; it is how they learn. Expect to read the favorite five times in a row, and celebrate it.</p>
+      </div>
+      <div class="mypick">
+        <div class="label">Mrs. Bear's Pick</div>
+        <h3>It's Ok to Be Happy — Your Feelings Matter Series</h3>
+        <p>Toddlers feel everything at full volume. This one gives their biggest, sunniest feeling a name — the first step of emotional regulation, in a read-aloud they can follow.</p>
+        <a class="btn" href="https://www.amazon.com/s?k=Mrs+Bear+its+ok+to+be+happy+your+feelings+matter&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">See it on Amazon &rarr;</a>
+      </div>
+      <div class="booklist">
+        <h3>The classroom shelf</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=the+very+hungry+caterpillar+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Very Hungry Caterpillar</a></li>
+          <li><a href="https://www.amazon.com/s?k=wheres+spot+eric+hill&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Where's Spot?</a></li>
+          <li><a href="https://www.amazon.com/s?k=little+blue+truck+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Little Blue Truck</a></li>
+          <li><a href="https://www.amazon.com/s?k=first+100+words+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">First 100 Words</a></li>
+          <li><a href="https://www.amazon.com/s?k=llama+llama+red+pajama+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Llama Llama Red Pajama</a></li>
+          <li><a href="https://www.amazon.com/s?k=wheels+on+the+bus+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Wheels on the Bus (sing-along)</a></li>
+          <li><a href="https://www.amazon.com/s?k=hand+hand+fingers+thumb+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Hand, Hand, Fingers, Thumb</a></li>
+          <li><a href="https://www.amazon.com/s?k=ten+little+fingers+and+ten+little+toes+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Ten Little Fingers and Ten Little Toes</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> pick books with one action per page for this room — toddlers narrate with their hands. If they can flap, stomp, or roar along, the book will survive the year in more ways than one.</div>
+      </div>
+    </div>
+
+    <!-- TWOS -->
+    <div class="panel" id="panel-twos">
+      <div class="agehead">
+        <h2>Twos (2&ndash;3 years)</h2>
+        <p>Twos live in big feelings and bigger opinions. Books about emotions, routines, and gentle limits do double duty here — story time and behavior guidance in the same ten minutes.</p>
+      </div>
+      <div class="mypick">
+        <div class="label">Mrs. Bear's Pick</div>
+        <h3>Are You Ok? Are You Hurt? — Your Feelings Matter Series</h3>
+        <p>The twos room runs on bumps, tumbles, and checking on friends. I wrote this one to teach empathy at exactly the age it first blooms — asking about someone else's feelings.</p>
+        <a class="btn" href="https://www.amazon.com/s?k=Mrs+Bear+are+you+ok+are+you+hurt+your+feelings+matter&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">See it on Amazon &rarr;</a>
+      </div>
+      <div class="booklist">
+        <h3>The classroom shelf</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=no+david+david+shannon&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">No, David!</a></li>
+          <li><a href="https://www.amazon.com/s?k=corduroy+don+freeman&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Corduroy</a></li>
+          <li><a href="https://www.amazon.com/s?k=pete+the+cat+i+love+my+white+shoes&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Pete the Cat: I Love My White Shoes</a></li>
+          <li><a href="https://www.amazon.com/s?k=if+you+give+a+mouse+a+cookie&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">If You Give a Mouse a Cookie</a></li>
+          <li><a href="https://www.amazon.com/s?k=llama+llama+time+to+share&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Llama Llama Time to Share</a></li>
+          <li><a href="https://www.amazon.com/s?k=grumpy+monkey+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Grumpy Monkey</a></li>
+          <li><a href="https://www.amazon.com/s?k=hands+are+not+for+hitting+board+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Hands Are Not for Hitting</a></li>
+          <li><a href="https://www.amazon.com/s?k=daniel+tiger+potty+time+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Potty &amp; routine books (Daniel Tiger)</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> keep two copies of the class favorite in the twos room. It ends the fiercest turf war in early childhood — "MINE" — before it starts.</div>
+      </div>
+    </div>
+
+    <!-- PRESCHOOL -->
+    <div class="panel" id="panel-preschool">
+      <div class="agehead">
+        <h2>Preschool (3&ndash;4 years)</h2>
+        <p>Now the stories get to stretch — plot, humor, and characters with problems to solve. This is the golden read-aloud age: build the daily ritual now and you build readers for life.</p>
+      </div>
+      <div class="mypick">
+        <div class="label">Mrs. Bear's Pick</div>
+        <h3>It's Ok to Be Brave — Your Feelings Matter Series</h3>
+        <p>Threes and fours meet real fears — the dark, the doctor, the first day. This one lives in my own calm-down corner, because brave is a feeling you practice, not a feeling you're born with.</p>
+        <a class="btn" href="https://www.amazon.com/s?k=Mrs+Bear+its+ok+to+be+brave+your+feelings+matter&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">See it on Amazon &rarr;</a>
+      </div>
+      <div class="booklist">
+        <h3>The classroom shelf</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=the+kissing+hand+audrey+penn&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Kissing Hand</a></li>
+          <li><a href="https://www.amazon.com/s?k=chicka+chicka+boom+boom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Chicka Chicka Boom Boom</a></li>
+          <li><a href="https://www.amazon.com/s?k=dont+let+the+pigeon+drive+the+bus&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Don't Let the Pigeon Drive the Bus!</a></li>
+          <li><a href="https://www.amazon.com/s?k=were+going+on+a+bear+hunt&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">We're Going on a Bear Hunt</a></li>
+          <li><a href="https://www.amazon.com/s?k=the+color+monster+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Color Monster</a></li>
+          <li><a href="https://www.amazon.com/s?k=the+rainbow+fish+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Rainbow Fish</a></li>
+          <li><a href="https://www.amazon.com/s?k=giraffes+cant+dance+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Giraffes Can't Dance</a></li>
+          <li><a href="https://www.amazon.com/s?k=the+dot+peter+reynolds&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Dot</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> before you read a new book to the group, read it once alone. The books you love are the books they'll love — enthusiasm is contagious and so is boredom.</div>
+      </div>
+    </div>
+
+    <!-- PRE-K -->
+    <div class="panel" id="panel-prek">
+      <div class="agehead">
+        <h2>Pre-K / VPK (4&ndash;5 years)</h2>
+        <p>Kindergarten is coming, and these readers-in-training are hungry for alphabet play, rhyme, and stories with heart. Add early readers they can "read" themselves — confidence now pays off all through kindergarten.</p>
+      </div>
+      <div class="mypick">
+        <div class="label">Mrs. Bear's Pick</div>
+        <h3>It's OK, Get Back Up! — Your Feelings Matter Series</h3>
+        <p>Persistence is the real kindergarten-readiness skill. This one teaches the get-back-up habit in story form — plus <a href="https://www.amazon.com/s?k=Mrs+Bear+its+ok+to+play+with+friends+coloring+journal&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener" style="color:var(--honey-deep);">It's Ok to Play With Friends</a> adds coloring and journal pages for this age.</p>
+        <a class="btn" href="https://www.amazon.com/s?k=Mrs+Bear+its+ok+get+back+up+your+feelings+matter&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">See it on Amazon &rarr;</a>
+      </div>
+      <div class="booklist">
+        <h3>The classroom shelf</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=chrysanthemum+kevin+henkes&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Chrysanthemum</a></li>
+          <li><a href="https://www.amazon.com/s?k=the+day+the+crayons+quit&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Day the Crayons Quit</a></li>
+          <li><a href="https://www.amazon.com/s?k=last+stop+on+market+street&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Last Stop on Market Street</a></li>
+          <li><a href="https://www.amazon.com/s?k=the+word+collector+peter+reynolds&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Word Collector</a></li>
+          <li><a href="https://www.amazon.com/s?k=bob+books+set+1+beginning+readers&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">BOB Books (beginning readers)</a></li>
+          <li><a href="https://www.amazon.com/s?k=there+was+an+old+lady+who+swallowed+a+fly+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">There Was an Old Lady... (series)</a></li>
+          <li><a href="https://www.amazon.com/s?k=wemberly+worried+kevin+henkes&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Wemberly Worried</a></li>
+          <li><a href="https://www.amazon.com/s?k=alphabet+books+preschool+kindergarten&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Alphabet &amp; letter-sound books</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> VPK-year story time should point at the print — slide your finger under the words as you read. That one habit teaches directionality, word boundaries, and "print carries meaning" for free.</div>
+      </div>
+    </div>
+
+    <!-- TEACHERS -->
+    <div class="panel" id="panel-teachers">
+      <div class="agehead">
+        <h2>The Teacher's Shelf</h2>
+        <p>The grown-up shelf — books that make you better at the work. Directors, new teachers, and seasoned pros all need refills; these are the ones worth the highlighter.</p>
+      </div>
+      <div class="mypick">
+        <div class="label">Mrs. Bear's Pick</div>
+        <h3>The Preschool Professional — by Mrs. Bear (paperback)</h3>
+        <p>The book behind this whole site. How one preschool owner turned the daily grind into a system that runs with excellence — written for owners and directors who want their hours back.</p>
+        <a class="btn" href="https://www.amazon.com/s?k=The+Preschool+Professional+Mrs+Bear+paperback&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">See it on Amazon &rarr;</a>
+      </div>
+      <div class="booklist">
+        <h3>The professional shelf</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=marva+collins+way+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Marva Collins' Way</a></li>
+          <li><a href="https://www.amazon.com/s?k=conscious+discipline+becky+bailey&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Conscious Discipline</a></li>
+          <li><a href="https://www.amazon.com/s?k=the+whole+brain+child+daniel+siegel&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Whole-Brain Child</a></li>
+          <li><a href="https://www.amazon.com/s?k=powerful+interactions+how+to+connect+with+children&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Powerful Interactions</a></li>
+          <li><a href="https://www.amazon.com/s?k=anti+bias+education+for+young+children&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Anti-Bias Education for Young Children</a></li>
+          <li><a href="https://www.amazon.com/s?k=purposeful+play+teachers+guide&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Purposeful Play</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> buy one professional book per teacher per year and hold a 20-minute staff-meeting book chat. Cheapest professional development you will ever run, and it changes classrooms.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="authorbar">
+  <div class="wrap">
+    <span class="eyebrow">From Mrs. Bear's Own Shelf</span>
+    <h2>The Your Feelings Matter series &amp; more</h2>
+    <p>Fourteen titles and counting — emotion books, coloring &amp; journal editions, and The Preschool Professional paperback, all written by a working preschool owner for real classrooms.</p>
+    <a class="btn" href="https://www.amazon.com/stores/Mrs-Bear/author/B0DNG9XXVD" target="_blank" rel="noopener">Browse all of Mrs. Bear's books &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaimer">As an Amazon Associate, The Preschool Professional earns from qualifying purchases. Book lists are suggestions, not sponsorships — swap freely to fit your classroom and your families.</div>
+    <div><a href="index.html">Home</a> &middot; <a href="milestone-wizard.html">Milestone Wizard</a> &middot; <a href="center-bundles.html">Center Bundles</a> &middot; <a href="learning-styles.html">Learning Styles</a> &middot; <a href="index.html#pricing">Pricing</a></div>
+    <div class="copy" style="margin-top:10px;">&copy; 2026 The Preschool Professional</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var chips = document.querySelectorAll('.chip');
+  for (var i = 0; i < chips.length; i++) {
+    chips[i].addEventListener('click', function(){
+      var target = this.getAttribute('data-panel');
+      var all = document.querySelectorAll('.chip');
+      for (var j = 0; j < all.length; j++) { all[j].classList.remove('active'); }
+      this.classList.add('active');
+      var panels = document.querySelectorAll('.panel');
+      for (var k = 0; k < panels.length; k++) { panels[k].classList.remove('active'); }
+      var p = document.getElementById('panel-' + target);
+      if (p) { p.classList.add('active'); }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

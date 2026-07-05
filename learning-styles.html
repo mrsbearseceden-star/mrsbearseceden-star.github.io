@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Styles &amp; Approaches — Shop by Philosophy | The Preschool Professional</title>
+<meta name="description" content="Play-Based, Montessori, Reggio Emilia, Waldorf, Forest School, and HighScope explained in plain language — with a ready-made classroom shopping bundle for each approach.">
+<style>
+  :root{
+    color-scheme: light;
+    --honey:#E8A317; --honey-deep:#C6820C; --ink:#2B2117; --ink-soft:#5c4d3a;
+    --cream:#FBF6EC; --card:#FFFFFF; --sage:#6E8B6A; --line:#EADFC8;
+    --shadow:0 18px 50px rgba(43,33,23,.10); --shadow-sm:0 6px 20px rgba(43,33,23,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Helvetica Neue',Arial,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;line-height:1.18;letter-spacing:-.01em;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px;}
+  .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:700;color:var(--honey-deep);}
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,246,236,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;}
+  nav .brand{font-family:Georgia,serif;font-weight:700;font-size:20px;letter-spacing:-.02em;}
+  nav .brand span{color:var(--honey-deep);}
+  nav .brand a{text-decoration:none;color:inherit;}
+  nav a.navlink{text-decoration:none;color:var(--ink-soft);font-size:15px;margin-left:26px;transition:color .2s;}
+  nav a.navlink:hover{color:var(--honey-deep);}
+  @media(max-width:720px){nav .links{display:none;}}
+  header.page{padding:70px 0 40px;background:linear-gradient(115deg,#FBF6EC 0%,#F6EAD0 100%);}
+  header.page h1{font-size:44px;margin:14px 0 16px;}
+  header.page h1 .accent{color:var(--honey-deep);font-style:italic;}
+  header.page p.sub{font-size:18px;color:var(--ink-soft);max-width:680px;}
+  .disclosure{max-width:1080px;margin:0 auto;padding:14px 26px;font-size:13.5px;color:var(--ink-soft);border-bottom:1px solid var(--line);background:#fff;}
+  .disclosure b{color:var(--ink);}
+  section.wizard{padding:50px 0 80px;}
+  .stepcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 30px;box-shadow:var(--shadow-sm);margin-bottom:26px;}
+  .stepcard .step{font-size:12.5px;text-transform:uppercase;letter-spacing:2px;color:var(--honey-deep);font-weight:700;margin-bottom:6px;}
+  .stepcard h2{font-size:26px;margin-bottom:14px;}
+  .chips{display:flex;flex-wrap:wrap;gap:12px;}
+  .chip{font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:700;padding:12px 22px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .2s;}
+  .chip:hover{border-color:var(--honey);color:var(--ink);}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .stylehead{margin:8px 0 18px;}
+  .stylehead h2{font-size:30px;}
+  .stylehead .oneliner{font-size:16px;color:var(--honey-deep);font-style:italic;font-family:Georgia,serif;margin:4px 0 12px;}
+  .about{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px 30px;box-shadow:var(--shadow-sm);margin-bottom:22px;}
+  .about h3{font-size:19px;margin-bottom:8px;}
+  .about p{font-size:15px;color:var(--ink-soft);margin-bottom:10px;}
+  .about p:last-child{margin-bottom:0;}
+  .about b{color:var(--ink);}
+  .booklist{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px 30px;box-shadow:var(--shadow-sm);}
+  .booklist h3{font-size:19px;margin-bottom:10px;}
+  .booklist ul{list-style:none;column-count:2;column-gap:40px;}
+  @media(max-width:720px){.booklist ul{column-count:1;}}
+  .booklist li{padding:7px 0 7px 22px;position:relative;font-size:15px;break-inside:avoid;border-bottom:1px dashed var(--line);}
+  .booklist li::before{content:"›";position:absolute;left:4px;color:var(--sage);font-weight:bold;}
+  .booklist a{color:var(--ink-soft);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;transition:color .2s;}
+  .booklist a:hover{color:var(--honey-deep);}
+  .tip{background:#F1F4EF;border-radius:10px;padding:12px 16px;font-size:13.5px;color:var(--ink-soft);margin-top:18px;}
+  .tip b{color:var(--ink);}
+  .authorbar{background:#fff;padding:56px 0;border-top:1px solid var(--line);}
+  .authorbar .wrap{max-width:820px;text-align:center;}
+  .authorbar h2{font-size:28px;margin-bottom:10px;}
+  .authorbar p{color:var(--ink-soft);font-size:16px;margin-bottom:16px;}
+  .authorbar a.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-size:15px;font-weight:700;padding:14px 30px;border-radius:4px;transition:all .2s;}
+  .authorbar a.btn:hover{background:var(--honey-deep);transform:translateY(-2px);}
+  footer{padding:44px 0 60px;text-align:center;font-size:13px;color:var(--ink-soft);border-top:1px solid var(--line);}
+  footer .disclaimer{max-width:720px;margin:0 auto 14px;}
+  footer a{color:var(--honey-deep);}
+  footer .copy{font-family:Georgia,serif;color:var(--ink);font-size:14px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><a href="index.html">The Preschool <span>Professional</span></a></div>
+    <div class="links">
+      <a class="navlink" href="index.html#library">Free Library</a>
+      <a class="navlink" href="milestone-wizard.html">Milestone Wizard</a>
+      <a class="navlink" href="center-bundles.html">Center Bundles</a>
+      <a class="navlink" href="reading-library.html">Reading Library</a>
+      <a class="navlink" href="index.html#pricing">Pricing</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="wrap">
+    <span class="eyebrow">Free Resource · Shop by Philosophy</span>
+    <h1>Learning Styles <span class="accent">&amp; Approaches</span></h1>
+    <p class="sub">Montessori? Play-based? Forest School? Every approach is really an answer to one question: how do young children learn best? Here's each philosophy in plain language — what it believes, what the classroom looks like — plus a ready-made shopping bundle to stock it. Most great preschools blend two or three; there is no wrong door.</p>
+  </div>
+</header>
+
+<div class="disclosure"><b>Heads up, friend:</b> As an Amazon Associate, The Preschool Professional earns from qualifying purchases made through the links below — at no extra cost to you. Every item was chosen because it belongs in a real classroom, not because of the commission.</div>
+
+<section class="wizard">
+  <div class="wrap">
+
+    <div class="stepcard">
+      <div class="step">Step 1</div>
+      <h2>Choose an approach</h2>
+      <div class="chips">
+        <button class="chip active" data-panel="play">Play-Based</button>
+        <button class="chip" data-panel="montessori">Montessori</button>
+        <button class="chip" data-panel="reggio">Reggio Emilia</button>
+        <button class="chip" data-panel="waldorf">Waldorf</button>
+        <button class="chip" data-panel="forest">Forest School</button>
+        <button class="chip" data-panel="highscope">HighScope</button>
+      </div>
+    </div>
+
+    <!-- PLAY-BASED -->
+    <div class="panel active" id="panel-play">
+      <div class="stylehead">
+        <h2>Play-Based Learning</h2>
+        <div class="oneliner">"Play is the work of childhood."</div>
+      </div>
+      <div class="about">
+        <h3>The nature of this approach</h3>
+        <p>Play-based classrooms trust that children learn academic and social skills best <b>through play, not in spite of it</b>. Teachers set up rich centers — dramatic play, blocks, sensory, art — and then join, extend, and gently steer the play toward language, math, and cooperation goals. It looks like fun; underneath it is careful design.</p>
+        <p><b>What the classroom looks like:</b> open centers, long uninterrupted play blocks, teachers on the floor asking "what happens if...?", learning goals hidden inside pretend restaurants and block cities.</p>
+        <p><b>Who it suits:</b> nearly everyone — it's the backbone of most American preschools and pairs beautifully with every other approach on this page.</p>
+      </div>
+      <div class="booklist">
+        <h3>Stock the play-based classroom</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=open+ended+loose+parts+play+kit+preschool&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Loose parts play kit</a></li>
+          <li><a href="https://www.amazon.com/s?k=play+silks+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Play silks</a></li>
+          <li><a href="https://www.amazon.com/s?k=pretend+play+sets+preschool&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Pretend play sets</a></li>
+          <li><a href="https://www.amazon.com/s?k=sand+and+water+table+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Sand &amp; water table</a></li>
+          <li><a href="https://www.amazon.com/s?k=wooden+building+blocks+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Building blocks</a></li>
+          <li><a href="https://www.amazon.com/s?k=dress+up+trunk+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Dress-up trunk</a></li>
+          <li><a href="https://www.amazon.com/s?k=purposeful+play+teachers+guide&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Teacher read: Purposeful Play</a></li>
+          <li><a href="https://www.amazon.com/s?k=Mrs+Bear+its+ok+to+play+with+friends+coloring+journal&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Mrs. Bear's pick: It's Ok to Play With Friends</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> the secret of play-based teaching is the question, not the toy. "Tell me about your building" grows more language than any flashcard ever printed.</div>
+      </div>
+    </div>
+
+    <!-- MONTESSORI -->
+    <div class="panel" id="panel-montessori">
+      <div class="stylehead">
+        <h2>Montessori</h2>
+        <div class="oneliner">"Help me do it myself."</div>
+      </div>
+      <div class="about">
+        <h3>The nature of this approach</h3>
+        <p>Born from Dr. Maria Montessori's work in 1907, this approach believes children are naturally driven to learn and gain deep confidence from <b>real independence</b>. Children choose their own "work" from beautiful, self-correcting materials on low shelves, and practical life — pouring, buttoning, food prep — is honored as real curriculum.</p>
+        <p><b>What the classroom looks like:</b> calm and orderly; natural wood everywhere; child-sized real tools; children working alone or in pairs on floor mats; the teacher ("guide") observing and giving quiet one-on-one lessons.</p>
+        <p><b>Who it suits:</b> children who thrive on order and independence; programs that value concentration and self-direction over group instruction.</p>
+      </div>
+      <div class="booklist">
+        <h3>Stock the Montessori shelf</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=montessori+practical+life+pouring+set&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Practical life pouring set</a></li>
+          <li><a href="https://www.amazon.com/s?k=montessori+knobbed+cylinders&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Knobbed cylinders</a></li>
+          <li><a href="https://www.amazon.com/s?k=sandpaper+letters+montessori&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Sandpaper letters</a></li>
+          <li><a href="https://www.amazon.com/s?k=montessori+dressing+frames&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Dressing frames (buttons, zippers)</a></li>
+          <li><a href="https://www.amazon.com/s?k=child+size+cleaning+set+broom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Child-size cleaning set</a></li>
+          <li><a href="https://www.amazon.com/s?k=montessori+low+wooden+shelf&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Low open shelving</a></li>
+          <li><a href="https://www.amazon.com/s?k=montessori+work+rugs+mats&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Work rugs</a></li>
+          <li><a href="https://www.amazon.com/s?k=the+montessori+toddler+simone+davies&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Teacher read: The Montessori Toddler</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> you don't have to be a certified Montessori school to borrow the best part — put real, breakable, child-sized tools in children's hands and watch how carefully they rise to it.</div>
+      </div>
+    </div>
+
+    <!-- REGGIO -->
+    <div class="panel" id="panel-reggio">
+      <div class="stylehead">
+        <h2>Reggio Emilia</h2>
+        <div class="oneliner">"The child has a hundred languages."</div>
+      </div>
+      <div class="about">
+        <h3>The nature of this approach</h3>
+        <p>From the town of Reggio Emilia, Italy, this approach sees children as <b>capable researchers</b> who express ideas in a "hundred languages" — paint, clay, light, movement, conversation. Curriculum emerges from the children's own questions and grows into long-running projects, which teachers document with photos and quotes displayed at child height.</p>
+        <p><b>What the classroom looks like:</b> an art studio feel ("atelier"); light tables and mirrors; children's work and words on every wall; natural and found materials; projects that last weeks because the children keep asking questions.</p>
+        <p><b>Who it suits:</b> programs with creative, observant teachers; families who love seeing thinking made visible.</p>
+      </div>
+      <div class="booklist">
+        <h3>Stock the atelier</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=light+table+for+kids+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Light table</a></li>
+          <li><a href="https://www.amazon.com/s?k=translucent+manipulatives+light+table&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Translucent manipulatives</a></li>
+          <li><a href="https://www.amazon.com/s?k=child+safe+acrylic+mirrors+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Child-safe mirrors</a></li>
+          <li><a href="https://www.amazon.com/s?k=liquid+watercolor+paint+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Liquid watercolors</a></li>
+          <li><a href="https://www.amazon.com/s?k=air+dry+clay+classroom+pack&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Clay (air-dry, classroom pack)</a></li>
+          <li><a href="https://www.amazon.com/s?k=natural+loose+parts+wood+slices+craft&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Natural loose parts</a></li>
+          <li><a href="https://www.amazon.com/s?k=instant+photo+printer+classroom+documentation&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Photo printer (documentation)</a></li>
+          <li><a href="https://www.amazon.com/s?k=working+in+the+reggio+way&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Teacher read: Working in the Reggio Way</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> start Reggio-style with one wall. Photograph one project, print the children's exact words underneath, hang it at their eye level — and watch parents stop and read every word at pickup.</div>
+      </div>
+    </div>
+
+    <!-- WALDORF -->
+    <div class="panel" id="panel-waldorf">
+      <div class="stylehead">
+        <h2>Waldorf</h2>
+        <div class="oneliner">"Rhythm, reverence, and imagination first."</div>
+      </div>
+      <div class="about">
+        <h3>The nature of this approach</h3>
+        <p>Founded by Rudolf Steiner in 1919, Waldorf early childhood protects imagination fiercely. Days follow a steady, comforting <b>rhythm</b> — the same songs, the same baking day, the same seasonal festivals — and toys are simple and natural on purpose: a knot of silk can be a baby, a cape, or the sea. Academics wait; wonder comes first.</p>
+        <p><b>What the classroom looks like:</b> soft colors, wool and wood, a nature table that changes with the seasons, teachers singing transitions instead of announcing them, real bread rising somewhere.</p>
+        <p><b>Who it suits:</b> programs that want calm, screen-free, deeply rhythmic days; families drawn to simplicity and seasonal celebration.</p>
+      </div>
+      <div class="booklist">
+        <h3>Stock the Waldorf classroom</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=play+silks+waldorf&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Play silks (seasonal colors)</a></li>
+          <li><a href="https://www.amazon.com/s?k=waldorf+wooden+peg+dolls&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Wooden peg dolls</a></li>
+          <li><a href="https://www.amazon.com/s?k=beeswax+crayons+stockmar&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Beeswax crayons</a></li>
+          <li><a href="https://www.amazon.com/s?k=wool+felt+sheets+craft&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Wool felt</a></li>
+          <li><a href="https://www.amazon.com/s?k=wooden+rainbow+stacker+large&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Wooden rainbow stacker</a></li>
+          <li><a href="https://www.amazon.com/s?k=waldorf+playstand&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Playstands</a></li>
+          <li><a href="https://www.amazon.com/s?k=nature+table+seasonal+decorations&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Nature table supplies</a></li>
+          <li><a href="https://www.amazon.com/s?k=heaven+on+earth+sharifa+oppenheimer&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Teacher read: Heaven on Earth</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> steal Waldorf's superpower — sing your transitions. A clean-up song ends the negotiation before it starts, and even your wiggliest friend can't argue with a melody.</div>
+      </div>
+    </div>
+
+    <!-- FOREST -->
+    <div class="panel" id="panel-forest">
+      <div class="stylehead">
+        <h2>Forest School (Nature-Based)</h2>
+        <div class="oneliner">"There's no bad weather, only bad clothing."</div>
+      </div>
+      <div class="about">
+        <h3>The nature of this approach</h3>
+        <p>The outdoor one — and it's exactly what it sounds like. Forest School moves learning <b>outside for long, regular stretches in all weather</b>, trusting nature as the richest classroom there is. Children climb, dig, balance, and take sensible risks with support, building resilience, focus, and strong bodies along with their science vocabulary.</p>
+        <p><b>What the classroom looks like:</b> mud kitchens in full service, magnifier in every pocket, rain suits on hooks, a teacher asking "how could we find out?" next to a puddle instead of mopping it up.</p>
+        <p><b>Who it suits:</b> programs with any usable outdoor space (a courtyard counts!); children who learn best in motion — which is most of them.</p>
+      </div>
+      <div class="booklist">
+        <h3>Stock the outdoor classroom</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=mud+kitchen+outdoor+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Mud kitchen</a></li>
+          <li><a href="https://www.amazon.com/s?k=kids+rain+suit+waterproof+coverall&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Rain suits / waterproof coveralls</a></li>
+          <li><a href="https://www.amazon.com/s?k=kids+magnifying+glasses+bulk+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Magnifying glasses (class set)</a></li>
+          <li><a href="https://www.amazon.com/s?k=bug+catcher+kit+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Bug catchers</a></li>
+          <li><a href="https://www.amazon.com/s?k=kids+garden+tools+set+real&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Child-size garden tools</a></li>
+          <li><a href="https://www.amazon.com/s?k=balance+beam+outdoor+kids+wooden&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Outdoor balance equipment</a></li>
+          <li><a href="https://www.amazon.com/s?k=first+aid+kit+outdoor+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Outdoor first aid kit</a></li>
+          <li><a href="https://www.amazon.com/s?k=balanced+and+barefoot+angela+hanscom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Teacher read: Balanced and Barefoot</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> in Florida, our "forest" is shade sails and a rain plan — nature-based works anywhere. Start with one all-weather outdoor hour a day and watch the afternoon behavior chart improve by itself.</div>
+      </div>
+    </div>
+
+    <!-- HIGHSCOPE -->
+    <div class="panel" id="panel-highscope">
+      <div class="stylehead">
+        <h2>HighScope</h2>
+        <div class="oneliner">"Plan, do, review."</div>
+      </div>
+      <div class="about">
+        <h3>The nature of this approach</h3>
+        <p>Built on decades of research (including the famous Perry Preschool Study), HighScope centers on <b>active participatory learning</b> and a daily rhythm called <b>plan-do-review</b>: children say what they intend to do, go do it, then come back and reflect on how it went. That tiny loop builds executive function — planning, follow-through, self-evaluation — the skills that predict school success.</p>
+        <p><b>What the classroom looks like:</b> clearly labeled interest areas, a consistent daily routine posted in pictures, small-group times, teachers recording what children actually do and building tomorrow's plan from it.</p>
+        <p><b>Who it suits:</b> programs that love structure with freedom inside it; teams that want research-backed routines and strong assessment habits.</p>
+      </div>
+      <div class="booklist">
+        <h3>Stock the HighScope classroom</h3>
+        <ul>
+          <li><a href="https://www.amazon.com/s?k=classroom+labels+with+pictures+preschool+centers&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Picture labels for every area</a></li>
+          <li><a href="https://www.amazon.com/s?k=clear+storage+bins+classroom+labeled&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Clear labeled storage bins</a></li>
+          <li><a href="https://www.amazon.com/s?k=preschool+visual+daily+schedule+cards&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Visual daily routine cards</a></li>
+          <li><a href="https://www.amazon.com/s?k=pocket+chart+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Pocket chart (planning time)</a></li>
+          <li><a href="https://www.amazon.com/s?k=sand+timer+set+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Sand timers</a></li>
+          <li><a href="https://www.amazon.com/s?k=math+manipulatives+counters+preschool&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Counting manipulatives</a></li>
+          <li><a href="https://www.amazon.com/s?k=teacher+observation+anecdotal+notes+forms&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Observation note supplies</a></li>
+          <li><a href="https://www.amazon.com/s?k=educating+young+children+highscope&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Teacher read: Educating Young Children</a></li>
+        </ul>
+        <div class="tip"><b>Mrs. Bear's tip:</b> plan-do-review works at any preschool: at morning circle, ask each child "what will you do at centers?" — then at closing circle, "how did it go?" Two questions, zero cost, executive function every single day.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="authorbar">
+  <div class="wrap">
+    <span class="eyebrow">Whatever Your Style</span>
+    <h2>Feelings belong in every classroom</h2>
+    <p>Montessori, Reggio, or mud-covered Forest School — social-emotional learning is universal. Mrs. Bear's <b>Your Feelings Matter</b> series fits every approach on this page, and The Preschool Professional paperback shows you the systems behind the scenes.</p>
+    <a class="btn" href="https://www.amazon.com/stores/Mrs-Bear/author/B0DNG9XXVD" target="_blank" rel="noopener">Browse all of Mrs. Bear's books &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaimer">As an Amazon Associate, The Preschool Professional earns from qualifying purchases. Approach summaries are simplified introductions — certified programs follow deeper training and standards.</div>
+    <div><a href="index.html">Home</a> &middot; <a href="milestone-wizard.html">Milestone Wizard</a> &middot; <a href="center-bundles.html">Center Bundles</a> &middot; <a href="reading-library.html">Reading Library</a> &middot; <a href="index.html#pricing">Pricing</a></div>
+    <div class="copy" style="margin-top:10px;">&copy; 2026 The Preschool Professional</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var chips = document.querySelectorAll('.chip');
+  for (var i = 0; i < chips.length; i++) {
+    chips[i].addEventListener('click', function(){
+      var target = this.getAttribute('data-panel');
+      var all = document.querySelectorAll('.chip');
+      for (var j = 0; j < all.length; j++) { all[j].classList.remove('active'); }
+      this.classList.add('active');
+      var panels = document.querySelectorAll('.panel');
+      for (var k = 0; k < panels.length; k++) { panels[k].classList.remove('active'); }
+      var p = document.getElementById('panel-' + target);
+      if (p) { p.classList.add('active'); }
+    });
+  }
+  var hash = window.location.hash.replace('#','');
+  if (hash) {
+    var chip = document.querySelector('.chip[data-panel="' + hash + '"]');
+    if (chip) { chip.click(); }
+  }
+})();
+</script>
+
+</body>
+</html>

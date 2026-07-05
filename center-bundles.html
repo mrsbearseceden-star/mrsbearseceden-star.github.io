@@ -43,11 +43,29 @@
   .bundle li{padding:6px 0 6px 22px;position:relative;font-size:15px;border-bottom:1px dashed var(--line);}
   .bundle li:last-child{border-bottom:none;}
   .bundle li::before{content:"›";position:absolute;left:4px;color:var(--sage);font-weight:bold;}
+  .bundle li.readalong::before{color:var(--honey-deep);}
+  .bundle li.readalong b{color:var(--honey-deep);font-weight:700;}
   .bundle a{color:var(--ink-soft);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;transition:color .2s;}
   .bundle a:hover{color:var(--honey-deep);}
   .tip{background:#F1F4EF;border-radius:10px;padding:12px 16px;font-size:13.5px;color:var(--ink-soft);margin-top:16px;}
   .tip b{color:var(--ink);}
-  .howto{background:#fff;padding:64px 0;}
+  section.styles{background:#fff;padding:64px 0;border-top:1px solid var(--line);}
+  section.styles h2{font-size:32px;margin:10px 0 8px;}
+  section.styles p.lead{color:var(--ink-soft);font-size:16px;max-width:720px;margin-bottom:26px;}
+  .stylegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media(max-width:860px){.stylegrid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.stylegrid{grid-template-columns:1fr;}}
+  .stylecard{display:block;text-decoration:none;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:22px 24px;transition:all .2s;box-shadow:var(--shadow-sm);}
+  .stylecard:hover{border-color:var(--honey);transform:translateY(-3px);}
+  .stylecard h3{font-size:19px;color:var(--ink);margin-bottom:4px;}
+  .stylecard p{font-size:13.5px;color:var(--ink-soft);margin-bottom:8px;}
+  .stylecard .go{font-size:13.5px;font-weight:700;color:var(--honey-deep);}
+  .readingpromo{margin-top:34px;background:linear-gradient(115deg,#FDF3DC 0%,#F6EAD0 100%);border:1.5px solid var(--honey);border-radius:12px;padding:26px 30px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;box-shadow:var(--shadow-sm);}
+  .readingpromo h3{font-size:22px;margin-bottom:4px;}
+  .readingpromo p{font-size:14.5px;color:var(--ink-soft);max-width:560px;}
+  .readingpromo a.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-size:14.5px;font-weight:700;padding:12px 26px;border-radius:4px;transition:all .2s;white-space:nowrap;}
+  .readingpromo a.btn:hover{background:var(--honey-deep);}
+  .howto{background:var(--cream);padding:64px 0;}
   .howto .wrap{max-width:820px;}
   .howto h2{font-size:32px;margin-bottom:14px;}
   .howto p{color:var(--ink-soft);margin-bottom:12px;font-size:16px;}
@@ -66,7 +84,8 @@
     <div class="links">
       <a class="navlink" href="index.html#library">Free Library</a>
       <a class="navlink" href="milestone-wizard.html">Milestone Wizard</a>
-      <a class="navlink" href="index.html#command-center">Command Center</a>
+      <a class="navlink" href="reading-library.html">Reading Library</a>
+      <a class="navlink" href="learning-styles.html">Learning Styles</a>
       <a class="navlink" href="index.html#pricing">Pricing</a>
     </div>
   </div>
@@ -99,6 +118,7 @@
           <li><a href="https://www.amazon.com/s?k=toy+cash+register+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Cash register</a></li>
           <li><a href="https://www.amazon.com/s?k=hand+puppets+set+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Hand puppet set</a></li>
           <li><a href="https://www.amazon.com/s?k=child+size+table+and+chairs+preschool&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Child-size table &amp; chairs</a></li>
+          <li class="readalong"><b>Read-along:</b> <a href="https://www.amazon.com/s?k=Mrs+Bear+its+ok+to+play+with+friends+coloring+journal&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">It's Ok to Play With Friends (Mrs. Bear)</a></li>
         </ul>
         <div class="tip"><b>Mrs. Bear's tip:</b> rotate the theme monthly — kitchen, doctor's office, flower shop — and the same furniture feels brand new.</div>
       </div>
@@ -115,6 +135,7 @@
           <li><a href="https://www.amazon.com/s?k=diverse+wooden+block+play+people+figures&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Block play people (diverse)</a></li>
           <li><a href="https://www.amazon.com/s?k=wooden+traffic+signs+toy&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Traffic signs</a></li>
           <li><a href="https://www.amazon.com/s?k=classroom+storage+shelf+bins+preschool&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Storage shelf with bins</a></li>
+          <li class="readalong"><b>Read-along:</b> <a href="https://www.amazon.com/s?k=iggy+peck+architect+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Iggy Peck, Architect</a></li>
         </ul>
         <div class="tip"><b>Mrs. Bear's tip:</b> tape simple road lines on the floor with painter's tape — the vehicles instantly organize the play.</div>
       </div>
@@ -131,6 +152,7 @@
           <li><a href="https://www.amazon.com/s?k=kinetic+sand+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Kinetic sand</a></li>
           <li><a href="https://www.amazon.com/s?k=textured+sensory+balls+baby&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Textured sensory balls</a></li>
           <li><a href="https://www.amazon.com/s?k=scoops+funnels+sensory+table+tools&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Scoops, funnels &amp; tools</a></li>
+          <li class="readalong"><b>Read-along:</b> <a href="https://www.amazon.com/s?k=my+five+senses+aliki+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">My Five Senses (Aliki)</a></li>
         </ul>
         <div class="tip"><b>Mrs. Bear's tip:</b> for infants and young toddlers, keep everything taste-safe and sealed — the wizard's infant bands show which sensory picks fit each age.</div>
       </div>
@@ -148,6 +170,7 @@
           <li><a href="https://www.amazon.com/s?k=washable+dot+markers+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Washable dot markers</a></li>
           <li><a href="https://www.amazon.com/s?k=kids+paint+smocks+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Paint smocks</a></li>
           <li><a href="https://www.amazon.com/s?k=glue+sticks+bulk+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Glue sticks (bulk)</a></li>
+          <li class="readalong"><b>Read-along:</b> <a href="https://www.amazon.com/s?k=the+dot+peter+reynolds+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Dot (Peter H. Reynolds)</a></li>
         </ul>
         <div class="tip"><b>Mrs. Bear's tip:</b> process over product — put out the materials and let them create. The refrigerator art sells your school better than any flyer.</div>
       </div>
@@ -164,8 +187,9 @@
           <li><a href="https://www.amazon.com/s?k=reading+nook+canopy+kids&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Reading nook canopy</a></li>
           <li><a href="https://www.amazon.com/s?k=felt+story+board+set+preschool&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Felt storyboard set</a></li>
           <li><a href="https://www.amazon.com/s?k=soft+kids+rug+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Soft area rug</a></li>
+          <li class="readalong"><b>Read-along:</b> <a href="https://www.amazon.com/s?k=Mrs+Bear+your+feelings+matter+book+series&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Your Feelings Matter series (Mrs. Bear)</a> — made for the calm-down corner</li>
         </ul>
-        <div class="tip"><b>Mrs. Bear's tip:</b> face the covers out, not the spines — children pick books with their eyes. Rotate a themed handful weekly.</div>
+        <div class="tip"><b>Mrs. Bear's tip:</b> face the covers out, not the spines — children pick books with their eyes. Rotate a themed handful weekly. For a full shelf plan by age, open the <a href="reading-library.html">Reading Library</a>.</div>
       </div>
 
       <div class="bundle">
@@ -181,6 +205,7 @@
           <li><a href="https://www.amazon.com/s?k=shape+sorter+toddler&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Shape sorter</a></li>
           <li><a href="https://www.amazon.com/s?k=nesting+cups+baby&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Nesting cups</a></li>
           <li><a href="https://www.amazon.com/s?k=number+flash+cards+preschool&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Number cards</a></li>
+          <li class="readalong"><b>Read-along:</b> <a href="https://www.amazon.com/s?k=chicka+chicka+1+2+3+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Chicka Chicka 1, 2, 3</a></li>
         </ul>
         <div class="tip"><b>Mrs. Bear's tip:</b> shallow trays keep manipulative pieces from wandering — one tray per child turns free play into a math lesson.</div>
       </div>
@@ -197,6 +222,7 @@
           <li><a href="https://www.amazon.com/s?k=kids+plant+growing+kit+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Plant growing kit</a></li>
           <li><a href="https://www.amazon.com/s?k=color+mixing+science+kit+preschool&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Color mixing kit</a></li>
           <li><a href="https://www.amazon.com/s?k=nature+specimens+kids+discovery&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Nature specimen set</a></li>
+          <li class="readalong"><b>Read-along:</b> <a href="https://www.amazon.com/s?k=the+tiny+seed+eric+carle+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">The Tiny Seed (Eric Carle)</a></li>
         </ul>
         <div class="tip"><b>Mrs. Bear's tip:</b> a sink-or-float tub made from your sensory table + the balance scale = a full week of lesson plans.</div>
       </div>
@@ -213,10 +239,58 @@
           <li><a href="https://www.amazon.com/s?k=wrist+bells+baby+music&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Wrist bells</a></li>
           <li><a href="https://www.amazon.com/s?k=balance+beam+kids+foam&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Foam balance beam</a></li>
           <li><a href="https://www.amazon.com/s?k=kids+bluetooth+speaker+classroom&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Classroom speaker</a></li>
+          <li class="readalong"><b>Read-along:</b> <a href="https://www.amazon.com/s?k=giraffes+cant+dance+book&tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">Giraffes Can't Dance</a></li>
         </ul>
         <div class="tip"><b>Mrs. Bear's tip:</b> movement scarves are the best two dollars in early childhood — they turn any song into a whole-body activity.</div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<section class="styles" id="learning-styles">
+  <div class="wrap">
+    <span class="eyebrow">Shop by Philosophy</span>
+    <h2>Teach a different way? Shop your learning style.</h2>
+    <p class="lead">Montessori shelves look nothing like a Waldorf playroom, and a Forest School packs rain suits instead of rugs. Pick your approach — each one comes with a plain-language explainer and its own curated bundle.</p>
+    <div class="stylegrid">
+      <a class="stylecard" href="learning-styles.html#play">
+        <h3>Play-Based</h3>
+        <p>Learning through rich, guided play — the backbone of most great preschools.</p>
+        <span class="go">Explore &amp; shop &rarr;</span>
+      </a>
+      <a class="stylecard" href="learning-styles.html#montessori">
+        <h3>Montessori</h3>
+        <p>"Help me do it myself" — independence, practical life, beautiful materials.</p>
+        <span class="go">Explore &amp; shop &rarr;</span>
+      </a>
+      <a class="stylecard" href="learning-styles.html#reggio">
+        <h3>Reggio Emilia</h3>
+        <p>Child-led projects, art everywhere, thinking made visible on the walls.</p>
+        <span class="go">Explore &amp; shop &rarr;</span>
+      </a>
+      <a class="stylecard" href="learning-styles.html#waldorf">
+        <h3>Waldorf</h3>
+        <p>Rhythm, imagination, and simple natural materials — wonder before academics.</p>
+        <span class="go">Explore &amp; shop &rarr;</span>
+      </a>
+      <a class="stylecard" href="learning-styles.html#forest">
+        <h3>Forest School</h3>
+        <p>The outdoor one — nature as the classroom, in all weather, on purpose.</p>
+        <span class="go">Explore &amp; shop &rarr;</span>
+      </a>
+      <a class="stylecard" href="learning-styles.html#highscope">
+        <h3>HighScope</h3>
+        <p>Plan-do-review — research-backed routines that build executive function.</p>
+        <span class="go">Explore &amp; shop &rarr;</span>
+      </a>
+    </div>
+    <div class="readingpromo">
+      <div>
+        <h3>Then stock the bookshelf.</h3>
+        <p>The <b>Reading Library</b> picks the right read-alouds for every age group — infants through Pre-K/VPK, plus a professional shelf for teachers, with Mrs. Bear's own books woven in.</p>
+      </div>
+      <a class="btn" href="reading-library.html">Open the Reading Library &rarr;</a>
     </div>
   </div>
 </section>
