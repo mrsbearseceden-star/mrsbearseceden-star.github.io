@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>👑 Director Dashboard — The Hive</title>
+<style>
+:root{--blue:#5aa9ff;--green:#46c97f;--coral:#ff6b6b;--orange:#ffb13d;--pink:#ff6b9d;--purple:#9b6bff;--teal:#2fc4b2;--navy:#1d4e89;--ink:#4a3a30;--soft:#9b8576;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
+body{min-height:100vh;background:linear-gradient(160deg,#fff7ef,#ffe7d4);color:var(--ink);padding-bottom:60px;}
+header{padding:16px 20px 4px;text-align:center;}
+h1{font-size:1.6rem;}
+.schoolbadge{display:inline-block;margin-top:8px;padding:8px 26px;border-radius:999px;color:#fff;font-weight:900;font-size:1.05rem;box-shadow:0 4px 14px rgba(74,58,48,.18);}
+nav{display:flex;gap:8px;overflow-x:auto;padding:14px 16px;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+.tab{flex:0 0 auto;padding:10px 16px;border-radius:16px;font-weight:800;cursor:pointer;color:#fff;opacity:.55;transition:.12s;box-shadow:0 4px 12px rgba(74,58,48,.15);font-size:.92rem;}
+.tab.active{opacity:1;transform:scale(1.06);}
+.t-brief{background:var(--green);} .t-auto{background:var(--navy);} .t-hours{background:var(--coral);} .t-food{background:var(--orange);} .t-ratio{background:var(--blue);} .t-task{background:#c95ab0;} .t-msg{background:var(--pink);} .t-time{background:var(--purple);} .t-onb{background:var(--teal);}
+main{max-width:840px;margin:0 auto;padding:4px 16px;}
+.panel{display:none;} .panel.show{display:block;animation:pop .25s;}
+@keyframes pop{from{opacity:0;transform:translateY(8px);}to{opacity:1;}}
+.card{background:#fff;border-radius:18px;padding:16px 18px;margin-bottom:12px;box-shadow:0 6px 18px rgba(74,58,48,.10);border-left:8px solid var(--green);}
+.card.action{border-left-color:var(--coral);} .card.fyi{border-left-color:var(--orange);}
+.card.done{opacity:.55;} .card.done .item{text-decoration:line-through;}
+.chk-row{display:flex;align-items:flex-start;gap:12px;}
+.bigchk{width:34px;height:34px;flex:0 0 34px;border-radius:10px;border:3px solid var(--green);background:#fff;cursor:pointer;font-size:1.3rem;line-height:28px;text-align:center;color:#fff;}
+.bigchk.on{background:var(--green);}
+.item{font-weight:700;flex:1;white-space:pre-wrap;}
+.badge{font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:999px;color:#fff;background:var(--soft);white-space:nowrap;}
+.b-action{background:var(--coral);} .b-fyi{background:var(--orange);} .b-routine{background:var(--green);}
+.notes{margin-top:10px;display:flex;gap:8px;}
+.notes textarea{flex:1;border:2px solid #f0e2d4;border-radius:12px;padding:8px 12px;font-family:inherit;font-size:.9rem;resize:vertical;min-height:38px;}
+.mini{border:none;border-radius:12px;color:#fff;font-weight:800;padding:8px 16px;cursor:pointer;background:var(--blue);}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;}
+.stat{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 6px 18px rgba(74,58,48,.10);border-top:8px solid var(--blue);}
+.stat .num{font-size:2rem;font-weight:900;color:var(--blue);}
+.stat .lbl{font-size:.8rem;color:var(--soft);font-weight:700;}
+.ratio-card{display:flex;align-items:center;gap:12px;}
+.dot{width:18px;height:18px;border-radius:50%;flex:0 0 18px;}
+.d-green{background:var(--green);} .d-yellow{background:var(--orange);} .d-red{background:var(--coral);}
+.taskchip{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:12px 16px;margin-bottom:8px;box-shadow:0 4px 12px rgba(74,58,48,.08);}
+.tstat{font-size:.75rem;font-weight:800;padding:4px 12px;border-radius:999px;color:#fff;white-space:nowrap;}
+.s-done{background:var(--green);} .s-up{background:var(--blue);} .s-pend{background:var(--orange);} .s-miss{background:var(--coral);}
+form .frow{margin-bottom:12px;}
+form label{display:block;font-weight:800;margin-bottom:5px;font-size:.9rem;}
+form input[type=text],form input[type=date],form textarea,form select{width:100%;border:2px solid #f0e2d4;border-radius:12px;padding:10px 14px;font-family:inherit;font-size:.95rem;background:#fff;}
+form textarea{min-height:80px;resize:vertical;}
+.submit{width:100%;border:none;border-radius:16px;color:#fff;font-weight:900;font-size:1.05rem;padding:14px;cursor:pointer;background:linear-gradient(90deg,var(--pink),var(--purple));}
+.submit:hover{filter:brightness(1.07);}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 24px;border-radius:999px;font-weight:800;opacity:0;transition:.3s;pointer-events:none;z-index:50;}
+.toast.show{opacity:1;}
+.empty{text-align:center;color:var(--soft);padding:26px;font-weight:700;}
+.sect{font-weight:900;margin:14px 0 8px;font-size:1.05rem;}
+a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800;color:var(--soft);}
+.codes{display:flex;flex-wrap:wrap;gap:8px;}
+.code{font-size:.85rem;font-weight:800;padding:8px 16px;border-radius:999px;border:2px solid #f0e2d4;background:#fff;cursor:pointer;text-transform:capitalize;transition:.12s;}
+.code.on{color:#fff;border-color:transparent;background:var(--navy);}
+.hbar{height:12px;border-radius:999px;background:#f4e8da;overflow:hidden;margin-top:8px;}
+.hbar>div{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--teal));}
+.hbar>div.over{background:linear-gradient(90deg,var(--orange),var(--coral));}
+.hourrow{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.pct{font-weight:900;font-size:1.1rem;}
+.foodchips{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.fchip{background:#fff3d6;border-radius:10px;padding:5px 12px;font-weight:800;font-size:.85rem;}
+.banner{background:#fff3d6;border:2px dashed #f0d9a6;border-radius:14px;padding:12px 16px;font-size:.88rem;color:#8a7357;margin-bottom:14px;font-weight:600;}
+.roomgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:16px;}
+.roomtile{border-radius:18px;padding:16px 14px;text-align:center;color:#fff;box-shadow:0 6px 18px rgba(74,58,48,.14);}
+.roomtile .rname{font-weight:900;font-size:.95rem;margin-bottom:8px;}
+.roomtile .rnums{display:flex;justify-content:center;gap:14px;font-weight:900;font-size:1.25rem;}
+.roomtile .rnums span small{display:block;font-size:.62rem;font-weight:700;opacity:.9;}
+.roomtile .radvice{margin-top:8px;font-size:.72rem;line-height:1.35;opacity:.95;}
+.rt-green{background:linear-gradient(150deg,#46c97f,#2fa866);} .rt-yellow{background:linear-gradient(150deg,#ffb13d,#f09a1a);} .rt-red{background:linear-gradient(150deg,#ff6b6b,#e04848);}
+.signcard{display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:12px 16px;margin-bottom:8px;box-shadow:0 4px 12px rgba(74,58,48,.08);border-left:8px solid var(--green);}
+.signcard.flagged{border-left-color:var(--coral);}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(150deg,var(--blue),var(--purple));color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:1rem;flex:0 0 42px;}
+.viewtog{display:flex;gap:8px;margin-bottom:14px;}
+.viewtog .vt{flex:1;text-align:center;padding:10px;border-radius:14px;font-weight:900;cursor:pointer;background:#fff;color:var(--soft);box-shadow:0 4px 12px rgba(74,58,48,.08);}
+.viewtog .vt.on{background:linear-gradient(90deg,#c95ab0,var(--purple));color:#fff;}
+.dayhdr{font-weight:900;margin:16px 0 8px;font-size:1rem;padding:8px 14px;border-radius:12px;color:#fff;display:inline-block;}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← exit</a>
+<header>
+  <h1>👑 Director Dashboard</h1>
+  <div class="schoolbadge" id="schoolBadge">…</div>
+</header>
+<nav>
+  <div class="tab t-brief active" onclick="show('brief',this)">📰 Daily Briefing</div>
+  <div class="tab t-auto" onclick="show('auto',this)">✉️ Automations</div>
+  <div class="tab t-hours" onclick="show('hours',this)">⏱ Staff Hours</div>
+  <div class="tab t-food" onclick="show('food',this)">🍽 Food Program</div>
+  <div class="tab t-ratio" onclick="show('ratio',this)">🧮 Ratios & FTE</div>
+  <div class="tab t-task" onclick="show('task',this)">📋 Task Board</div>
+  <div class="tab t-msg" onclick="show('msg',this)">💬 Parent Message</div>
+  <div class="tab t-time" onclick="show('time',this)">⏰ Time Fix</div>
+  <div class="tab t-onb" onclick="show('onb',this)">🌟 Onboarding</div>
+  <div class="tab" style="background:#2fc4b2" onclick="show('forms',this)">📄 Forms Wizard</div>
+  <div class="tab" style="background:linear-gradient(90deg,#5a4cc9,#9b6bff)" onclick="show('mc',this)">🎛 Mission Control</div>
+</nav>
+<main>
+  <div class="panel show" id="p-brief">
+    <div class="banner">📰 This is your morning briefing, turned into a to-do list. Check things off as you go and leave notes — Charles reads them every hour and rolls them up to Mrs. Bear. 💛</div>
+    <div id="checkList" class="empty">Loading your day… 🌞</div>
+  </div>
+
+  <div class="panel" id="p-auto">
+    <div class="card" style="border-left-color:var(--navy)">
+      <div class="sect">✉️ Send an email automation</div>
+      <div style="color:var(--soft);font-size:.88rem;margin-bottom:10px;">Pick the email, add the parent's address(es), hit send — it goes out from <b id="fromEmail">your office inbox</b> within the hour.</div>
+      <form onsubmit="return sendAuto(event)">
+        <div class="frow"><label>1 · Pick the email</label><div class="codes" id="autoCodes"></div></div>
+        <div class="frow"><label>2 · Parent email(s) — one or many</label>
+          <textarea id="aEmails" required placeholder="parent1@email.com, parent2@email.com&#10;(commas, spaces, or new lines — each gets its own email)"></textarea></div>
+        <div class="frow"><label>Your name</label><input type="text" id="aBy" required placeholder="So Charles knows who sent it"></div>
+        <button class="submit" style="background:linear-gradient(90deg,var(--navy),#2f6bb0)">▶ Send Email Now</button>
+      </form>
+    </div>
+    <div class="sect">📨 Recent sends</div><div id="autoList" class="empty">Loading…</div>
+  </div>
+
+  <div class="panel" id="p-hours">
+    <div class="banner">⏱ Who's on the clock right now, punch flags to fix, hours today & this week — refreshed by Charles's checks through the day (9:30 AM · midday · 3 PM).</div>
+    <div class="sect">🕐 Today's Sign-In Board <span id="signAsOf" style="font-weight:600;color:var(--soft);font-size:.8rem"></span></div>
+    <div id="signList" class="empty">Loading…</div>
+    <div class="sect">📈 Weekly Pace & Payroll</div>
+    <div id="hoursSummary"></div>
+    <div id="hoursList" class="empty">Loading…</div>
+  </div>
+
+  <div class="panel" id="p-food">
+    <div class="banner">🍽 Daily KidKare meal counts and what still needs attention. Remember: Charles records &amp; saves daily — <b>you submit the claim at month-end</b>.</div>
+    <div id="foodList" class="empty">Loading…</div>
+  </div>
+
+  <div class="panel" id="p-ratio">
+    <div class="sect">🏫 Your Classrooms <span id="ratioAsOf" style="font-weight:600;color:var(--soft);font-size:.8rem"></span></div>
+    <div class="roomgrid" id="roomGrid"></div>
+    <div class="sect">📊 This Week's Numbers</div><div class="statgrid" id="fteStats"></div>
+  </div>
+
+  <div class="panel" id="p-task">
+    <div class="viewtog">
+      <div class="vt on" id="vtToday" onclick="taskView('today')">📅 Today</div>
+      <div class="vt" id="vtWeek" onclick="taskView('week')">🗓 Week at a Glance</div>
+    </div>
+    <div id="taskList" class="empty">Loading…</div>
+    <div id="weekList" style="display:none"></div>
+  </div>
+
+  <div class="panel" id="p-msg">
+    <div class="card" style="border-left-color:var(--pink)">
+      <div class="sect">💬 Ask Charles to send a parent message (ProCare)</div>
+      <form onsubmit="return sendMsg(event)">
+        <div class="frow"><label>Who should get it?</label>
+          <select id="mAud"><option>All families</option><option>Specific families (list in message)</option></select></div>
+        <div class="frow"><label>What's it about? (short title)</label><input type="text" id="mTitle" required placeholder="e.g. Water Day reminder"></div>
+        <div class="frow"><label>The message ✏️</label><textarea id="mBody" required placeholder="Type exactly what families should read…"></textarea></div>
+        <div class="frow"><label>Your name</label><input type="text" id="mBy" required></div>
+        <button class="submit">Send to Charles 🐝</button>
+      </form>
+    </div>
+    <div class="sect">📨 Recent requests</div><div id="msgList" class="empty">Loading…</div>
+  </div>
+
+  <div class="panel" id="p-time">
+    <div class="card" style="border-left-color:var(--purple)">
+      <div class="sect">⏰ Fix a time-clock punch</div>
+      <form onsubmit="return sendTime(event)">
+        <div class="frow"><label>Staff member</label><select id="tStaff" required><option value="">Pick a name…</option></select></div>
+        <div class="frow"><label>Which day?</label><input type="date" id="tDate" required></div>
+        <div class="frow"><label>Correct time IN</label><input type="text" id="tIn" placeholder="e.g. 8:30 AM"></div>
+        <div class="frow"><label>Correct time OUT</label><input type="text" id="tOut" placeholder="e.g. 5:30 PM"></div>
+        <div class="frow"><label>What happened?</label><textarea id="tWhy" required placeholder="e.g. Forgot to clock back in after break"></textarea></div>
+        <button class="submit" style="background:linear-gradient(90deg,var(--purple),var(--blue))">Send the fix 🛠️</button>
+      </form>
+    </div>
+    <div class="sect">🧾 Recent fixes</div><div id="timeList" class="empty">Loading…</div>
+  </div>
+
+  <div class="panel" id="p-onb">
+    <div class="card" style="border-left-color:var(--teal)">
+      <div class="sect">🌟 Start an enrollment or onboarding</div>
+      <form onsubmit="return sendOnb(event)">
+        <div class="frow"><label>Type</label><select id="oType"><option>👨‍👩‍👧 Parent / Child Enrollment</option><option>🍎 Teacher Onboarding</option></select></div>
+        <div class="frow"><label>Name (child or new teacher)</label><input type="text" id="oName" required></div>
+        <div class="frow"><label>Anything Charles should know?</label><textarea id="oNotes" placeholder="Start date, sibling info, etc."></textarea></div>
+        <button class="submit" style="background:linear-gradient(90deg,var(--teal),var(--green))">Kick it off 🚀</button>
+      </form>
+    </div>
+    <div class="sect">🌱 In progress</div><div id="onbList" class="empty">Loading…</div>
+  </div>
+
+  <div class="panel" id="p-mc">
+    <div class="banner">🎛 Every tool and link you need — Slack, portals, look-ups, music, your school's registration & tour links. One home base. (Same links as the old interface page — now they live here!)</div>
+    <div id="mcList" class="empty">Loading your links… 🐝</div>
+  </div>
+
+  <div class="panel" id="p-forms">
+    <div class="banner">📄 Every form that runs the school — Bee System, facility, enrollment, employee & QA. Search or tap a category, then Open & print.</div>
+    <input id="fq" oninput="renderForms()" placeholder="🔍 Search a form… (e.g. incident, field trip)" style="width:100%;font-size:1.05rem;padding:13px 18px;border:3px solid var(--teal);border-radius:16px;margin-bottom:12px;font-family:inherit;">
+    <div id="fcats" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;"></div>
+    <div id="formList" class="empty">Loading the library… 🐝</div>
+  </div>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+const PIN = sessionStorage.getItem('hivePin');
+if(!PIN || sessionStorage.getItem('hiveRole')!=='director') location.href='index.html';
+let SCHOOL = null;
+const esc = s => (s??'').toString().replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sel = v => v?.name || v || '';
+async function api(payload){ const r = await fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:PIN,...payload})}); return r.json(); }
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2400); }
+function show(id, el){ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
+  document.getElementById('p-'+id).classList.add('show');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); el.classList.add('active'); }
+
+// ---- DAILY BRIEFING (interactive checklist) ----
+async function loadCheck(){
+  const d = await api({action:'list', table:'Briefing Checklist', filterByFormula:"IS_SAME({Date},TODAY(),'day')", sortField:'Type'});
+  const box = document.getElementById('checkList'); const recs = d.records||[];
+  if(!recs.length){ box.innerHTML='<div class="empty">Nothing on the list yet — Charles posts your briefing each morning 🌅</div>'; return; }
+  box.classList.remove('empty');
+  box.innerHTML = recs.map(r=>{ const f=r.fields; const type=sel(f.Type);
+    const cls = type.includes('Action')?'action':type.includes('FYI')?'fyi':'';
+    const bcls = type.includes('Action')?'b-action':type.includes('FYI')?'b-fyi':'b-routine';
+    return `<div class="card ${cls} ${f.Done?'done':''}" id="c-${r.id}">
+      <div class="chk-row">
+        <div class="bigchk ${f.Done?'on':''}" onclick="toggle('${r.id}',this)">${f.Done?'✔':''}</div>
+        <div class="item">${esc(f.Item)}</div>
+        <span class="badge ${bcls}">${esc(type||'✅ Routine')}</span>
+      </div>
+      <div class="notes"><textarea id="n-${r.id}" placeholder="Reply / note for Mrs. Bear…">${esc(f['Director Notes']||'')}</textarea>
+      <button class="mini" onclick="saveNote('${r.id}')">Save</button></div>
+    </div>`; }).join('');
+}
+async function toggle(id, el){ const on = !el.classList.contains('on');
+  el.classList.toggle('on', on); el.textContent = on?'✔':''; document.getElementById('c-'+id).classList.toggle('done', on);
+  await api({action:'update', table:'Briefing Checklist', recordId:id, fields:{'Done':on}}); toast(on?'Checked off! 🎉':'Un-checked'); }
+async function saveNote(id){ const v = document.getElementById('n-'+id).value;
+  await api({action:'update', table:'Briefing Checklist', recordId:id, fields:{'Director Notes':v}}); toast('Saved — Charles will see it 📝'); }
+
+// ---- EMAIL AUTOMATIONS ----
+const CODES = ['inquiry','enrolled','onboard','tour','registration','sams','teacher hub','management hub'];
+let selCode = null;
+function renderCodes(){ document.getElementById('autoCodes').innerHTML = CODES.map(c=>`<div class="code ${c===selCode?'on':''}" onclick="selCode='${c}';renderCodes()">${c}</div>`).join(''); }
+async function sendAuto(e){ e.preventDefault();
+  if(!selCode){ toast('Pick which email first! ✉️'); return false; }
+  const emails = document.getElementById('aEmails').value.trim();
+  await api({action:'create', table:'Email Automation Requests', fields:{
+    'Request': selCode + ' → ' + emails.split(/[\s,;]+/)[0] + (emails.split(/[\s,;]+/).length>1?' +'+(emails.split(/[\s,;]+/).length-1)+' more':''),
+    'Template': selCode, 'Parent Emails': emails,
+    'Requested By': document.getElementById('aBy').value, 'Requested At': new Date().toISOString(),
+    'Status':'🟡 New — waiting for Charles'}});
+  e.target.reset(); selCode=null; renderCodes(); toast('Queued! Charles sends it within the hour ✉️'); loadAuto(); return false; }
+async function loadAuto(){ const d = await api({action:'list', table:'Email Automation Requests', sortField:'Requested At', sortDir:'desc', maxRecords:8});
+  const box = document.getElementById('autoList'); box.classList.remove('empty');
+  box.innerHTML = (d.records||[]).map(r=>{const f=r.fields; return `<div class="taskchip"><div><b>${esc(sel(f.Template))}</b> · ${esc((f['Parent Emails']||'').split(/[\s,;]+/)[0])}<br><span style="color:var(--soft);font-size:.8rem">${esc(f['Requested By']||'')}</span></div><span class="tstat ${sel(f.Status).includes('✅')?'s-done':sel(f.Status).includes('⛔')?'s-miss':'s-pend'}">${esc(sel(f.Status))}</span></div>`;}).join('') || '<div class="empty">No sends yet — your history will show here ✨</div>'; }
+
+// ---- STAFF HOURS ----
+async function loadHours(){
+  const d = await api({action:'list', table:'Staff Hours Snapshot', maxRecords:30});
+  const recs = d.records||[];
+  const summary = recs.find(r=>(r.fields.Staff||'').includes('SUMMARY'));
+  const staff = recs.filter(r=>!(r.fields.Staff||'').includes('SUMMARY'));
+  document.getElementById('hoursSummary').innerHTML = summary ? `<div class="card" style="border-left-color:var(--coral)"><b>📊 ${esc(sel(summary.fields.School))} payroll picture</b> · <span style="color:var(--soft)">${esc(summary.fields.Week||'')}</span><div style="margin-top:6px;font-size:.9rem;color:var(--soft)">${esc(summary.fields.Notes||'')}</div></div>` : '';
+  const box = document.getElementById('hoursList'); box.classList.remove('empty');
+  box.innerHTML = staff.length ? staff.map(r=>{ const f=r.fields;
+    const h=f['Hours To Date']??0, s=f['Scheduled Weekly']||0;
+    const pct = s? Math.min(Math.round(h/s*100),130) : 0;
+    const over = s && h>s;
+    const pace = sel(f.Pace);
+    const pcls = pace.includes('🚨')?'s-miss':pace.includes('⚠️')?'s-pend':pace.includes('🔻')?'s-up':'s-done';
+    return `<div class="card" style="border-left-color:${over?'var(--orange)':'var(--green)'}">
+      <div class="hourrow"><b>${esc(f.Staff)}</b><span class="tstat ${pcls}">${esc(pace||'—')}</span></div>
+      <div class="hourrow" style="margin-top:4px"><span style="color:var(--soft);font-size:.85rem">${esc(f.Week||'')}</span>
+      <span class="pct">${h??'—'}${s?' / '+s+'h':''}</span></div>
+      ${s?`<div class="hbar"><div class="${over?'over':''}" style="width:${Math.min(pct,100)}%"></div></div>`:''}
+      ${f.Notes?`<div style="margin-top:8px;font-size:.85rem;color:var(--soft)">${esc(f.Notes)}</div>`:''}
+    </div>`; }).join('') : '<div class="empty">Hours land with the weekday refresh ⏱</div>';
+}
+
+// ---- FOOD PROGRAM ----
+async function loadFood(){
+  const d = await api({action:'list', table:'Food Program Log', sortField:'Day', sortDir:'desc', maxRecords:12});
+  const box = document.getElementById('foodList'); box.classList.remove('empty');
+  box.innerHTML = (d.records||[]).map(r=>{ const f=r.fields; const st=sel(f.Status);
+    const col = st.includes('✅')?'var(--green)':st.includes('⚠️')?'var(--orange)':st.includes('❌')?'var(--coral)':'#c9bcae';
+    return `<div class="card" style="border-left-color:${col}">
+      <div class="hourrow"><b>${esc(f.Day||'')}</b><span class="tstat" style="background:${col}">${esc(st)}</span></div>
+      ${(f.Breakfast!=null||f.Lunch!=null)?`<div class="foodchips"><span class="fchip">🥣 B: ${f.Breakfast??'—'}</span><span class="fchip">🍎 L: ${f.Lunch??'—'}</span><span class="fchip">🧃 P: ${f['PM Snack']??'—'}</span></div>`:''}
+      ${f.Notes?`<div style="margin-top:8px;font-size:.85rem;color:var(--soft)">${esc(f.Notes)}</div>`:''}
+    </div>`; }).join('') || '<div class="empty">Daily counts appear here after each school day 🍽</div>';
+}
+
+// ---- RATIOS: room tiles ----
+async function loadRatio(){
+  const [rd, fd] = await Promise.all([
+    api({action:'list', table:'Ratio Snapshots', sortField:'Snapshot Time', sortDir:'desc', maxRecords:20}),
+    api({action:'list', table:'FTE & Occupancy', maxRecords:6})
+  ]);
+  const fs = document.getElementById('fteStats'); const latest = (fd.records||[]).slice(-1)[0];
+  fs.innerHTML = latest ? `
+    <div class="stat"><div class="num">${latest.fields.FTEs??'—'}</div><div class="lbl">FTEs</div></div>
+    <div class="stat" style="border-top-color:var(--green)"><div class="num" style="color:var(--green)">${latest.fields.Occupancy!=null?Math.round(latest.fields.Occupancy*100)+'%':'—'}</div><div class="lbl">Occupancy</div></div>
+    <div class="stat" style="border-top-color:var(--purple)"><div class="num" style="color:var(--purple)">${latest.fields.Enrollment??'—'}</div><div class="lbl">Enrolled</div></div>`
+    : '<div class="empty">FTE numbers land every Thursday 📬</div>';
+  const grid = document.getElementById('roomGrid');
+  const recs = rd.records||[];
+  // keep only the newest snapshot batch
+  const newest = recs[0]?.fields['Snapshot Time'];
+  const batch = recs.filter(r=>r.fields['Snapshot Time']===newest);
+  if(newest){ const t = new Date(newest); document.getElementById('ratioAsOf').textContent = '· as of ' + t.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) + ' check'; }
+  grid.innerHTML = batch.length ? batch.map(r=>{ const f=r.fields; const st=sel(f.Status);
+    const cls = st.includes('🔴')?'rt-red':st.includes('🟡')?'rt-yellow':'rt-green';
+    return `<div class="roomtile ${cls}">
+      <div class="rname">${esc(f.Room)}</div>
+      <div class="rnums"><span>👶 ${f.Children??'—'}<small>children</small></span><span>🍎 ${f.Staff??'—'}${f['Staff Needed']!=null?' / '+f['Staff Needed']:''}<small>staff${f['Staff Needed']!=null?' / need':''}</small></span></div>
+      ${f.Advice?`<div class="radvice">${esc(f.Advice)}</div>`:''}
+    </div>`; }).join('') : '<div class="empty">Room snapshots appear during the school day 🕘</div>';
+}
+
+// ---- SIGN-IN BOARD ----
+async function loadSignin(){
+  const d = await api({action:'list', table:'Sign-In Log', filterByFormula:"IS_SAME({Date},TODAY(),'day')", sortField:'Staff'});
+  const box = document.getElementById('signList'); const recs = d.records||[];
+  box.classList.remove('empty');
+  if(recs[0]?.fields['As Of']) document.getElementById('signAsOf').textContent = '· as of ' + recs[0].fields['As Of'];
+  box.innerHTML = recs.length ? recs.map(r=>{ const f=r.fields; const flag = sel(f.Flag);
+    const bad = /🚨|⚠️|🔻/.test(flag);
+    const initials = (f.Staff||'?').split(' ').map(w=>w[0]).slice(0,2).join('');
+    return `<div class="signcard ${bad?'flagged':''}">
+      <div class="avatar">${esc(initials)}</div>
+      <div style="flex:1"><b>${esc(f.Staff)}</b>
+        <div style="font-size:.82rem;color:var(--soft)">In: ${esc(f['Clock In']||'—')}${f['Clock Out']?' · Out: '+esc(f['Clock Out']):''}${f['Hours Today']!=null?' · Today: '+f['Hours Today']+'h':''}${f['Hours This Week']!=null?' · Week: '+f['Hours This Week']+'h':''}</div>
+        ${f.Notes?`<div style="font-size:.8rem;color:${bad?'var(--coral)':'var(--soft)'};margin-top:3px">${esc(f.Notes)}</div>`:''}
+      </div>
+      <span class="tstat ${bad?'s-miss':'s-done'}">${esc(flag||'—')}</span>
+    </div>`; }).join('') : '<div class="empty">Today\'s sign-ins appear after the 9:30 AM check ⏰</div>';
+}
+
+// ---- TASKS: Today + Week at a Glance ----
+function taskView(v){
+  document.getElementById('vtToday').classList.toggle('on', v==='today');
+  document.getElementById('vtWeek').classList.toggle('on', v==='week');
+  document.getElementById('taskList').style.display = v==='today'?'block':'none';
+  document.getElementById('weekList').style.display = v==='week'?'block':'none';
+}
+async function loadTasks(){
+  const d = await api({action:'list', table:'Task Board', maxRecords:60});
+  const box = document.getElementById('taskList'); const recs = d.records||[];
+  box.classList.remove('empty');
+  const order = ['✅','🟠','🔴','🔵'];
+  recs.sort((a,b)=>order.findIndex(o=>sel(a.fields.Status).startsWith(o)) - order.findIndex(o=>sel(b.fields.Status).startsWith(o)));
+  box.innerHTML = recs.length ? recs.map(r=>{ const f=r.fields; const st=sel(f.Status);
+    const cls = st.includes('✅')?'s-done':st.includes('🔴')?'s-miss':st.includes('🟠')?'s-pend':'s-up';
+    return `<div class="taskchip"><div><b>${esc(f.Task)}</b><br><span style="color:var(--soft);font-size:.8rem">${esc(f.Schedule||'')}${f.Description?' — '+esc(f.Description):''}</span></div><span class="tstat ${cls}">${esc(st)}</span></div>`; }).join('')
+    : '<div class="empty">No tasks yet</div>';
+}
+async function loadWeek(){
+  const d = await api({action:'list', table:'Weekly Schedule', sortField:'Order', maxRecords:60});
+  const box = document.getElementById('weekList'); const recs = d.records||[];
+  const dayColors = {'Every weekday':'var(--green)','Hourly (weekdays 7–6)':'var(--teal)','Monday':'var(--blue)','Mon–Wed':'var(--blue)','Tuesday':'var(--purple)','Wednesday':'var(--orange)','Thursday':'#e0b000','Friday':'var(--pink)','Alternate Wednesdays':'var(--orange)','Monthly':'#9b8576'};
+  const dayOrder = ['Every weekday','Hourly (weekdays 7–6)','Monday','Mon–Wed','Tuesday','Wednesday','Alternate Wednesdays','Thursday','Friday','Monthly'];
+  const groups = {};
+  recs.forEach(r=>{ const day = sel(r.fields.Day)||'Other'; (groups[day]=groups[day]||[]).push(r.fields); });
+  box.innerHTML = dayOrder.filter(day=>groups[day]).map(day=>`
+    <div class="dayhdr" style="background:${dayColors[day]||'var(--soft)'}">${esc(day)}</div>
+    ${groups[day].map(f=>`<div class="taskchip"><div><b>${esc(f.Task)}</b><br><span style="color:var(--soft);font-size:.8rem">${esc(sel(f.Category))}${f.Details?' — '+esc(f.Details):''}</span></div><span class="tstat s-up">${esc(f.Time||'')}</span></div>`).join('')}
+  `).join('') || '<div class="empty">Week view loads shortly</div>';
+}
+
+// ---- MESSAGE REQUESTS ----
+async function sendMsg(e){ e.preventDefault();
+  await api({action:'create', table:'ProCare Message Requests', fields:{
+    'Request': document.getElementById('mTitle').value,
+    'Audience': document.getElementById('mAud').value, 'Message Text': document.getElementById('mBody').value,
+    'Requested By': document.getElementById('mBy').value, 'Requested At': new Date().toISOString(),
+    'Status':'🟡 New — waiting for Charles'}});
+  e.target.reset(); toast('Sent! Charles handles it within the hour 🐝'); loadMsg(); return false; }
+async function loadMsg(){ const d = await api({action:'list', table:'ProCare Message Requests', sortField:'Requested At', sortDir:'desc', maxRecords:8});
+  const box = document.getElementById('msgList'); box.classList.remove('empty');
+  box.innerHTML = (d.records||[]).map(r=>{const f=r.fields; return `<div class="taskchip"><div><b>${esc(f.Request)}</b><br><span style="color:var(--soft);font-size:.8rem">${esc(f['Requested By']||'')}</span></div><span class="tstat ${sel(f.Status).includes('✅')?'s-done':sel(f.Status).includes('⛔')?'s-miss':'s-pend'}">${esc(sel(f.Status))}</span></div>`;}).join('') || '<div class="empty">No requests yet ✨</div>'; }
+
+// ---- TIME CORRECTIONS ----
+async function loadStaffDropdown(){
+  const d = await api({action:'list', table:'Staff Roster', filterByFormula:"{Active}=TRUE()", sortField:'Name'});
+  const selEl = document.getElementById('tStaff');
+  selEl.innerHTML = '<option value="">Pick a name…</option>' + (d.records||[]).map(r=>`<option>${esc(r.fields.Name)}</option>`).join('');
+}
+async function sendTime(e){ e.preventDefault();
+  await api({action:'create', table:'Staff Time Corrections', fields:{
+    'Staff Member': document.getElementById('tStaff').value, 'Date': document.getElementById('tDate').value,
+    'Correct Time In': document.getElementById('tIn').value, 'Correct Time Out': document.getElementById('tOut').value,
+    'Reason': document.getElementById('tWhy').value, 'Status':'🟡 New — waiting for Charles'}});
+  e.target.reset(); toast('Fix sent to Charles 🛠️'); loadTime(); return false; }
+async function loadTime(){ const d = await api({action:'list', table:'Staff Time Corrections', sortField:'Date', sortDir:'desc', maxRecords:8});
+  const box = document.getElementById('timeList'); box.classList.remove('empty');
+  box.innerHTML = (d.records||[]).map(r=>{const f=r.fields; return `<div class="taskchip"><div><b>${esc(f['Staff Member'])}</b> · ${esc(f.Date||'')}<br><span style="color:var(--soft);font-size:.8rem">${esc(f.Reason||'')}</span></div><span class="tstat ${sel(f.Status).includes('✅')?'s-done':'s-pend'}">${esc(sel(f.Status))}</span></div>`;}).join('') || '<div class="empty">No fixes pending 🎉</div>'; }
+
+// ---- ONBOARDING ----
+async function sendOnb(e){ e.preventDefault();
+  await api({action:'create', table:'Onboarding Tracker', fields:{
+    'Name': document.getElementById('oName').value, 'Type': document.getElementById('oType').value,
+    'Status':'🟡 In progress', 'Started': new Date().toISOString().slice(0,10),
+    'Current Step':'Step 1 — requested by director via The Hive', 'Notes': document.getElementById('oNotes').value}});
+  e.target.reset(); toast('Started! Charles + Mrs. Bear are on it 🚀'); loadOnb(); return false; }
+async function loadOnb(){ const d = await api({action:'list', table:'Onboarding Tracker', maxRecords:15});
+  const box = document.getElementById('onbList'); box.classList.remove('empty');
+  box.innerHTML = (d.records||[]).map(r=>{const f=r.fields; return `<div class="taskchip"><div><b>${esc(f.Name)}</b><br><span style="color:var(--soft);font-size:.8rem">${esc(sel(f.Type))} · ${esc(f['Current Step']||'')}</span></div><span class="tstat ${sel(f.Status).includes('✅')?'s-done':'s-pend'}">${esc(sel(f.Status))}</span></div>`;}).join('') || '<div class="empty">Nothing in progress</div>'; }
+
+// ---- MISSION CONTROL (Resource Links) ----
+async function loadMC(){
+  const d = await api({action:'list', table:'Resource Links', sortField:'Order', maxRecords:60});
+  const box = document.getElementById('mcList'); const recs = d.records||[];
+  box.classList.remove('empty');
+  const secOrder = ['❤️ General','⭐ Most Used','🏫 My School Links','🎶 Music & Songs'];
+  const groups = {};
+  recs.forEach(r=>{ const s = sel(r.fields.Section)||'Other'; (groups[s]=groups[s]||[]).push(r.fields); });
+  box.innerHTML = secOrder.filter(s=>groups[s]).map(s=>`
+    <div class="sect">${esc(s)}</div>
+    <div class="roomgrid" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))">
+    ${groups[s].map(f=>`<div class="card" style="margin:0;border-left-color:var(--purple);display:flex;flex-direction:column">
+      <div style="font-size:1.6rem">${esc(f.Emoji||'🔗')}</div>
+      <b style="margin:4px 0">${esc(f.Title)}</b>
+      <div style="font-size:.8rem;color:var(--soft);flex:1;margin-bottom:10px">${esc(f.Description||'')}</div>
+      ${f.URL?`<a class="mini" style="text-decoration:none;text-align:center;background:var(--purple)" href="${esc(f.URL)}" target="_blank" rel="noopener">Open →</a>`:'<span class="badge">link coming — ask Mrs. Bear</span>'}
+    </div>`).join('')}
+    </div>`).join('') || '<div class="empty">Links land here shortly 🐝</div>';
+}
+
+// ---- FORMS WIZARD ----
+let forms = [], selCat = 'All';
+async function loadForms(){
+  const d = await api({action:'list', table:'Forms Library', maxRecords:120, sortField:'Form Name'});
+  forms = (d.records||[]).map(r=>r.fields);
+  const cats = ['All', ...new Set(forms.map(f=>sel(f.Category)).filter(Boolean))];
+  const colors = ['var(--blue)','var(--teal)','var(--green)','var(--orange)','var(--purple)','var(--coral)','var(--pink)'];
+  document.getElementById('fcats').innerHTML = cats.map((c,i)=>`<div onclick="pickCat('${esc(c)}',this)" style="padding:8px 16px;border-radius:999px;font-weight:800;font-size:.82rem;cursor:pointer;color:#fff;background:${colors[i%7]};opacity:${c===selCat?1:.5}" data-cat>${esc(c)}</div>`).join('');
+  renderForms();
+}
+function pickCat(c, el){ selCat=c; document.querySelectorAll('[data-cat]').forEach(x=>x.style.opacity=.5); el.style.opacity=1; renderForms(); }
+function renderForms(){
+  const q = (document.getElementById('fq').value||'').toLowerCase();
+  const box = document.getElementById('formList'); box.classList.remove('empty');
+  const list = forms.filter(f => (selCat==='All' || sel(f.Category)===selCat) && (!q || (f['Form Name']||'').toLowerCase().includes(q)));
+  box.innerHTML = list.length ? list.map(f=>`<div class="taskchip"><div><b>${esc(f['Form Name'])}</b><br><span style="color:var(--soft);font-size:.8rem">${esc(sel(f.Category))}</span></div>
+    ${f['File Link'] ? `<a class="tstat s-done" style="text-decoration:none" href="${esc(f['File Link'])}" target="_blank" rel="noopener">Open 🖨️</a>` : '<span class="tstat s-pend">ask Mrs. Bear</span>'}</div>`).join('')
+    : '<div class="empty">No forms match — try another word 🔍</div>';
+}
+
+// ---- TAB NOTES (a note box on every tab) ----
+const TAB_LABELS = {brief:'📰 Daily Briefing', auto:'✉️ Automations', hours:'⏱ Staff Hours', food:'🍽 Food Program', ratio:'🧮 Ratios & FTE', task:'📋 Task Board', msg:'💬 Parent Message', time:'⏰ Time Fix', onb:'🌟 Onboarding'};
+// (Mission Control + Forms tabs share the Tab Notes box via the panels below)
+function injectNoteBoxes(){
+  Object.keys(TAB_LABELS).forEach(id=>{
+    const panel = document.getElementById('p-'+id);
+    if(!panel) return;
+    const box = document.createElement('div');
+    box.className = 'card';
+    box.style.borderLeftColor = '#c9bcae';
+    box.innerHTML = `<div style="font-weight:900;margin-bottom:8px;">💛 Note for Charles & Mrs. Bear about this tab</div>
+      <div class="notes"><textarea id="tabnote-${id}" placeholder="e.g. Just added that child in KidKare / this number looks off / done!"></textarea>
+      <button class="mini" style="background:var(--orange)" onclick="sendTabNote('${id}')">Send</button></div>
+      <div id="tabnote-sent-${id}" style="margin-top:8px;font-size:.82rem;color:var(--soft);"></div>`;
+    panel.appendChild(box);
+  });
+}
+async function sendTabNote(id){
+  const ta = document.getElementById('tabnote-'+id);
+  const v = (ta.value||'').trim();
+  if(!v){ toast('Type your note first! ✏️'); return; }
+  let by = localStorage.getItem('hiveName') || '';
+  if(!by){ by = prompt("What's your name? (saved for next time)")||''; if(by) localStorage.setItem('hiveName', by); }
+  await api({action:'create', table:'Tab Notes', fields:{
+    'Note': v.slice(0,90), 'Full Note': v, 'Tab': TAB_LABELS[id], 'By': by,
+    'When': new Date().toISOString(), 'Status':'🟡 New'}});
+  ta.value='';
+  document.getElementById('tabnote-sent-'+id).textContent = '✅ Sent '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+' — Charles picks notes up every hour on weekdays.';
+  toast('Note sent! 🐝');
+}
+
+// ---- BOOT ----
+(async function(){
+  const who = await api({action:'whoami'});
+  if(!who.school){ location.href='index.html'; return; }
+  SCHOOL = who.school;
+  const b = document.getElementById('schoolBadge');
+  b.textContent = '🏫 ' + SCHOOL;
+  b.style.background = SCHOOL==='Sanford' ? 'linear-gradient(135deg,#1d4e89,#2f6bb0)' : 'linear-gradient(135deg,#0a6b4f,#12946c)';
+  document.getElementById('fromEmail').textContent = SCHOOL==='Sanford' ? 'sanfordoffice@kidcityusa.com' : 'deland2office@kidcityusa.com';
+  renderCodes(); injectNoteBoxes();
+  loadCheck(); loadAuto(); loadSignin(); loadHours(); loadFood(); loadRatio(); loadTasks(); loadWeek(); loadMsg(); loadStaffDropdown(); loadTime(); loadOnb(); loadForms(); loadMC();
+})();
+</script>
+</body>
+</html>
