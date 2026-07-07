@@ -1193,7 +1193,7 @@ if (typeof document !== "undefined") {
     for(var i=0;i<ALL_STATES.length;i++){
       var opt = document.createElement("option");
       opt.value = ALL_STATES[i];
-      opt.textContent = ALL_STATES[i] + (ALL_STATES[i]==="Florida" ? " ⭐" : "");
+      opt.textContent = ALL_STATES[i] + (ALL_STATES[i]==="Florida" ? "" : "");
       stateSelect.appendChild(opt);
     }
 
