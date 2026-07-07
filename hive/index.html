@@ -12,15 +12,17 @@ body{min-height:100vh;background:linear-gradient(160deg,#fff7ef,#ffe7d4 55%,#ffd
 h1{font-size:2.6rem;margin-bottom:6px;}
 h1 .hive{background:linear-gradient(90deg,var(--orange),var(--pink),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .sub{color:#9b8576;margin-bottom:34px;font-size:1.05rem;}
-.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}
 .door{background:#fff;border-radius:24px;padding:34px 26px;box-shadow:0 10px 30px rgba(74,58,48,.12);cursor:pointer;transition:.15s;border-top:10px solid var(--blue);}
 .door:hover{transform:translateY(-6px) scale(1.01);}
 .door.teacher{border-top-color:var(--green);}
+.door.parent{border-top-color:var(--pink);}
 .door .big{font-size:3.4rem;}
 .door h2{margin:10px 0 6px;font-size:1.5rem;}
 .door p{color:#9b8576;font-size:.95rem;line-height:1.5;}
 .tag{display:inline-block;margin-top:14px;padding:8px 20px;border-radius:999px;color:#fff;font-weight:700;background:var(--blue);}
 .teacher .tag{background:var(--green);}
+.parent .tag{background:var(--pink);}
 .gate{display:none;margin-top:30px;background:#fff;border-radius:20px;padding:26px;box-shadow:0 10px 30px rgba(74,58,48,.12);}
 .gate.show{display:block;}
 .gate h3{margin-bottom:12px;}
@@ -49,6 +51,12 @@ footer{margin-top:34px;font-size:.8rem;color:#c9bcae;}
       <p>Lesson Plan Wizard · printable forms · take-home packets — everything for your classroom</p>
       <span class="tag">I'm a Teacher →</span>
     </div>
+    <div class="door parent" onclick="pick('parent')">
+      <div class="big">🏠</div>
+      <h2>Parent Portal</h2>
+      <p>Handbook · calendar · registration · lesson plans · take-home packets · send us a message</p>
+      <span class="tag">I'm a Parent →</span>
+    </div>
   </div>
   <div class="gate" id="gate">
     <h3 id="gateTitle">Enter your PIN 🔑</h3>
@@ -62,8 +70,10 @@ footer{margin-top:34px;font-size:.8rem;color:#c9bcae;}
 </div>
 <script>
 let role = null;
+const TITLES = {director:'Director PIN, please 👑', teacher:'Teacher PIN, please 🍎', parent:'Parent PIN, please 🏠'};
+const DEST = {director:'director.html', teacher:'teacher.html', parent:'parent.html'};
 function pick(r){ role = r; document.getElementById('gate').classList.add('show');
-  document.getElementById('gateTitle').textContent = r==='director' ? 'Director PIN, please 👑' : 'Teacher PIN, please 🍎';
+  document.getElementById('gateTitle').textContent = TITLES[r] || 'Enter your PIN 🔑';
   document.getElementById('pin').focus(); }
 async function enter(){
   const pin = document.getElementById('pin').value.trim().toUpperCase();
@@ -75,7 +85,7 @@ async function enter(){
     if(d.role){
       if(d.role !== role){ err.textContent = 'That PIN opens the ' + d.role + ' door — try that one! 😉'; return; }
       sessionStorage.setItem('hivePin', pin); sessionStorage.setItem('hiveRole', d.role);
-      location.href = d.role === 'director' ? 'director.html' : 'teacher.html';
+      location.href = DEST[d.role] || 'index.html';
     } else { err.textContent = d.error || 'Hmm, that PIN didn\'t work.'; }
   } catch(e){ err.textContent = 'Connection hiccup — try again.'; }
 }

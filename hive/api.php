@@ -27,12 +27,13 @@ $SCHOOL_BY_ROLE = ['director-sanford' => 'Sanford', 'director-deland' => 'DeLand
 $SCHOOL_TABLES = ['Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links'];
 
 $DIRECTOR_PERMS = [
-  'read'  => ['Lesson Plan Index','Forms Library','Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links'],
+  'read'  => ['Lesson Plan Index','Forms Library','Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links','Parent Messages'],
   'create'=> ['ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Email Automation Requests','Tab Notes'],
-  'update'=> ['Briefing Checklist' => ['Done','Director Notes'], 'Onboarding Tracker' => ['Current Step','Status','Notes']]
+  'update'=> ['Briefing Checklist' => ['Done','Director Notes'], 'Onboarding Tracker' => ['Current Step','Status','Notes'], 'Parent Messages' => ['Status']]
 ];
 $PERMS = [
   'teacher' => ['read' => ['Lesson Plan Index','Resource Links'], 'create'=>['Teacher Questions'], 'update'=>[]],
+  'parent'  => ['read' => ['Resource Links'], 'create'=>['Parent Messages'], 'update'=>[]],
   'director-sanford' => $DIRECTOR_PERMS,
   'director-deland'  => $DIRECTOR_PERMS
 ];
@@ -93,6 +94,7 @@ if ($action === 'list'){
   if (!empty($input['filterByFormula'])) $formulas[] = '(' . $input['filterByFormula'] . ')';
   if ($school && in_array($table, $SCHOOL_TABLES)) $formulas[] = "OR({School}='" . $school . "',{School}='Both')";
   if ($role === 'teacher' && $table === 'Resource Links') $formulas[] = "{Audience}='Everyone'"; // teachers never see director-only links
+  if ($role === 'parent' && $table === 'Resource Links') $formulas[] = "{Audience}='Parents'"; // parents only see parent-facing links
   if ($formulas) $q['filterByFormula'] = count($formulas) > 1 ? 'AND(' . implode(',', $formulas) . ')' : $formulas[0];
   if (!empty($input['sortField'])) { $q['sort[0][field]'] = $input['sortField']; $q['sort[0][direction]'] = ($input['sortDir'] ?? 'asc') === 'desc' ? 'desc' : 'asc'; }
   $out = at_request('GET', [$table], $q);
