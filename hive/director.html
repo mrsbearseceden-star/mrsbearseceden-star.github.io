@@ -90,6 +90,7 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
   <div class="tab t-auto" onclick="show('auto',this)">✉️ Automations</div>
   <div class="tab t-hours" onclick="show('hours',this)">⏱ Staff Hours</div>
   <div class="tab t-food" onclick="show('food',this)">🍽 Food Program</div>
+  <div class="tab" style="background:#b0722e" onclick="show('inv',this)">📦 Inventory</div>
   <div class="tab t-ratio" onclick="show('ratio',this)">🧮 Ratios & FTE</div>
   <div class="tab t-task" onclick="show('task',this)">📋 Task Board</div>
   <div class="tab t-msg" onclick="show('msg',this)">💬 Parent Message</div>
@@ -131,6 +132,27 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
   <div class="panel" id="p-food">
     <div class="banner">🍽 Daily KidKare meal counts and what still needs attention. Remember: Charles records &amp; saves daily — <b>you submit the claim at month-end</b>.</div>
     <div id="foodList" class="empty">Loading…</div>
+  </div>
+
+  <div class="panel" id="p-inv">
+    <div class="banner">📦 Your on-hand counts, so the weekly orders match what's really in the building. Type the quantity you have and hit ✔ — 🟡 means it's below the reorder level. Update on inventory days (Mon–Tue) and Charles builds Wednesday's cart around it.</div>
+    <div id="icats" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;"></div>
+    <div id="invList" class="empty">Counting the shelves… 📦</div>
+    <div class="card" style="border-left-color:#b0722e;margin-top:16px">
+      <div class="sect">➕ Add an item we should track</div>
+      <form onsubmit="return addInv(event)">
+        <div class="frow"><label>Item name</label><input type="text" id="iName" required placeholder="e.g. Goldfish Crackers"></div>
+        <div class="frow" style="display:flex;gap:10px">
+          <div style="flex:1"><label>Category</label><select id="iCat"><option>🍎 Food</option><option>🧻 Paper / Disposables</option><option>🧼 Cleaning / Sanitation</option><option>🍽 Kitchen</option><option>🖨 Office</option><option>🧸 Classroom</option><option>📦 Other</option></select></div>
+          <div style="flex:1"><label>Unit</label><select id="iUnit"><option>boxes</option><option>cans</option><option>bags</option><option>jars</option><option>packs</option><option>tubs</option><option>gallons</option><option>lbs</option><option>trays</option><option>loaves</option><option>cases</option><option>rolls</option><option>each</option><option>other</option></select></div>
+        </div>
+        <div class="frow" style="display:flex;gap:10px">
+          <div style="flex:1"><label>On hand now</label><input type="text" id="iQty" inputmode="numeric" placeholder="e.g. 3"></div>
+          <div style="flex:1"><label>Reorder when below</label><input type="text" id="iPar" inputmode="numeric" placeholder="e.g. 2"></div>
+        </div>
+        <button class="submit" style="background:linear-gradient(90deg,#b0722e,var(--orange))">Add to Inventory 📦</button>
+      </form>
+    </div>
   </div>
 
   <div class="panel" id="p-ratio">
@@ -294,6 +316,52 @@ async function loadFood(){
     </div>`; }).join('') || '<div class="empty">Daily counts appear here after each school day 🍽</div>';
 }
 
+// ---- INVENTORY ----
+let invRecs = [], invCat = 'All';
+async function loadInv(){
+  const d = await api({action:'list', table:'Inventory', sortField:'Item', maxRecords:300});
+  invRecs = d.records||[];
+  const cats = ['All', ...new Set(invRecs.map(r=>sel(r.fields.Category)).filter(Boolean))];
+  const colors = ['#b0722e','var(--green)','var(--blue)','var(--teal)','var(--purple)','var(--pink)','var(--coral)','var(--orange)'];
+  document.getElementById('icats').innerHTML = cats.map((c,i)=>`<div onclick="pickInvCat('${esc(c)}',this)" style="padding:8px 16px;border-radius:999px;font-weight:800;font-size:.82rem;cursor:pointer;color:#fff;background:${colors[i%8]};opacity:${c===invCat?1:.5}" data-icat>${esc(c)}</div>`).join('');
+  renderInv();
+}
+function pickInvCat(c, el){ invCat=c; document.querySelectorAll('[data-icat]').forEach(x=>x.style.opacity=.5); el.style.opacity=1; renderInv(); }
+function renderInv(){
+  const box = document.getElementById('invList'); box.classList.remove('empty');
+  const list = invRecs.filter(r=>invCat==='All' || sel(r.fields.Category)===invCat);
+  const rank = s => s.includes('🔴')?0 : s.includes('🟡')?1 : s.includes('🟢')?2 : 3;
+  list.sort((a,b)=>rank(a.fields.Status||'')-rank(b.fields.Status||'') || (a.fields.Item||'').localeCompare(b.fields.Item||''));
+  box.innerHTML = list.length ? list.map(r=>{ const f=r.fields; const st=f.Status||'';
+    const col = st.includes('🟢')?'var(--green)':st.includes('🟡')?'var(--orange)':st.includes('🔴')?'var(--coral)':'#c9bcae';
+    return `<div class="card" style="border-left-color:${col};padding:12px 16px">
+      <div class="hourrow">
+        <div style="flex:1"><b>${esc(f.Item)}</b>
+          <div style="font-size:.78rem;color:var(--soft)">${esc(sel(f.Category))} · reorder below ${f['Par / Reorder Level']??'—'} ${esc(sel(f.Unit))}${f['Last Updated']?' · counted '+esc(f['Last Updated']):''}</div>
+        </div>
+        <input type="text" inputmode="numeric" id="iq-${r.id}" value="${f['On-Hand Qty']??''}" placeholder="?" style="width:64px;text-align:center;font-weight:900;font-size:1.05rem;border:2px solid #f0e2d4;border-radius:12px;padding:8px 4px;font-family:inherit;">
+        <span style="font-size:.8rem;color:var(--soft);font-weight:700">${esc(sel(f.Unit))}</span>
+        <button class="mini" style="background:${col}" onclick="saveInv('${r.id}')">✔</button>
+        <span class="tstat" style="background:${col}">${esc(st||'—')}</span>
+      </div>
+      ${f.Notes?`<div style="margin-top:6px;font-size:.82rem;color:var(--soft)">${esc(f.Notes)}</div>`:''}
+    </div>`; }).join('') : '<div class="empty">No items here yet — add one below 📦</div>';
+}
+async function saveInv(id){
+  const v = document.getElementById('iq-'+id).value.trim();
+  if(v==='' || isNaN(Number(v))){ toast('Type a number first! 🔢'); return; }
+  await api({action:'update', table:'Inventory', recordId:id, fields:{'On-Hand Qty':Number(v), 'Last Updated':new Date().toISOString().slice(0,10)}});
+  toast('Counted! 📦'); loadInv();
+}
+async function addInv(e){ e.preventDefault();
+  const qty = document.getElementById('iQty').value.trim(), par = document.getElementById('iPar').value.trim();
+  const fields = {'Item':document.getElementById('iName').value, 'Category':document.getElementById('iCat').value,
+    'Unit':document.getElementById('iUnit').value, 'Last Updated':new Date().toISOString().slice(0,10)};
+  if(qty!=='' && !isNaN(Number(qty))) fields['On-Hand Qty']=Number(qty);
+  if(par!=='' && !isNaN(Number(par))) fields['Par / Reorder Level']=Number(par);
+  await api({action:'create', table:'Inventory', fields});
+  e.target.reset(); toast('Added! 📦'); loadInv(); return false; }
+
 // ---- RATIOS: room tiles ----
 async function loadRatio(){
   const [rd, fd] = await Promise.all([
@@ -451,7 +519,7 @@ function renderForms(){
 }
 
 // ---- TAB NOTES (a note box on every tab) ----
-const TAB_LABELS = {brief:'📰 Daily Briefing', auto:'✉️ Automations', hours:'⏱ Staff Hours', food:'🍽 Food Program', ratio:'🧮 Ratios & FTE', task:'📋 Task Board', msg:'💬 Parent Message', time:'⏰ Time Fix', onb:'🌟 Onboarding'};
+const TAB_LABELS = {brief:'📰 Daily Briefing', auto:'✉️ Automations', hours:'⏱ Staff Hours', food:'🍽 Food Program', inv:'📦 Inventory', ratio:'🧮 Ratios & FTE', task:'📋 Task Board', msg:'💬 Parent Message', time:'⏰ Time Fix', onb:'🌟 Onboarding'};
 // (Mission Control + Forms tabs share the Tab Notes box via the panels below)
 function injectNoteBoxes(){
   Object.keys(TAB_LABELS).forEach(id=>{
@@ -491,7 +559,7 @@ async function sendTabNote(id){
   b.style.background = SCHOOL==='Sanford' ? 'linear-gradient(135deg,#1d4e89,#2f6bb0)' : 'linear-gradient(135deg,#0a6b4f,#12946c)';
   document.getElementById('fromEmail').textContent = SCHOOL==='Sanford' ? 'sanfordoffice@kidcityusa.com' : 'deland2office@kidcityusa.com';
   renderCodes(); injectNoteBoxes();
-  loadCheck(); loadAuto(); loadSignin(); loadHours(); loadFood(); loadRatio(); loadTasks(); loadWeek(); loadMsg(); loadStaffDropdown(); loadTime(); loadOnb(); loadForms(); loadMC();
+  loadCheck(); loadAuto(); loadSignin(); loadHours(); loadFood(); loadInv(); loadRatio(); loadTasks(); loadWeek(); loadMsg(); loadStaffDropdown(); loadTime(); loadOnb(); loadForms(); loadMC();
 })();
 </script>
 </body>

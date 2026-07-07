@@ -24,12 +24,12 @@ header('X-Robots-Tag: noindex, nofollow');
 $SCHOOL_BY_ROLE = ['director-sanford' => 'Sanford', 'director-deland' => 'DeLand 2'];
 
 // Tables that carry a School field (server injects the school filter for directors)
-$SCHOOL_TABLES = ['Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links'];
+$SCHOOL_TABLES = ['Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links','Inventory','Parent Messages'];
 
 $DIRECTOR_PERMS = [
-  'read'  => ['Lesson Plan Index','Forms Library','Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links','Parent Messages'],
-  'create'=> ['ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Email Automation Requests','Tab Notes'],
-  'update'=> ['Briefing Checklist' => ['Done','Director Notes'], 'Onboarding Tracker' => ['Current Step','Status','Notes'], 'Parent Messages' => ['Status']]
+  'read'  => ['Lesson Plan Index','Forms Library','Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links','Parent Messages','Inventory'],
+  'create'=> ['ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Email Automation Requests','Tab Notes','Inventory'],
+  'update'=> ['Briefing Checklist' => ['Done','Director Notes'], 'Onboarding Tracker' => ['Current Step','Status','Notes'], 'Parent Messages' => ['Status'], 'Inventory' => ['On-Hand Qty','Par / Reorder Level','Notes','Last Updated']]
 ];
 $PERMS = [
   'teacher' => ['read' => ['Lesson Plan Index','Resource Links'], 'create'=>['Teacher Questions'], 'update'=>[]],
