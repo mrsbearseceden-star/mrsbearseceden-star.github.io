@@ -74,7 +74,7 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
     <div id="mcList" class="empty">Loading your links… 🐝</div>
   </div>
 
-  <style>#p-facil .fcard{background:#fff;border-left:5px solid #e5d9c8;border-radius:12px;padding:12px 14px;margin:8px 0;box-shadow:0 1px 4px rgba(0,0,0,.06);}#p-facil .fcard.fdone{opacity:.55;}#p-facil .frow{display:flex;align-items:center;gap:10px;}#p-facil .fchk{width:30px;height:30px;min-width:30px;border:2px solid #bbb;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:900;color:#12946c;background:#fafafa;}#p-facil .fchk.on{background:#d5f0e2;border-color:#12946c;}#p-facil .fitem{font-size:15px;font-weight:600;}#p-facil .fnotes{margin-top:8px;display:flex;gap:6px;}#p-facil .fnotes textarea{flex:1;border:1px solid #e5d9c8;border-radius:8px;padding:6px 8px;font-size:14px;min-height:34px;font-family:inherit;}#p-facil .fmini{border:none;border-radius:8px;padding:6px 12px;color:#fff;font-weight:700;cursor:pointer;background:#8fbf9f;}</style><div id="p-facil" class="panel"><div class="fcard" style="border-left-color:#c9bcae"><b>🧹 Facility Checklists.</b> Your class's cleaning &amp; inspection charts for the whole week. Enter your name, pick your school and room, then tap ✔ as you finish each task. Flag ⚠️ anything that needs attention.</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;"><input class="search" style="margin:0" id="ftName" placeholder="Your name"><select class="search" style="margin:0" id="ftSchool" onchange="ftLoad()"><option value="">Your school…</option><option>Sanford</option><option>DeLand 2</option></select><select class="search" style="margin:0" id="ftClass"><option value="">Your room…</option><option>Infant Room</option><option>Ones</option><option>Twos</option><option>Threes</option><option>Fours / VPK</option><option>School Age</option><option>Kitchen</option><option>Playground</option><option>Whole Building / Common Areas</option></select></div><div id="ftList"><div class="empty">Pick your school above to see your checklist. 👆</div></div></div>
+  <style>#p-facil .fcard{background:#fff;border-left:5px solid #e5d9c8;border-radius:12px;padding:12px 14px;margin:8px 0;box-shadow:0 1px 4px rgba(0,0,0,.06);}#p-facil .frow2{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}#p-facil .frow2 .search{margin:0;flex:1;min-width:140px;}#p-facil .fbtn{border:none;border-radius:12px;padding:12px 20px;color:#fff;font-weight:800;cursor:pointer;background:#2fc4b2;font-size:16px;margin:6px 0;}#p-facil .fsubmit{display:block;width:100%;background:#12946c;margin-top:14px;font-size:17px;}#p-facil .fformhead{font-weight:900;font-size:18px;margin:14px 0 8px;}#p-facil .fitemrow{background:#fff;border-radius:10px;padding:10px 12px;margin:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.05);}#p-facil .fitemtxt{font-weight:600;font-size:15px;margin-bottom:6px;}#p-facil .fbtns{display:flex;gap:6px;margin-bottom:6px;}#p-facil .ftog{border:2px solid #ddd;background:#fafafa;border-radius:8px;padding:5px 10px;font-weight:700;cursor:pointer;font-size:13px;color:#888;}#p-facil .ftog.ok.on{background:#d5f0e2;border-color:#12946c;color:#0a6b4f;}#p-facil .ftog.bad.on{background:#ffd9d4;border-color:#e74c3c;color:#c0392b;}#p-facil .fnote{width:100%;border:1px solid #e5d9c8;border-radius:8px;padding:6px 8px;font-size:14px;font-family:inherit;}#p-facil .fnote.big{min-height:70px;}#p-facil .flbl{display:block;font-weight:700;margin:10px 0 3px;font-size:14px;}#p-facil .fhisthead{font-weight:900;font-size:17px;margin:20px 0 8px;border-top:2px dashed #e5d9c8;padding-top:14px;}#p-facil .fhist{background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;box-shadow:0 1px 3px rgba(0,0,0,.05);}#p-facil .fmeta{color:#8a7c66;font-size:13px;}#p-facil .fwarn{background:#fff6d9;border-left:4px solid #ffb13d;padding:10px 12px;border-radius:8px;}#p-facil .fok{background:#d5f0e2;border-left:4px solid #12946c;padding:14px;border-radius:10px;font-weight:700;}#p-facil .empty{color:#999;text-align:center;padding:16px;}</style><div id="p-facil" class="panel"><div class="fcard"><b>🧹 Facility Checklists.</b> Finished cleaning or inspecting your room? Submit it here — it's saved, logged for DCF, and your director gets it. Add your name, pick your room &amp; form, and go.</div><div class="frow2"><input class="search" id="ftName" placeholder="Your name"><select class="search" id="ftSchool"><option value="">Your school…</option><option>Sanford</option><option>DeLand 2</option></select><select class="search" id="ftRoom"><option value="">Your room…</option><option>Infant Room</option><option>Ones</option><option>Twos</option><option>Threes</option><option>Fours / VPK</option><option>School Age</option><option>Kitchen</option><option>Playground</option><option>Whole Building / Common Areas</option></select><select class="search" id="ftForm"><option value="">Which form?…</option><option>🚽 Bathroom Cleaning</option><option>🧹 Classroom Cleaning</option><option>🏠 Indoor Inspection</option><option>🛝 Outdoor / Playground Inspection</option><option>🧼 Sanitation & Safety</option><option>🌙 End of Day Building Sweep</option><option>🚨 Incident Report</option></select></div><button class="fbtn" onclick="ftStart()">Start form →</button><div id="ftBody"></div><div id="ftHist"><div class="empty">Pick your school &amp; room to see today's submitted forms.</div></div></div>
 <div class="panel" id="p-ask">
     <div class="result show" style="border-top-color:var(--pink)">
       <h2>💬 Got a question? Ask away!</h2>
@@ -168,60 +168,73 @@ async function sendQuestion(e){ e.preventDefault();
   document.getElementById('qText').value='';
   document.getElementById('qSent').innerHTML = '🎉 <b>Sent!</b> Watch your Slack — Charles or Mrs. Bear will message you personally, usually within the hour on weekdays.';
   return false; }
-window.ftToast=function(m){ var t=document.getElementById('ftToastBox'); if(!t){t=document.createElement('div'); t.id='ftToastBox'; t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 18px;border-radius:20px;z-index:9999;font-weight:700;transition:opacity .3s;'; document.body.appendChild(t);} t.textContent=m; t.style.opacity='1'; clearTimeout(window.__ftT); window.__ftT=setTimeout(function(){t.style.opacity='0';},2200); };
-window.ftLoad=async function(){
-  var school=document.getElementById('ftSchool').value;
-  var box=document.getElementById('ftList');
-  var nm=(document.getElementById('ftName').value||'').trim(); if(nm) localStorage.setItem('hiveName',nm);
-  var cl=document.getElementById('ftClass').value; if(cl) localStorage.setItem('hiveClass',cl); localStorage.setItem('hiveSchool',school);
-  if(!school){ box.innerHTML='<div class="empty">Pick your school above to see your checklist. 👆</div>'; return; }
-  box.innerHTML='<div class="empty">Loading… 🧹</div>';
-  var d=await api({action:'list', table:'Facility Checklists', filterByFormula:"AND(IS_SAME({Week Of},TODAY(),'week'),{School}='"+school+"')", maxRecords:500});
-  var recs=(d.records||[]).filter(function(r){return r.fields.Item;});
-  if(!recs.length){ box.innerHTML='<div class="empty">No checklist for '+esc(school)+' this week yet — check back Monday. 🧹</div>'; return; }
-  var dayOrder=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  var chartOrder=['🚽 Bathroom Cleaning','🧹 Classroom Cleaning','🏠 Indoor Inspection','🛝 Outdoor / Playground Inspection','🧼 Sanitation & Safety','🌙 End of Day Building Sweep'];
-  var days={}; recs.forEach(function(r){ var dy=r.fields.Day||'—'; (days[dy]=days[dy]||[]).push(r); });
-  var done=recs.filter(function(r){return r.fields.Checked;}).length;
-  var todayName=dayOrder[(new Date().getDay()+6)%7];
-  var html='<div class="fcard" style="border-left-color:#12946c"><b>'+done+'/'+recs.length+' done this week</b> · tap ✔ as you go</div>';
-  Object.keys(days).sort(function(a,b){return (dayOrder.indexOf(a)+99)-(dayOrder.indexOf(b)+99);}).forEach(function(dy){
-    var isToday=dy===todayName;
-    html+='<details '+(isToday?'open':'')+' style="margin:14px 0;"><summary style="font-weight:900;font-size:19px;cursor:pointer;padding:6px 0;">📅 '+esc(dy)+(isToday?' — today':'')+'</summary>';
-    var charts={}; days[dy].forEach(function(r){ var c=r.fields.Chart||'Other'; (charts[c]=charts[c]||[]).push(r); });
-    Object.keys(charts).sort(function(a,b){return (chartOrder.indexOf(a)+99)-(chartOrder.indexOf(b)+99);}).forEach(function(chart){
-      var items=charts[chart].sort(function(a,b){return (a.fields.Order||0)-(b.fields.Order||0);});
-      html+='<div style="font-weight:800;margin:12px 0 4px;font-size:16px;color:#7a6a55;">'+esc(chart)+'</div>';
-      items.forEach(function(r){ var f=r.fields; var needs=f.Status==='⚠️ Needs Attention';
-        html+='<div class="fcard '+(f.Checked?'fdone':'')+'" id="ft-'+r.id+'"><div class="frow"><div class="fchk '+(f.Checked?'on':'')+'" onclick="ftToggle(\''+r.id+'\',this)">'+(f.Checked?'✔':'')+'</div><div class="fitem">'+esc(f.Item)+(f['Checked By']?' <span style="color:#8a7;font-weight:700;">— '+esc(f['Checked By'])+'</span>':'')+'</div></div><div style="margin-top:8px;"><button class="fmini" style="background:'+(needs?'#e74c3c':'#8fbf9f')+'" onclick="ftFlag(\''+r.id+'\',this)">'+(needs?'⚠️ Needs Attention':'✅ OK')+'</button></div><div class="fnotes"><textarea id="ftn-'+r.id+'" placeholder="Note…">'+esc(f.Notes||'')+'</textarea><button class="fmini" onclick="ftNote(\''+r.id+'\')">Save</button></div></div>';
-      });
-    });
-    html+='</details>';
-  });
-  box.innerHTML=html;
+window.ftToast=function(m){var t=document.getElementById('ftToastBox');if(!t){t=document.createElement('div');t.id='ftToastBox';t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 18px;border-radius:20px;z-index:9999;font-weight:700;transition:opacity .3s';document.body.appendChild(t);}t.textContent=m;t.style.opacity='1';clearTimeout(window.__ftT);window.__ftT=setTimeout(function(){t.style.opacity='0';},2600);};
+window.ftPick=function(el,ok){var row=el.closest('.fitemrow');row.querySelectorAll('.ftog').forEach(function(b){b.classList.remove('on');});el.classList.add('on');row.setAttribute('data-ok',ok?'1':'0');};
+window.ftIncidentForm=function(){return '<div class="fformhead">🚨 Incident Report</div>'
++'<label class="flbl">When did it happen?</label><input id="incWhen" class="search" placeholder="e.g. Today ~10:30 AM">'
++'<label class="flbl">Child(ren) involved</label><input id="incChild" class="search" placeholder="First names">'
++'<label class="flbl">Staff / witnesses present</label><input id="incStaff" class="search" placeholder="Names">'
++'<label class="flbl">What happened?</label><textarea id="incWhat" class="fnote big" placeholder="Describe the incident in detail…"></textarea>'
++'<label class="flbl">Action taken</label><textarea id="incAction" class="fnote big" placeholder="First aid, comfort, separation, etc."></textarea>'
++'<label class="flbl">Parent / guardian notified?</label><select id="incParent" class="search"><option>Not yet</option><option>Yes — in person</option><option>Yes — by phone</option><option>Yes — by ProCare</option></select>'
++'<label class="flbl">Follow-up needed</label><input id="incFollow" class="search" placeholder="e.g. Watch the area / call parent again">'
++'<button class="fbtn fsubmit" style="background:#e74c3c" onclick="ftSubmitIncident()">Submit Incident Report 🚨</button>';};
+window.ftStart=async function(){
+ var name=(document.getElementById('ftName').value||'').trim();
+ var school=document.getElementById('ftSchool').value, room=document.getElementById('ftRoom').value, form=document.getElementById('ftForm').value;
+ var body=document.getElementById('ftBody');
+ if(!name||!school||!room||!form){ body.innerHTML='<div class="fwarn">Please add your name, school, room, and which form. 💛</div>'; return; }
+ localStorage.setItem('hiveName',name); localStorage.setItem('hiveSchool',school); localStorage.setItem('hiveClass',room);
+ body.innerHTML='<div class="empty">Loading… 🧹</div>';
+ if(form.indexOf('Incident')>-1){ body.innerHTML=ftIncidentForm(); return; }
+ var d=await api({action:'list',table:'Facility Checklists',filterByFormula:"AND(IS_SAME({Week Of},TODAY(),'week'),{Chart}='"+form+"')",maxRecords:500});
+ var seen={},items=[];
+ (d.records||[]).forEach(function(r){var f=r.fields; if(f.Item&&!seen[f.Item]){seen[f.Item]=1; items.push({item:f.Item,order:f.Order||0});}});
+ items.sort(function(a,b){return a.order-b.order;});
+ if(!items.length){ body.innerHTML='<div class="fwarn">No items found for this form yet.</div>'; return; }
+ var h='<div class="fformhead">'+esc(form)+' · '+esc(room)+'</div>';
+ items.forEach(function(it){ h+='<div class="fitemrow" data-item="'+encodeURIComponent(it.item)+'" data-ok="1"><div class="fitemtxt">'+esc(it.item)+'</div><div class="fbtns"><button type="button" class="ftog ok on" onclick="ftPick(this,1)">✅ OK</button><button type="button" class="ftog bad" onclick="ftPick(this,0)">⚠️ Needs attention</button></div><input class="fnote" placeholder="Note (optional)…"></div>'; });
+ h+='<button class="fbtn fsubmit" onclick="ftSubmit(\''+encodeURIComponent(form)+'\')">Submit ✅</button>';
+ body.innerHTML=h;
 };
-window.ftToggle=async function(id,el){
-  var on=!el.classList.contains('on');
-  el.classList.toggle('on',on); el.textContent=on?'✔':''; document.getElementById('ft-'+id).classList.toggle('fdone',on);
-  var nm=(document.getElementById('ftName').value||'').trim(), cl=document.getElementById('ftClass').value;
-  if(nm) localStorage.setItem('hiveName',nm);
-  var fields={'Checked':on};
-  if(on){ fields['Checked By']=nm; fields['Time']=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); if(cl) fields['Room / Classroom']=cl; }
-  await api({action:'update', table:'Facility Checklists', recordId:id, fields:fields});
-  ftToast(on?'Checked off! 🎉':'Un-checked');
+window.ftSubmit=async function(formEnc){
+ var form=decodeURIComponent(formEnc);
+ var name=(document.getElementById('ftName').value||'').trim(), school=document.getElementById('ftSchool').value, room=document.getElementById('ftRoom').value;
+ var rows=[].slice.call(document.querySelectorAll('#ftBody .fitemrow'));
+ var lines=[],flags=[];
+ rows.forEach(function(r){var item=decodeURIComponent(r.getAttribute('data-item')); var ok=r.getAttribute('data-ok')!=='0'; var note=(r.querySelector('.fnote').value||'').trim(); lines.push((ok?'✅ ':'⚠️ ')+item+(note?' — '+note:'')); if(!ok)flags.push(item+(note?' ('+note+')':''));});
+ var status=flags.length?'⚠️ Issues Flagged':'✅ All OK';
+ var now=new Date();
+ var fields={'School':school,'Room / Classroom':room,'Form Type':form,'Staff Name':name,'Date':now.toISOString().slice(0,10),'Submitted At':now.toISOString(),'Items':lines.join('\n'),'Overall Status':status,'Status':'🟡 Pending','Submission':school+' · '+room+' · '+form.replace(/^[^ ]+ /,'')+' · '+now.toLocaleString('en-US',{month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit'})};
+ if(flags.length)fields['Details']='Needs attention:\n- '+flags.join('\n- ');
+ var res=await api({action:'create',table:'Facility Submissions',fields:fields});
+ if(res&&res.id){document.getElementById('ftBody').innerHTML='<div class="fok">✅ Submitted! Your director will get it. 💛</div>';document.getElementById('ftForm').value='';ftToast('Submitted — logged for DCF 🎉');ftHistory();}
+ else ftToast("Didn't save — "+((res&&res.error)||'try again'));
 };
-window.ftFlag=async function(id,el){
-  var needs=el.textContent.indexOf('Needs')>-1; var next=needs?'✅ OK':'⚠️ Needs Attention';
-  el.textContent=next; el.style.background=needs?'#8fbf9f':'#e74c3c';
-  await api({action:'update', table:'Facility Checklists', recordId:id, fields:{'Status':next}});
-  ftToast(needs?'Marked OK ✅':'Flagged ⚠️');
+window.ftSubmitIncident=async function(){
+ var name=(document.getElementById('ftName').value||'').trim(), school=document.getElementById('ftSchool').value, room=document.getElementById('ftRoom').value;
+ var g=function(id){return (document.getElementById(id).value||'').trim();};
+ var details='WHEN: '+g('incWhen')+'\nCHILD(REN): '+g('incChild')+'\nSTAFF/WITNESSES: '+g('incStaff')+'\nWHAT HAPPENED: '+g('incWhat')+'\nACTION TAKEN: '+g('incAction')+'\nPARENT NOTIFIED: '+g('incParent')+'\nFOLLOW-UP: '+g('incFollow');
+ var now=new Date();
+ var fields={'School':school,'Room / Classroom':room,'Form Type':'🚨 Incident Report','Staff Name':name,'Date':now.toISOString().slice(0,10),'Submitted At':now.toISOString(),'Overall Status':'🚨 Incident','Details':details,'Status':'🟡 Pending','Submission':school+' · '+room+' · INCIDENT · '+now.toLocaleString('en-US',{month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit'})};
+ var res=await api({action:'create',table:'Facility Submissions',fields:fields});
+ if(res&&res.id){document.getElementById('ftBody').innerHTML='<div class="fok">🚨 Incident report submitted. Your director and Mrs. Bear are being notified right away.</div>';document.getElementById('ftForm').value='';ftToast('Incident report sent 🚨');ftHistory();}
+ else ftToast("Didn't save — "+((res&&res.error)||'try again'));
 };
-window.ftNote=async function(id){
-  var v=document.getElementById('ftn-'+id).value;
-  await api({action:'update', table:'Facility Checklists', recordId:id, fields:{'Notes':v}});
-  ftToast('Saved 📝');
+window.ftHistory=async function(){
+ var school=document.getElementById('ftSchool').value, room=document.getElementById('ftRoom').value, box=document.getElementById('ftHist');
+ if(!school){box.innerHTML='<div class="empty">Pick your school & room to see today\'s submitted forms.</div>';return;}
+ var today=new Date().toISOString().slice(0,10);
+ var d=await api({action:'list',table:'Facility Submissions',filterByFormula:"AND({Date}='"+today+"',{School}='"+school+"')",maxRecords:200});
+ var recs=(d.records||[]).filter(function(r){return !room||r.fields['Room / Classroom']===room;});
+ recs.sort(function(a,b){return (b.fields['Submitted At']||'').localeCompare(a.fields['Submitted At']||'');});
+ var head='<div class="fhisthead">📋 Today\'s submitted forms'+(room?' — '+esc(room):'')+'</div>';
+ if(!recs.length){box.innerHTML=head+'<div class="empty">Nothing submitted yet today.</div>';return;}
+ var h=head;
+ recs.forEach(function(r){var f=r.fields;var t=f['Submitted At']?new Date(f['Submitted At']).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';h+='<div class="fhist"><b>'+esc(f['Form Type']||'')+'</b> · '+esc(f['Room / Classroom']||'')+'<br><span class="fmeta">'+esc(f['Staff Name']||'')+' · '+t+' · '+esc(f['Overall Status']||'')+'</span>'+(f['Drive Link']?' · <a href="'+f['Drive Link']+'" target="_blank">PDF</a>':'')+'</div>';});
+ box.innerHTML=h;
 };
-window.ftInit=function(){ var s=localStorage.getItem('hiveSchool'), el=document.getElementById('ftSchool'); if(el&&s)el.value=s; var n=localStorage.getItem('hiveName'), ne=document.getElementById('ftName'); if(ne&&n)ne.value=n; var c=localStorage.getItem('hiveClass'), ce=document.getElementById('ftClass'); if(ce&&c)ce.value=c; if(s)ftLoad(); };
+window.ftInit=function(){var g=function(id){return document.getElementById(id);};var n=localStorage.getItem('hiveName');if(n&&g('ftName'))g('ftName').value=n;var s=localStorage.getItem('hiveSchool');if(s&&g('ftSchool'))g('ftSchool').value=s;var c=localStorage.getItem('hiveClass');if(c&&g('ftRoom'))g('ftRoom').value=c;if(g('ftRoom'))g('ftRoom').addEventListener('change',ftHistory);if(g('ftSchool'))g('ftSchool').addEventListener('change',ftHistory);if(s)ftHistory();};
 
 loadPlans(); ftInit();
 </script>
