@@ -91,6 +91,7 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
   <div class="tab t-hours" onclick="show('hours',this)">⏱ Staff Hours</div>
   <div class="tab t-food" onclick="show('food',this)">🍽 Food Program</div>
   <div class="tab" style="background:#b0722e" onclick="show('inv',this)">📦 Inventory</div>
+<div class="tab t-facility" onclick="show('facility',this)">🧹 Facility Checklists</div>
   <div class="tab t-ratio" onclick="show('ratio',this)">🧮 Ratios & FTE</div>
   <div class="tab t-task" onclick="show('task',this)">📋 Task Board</div>
   <div class="tab t-msg" onclick="show('msg',this)">💬 Parent Message</div>
@@ -134,7 +135,8 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
     <div id="foodList" class="empty">Loading…</div>
   </div>
 
-  <div class="panel" id="p-inv">
+  <div id="p-facility" class="panel"><div class="card" style="border-left-color:#c9bcae"><b>🧹 Facility Checklists.</b> Your cleaning &amp; inspection charts for the whole week, so nothing gets missed. Tap ✔ as each task is done, flag ⚠️ if something needs attention, add a note. Charles prints the week every Friday for DCF.</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;"><input id="facilName" placeholder="Your name" style="padding:9px 12px;border:2px solid #e5d9c8;border-radius:10px;font-size:15px;"><select id="facilClass" style="padding:9px 12px;border:2px solid #e5d9c8;border-radius:10px;font-size:15px;"><option value="">Your room (optional)…</option><option>Infant Room</option><option>Ones</option><option>Twos</option><option>Threes</option><option>Fours / VPK</option><option>School Age</option><option>Kitchen</option><option>Playground</option><option>Whole Building / Common Areas</option></select></div><div id="facilList"><div class="empty">Loading this week's checklist… 🧹</div></div></div>
+<div class="panel" id="p-inv">
     <div class="banner">📦 Your on-hand counts, so the weekly orders match what's really in the building. Type the quantity you have and hit ✔ — 🟡 means it's below the reorder level. Update on inventory days (Mon–Tue) and Charles builds Wednesday's cart around it.</div>
     <div id="icats" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;"></div>
     <div id="invList" class="empty">Counting the shelves… 📦</div>
@@ -519,8 +521,62 @@ function renderForms(){
 }
 
 // ---- TAB NOTES (a note box on every tab) ----
-const TAB_LABELS = {brief:'📰 Daily Briefing', auto:'✉️ Automations', hours:'⏱ Staff Hours', food:'🍽 Food Program', inv:'📦 Inventory', ratio:'🧮 Ratios & FTE', task:'📋 Task Board', msg:'💬 Parent Message', time:'⏰ Time Fix', onb:'🌟 Onboarding'};
+const TAB_LABELS = {brief:'📰 Daily Briefing', auto:'✉️ Automations', hours:'⏱ Staff Hours', food:'🍽 Food Program', inv:'📦 Inventory', ratio:'🧮 Ratios & FTE', task:'📋 Task Board', msg:'💬 Parent Message', time:'⏰ Time Fix', onb:'🌟 Onboarding', facility:'🧹 Facility Checklists'};
 // (Mission Control + Forms tabs share the Tab Notes box via the panels below)
+window.facilName=function(){ var e=document.getElementById('facilName'); return (e&&e.value.trim())||localStorage.getItem('hiveFacilName')||''; };
+window.facilClass=function(){ var e=document.getElementById('facilClass'); return (e&&e.value)||''; };
+window.loadFacility=async function(){
+  var box=document.getElementById('facilList'); if(!box) return;
+  var sN=localStorage.getItem('hiveFacilName'); if(sN&&document.getElementById('facilName')) document.getElementById('facilName').value=sN;
+  var sC=localStorage.getItem('hiveFacilClass'); if(sC&&document.getElementById('facilClass')) document.getElementById('facilClass').value=sC;
+  var d=await api({action:'list', table:'Facility Checklists', filterByFormula:"IS_SAME({Week Of},TODAY(),'week')", maxRecords:500});
+  var recs=(d.records||[]).filter(function(r){return r.fields.Item;});
+  if(!recs.length){ box.innerHTML='<div class="empty">No facility checklist for this week yet — Charles seeds it each Monday. 🧹</div>'; return; }
+  var dayOrder=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var chartOrder=['🚽 Bathroom Cleaning','🧹 Classroom Cleaning','🏠 Indoor Inspection','🛝 Outdoor / Playground Inspection','🧼 Sanitation & Safety','🌡️ Temp & Safety Logs','🔒 Security & Attendance','🧯 Drills & Emergency','🌙 End of Day Building Sweep'];
+  var days={}; recs.forEach(function(r){ var dy=sel(r.fields.Day)||'—'; (days[dy]=days[dy]||[]).push(r); });
+  var done=recs.filter(function(r){return r.fields.Checked;}).length;
+  var todayName=dayOrder[(new Date().getDay()+6)%7];
+  var html='<div class="card" style="border-left-color:#12946c"><b>'+done+'/'+recs.length+' done this week</b> · tap ✔ as you go, flag ⚠️ anything that needs attention</div>';
+  Object.keys(days).sort(function(a,b){return (dayOrder.indexOf(a)+99)-(dayOrder.indexOf(b)+99);}).forEach(function(dy){
+    var isToday=dy===todayName;
+    html+='<details '+(isToday?'open':'')+' style="margin:14px 0;"><summary style="font-weight:900;font-size:19px;cursor:pointer;padding:6px 0;">📅 '+esc(dy)+(isToday?' — today':'')+'</summary>';
+    var charts={}; days[dy].forEach(function(r){ var c=sel(r.fields.Chart)||'Other'; (charts[c]=charts[c]||[]).push(r); });
+    Object.keys(charts).sort(function(a,b){return (chartOrder.indexOf(a)+99)-(chartOrder.indexOf(b)+99);}).forEach(function(chart){
+      var items=charts[chart].sort(function(a,b){return (a.fields.Order||0)-(b.fields.Order||0);});
+      html+='<div style="font-weight:800;margin:12px 0 4px;font-size:16px;color:#7a6a55;">'+esc(chart)+'</div>';
+      items.forEach(function(r){ var f=r.fields; var att=sel(f.Status)==='⚠️ Needs Attention';
+        html+='<div class="card '+(f.Checked?'done':'')+' '+(att?'action':'')+'" id="fc-'+r.id+'"><div class="chk-row"><div class="bigchk '+(f.Checked?'on':'')+'" onclick="facilToggle(\''+r.id+'\',this)">'+(f.Checked?'✔':'')+'</div><div class="item">'+esc(f.Item)+(f['Checked By']?' <span style="color:#8a7;font-weight:700;">— '+esc(f['Checked By'])+'</span>':'')+'</div></div><div style="margin-top:8px;"><button class="mini" style="background:'+(att?'#e74c3c':'#8fbf9f')+'" onclick="facilFlag(\''+r.id+'\',this)">'+(att?'⚠️ Needs Attention':'✅ OK')+'</button></div><div class="notes"><textarea id="fn-'+r.id+'" placeholder="Note — what / where…">'+esc(f.Notes||'')+'</textarea><button class="mini" onclick="facilNote(\''+r.id+'\')">Save</button></div></div>';
+      });
+    });
+    html+='</details>';
+  });
+  box.innerHTML=html;
+};
+window.facilToggle=async function(id, el){
+  var on=!el.classList.contains('on');
+  el.classList.toggle('on',on); el.textContent=on?'✔':''; document.getElementById('fc-'+id).classList.toggle('done',on);
+  var nm=facilName(), cl=facilClass();
+  if(nm) localStorage.setItem('hiveFacilName',nm); if(cl) localStorage.setItem('hiveFacilClass',cl);
+  var fields={'Checked':on};
+  if(on){ fields['Checked By']=nm; fields['Time']=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); if(cl) fields['Room / Classroom']=cl; }
+  await api({action:'update', table:'Facility Checklists', recordId:id, fields:fields});
+  toast(on?'Checked off! 🎉':'Un-checked');
+};
+window.facilFlag=async function(id, el){
+  var needs=el.textContent.indexOf('Needs')>-1;
+  var next=needs?'✅ OK':'⚠️ Needs Attention';
+  el.textContent=next; el.style.background=needs?'#8fbf9f':'#e74c3c';
+  document.getElementById('fc-'+id).classList.toggle('action', !needs);
+  await api({action:'update', table:'Facility Checklists', recordId:id, fields:{'Status':next}});
+  toast(needs?'Marked OK ✅':'Flagged for the director ⚠️');
+};
+window.facilNote=async function(id){
+  var v=document.getElementById('fn-'+id).value;
+  await api({action:'update', table:'Facility Checklists', recordId:id, fields:{'Notes':v}});
+  toast('Saved 📝');
+};
+
 function injectNoteBoxes(){
   Object.keys(TAB_LABELS).forEach(id=>{
     const panel = document.getElementById('p-'+id);
@@ -559,7 +615,7 @@ async function sendTabNote(id){
   b.style.background = SCHOOL==='Sanford' ? 'linear-gradient(135deg,#1d4e89,#2f6bb0)' : 'linear-gradient(135deg,#0a6b4f,#12946c)';
   document.getElementById('fromEmail').textContent = SCHOOL==='Sanford' ? 'sanfordoffice@kidcityusa.com' : 'deland2office@kidcityusa.com';
   renderCodes(); injectNoteBoxes();
-  loadCheck(); loadAuto(); loadSignin(); loadHours(); loadFood(); loadInv(); loadRatio(); loadTasks(); loadWeek(); loadMsg(); loadStaffDropdown(); loadTime(); loadOnb(); loadForms(); loadMC();
+  loadCheck(); loadAuto(); loadSignin(); loadHours(); loadFood(); loadInv(); loadFacility(); loadRatio(); loadTasks(); loadWeek(); loadMsg(); loadStaffDropdown(); loadTime(); loadOnb(); loadForms(); loadMC();
 })();
 </script>
 </body>
