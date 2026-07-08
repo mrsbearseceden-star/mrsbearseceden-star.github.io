@@ -156,6 +156,16 @@
     .row3,.row2{page-break-inside:avoid;break-inside:avoid;}
     .pagefoot{page-break-inside:avoid;}
     a{color:#000;text-decoration:none;}
+    /* optional pieces each start on their own page(s) */
+    .reader{page-break-before:always;}
+    .reader .rband{page-break-after:avoid;}
+    .reader .rpage{display:block;width:100%;max-width:6.2in;margin:0 auto;page-break-inside:avoid;}
+    .reader .rpage + .rpage{page-break-before:always;}
+    .reader .rnote{display:none;}
+    .takehome{page-break-before:always;page-break-inside:avoid;}
+    #results.hide-plan .plan,
+    #results.hide-reader .reader,
+    #results.hide-take .takehome{display:none !important;}
   }
 </style>
 <style>
@@ -168,6 +178,48 @@
   .band .bwm{background:var(--white);border-radius:6px;padding:8px 10px;flex-shrink:0;}
   .band .bwm-a{font-size:12px;} .band .bwm-b{font-size:15px;}
   @media print{ .band .bwm{border:1px solid #000;} }
+
+  .planbar{flex-wrap:wrap;gap:14px;align-items:center;}
+  .inc{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:Helvetica,Arial,sans-serif;font-size:14px;color:var(--ink);}
+  .inc .inc-lbl{font-weight:bold;color:var(--inks);margin-right:2px;}
+  .inc label{display:inline-flex;align-items:center;gap:7px;cursor:pointer;background:var(--creamhl);border:1px solid #e7d9bd;padding:7px 12px;border-radius:9px;transition:background .15s,border-color .15s;}
+  .inc label:hover{background:#f7ecd2;}
+  .inc input{width:17px;height:17px;accent-color:var(--honeyd);cursor:pointer;}
+  .planbar .planbar-btns{display:flex;gap:10px;margin-left:auto;flex-wrap:wrap;}
+
+  .reader{background:var(--white);border-radius:14px;box-shadow:0 2px 14px rgba(43,33,23,.08);padding:22px;margin:0 0 26px;}
+  .reader .rband{text-align:center;border-bottom:2px solid var(--honey);padding-bottom:12px;margin-bottom:16px;}
+  .reader .rband .rtag{display:inline-block;background:var(--honey);color:var(--white);font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;letter-spacing:.5px;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
+  .reader .rband h2{font-family:Georgia,serif;color:var(--ink);margin:2px 0 4px;font-size:24px;}
+  .reader .rband p{font-family:Helvetica,Arial,sans-serif;color:var(--inks);font-size:14px;margin:0;}
+  .reader .rpages{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .reader .rpage{display:block;width:100%;border:1px solid #eee;border-radius:10px;}
+  .reader .rnote{margin-top:16px;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:13px;color:var(--inks);background:var(--sagebg);border-radius:10px;padding:10px 14px;}
+  .reader .rnote a{color:var(--honeyd);font-weight:bold;}
+  @media (max-width:560px){ .reader .rpages{grid-template-columns:1fr;} }
+
+  .takehome{background:var(--cream2);border:2px solid var(--honey);border-radius:14px;box-shadow:0 2px 14px rgba(43,33,23,.08);padding:26px 26px 20px;margin:0 0 26px;font-family:Helvetica,Arial,sans-serif;color:var(--ink);}
+  .takehome .thband{text-align:center;border-bottom:2px dashed var(--honey);padding-bottom:12px;margin-bottom:14px;}
+  .takehome .thtag{display:inline-block;background:var(--sage);color:var(--white);font-size:12px;font-weight:bold;letter-spacing:.4px;padding:3px 10px;border-radius:20px;}
+  .takehome h2{font-family:Georgia,serif;color:var(--ink);font-size:24px;margin:8px 0 2px;}
+  .takehome .thsub{color:var(--inks);font-size:14px;margin:0;}
+  .takehome .thnote{font-size:15px;line-height:1.5;color:var(--inks);margin:0 0 14px;text-align:center;font-style:italic;}
+  .takehome .thlearn{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 16px;}
+  .takehome .thlearn span{background:var(--creamhl);border:1px solid #e7d9bd;border-radius:8px;padding:6px 11px;font-size:13px;font-weight:bold;color:var(--ink);}
+  .takehome .thcols{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:560px){ .takehome .thcols{grid-template-columns:1fr;} }
+  .takehome h3{font-family:Georgia,serif;color:var(--honeyd);font-size:17px;margin:0 0 8px;}
+  .takehome ul{list-style:none;margin:0;padding:0;}
+  .takehome ul li{position:relative;padding:4px 0 4px 26px;font-size:14px;line-height:1.45;}
+  .takehome ul li::before{content:"\1F43E";position:absolute;left:0;top:3px;font-size:14px;}
+  .takehome .thread{background:var(--white);border-radius:10px;padding:12px 14px;margin-top:4px;font-size:14px;}
+  .takehome .thread a{color:var(--honeyd);font-weight:bold;}
+  .takehome .thfoot{margin-top:16px;border-top:1px solid #e7d9bd;padding-top:10px;text-align:center;font-size:12px;color:var(--inks);}
+  .takehome .thfoot .thbrand{font-family:Georgia,serif;color:var(--ink);font-weight:bold;}
+
+  #results.hide-plan .plan,
+  #results.hide-reader .reader,
+  #results.hide-take .takehome{display:none !important;}
 </style>
 </head>
 <body>
@@ -219,8 +271,16 @@
   </div>
 
   <div class="planbar" id="planbar" style="display:none;">
-    <button type="button" class="again" id="againBtn">&larr; Choose another plan</button>
-    <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+    <div class="inc" id="incPanel">
+      <span class="inc-lbl">Print packet includes:</span>
+      <label><input type="checkbox" id="incPlan" checked> Lesson plan</label>
+      <label><input type="checkbox" id="incReader" checked> <i>See&nbsp;Me</i> reader</label>
+      <label><input type="checkbox" id="incTake" checked> Take-home handout</label>
+    </div>
+    <div class="planbar-btns">
+      <button type="button" class="again" id="againBtn">&larr; Choose another plan</button>
+      <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+    </div>
   </div>
 
   <div id="results">
@@ -233,6 +293,93 @@
 <section class="page plan" id="plan-threes" style="display:none;"><div class="band"><div class="bwm"><span class="bwm-a">The Preschool</span><span class="bwm-b">Professional</span></div><div><span class="tag">Free from The Preschool Professional</span><h1>September &middot; Threes</h1><div class="sub">All About Me &amp; My Family &nbsp;&middot;&nbsp; Letter Ss</div></div></div><div class="meta"><div><span>MONTH</span> September</div><div><span>THEME</span> All About Me &amp; My Family</div><div><span>LETTER</span> Ss</div><div>Number <b>2</b> &middot; Shape <b>square</b> &middot; Color <b>orange</b></div></div><div class="teacher"><span><b>Teacher:</b> _______________</span><span><b>Classroom:</b> _______________</span><span><b>Week of:</b> _______________</span><span><b>Take-home:</b> The Home Den family pack</span></div><h2 class="sect">Weekly Plan &mdash; four sub-themes across the developmental domains</h2><div class="gridwrap"><table class="grid"><thead><tr><th>Week &middot; Sub-theme</th><th>Physical</th><th>Language / Literacy</th><th>Math</th><th>Science</th><th>Social-Emotional</th><th>Creative</th></tr></thead><tbody><tr><td class="wk"><b>Week 1</b><br><i>This Is Me</i></td><td>Body trace on big paper</td><td>Name card: find, trace, stamp</td><td>Count body parts to 10</td><td>5 senses: taste / smell / touch table</td><td>“I am special because…”</td><td>Life-size self-portrait</td></tr><tr><td class="wk"><b>Week 2</b><br><i>My Family</i></td><td>Act out family jobs (sweep, cook)</td><td>Draw &amp; label “my family”; dictate</td><td>Sort family by size (tall / short)</td><td>How families are alike / different</td><td>Family roles &amp; belonging</td><td>Family photo picture-frame craft</td></tr><tr><td class="wk"><b>Week 3</b><br><i>My Feelings</i></td><td>Feeling freeze-dance (mad / happy / calm)</td><td>Feelings book read-aloud + retell</td><td>Graph “how we feel today”</td><td>Why does my heart beat fast?</td><td>Name feelings + causes; empathy</td><td>Feelings faces watercolor</td></tr><tr><td class="wk"><b>Week 4</b><br><i>My Friends</i></td><td>Cooperative parachute / ball games</td><td>“A friend is someone who…” chart</td><td>Count &amp; compare friends per center</td><td>Sink / float: our favorite toys</td><td>Turn-taking, kind words</td><td>Handprint friendship wreath</td></tr></tbody></table></div><div class="std"><div class="stdlab">FLORIDA EARLY LEARNING STANDARDS &mdash; DOMAINS ADDRESSED THIS MONTH</div><div class="badges"><span class="badge">Physical Development</span><span class="badge">Language &amp; Literacy</span><span class="badge">Mathematical Thinking</span><span class="badge">Scientific Inquiry</span><span class="badge">Social &amp; Emotional Development</span><span class="badge">Creative Expression</span></div><div class="cite">Aligned to the <b>Florida Early Learning and Developmental Standards: Birth to Kindergarten (2017)</b>, FDOE Division of Early Learning. Domain alignments are paraphrased teaching summaries, not the official standards text. <a href="https://flbt5.floridaearlylearning.com/" target="_blank" rel="noopener">View the official standards &rarr;</a></div></div><div class="row3"><div class="box"><h3>Bear Phonics</h3><ul><li>Sound Clock <b>S</b> and <b>T</b>; read the decodable <b>“See Me.”</b></li><li>“I do / we do / you do” — trace the <b>S</b> row (Bear Tracks page).</li><li>Friday recite + “I did it!” <a href='https://youtube.com/@bearseceden' target='_blank' rel='noopener'>Watch Lesson 1 free &rarr;</a></li></ul></div><div class="box rose"><h3>Your Feelings Matter</h3><ul><li>Daily <b>feelings check-in chart</b>.</li><li>Read the <i>Your Feelings Matter</i> “I belong / I’m proud of me” title; grow a class <b>kindness tree</b>.</li><li><a href='https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20' target='_blank' rel='nofollow sponsored noopener'>Get the book &rarr;</a></li></ul></div><div class="box sage"><h3>Books &amp; Read-Alouds</h3><ul><li><b><i>Your Feelings Matter</i></b> — “I belong / I’m proud of me” title. <a href='https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20' target='_blank' rel='nofollow sponsored noopener'>Get on Amazon &rarr;</a></li><li>“This Is My Family” &amp; “all about me” picture books <i>(teacher’s choice)</i>.</li><li>Bear Phonics decodable readers. <a href='https://youtube.com/@bearseceden' target='_blank' rel='noopener'>Watch on Bear Phonics &rarr;</a></li></ul></div></div><div class="music"><h3>Music &amp; Movement <small>from Mrs. Bear’s &ldquo;Welcome to Success!&rdquo; album</small></h3><p class="mlead">One tap plays the track. The <b>Success Anthem</b> is the recurring phonics anthem — use it often.</p><div class="songrow"><div class="song feat"><div class="lbl">Featured phonics anthem</div><div class="ttl">Success Anthem</div><div class="mo">Phonics / literacy anthem</div><a href="https://www.youtube.com/watch?v=OnwAryQdX1E" target="_blank" rel="noopener">Listen on YouTube &rarr;</a></div><div class="song"><div class="lbl">Song of the day</div><div class="ttl">It's Ok to Express Yourself</div><div class="mo">Circle time / SEL feelings check-in</div><a href="https://www.youtube.com/watch?v=jgSMxJMpdgI" target="_blank" rel="noopener">Listen on YouTube &rarr;</a></div></div><p class="album">Full album playlist: <a href="https://www.youtube.com/playlist?list=OLAK5uy_k9twn82PNHg8mv9sXYcNM75_v-xuImubo" target="_blank" rel="noopener">&ldquo;Welcome to Success!&rdquo; on YouTube &rarr;</a></p></div><div class="den"><h3>The Home Den <small>&mdash; the family take-home pack</small></h3><p class="denlead"><i>Goes in every backpack this month.</i></p><ul class="two"><li>“All About Me” fold-out (favorites, family, my hand).</li><li>Family-frame craft to finish.</li><li>/s/ + /t/ sound cards &amp; “read <i>See Me</i> tonight” prompt.</li><li>Feelings talk-starter.</li><li>Trace-S, count-to-2 sheet.</li></ul></div><div class="row2"><div class="box"><h3>Songs &amp; Fingerplays</h3><ul><li>“Twinkle, Twinkle Little Star”</li><li>“If You’re Happy…”</li><li>“The More We Get Together”</li><li>“This Is My Family” (<i>Frère Jacques</i>)</li></ul></div><div class="box sage"><h3>Materials <small>(Amazon affiliate — tag theprescho03d-20)</small></h3><p class="mat">Name cards + letter stamps &middot; feelings check-in chart &middot; family-photo pockets &middot; counting bears &middot; watercolors &middot; big roll paper &middot; parachute.</p></div></div><div class="tres"><h3>Teacher Resources &mdash; September (all ages)</h3><p><b>Book list:</b> Bear Phonics <i>See Me</i> &amp; <i>See Me Eat Meat</i> (<a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">watch on Bear Phonics</a>) &middot; <i>Your Feelings Matter</i> — &ldquo;I belong / I’m proud of me&rdquo; (<a href="https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">get on Amazon</a>) &middot; suggested trade books on family &amp; feelings <i>(teacher’s choice)</i>.</p><p><b>Song &amp; fingerplay sheet:</b> “Twinkle, Twinkle Little Star” &middot; “If You’re Happy…” &middot; “The More We Get Together” &middot; “This Is My Family” (<i>Frère Jacques</i>).</p><p><b>Materials shopping list</b> <small>(Amazon affiliate — tag theprescho03d-20)</small>: <span class="mat">Name cards + letter stamps &middot; feelings check-in chart &middot; family-photo pockets &middot; counting bears &middot; watercolors &middot; big roll paper &middot; parachute.</span></p><p><b>Printables:</b> fill-in weekly grid &middot; “All About Me” mini-book &middot; family-portrait frame &middot; Ss / number-2 / square practice page &middot; the September <i>Home Den</i> cover sheet &middot; “See the Work” Friday checklist.</p><p><b>Teacher note:</b> Every Friday = spiral review + a “win” (sticker / Honey Coin).</p></div><div class="pagefoot"><div class="copy">&copy; The Preschool Professional &nbsp;&middot;&nbsp; Built with love by Mrs. Bear</div><div class="dis">September &middot; All About Me &amp; My Family — Free to use, no strings. Theme, activities &amp; printables are original works by Mrs. Bear. Bear Phonics &amp; <i>Your Feelings Matter</i> books sold separately. As an Amazon Associate, The Preschool Professional earns from qualifying purchases.</div></div></section>
 <section class="page plan" id="plan-fours" style="display:none;"><div class="band"><div class="bwm"><span class="bwm-a">The Preschool</span><span class="bwm-b">Professional</span></div><div><span class="tag">Free from The Preschool Professional</span><h1>September &middot; Fours (Pre-K / VPK)</h1><div class="sub">All About Me &amp; My Family &nbsp;&middot;&nbsp; Letter Ss</div></div></div><div class="meta"><div><span>MONTH</span> September</div><div><span>THEME</span> All About Me &amp; My Family</div><div><span>LETTER</span> Ss</div><div>Number <b>2</b> &middot; Shape <b>square</b> &middot; Color <b>orange</b></div></div><div class="teacher"><span><b>Teacher:</b> _______________</span><span><b>Classroom:</b> _______________</span><span><b>Week of:</b> _______________</span><span><b>Take-home:</b> The Home Den family pack</span></div><h2 class="sect">The lead band. The Marva-rhythm daily block folds Bear Phonics in as the literacy core.</h2><h2 class="sect">Weekly Plan &mdash; four sub-themes across the developmental domains</h2><div class="gridwrap"><table class="grid"><thead><tr><th>Week &middot; Sub-theme</th><th>Physical</th><th>Language &amp; Literacy</th><th>Math</th><th>Science</th><th>Social Studies</th><th>Social-Emotional</th><th>Creative</th></tr></thead><tbody><tr><td class="wk"><b>Week 1</b><br><i>This Is Me</i></td><td>Trace body; write my name</td><td><b>Ss</b> intro; name in print; “All About Me” book</td><td>Count 1-to-1 to 5; number 2; pairs</td><td>5 senses investigation stations</td><td>I am part of a family &amp; a class</td><td>“I am proud that I can…”</td><td>Self-portrait with mirror</td></tr><tr><td class="wk"><b>Week 2</b><br><i>My Family</i></td><td>Fine-motor: family finger puppets</td><td>Draw + dictate a family story; family words</td><td>Sort / graph family members; more / fewer</td><td>Alike &amp; different among families</td><td>Family roles, homes, cultures</td><td>Belonging; my job in the family</td><td>Family portrait, labeled</td></tr><tr><td class="wk"><b>Week 3</b><br><i>My Feelings</i></td><td>Yoga: calm-down “smell the flower”</td><td>Feelings vocabulary; read-aloud + retell</td><td>Feelings graph; count &amp; compare</td><td>Body clues: how feelings feel</td><td>How we help friends feel better</td><td>Name feelings + causes; empathy</td><td>Feelings self-portrait series</td></tr><tr><td class="wk"><b>Week 4</b><br><i>My Friends &amp; My Class</i></td><td>Cooperative team games</td><td>Class-made “Our Den” friendship book</td><td>Pattern with friends (AB); count class</td><td>Sink / float with class toys (predict)</td><td>Class rules we make together</td><td>Turn-taking, solving small conflicts</td><td>Mural: “This Is Our Class”</td></tr></tbody></table></div><div class="std"><div class="stdlab">FLORIDA EARLY LEARNING STANDARDS &mdash; DOMAINS ADDRESSED THIS MONTH</div><div class="badges"><span class="badge">Physical Development</span><span class="badge">Approaches to Learning</span><span class="badge">Social &amp; Emotional Development</span><span class="badge">Language &amp; Literacy</span><span class="badge">Mathematical Thinking</span><span class="badge">Scientific Inquiry</span><span class="badge">Social Studies</span><span class="badge">Creative Expression</span></div><div class="cite">Aligned to the <b>Florida Early Learning and Developmental Standards: Birth to Kindergarten (2017)</b>, FDOE Division of Early Learning. Domain alignments are paraphrased teaching summaries, not the official standards text. <a href="https://flbt5.floridaearlylearning.com/" target="_blank" rel="noopener">View the official standards &rarr;</a></div></div><div class="row3"><div class="box"><h3>Bear Phonics</h3><ul><li><b>Warm-up:</b> Sound Clock <b>S</b>, then <b>T</b>. <b>Teach:</b> read <b>“See Me”</b> (Lesson 1), Socratic questions.</li><li><b>Workbook (you-do):</b> Bear Tracks Lesson 1 — Meet S, Write S, find-the-S grid; then Lesson 2 “See Me Eat Meat” (t).</li><li><b>Apply:</b> re-read the decodable; Friday <b>mastery check + “I did it!”</b> win.</li><li><a href='https://youtube.com/@bearseceden' target='_blank' rel='noopener'>Watch Lessons 1–2 free on Bear Phonics &rarr;</a></li></ul></div><div class="box rose"><h3>Your Feelings Matter</h3><ul><li>Feelings check-in chart every morning.</li><li>Read the <i>Your Feelings Matter</i> “I belong / I’m proud of me” title; build the class <b>kindness tree</b>.</li><li>Role-play “how can we help ___ feel better?”</li><li><a href='https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20' target='_blank' rel='nofollow sponsored noopener'>Get the book &rarr;</a></li></ul></div><div class="box sage"><h3>Books &amp; Read-Alouds</h3><ul><li><b><i>Your Feelings Matter</i></b> — “I belong / I’m proud of me” title. <a href='https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20' target='_blank' rel='nofollow sponsored noopener'>Get on Amazon &rarr;</a></li><li>Bear Phonics <b>“See Me”</b> &amp; <b>“See Me Eat Meat”</b> decodable readers. <a href='https://youtube.com/@bearseceden' target='_blank' rel='noopener'>Watch on Bear Phonics &rarr;</a></li><li>Diverse family &amp; “all about me” picture books <i>(teacher’s choice)</i>.</li></ul></div></div><div class="music"><h3>Music &amp; Movement <small>from Mrs. Bear’s &ldquo;Welcome to Success!&rdquo; album</small></h3><p class="mlead">One tap plays the track. The <b>Success Anthem</b> is the recurring phonics anthem — use it often.</p><div class="songrow"><div class="song feat"><div class="lbl">Featured phonics anthem</div><div class="ttl">Success Anthem</div><div class="mo">Phonics / literacy anthem</div><a href="https://www.youtube.com/watch?v=OnwAryQdX1E" target="_blank" rel="noopener">Listen on YouTube &rarr;</a></div><div class="song"><div class="lbl">Song of the day</div><div class="ttl">It's Time for Class</div><div class="mo">Arrival / gathering</div><a href="https://www.youtube.com/watch?v=fVCM7lb5moE" target="_blank" rel="noopener">Listen on YouTube &rarr;</a></div></div><p class="album">Full album playlist: <a href="https://www.youtube.com/playlist?list=OLAK5uy_k9twn82PNHg8mv9sXYcNM75_v-xuImubo" target="_blank" rel="noopener">&ldquo;Welcome to Success!&rdquo; on YouTube &rarr;</a></p></div><div class="den"><h3>The Home Den <small>&mdash; the family take-home pack</small></h3><p class="denlead"><i>Goes in every backpack this month.</i></p><ul class="two"><li>“All About Me” mini-book to finish with family.</li><li>Family-portrait page.</li><li>Bear Phonics sound-of-the-month card + “read <i>See Me</i> together tonight” + channel QR.</li><li><i>Your Feelings Matter</i> talk-starter + feeling-of-the-week chart.</li><li>Write-your-name &amp; S / 2 / square practice sheet.</li><li>A completed Bear Tracks page as “proof of work.”</li></ul></div><div class="row2"><div class="box"><h3>Songs &amp; Fingerplays</h3><ul><li>“Twinkle, Twinkle” (Ss)</li><li>“If You’re Happy…”</li><li>“The More We Get Together”</li><li>“Where Is Thumbkin?”</li><li>“This Is My Family”</li></ul></div><div class="box sage"><h3>Materials <small>(Amazon affiliate — tag theprescho03d-20)</small></h3><p class="mat">Name cards + letter tiles &middot; Bear Tracks Lesson 1–2 workbooks &middot; Sound Clock poster &middot; feelings check-in chart &middot; ten-frames + counters &middot; unbreakable mirrors &middot; watercolors / oil pastels &middot; family-photo supplies.</p></div></div><div class="tres"><h3>Teacher Resources &mdash; September (all ages)</h3><p><b>Book list:</b> Bear Phonics <i>See Me</i> &amp; <i>See Me Eat Meat</i> (<a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">watch on Bear Phonics</a>) &middot; <i>Your Feelings Matter</i> — &ldquo;I belong / I’m proud of me&rdquo; (<a href="https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">get on Amazon</a>) &middot; suggested trade books on family &amp; feelings <i>(teacher’s choice)</i>.</p><p><b>Song &amp; fingerplay sheet:</b> “Twinkle, Twinkle” (Ss) &middot; “If You’re Happy…” &middot; “The More We Get Together” &middot; “Where Is Thumbkin?” &middot; “This Is My Family”.</p><p><b>Materials shopping list</b> <small>(Amazon affiliate — tag theprescho03d-20)</small>: <span class="mat">Name cards + letter tiles &middot; Bear Tracks Lesson 1–2 workbooks &middot; Sound Clock poster &middot; feelings check-in chart &middot; ten-frames + counters &middot; unbreakable mirrors &middot; watercolors / oil pastels &middot; family-photo supplies.</span></p><p><b>Printables:</b> fill-in weekly grid &middot; “All About Me” mini-book &middot; family-portrait frame &middot; Ss / number-2 / square practice page &middot; the September <i>Home Den</i> cover sheet &middot; “See the Work” Friday checklist.</p></div><div class="pagefoot"><div class="copy">&copy; The Preschool Professional &nbsp;&middot;&nbsp; Built with love by Mrs. Bear</div><div class="dis">September &middot; All About Me &amp; My Family — Free to use, no strings. Theme, activities &amp; printables are original works by Mrs. Bear. Bear Phonics &amp; <i>Your Feelings Matter</i> books sold separately. As an Amazon Associate, The Preschool Professional earns from qualifying purchases.</div></div></section>
 <section class="page plan" id="plan-schoolage" style="display:none;"><div class="band"><div class="bwm"><span class="bwm-a">The Preschool</span><span class="bwm-b">Professional</span></div><div><span class="tag">Free from The Preschool Professional</span><h1>September &middot; School Age</h1><div class="sub">All About Me &amp; My Family &nbsp;&middot;&nbsp; Letter Ss</div></div></div><div class="meta"><div><span>MONTH</span> September</div><div><span>THEME</span> All About Me &amp; My Family</div><div><span>LETTER</span> Ss</div><div>Number <b>2</b> &middot; Shape <b>square</b> &middot; Color <b>orange</b></div></div><div class="teacher"><span><b>Teacher:</b> _______________</span><span><b>Classroom:</b> _______________</span><span><b>Week of:</b> _______________</span><span><b>Take-home:</b> The Home Den family pack</span></div><h2 class="sect">Before / after care — projects, journaling, and leadership, not circle time.</h2><h2 class="sect">Weekly Plan &mdash; four sub-themes across the developmental domains</h2><div class="gridwrap"><table class="grid"><thead><tr><th>Week &middot; Sub-theme</th><th>Focus</th><th>Activity</th></tr></thead><tbody><tr><td class="wk"><b>Week 1</b><br><i>This Is Me</i></td><td>Identity &amp; goals</td><td>“About Me” journal page + a personal goal for the year; interview a partner</td></tr><tr><td class="wk"><b>Week 2</b><br><i>My Family</i></td><td>Family &amp; heritage</td><td>Family tree or “my family map”; share a family tradition or recipe</td></tr><tr><td class="wk"><b>Week 3</b><br><i>My Feelings</i></td><td>SEL &amp; self-regulation</td><td>Feelings journal; make a personal “calm-down toolkit”; discuss what helps</td></tr><tr><td class="wk"><b>Week 4</b><br><i>My Friends &amp; Community</i></td><td>Belonging &amp; leadership</td><td>Design “our after-school code”; be a <b>reading buddy</b> to a younger class</td></tr></tbody></table></div><div class="std"><div class="stdlab">FLORIDA EARLY LEARNING STANDARDS &mdash; DOMAINS ADDRESSED THIS MONTH</div><div class="badges"><span class="badge">Approaches to Learning</span><span class="badge">Social &amp; Emotional Development</span><span class="badge">Language &amp; Literacy</span><span class="badge">Social Studies</span><span class="badge">Creative Expression</span></div><div class="cite">Aligned to the <b>Florida Early Learning and Developmental Standards: Birth to Kindergarten (2017)</b>, FDOE Division of Early Learning. Domain alignments are paraphrased teaching summaries, not the official standards text. <a href="https://flbt5.floridaearlylearning.com/" target="_blank" rel="noopener">View the official standards &rarr;</a></div></div><div class="row3"><div class="box"><h3>Bear Phonics</h3><ul><li><b>Leadership tie-in:</b> School Agers become <b>reading buddies</b> — they read <b>“See Me”</b> aloud to the Twos / Threes.</li><li>Great confidence builder + drives familiarity with the readers.</li><li><a href='https://youtube.com/@bearseceden' target='_blank' rel='noopener'>Watch on Bear Phonics &rarr;</a></li></ul></div><div class="box rose"><h3>Your Feelings Matter</h3><ul><li>Older-kid feelings journal + personal “calm-down toolkit.”</li><li>Talk through what <b>belonging</b> means.</li><li><a href='https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20' target='_blank' rel='nofollow sponsored noopener'>Get the <i>Your Feelings Matter</i> book &rarr;</a></li></ul></div><div class="box sage"><h3>Books &amp; Read-Alouds</h3><ul><li><b><i>Your Feelings Matter</i></b> anthology — for the feelings journal. <a href='https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20' target='_blank' rel='nofollow sponsored noopener'>Get on Amazon &rarr;</a></li><li>Bear Phonics readers to read aloud as buddies. <a href='https://youtube.com/@bearseceden' target='_blank' rel='noopener'>Watch on Bear Phonics &rarr;</a></li></ul></div></div><div class="music"><h3>Music &amp; Movement <small>from Mrs. Bear’s &ldquo;Welcome to Success!&rdquo; album</small></h3><p class="mlead">One tap plays the track. The <b>Success Anthem</b> is the recurring phonics anthem — use it often.</p><div class="songrow"><div class="song feat"><div class="lbl">Featured phonics anthem</div><div class="ttl">Success Anthem</div><div class="mo">Phonics / literacy anthem</div><a href="https://www.youtube.com/watch?v=OnwAryQdX1E" target="_blank" rel="noopener">Listen on YouTube &rarr;</a></div><div class="song"><div class="lbl">Song of the day</div><div class="ttl">Kindergarten Bop</div><div class="mo">Movement break / gross-motor</div><a href="https://www.youtube.com/watch?v=o6_dB3fvx84" target="_blank" rel="noopener">Listen on YouTube &rarr;</a></div></div><p class="album">Full album playlist: <a href="https://www.youtube.com/playlist?list=OLAK5uy_k9twn82PNHg8mv9sXYcNM75_v-xuImubo" target="_blank" rel="noopener">&ldquo;Welcome to Success!&rdquo; on YouTube &rarr;</a></p></div><div class="den"><h3>The Home Den <small>&mdash; the family take-home pack</small></h3><p class="denlead"><i>Goes in every backpack this month.</i></p><ul class="two"><li>“About Me” journal page to share at home.</li><li>Family-tradition interview.</li><li>A family game-night suggestion.</li></ul></div><div class="row2"><div class="box"><h3>Songs &amp; Fingerplays</h3><ul><li>“Kindergarten Bop” (movement)</li><li>“Success Anthem” (buddy-reading warm-up)</li></ul></div><div class="box sage"><h3>Materials <small>(Amazon affiliate — tag theprescho03d-20)</small></h3><p class="mat">Journals &middot; colored pencils &middot; family-tree printables.</p></div></div><div class="tres"><h3>Teacher Resources &mdash; September (all ages)</h3><p><b>Book list:</b> Bear Phonics <i>See Me</i> &amp; <i>See Me Eat Meat</i> (<a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">watch on Bear Phonics</a>) &middot; <i>Your Feelings Matter</i> — &ldquo;I belong / I’m proud of me&rdquo; (<a href="https://www.amazon.com/dp/B0DP3KJJ2J?tag=theprescho03d-20" target="_blank" rel="nofollow sponsored noopener">get on Amazon</a>) &middot; suggested trade books on family &amp; feelings <i>(teacher’s choice)</i>.</p><p><b>Song &amp; fingerplay sheet:</b> “Kindergarten Bop” (movement) &middot; “Success Anthem” (buddy-reading warm-up).</p><p><b>Materials shopping list</b> <small>(Amazon affiliate — tag theprescho03d-20)</small>: <span class="mat">Journals &middot; colored pencils &middot; family-tree printables.</span></p><p><b>Printables:</b> fill-in weekly grid &middot; “All About Me” mini-book &middot; family-portrait frame &middot; Ss / number-2 / square practice page &middot; the September <i>Home Den</i> cover sheet &middot; “See the Work” Friday checklist.</p></div><div class="pagefoot"><div class="copy">&copy; The Preschool Professional &nbsp;&middot;&nbsp; Built with love by Mrs. Bear</div><div class="dis">September &middot; All About Me &amp; My Family — Free to use, no strings. Theme, activities &amp; printables are original works by Mrs. Bear. Bear Phonics &amp; <i>Your Feelings Matter</i> books sold separately. As an Amazon Associate, The Preschool Professional earns from qualifying purchases.</div></div></section>
+
+<!-- ===== September decodable reader (See Me) — shared, shown after Generate ===== -->
+<section class="page reader" id="reader-seeme" style="display:none;">
+  <div class="rband">
+    <span class="rtag">September Decodable Reader</span>
+    <h2>&ldquo;See Me!&rdquo; &middot; Bear Phonics Lesson 1</h2>
+    <p>The matching reader for September&rsquo;s Letter <b>Ss</b> &mdash; sounds <b>M &middot; E &middot; S</b> blend into the very first sentence: &ldquo;See me!&rdquo;</p>
+  </div>
+  <div class="rpages">
+    <img class="rpage" src="wiz-seeme-1.jpg" alt="See Me — cover" loading="lazy">
+    <img class="rpage" src="wiz-seeme-2.jpg" alt="See Me — the M sound" loading="lazy">
+    <img class="rpage" src="wiz-seeme-3.jpg" alt="See Me — the E sound" loading="lazy">
+    <img class="rpage" src="wiz-seeme-4.jpg" alt="See Me — the S sound" loading="lazy">
+    <img class="rpage" src="wiz-seeme-5.jpg" alt="See Me — blend m + e = me" loading="lazy">
+    <img class="rpage" src="wiz-seeme-6.jpg" alt="See Me — blend s + ee = see" loading="lazy">
+    <img class="rpage" src="wiz-seeme-7.jpg" alt="See Me — our first sentence: See me!" loading="lazy">
+    <img class="rpage" src="wiz-seeme-8.jpg" alt="See Me — good job!" loading="lazy">
+  </div>
+  <div class="rnote">Read it together, then watch it free on <a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">Bear Phonics on YouTube</a>. The full printed book is available separately.</div>
+</section>
+
+<!-- ===== Take-home family handouts (The Home Den) — one per band ===== -->
+<section class="page takehome" id="take-infant" style="display:none;">
+  <div class="thband"><span class="thtag">The Home Den &#128062; Family Handout</span><h2>September &middot; Infant</h2><p class="thsub">All About Me &amp; My Family &middot; a note to take home</p></div>
+  <p class="thnote">Baby&rsquo;s biggest lesson this month is <b>you</b>. Faces, names, and cuddles are how little ones first learn: &ldquo;I belong.&rdquo;</p>
+  <div class="thlearn"><span>Letter Ss</span><span>Number 2</span><span>Shape: square</span><span>Color: orange</span><span>Theme: All About Me &amp; My Family</span></div>
+  <div class="thcols">
+    <div><h3>Try this at home</h3><ul><li>Play peekaboo with a scarf.</li><li>Sign &ldquo;more&rdquo; at every feeding.</li><li>Name faces in a family photo.</li><li>Talk, then pause &mdash; let baby &ldquo;answer&rdquo; with coos.</li></ul></div>
+    <div><h3>Sing together</h3><ul><li>&ldquo;This Little Piggy&rdquo;</li><li>&ldquo;Where Is Baby?&rdquo; (peekaboo)</li></ul><h3 style="margin-top:14px;">Read together</h3><div class="thread">Cuddle up and read <b>See&nbsp;Me</b> in a soft voice &mdash; it&rsquo;s printed right in this packet, and free on <a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">Bear Phonics</a>.</div></div>
+  </div>
+  <div class="thfoot"><span class="thbrand">The Preschool Professional</span> &middot; Built with love by Mrs. Bear &middot; Free to use, no strings.</div>
+</section>
+
+<section class="page takehome" id="take-ones" style="display:none;">
+  <div class="thband"><span class="thtag">The Home Den &#128062; Family Handout</span><h2>September &middot; Ones</h2><p class="thsub">All About Me &amp; My Family &middot; a note to take home</p></div>
+  <p class="thnote">Your one-year-old is discovering &ldquo;me&rdquo; and &ldquo;my family.&rdquo; Name everything in sight &mdash; it grows their words fast.</p>
+  <div class="thlearn"><span>Letter Ss</span><span>Number 2</span><span>Shape: square</span><span>Color: orange</span><span>Theme: All About Me &amp; My Family</span></div>
+  <div class="thcols">
+    <div><h3>Try this at home</h3><ul><li>Name body parts at bath time.</li><li>Look at a family photo book together.</li><li>Make the &ldquo;sssss&rdquo; snake sound.</li><li>Point to happy and sad faces.</li></ul></div>
+    <div><h3>Sing together</h3><ul><li>&ldquo;Where Is Thumbkin?&rdquo;</li><li>&ldquo;If You&rsquo;re Happy and You Know It&rdquo;</li></ul><h3 style="margin-top:14px;">Read together</h3><div class="thread">Read <b>See&nbsp;Me</b> together and let them pat the pictures &mdash; it&rsquo;s in this packet, and free on <a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">Bear Phonics</a>.</div></div>
+  </div>
+  <div class="thfoot"><span class="thbrand">The Preschool Professional</span> &middot; Built with love by Mrs. Bear &middot; Free to use, no strings.</div>
+</section>
+
+<section class="page takehome" id="take-twos" style="display:none;">
+  <div class="thband"><span class="thtag">The Home Den &#128062; Family Handout</span><h2>September &middot; Twos</h2><p class="thsub">All About Me &amp; My Family &middot; a note to take home</p></div>
+  <p class="thnote">Twos love to say &ldquo;me!&rdquo; and &ldquo;mine!&rdquo; Lean in &mdash; this month is all about who they are and who loves them.</p>
+  <div class="thlearn"><span>Letter Ss</span><span>Number 2</span><span>Shape: square</span><span>Color: orange</span><span>Theme: All About Me &amp; My Family</span></div>
+  <div class="thcols">
+    <div><h3>Try this at home</h3><ul><li>Make a paper-plate &ldquo;me&rdquo; face.</li><li>Hunt for things that start with <b>sss</b>.</li><li>Count 2 eyes, 2 hands, 2 shoes.</li><li>Name a feeling out loud together.</li></ul></div>
+    <div><h3>Sing together</h3><ul><li>&ldquo;Twinkle, Twinkle&rdquo; (S is for star!)</li><li>&ldquo;The More We Get Together&rdquo;</li></ul><h3 style="margin-top:14px;">Read together</h3><div class="thread">Read <b>See&nbsp;Me</b> together, then trace the letter <b>S</b> with a finger. It&rsquo;s in this packet, and free on <a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">Bear Phonics</a>.</div></div>
+  </div>
+  <div class="thfoot"><span class="thbrand">The Preschool Professional</span> &middot; Built with love by Mrs. Bear &middot; Free to use, no strings.</div>
+</section>
+
+<section class="page takehome" id="take-threes" style="display:none;">
+  <div class="thband"><span class="thtag">The Home Den &#128062; Family Handout</span><h2>September &middot; Threes</h2><p class="thsub">All About Me &amp; My Family &middot; a note to take home</p></div>
+  <p class="thnote">Threes are ready to tell you <i>all</i> about themselves. Ask lots of &ldquo;who&rdquo; and &ldquo;why,&rdquo; and listen big.</p>
+  <div class="thlearn"><span>Letter Ss</span><span>Number 2</span><span>Shape: square</span><span>Color: orange</span><span>Theme: All About Me &amp; My Family</span></div>
+  <div class="thcols">
+    <div><h3>Try this at home</h3><ul><li>Draw &ldquo;my family&rdquo; and label who&rsquo;s who.</li><li>Practice writing the letter <b>S</b>.</li><li>Count to 2 and find squares around the house.</li><li>Talk about a feeling &mdash; and what caused it.</li></ul></div>
+    <div><h3>Sing together</h3><ul><li>&ldquo;This Is My Family&rdquo;</li><li>&ldquo;If You&rsquo;re Happy&hellip;&rdquo;</li></ul><h3 style="margin-top:14px;">Read together</h3><div class="thread">Read <b>See&nbsp;Me</b> together tonight &mdash; point to each word as you say it. It&rsquo;s in this packet, and free on <a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">Bear Phonics</a>.</div></div>
+  </div>
+  <div class="thfoot"><span class="thbrand">The Preschool Professional</span> &middot; Built with love by Mrs. Bear &middot; Free to use, no strings.</div>
+</section>
+
+<section class="page takehome" id="take-fours" style="display:none;">
+  <div class="thband"><span class="thtag">The Home Den &#128062; Family Handout</span><h2>September &middot; Fours (Pre-K / VPK)</h2><p class="thsub">All About Me &amp; My Family &middot; a note to take home</p></div>
+  <p class="thnote">Your Pre-K&rsquo;er is becoming a reader! This month they meet the letter <b>S</b> and read their very first sentence: &ldquo;See me!&rdquo;</p>
+  <div class="thlearn"><span>Letter Ss</span><span>Number 2</span><span>Shape: square</span><span>Color: orange</span><span>Theme: All About Me &amp; My Family</span></div>
+  <div class="thcols">
+    <div><h3>Try this at home</h3><ul><li>Read <b>See&nbsp;Me</b> together &mdash; let them point to each word.</li><li>Write your child&rsquo;s name together.</li><li>Practice <b>S</b>, the number <b>2</b>, and <b>squares</b>.</li><li>Talk about a feeling and why it happened.</li></ul></div>
+    <div><h3>Sing together</h3><ul><li>&ldquo;Twinkle, Twinkle&rdquo; (Ss)</li><li>&ldquo;The More We Get Together&rdquo;</li></ul><h3 style="margin-top:14px;">Read together</h3><div class="thread">Let your child read <b>See&nbsp;Me</b> to <i>you</i> &mdash; they can do it! It&rsquo;s printed in this packet, and free on <a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">Bear Phonics</a>.</div></div>
+  </div>
+  <div class="thfoot"><span class="thbrand">The Preschool Professional</span> &middot; Built with love by Mrs. Bear &middot; Free to use, no strings.</div>
+</section>
+
+<section class="page takehome" id="take-schoolage" style="display:none;">
+  <div class="thband"><span class="thtag">The Home Den &#128062; Family Handout</span><h2>September &middot; School Age</h2><p class="thsub">All About Me &amp; My Family &middot; a note to take home</p></div>
+  <p class="thnote">Big kids shine as leaders and helpers this month. Invite them to teach what they know.</p>
+  <div class="thlearn"><span>Letter Ss</span><span>Number 2</span><span>Shape: square</span><span>Color: orange</span><span>Theme: All About Me &amp; My Family</span></div>
+  <div class="thcols">
+    <div><h3>Try this at home</h3><ul><li>Share a family tradition or recipe.</li><li>Read <b>See&nbsp;Me</b> aloud to a younger sibling.</li><li>Start an &ldquo;About Me&rdquo; journal page.</li><li>Plan a family game night together.</li></ul></div>
+    <div><h3>Do together</h3><ul><li>Family game night</li><li>&ldquo;Success Anthem&rdquo; warm-up</li></ul><h3 style="margin-top:14px;">Read together</h3><div class="thread">Have them read <b>See&nbsp;Me</b> as a reading buddy &mdash; teaching is the best way to master it. It&rsquo;s in this packet, and free on <a href="https://youtube.com/@bearseceden" target="_blank" rel="noopener">Bear Phonics</a>.</div></div>
+  </div>
+  <div class="thfoot"><span class="thbrand">The Preschool Professional</span> &middot; Built with love by Mrs. Bear &middot; Free to use, no strings.</div>
+</section>
 
     <!-- ===== coming-soon (shown for months other than September) ===== -->
     <div class="soon plan-cs" id="plan-comingsoon" style="display:none;">
@@ -271,7 +418,7 @@ function LPW_currentMonth(){
   return (s && s.value) ? s.value : "";
 }
 function LPW_hideAll(){
-  var ps = document.querySelectorAll(".plan, #plan-comingsoon");
+  var ps = document.querySelectorAll(".plan, .reader, .takehome, #plan-comingsoon");
   for(var i=0;i<ps.length;i++){ ps[i].style.display="none"; }
 }
 function LPW_prompt(msg){
@@ -293,6 +440,8 @@ function LPW_generate(){
       var sec=document.getElementById("plan-"+band);
       if(sec){
         sec.style.display="block";
+        var rd=document.getElementById("reader-seeme"); if(rd){ rd.style.display="block"; }
+        var th=document.getElementById("take-"+band); if(th){ th.style.display="block"; }
         if(pb){ pb.style.display="flex"; }
         if(sec.scrollIntoView){ try{ sec.scrollIntoView({behavior:"smooth",block:"start"}); }catch(e){ sec.scrollIntoView(); } }
       } else { LPW_prompt("That plan isn’t ready yet."); }
@@ -348,6 +497,21 @@ if(typeof window!=="undefined"){ window.LPW_generate = LPW_generate; }
 
       genBtn.disabled=false;
       genBtn.addEventListener("click",LPW_generate);
+
+      var incPlan=document.getElementById("incPlan");
+      var incReader=document.getElementById("incReader");
+      var incTake=document.getElementById("incTake");
+      var results=document.getElementById("results");
+      function syncInc(){
+        if(!results){ return; }
+        if(incPlan){ results.classList.toggle("hide-plan", !incPlan.checked); }
+        if(incReader){ results.classList.toggle("hide-reader", !incReader.checked); }
+        if(incTake){ results.classList.toggle("hide-take", !incTake.checked); }
+      }
+      if(incPlan){ incPlan.addEventListener("change",syncInc); }
+      if(incReader){ incReader.addEventListener("change",syncInc); }
+      if(incTake){ incTake.addEventListener("change",syncInc); }
+      syncInc();
 
       if(againBtn){
         againBtn.addEventListener("click",function(){
