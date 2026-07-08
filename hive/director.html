@@ -135,7 +135,7 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
     <div id="foodList" class="empty">Loading…</div>
   </div>
 
-  <div id="p-facility" class="panel"><div class="card" style="border-left-color:#c9bcae"><b>🧹 Facility Checklists.</b> Your cleaning &amp; inspection charts for the whole week, so nothing gets missed. Tap ✔ as each task is done, flag ⚠️ if something needs attention, add a note. Charles prints the week every Friday for DCF.</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;"><input id="facilName" placeholder="Your name" style="padding:9px 12px;border:2px solid #e5d9c8;border-radius:10px;font-size:15px;"><select id="facilClass" style="padding:9px 12px;border:2px solid #e5d9c8;border-radius:10px;font-size:15px;"><option value="">Your room (optional)…</option><option>Infant Room</option><option>Ones</option><option>Twos</option><option>Threes</option><option>Fours / VPK</option><option>School Age</option><option>Kitchen</option><option>Playground</option><option>Whole Building / Common Areas</option></select></div><div id="facilList"><div class="empty">Loading this week's checklist… 🧹</div></div></div>
+  <div id="p-facility" class="panel"><style>#p-facility .fbtn{border:none;border-radius:12px;padding:11px 18px;color:#fff;font-weight:800;cursor:pointer;background:#5aa9ff;font-size:15px;margin:6px 0}#p-facility .fsubmit{display:block;width:100%;background:#12946c;margin-top:12px;font-size:16px}#p-facility .fformhead{font-weight:900;font-size:17px;margin:12px 0 6px}#p-facility .fitemrow{background:#fff;border-radius:10px;padding:10px 12px;margin:7px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}#p-facility .fitemtxt{font-weight:600;font-size:15px;margin-bottom:6px}#p-facility .fbtns{display:flex;gap:6px;margin-bottom:6px}#p-facility .ftog{border:2px solid #ddd;background:#fafafa;border-radius:8px;padding:5px 10px;font-weight:700;cursor:pointer;font-size:13px;color:#888}#p-facility .ftog.ok.on{background:#d5f0e2;border-color:#12946c;color:#0a6b4f}#p-facility .ftog.bad.on{background:#ffd9d4;border-color:#e74c3c;color:#c0392b}#p-facility .dinp{border:2px solid #e5d9c8;border-radius:10px;padding:9px 12px;font-size:15px;font-family:inherit;width:100%}#p-facility .dinp.big{min-height:70px}#p-facility .fnote{margin-top:4px}#p-facility .flbl{display:block;font-weight:700;margin:9px 0 3px;font-size:14px}#p-facility .fwarn{background:#fff6d9;border-left:4px solid #ffb13d;padding:10px 12px;border-radius:8px}#p-facility .fok{background:#d5f0e2;border-left:4px solid #12946c;padding:14px;border-radius:10px;font-weight:700}</style><div class="card" style="border-left-color:#c9bcae"><b>🧹 Facility Checklists.</b> Every room's cleaning &amp; inspection logs land here as staff submit them through the Teacher Portal — review today's, open the PDF, watch for 🚨 incidents. You can also submit director-only forms (temps, drills, security) yourself below.</div><div id="facMonitor"><div class="empty">Loading today's submissions… 🧹</div></div><details style="margin-top:16px"><summary style="font-weight:900;cursor:pointer;font-size:16px">➕ Submit a form yourself</summary><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><input id="dfName" class="dinp" style="flex:1;min-width:130px" placeholder="Your name"><select id="dfRoom" class="dinp" style="flex:1;min-width:130px"><option value="">Room…</option><option>Infant Room</option><option>Ones</option><option>Twos</option><option>Threes</option><option>Fours / VPK</option><option>School Age</option><option>Kitchen</option><option>Playground</option><option>Whole Building / Common Areas</option></select><select id="dfForm" class="dinp" style="flex:1;min-width:130px"><option value="">Which form?…</option><option>🚽 Bathroom Cleaning</option><option>🧹 Classroom Cleaning</option><option>🏠 Indoor Inspection</option><option>🛝 Outdoor / Playground Inspection</option><option>🧼 Sanitation & Safety</option><option>🌡️ Temp & Safety Logs</option><option>🔒 Security & Attendance</option><option>🧯 Drills & Emergency</option><option>🌙 End of Day Building Sweep</option><option>🚨 Incident Report</option></select></div><button class="fbtn" onclick="dfStart()">Start →</button><div id="dfBody"></div></details></div>
 <div class="panel" id="p-inv">
     <div class="banner">📦 Your on-hand counts, so the weekly orders match what's really in the building. Type the quantity you have and hit ✔ — 🟡 means it's below the reorder level. Update on inventory days (Mon–Tue) and Charles builds Wednesday's cart around it.</div>
     <div id="icats" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;"></div>
@@ -523,59 +523,43 @@ function renderForms(){
 // ---- TAB NOTES (a note box on every tab) ----
 const TAB_LABELS = {brief:'📰 Daily Briefing', auto:'✉️ Automations', hours:'⏱ Staff Hours', food:'🍽 Food Program', inv:'📦 Inventory', ratio:'🧮 Ratios & FTE', task:'📋 Task Board', msg:'💬 Parent Message', time:'⏰ Time Fix', onb:'🌟 Onboarding', facility:'🧹 Facility Checklists'};
 // (Mission Control + Forms tabs share the Tab Notes box via the panels below)
-window.facilName=function(){ var e=document.getElementById('facilName'); return (e&&e.value.trim())||localStorage.getItem('hiveFacilName')||''; };
-window.facilClass=function(){ var e=document.getElementById('facilClass'); return (e&&e.value)||''; };
 window.loadFacility=async function(){
-  var box=document.getElementById('facilList'); if(!box) return;
-  var sN=localStorage.getItem('hiveFacilName'); if(sN&&document.getElementById('facilName')) document.getElementById('facilName').value=sN;
-  var sC=localStorage.getItem('hiveFacilClass'); if(sC&&document.getElementById('facilClass')) document.getElementById('facilClass').value=sC;
-  var d=await api({action:'list', table:'Facility Checklists', filterByFormula:"IS_SAME({Week Of},TODAY(),'week')", maxRecords:500});
-  var recs=(d.records||[]).filter(function(r){return r.fields.Item;});
-  if(!recs.length){ box.innerHTML='<div class="empty">No facility checklist for this week yet — Charles seeds it each Monday. 🧹</div>'; return; }
-  var dayOrder=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  var chartOrder=['🚽 Bathroom Cleaning','🧹 Classroom Cleaning','🏠 Indoor Inspection','🛝 Outdoor / Playground Inspection','🧼 Sanitation & Safety','🌡️ Temp & Safety Logs','🔒 Security & Attendance','🧯 Drills & Emergency','🌙 End of Day Building Sweep'];
-  var days={}; recs.forEach(function(r){ var dy=sel(r.fields.Day)||'—'; (days[dy]=days[dy]||[]).push(r); });
-  var done=recs.filter(function(r){return r.fields.Checked;}).length;
-  var todayName=dayOrder[(new Date().getDay()+6)%7];
-  var html='<div class="card" style="border-left-color:#12946c"><b>'+done+'/'+recs.length+' done this week</b> · tap ✔ as you go, flag ⚠️ anything that needs attention</div>';
-  Object.keys(days).sort(function(a,b){return (dayOrder.indexOf(a)+99)-(dayOrder.indexOf(b)+99);}).forEach(function(dy){
-    var isToday=dy===todayName;
-    html+='<details '+(isToday?'open':'')+' style="margin:14px 0;"><summary style="font-weight:900;font-size:19px;cursor:pointer;padding:6px 0;">📅 '+esc(dy)+(isToday?' — today':'')+'</summary>';
-    var charts={}; days[dy].forEach(function(r){ var c=sel(r.fields.Chart)||'Other'; (charts[c]=charts[c]||[]).push(r); });
-    Object.keys(charts).sort(function(a,b){return (chartOrder.indexOf(a)+99)-(chartOrder.indexOf(b)+99);}).forEach(function(chart){
-      var items=charts[chart].sort(function(a,b){return (a.fields.Order||0)-(b.fields.Order||0);});
-      html+='<div style="font-weight:800;margin:12px 0 4px;font-size:16px;color:#7a6a55;">'+esc(chart)+'</div>';
-      items.forEach(function(r){ var f=r.fields; var att=sel(f.Status)==='⚠️ Needs Attention';
-        html+='<div class="card '+(f.Checked?'done':'')+' '+(att?'action':'')+'" id="fc-'+r.id+'"><div class="chk-row"><div class="bigchk '+(f.Checked?'on':'')+'" onclick="facilToggle(\''+r.id+'\',this)">'+(f.Checked?'✔':'')+'</div><div class="item">'+esc(f.Item)+(f['Checked By']?' <span style="color:#8a7;font-weight:700;">— '+esc(f['Checked By'])+'</span>':'')+'</div></div><div style="margin-top:8px;"><button class="mini" style="background:'+(att?'#e74c3c':'#8fbf9f')+'" onclick="facilFlag(\''+r.id+'\',this)">'+(att?'⚠️ Needs Attention':'✅ OK')+'</button></div><div class="notes"><textarea id="fn-'+r.id+'" placeholder="Note — what / where…">'+esc(f.Notes||'')+'</textarea><button class="mini" onclick="facilNote(\''+r.id+'\')">Save</button></div></div>';
-      });
-    });
-    html+='</details>';
-  });
-  box.innerHTML=html;
+ var box=document.getElementById('facMonitor'); if(!box) return;
+ var sn=localStorage.getItem('hiveName'); if(sn&&document.getElementById('dfName'))document.getElementById('dfName').value=sn;
+ var d=await api({action:'list',table:'Facility Submissions',filterByFormula:"IS_SAME({Date},TODAY(),'day')",maxRecords:200});
+ var recs=(d.records||[]);
+ recs.sort(function(a,b){return (b.fields['Submitted At']||'').localeCompare(a.fields['Submitted At']||'');});
+ var inc=recs.filter(function(r){return (r.fields['Form Type']||'').indexOf('Incident')>-1;});
+ var h='<div class="card" style="border-left-color:#12946c"><b>'+recs.length+' form'+(recs.length===1?'':'s')+' submitted today</b>'+(inc.length?' · <span style="color:#c0392b;font-weight:800">🚨 '+inc.length+' incident</span>':'')+'</div>';
+ if(!recs.length){ box.innerHTML=h+'<div class="empty">No submissions yet today. As staff finish their rooms, they show up here.</div>'; return; }
+ recs.forEach(function(r){var f=r.fields; var isInc=(f['Form Type']||'').indexOf('Incident')>-1; var t=f['Submitted At']?new Date(f['Submitted At']).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+  h+='<div class="card '+(isInc?'action':'')+'"><div style="font-weight:800">'+esc(f['Form Type']||'')+' · '+esc(f['Room / Classroom']||'')+'</div><div style="color:#8a7c66;font-size:13px;margin:3px 0">'+esc(f['Staff Name']||'')+' · '+t+' · '+esc(f['Overall Status']||'')+(f['Drive Link']?' · <a href="'+f['Drive Link']+'" target="_blank">📄 PDF</a>':'')+'</div>';
+  var detail=f.Details||f.Items||'';
+  if(detail) h+='<details><summary style="cursor:pointer;font-size:13px;color:#7a6a55">view</summary><pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;margin:6px 0">'+esc(detail)+'</pre></details>';
+  h+='</div>';
+ });
+ box.innerHTML=h;
 };
-window.facilToggle=async function(id, el){
-  var on=!el.classList.contains('on');
-  el.classList.toggle('on',on); el.textContent=on?'✔':''; document.getElementById('fc-'+id).classList.toggle('done',on);
-  var nm=facilName(), cl=facilClass();
-  if(nm) localStorage.setItem('hiveFacilName',nm); if(cl) localStorage.setItem('hiveFacilClass',cl);
-  var fields={'Checked':on};
-  if(on){ fields['Checked By']=nm; fields['Time']=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); if(cl) fields['Room / Classroom']=cl; }
-  await api({action:'update', table:'Facility Checklists', recordId:id, fields:fields});
-  toast(on?'Checked off! 🎉':'Un-checked');
+window.dfPick=function(el,ok){var row=el.closest('.fitemrow');row.querySelectorAll('.ftog').forEach(function(b){b.classList.remove('on');});el.classList.add('on');row.setAttribute('data-ok',ok?'1':'0');};
+window.dfIncidentForm=function(){return '<div class="fformhead">🚨 Incident Report</div><label class="flbl">When?</label><input id="dincWhen" class="dinp" placeholder="e.g. Today ~10:30 AM"><label class="flbl">Child(ren) involved</label><input id="dincChild" class="dinp"><label class="flbl">Staff / witnesses</label><input id="dincStaff" class="dinp"><label class="flbl">What happened?</label><textarea id="dincWhat" class="dinp big"></textarea><label class="flbl">Action taken</label><textarea id="dincAction" class="dinp big"></textarea><label class="flbl">Parent notified?</label><select id="dincParent" class="dinp"><option>Not yet</option><option>Yes — in person</option><option>Yes — by phone</option><option>Yes — by ProCare</option></select><label class="flbl">Follow-up</label><input id="dincFollow" class="dinp"><button class="fbtn fsubmit" style="background:#e74c3c" onclick="dfSubmitIncident()">Submit Incident 🚨</button>';};
+window.dfStart=async function(){
+ var name=(document.getElementById('dfName').value||'').trim(), room=document.getElementById('dfRoom').value, form=document.getElementById('dfForm').value;
+ var body=document.getElementById('dfBody');
+ if(!name||!room||!form){ body.innerHTML='<div class="fwarn">Add your name, room, and form. 💛</div>'; return; }
+ localStorage.setItem('hiveName',name);
+ body.innerHTML='<div class="empty">Loading…</div>';
+ if(form.indexOf('Incident')>-1){ body.innerHTML=dfIncidentForm(); return; }
+ var d=await api({action:'list',table:'Facility Checklists',filterByFormula:"AND(IS_SAME({Week Of},TODAY(),'week'),{Chart}='"+form+"')",maxRecords:500});
+ var seen={},items=[];(d.records||[]).forEach(function(r){var f=r.fields;if(f.Item&&!seen[f.Item]){seen[f.Item]=1;items.push({item:f.Item,order:f.Order||0});}});
+ items.sort(function(a,b){return a.order-b.order;});
+ if(!items.length){ body.innerHTML='<div class="fwarn">No items for this form yet.</div>'; return; }
+ var h='<div class="fformhead">'+esc(form)+' · '+esc(room)+'</div>';
+ items.forEach(function(it){h+='<div class="fitemrow" data-item="'+encodeURIComponent(it.item)+'" data-ok="1"><div class="fitemtxt">'+esc(it.item)+'</div><div class="fbtns"><button type="button" class="ftog ok on" onclick="dfPick(this,1)">✅ OK</button><button type="button" class="ftog bad" onclick="dfPick(this,0)">⚠️ Needs attention</button></div><input class="dinp fnote" placeholder="Note (optional)…"></div>';});
+ h+='<button class="fbtn fsubmit" onclick="dfSubmit(\''+encodeURIComponent(form)+'\')">Submit ✅</button>';
+ body.innerHTML=h;
 };
-window.facilFlag=async function(id, el){
-  var needs=el.textContent.indexOf('Needs')>-1;
-  var next=needs?'✅ OK':'⚠️ Needs Attention';
-  el.textContent=next; el.style.background=needs?'#8fbf9f':'#e74c3c';
-  document.getElementById('fc-'+id).classList.toggle('action', !needs);
-  await api({action:'update', table:'Facility Checklists', recordId:id, fields:{'Status':next}});
-  toast(needs?'Marked OK ✅':'Flagged for the director ⚠️');
-};
-window.facilNote=async function(id){
-  var v=document.getElementById('fn-'+id).value;
-  await api({action:'update', table:'Facility Checklists', recordId:id, fields:{'Notes':v}});
-  toast('Saved 📝');
-};
+window.dfSubmit=async function(formEnc){var form=decodeURIComponent(formEnc);var name=(document.getElementById('dfName').value||'').trim(), room=document.getElementById('dfRoom').value;var rows=[].slice.call(document.querySelectorAll('#dfBody .fitemrow'));var lines=[],flags=[];rows.forEach(function(r){var item=decodeURIComponent(r.getAttribute('data-item'));var ok=r.getAttribute('data-ok')!=='0';var note=(r.querySelector('.fnote').value||'').trim();lines.push((ok?'✅ ':'⚠️ ')+item+(note?' — '+note:''));if(!ok)flags.push(item+(note?' ('+note+')':''));});var status=flags.length?'⚠️ Issues Flagged':'✅ All OK';var now=new Date();var fields={'School':SCHOOL,'Room / Classroom':room,'Form Type':form,'Staff Name':name,'Date':now.toISOString().slice(0,10),'Submitted At':now.toISOString(),'Items':lines.join('\n'),'Overall Status':status,'Status':'🟡 Pending','Submission':SCHOOL+' · '+room+' · '+form.replace(/^[^ ]+ /,'')+' · '+now.toLocaleString('en-US',{month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit'})};if(flags.length)fields['Details']='Needs attention:\n- '+flags.join('\n- ');var res=await api({action:'create',table:'Facility Submissions',fields:fields});var ok=res&&(res.id||(res.records&&res.records[0]&&res.records[0].id));if(ok){document.getElementById('dfBody').innerHTML='<div class="fok">✅ Submitted &amp; logged.</div>';document.getElementById('dfForm').value='';toast('Submitted 🎉');loadFacility();}else toast("Didn't save — "+((res&&res.error)||'try again'));};
+window.dfSubmitIncident=async function(){var name=(document.getElementById('dfName').value||'').trim(), room=document.getElementById('dfRoom').value;var g=function(id){return (document.getElementById(id).value||'').trim();};var details='WHEN: '+g('dincWhen')+'\nCHILD(REN): '+g('dincChild')+'\nSTAFF/WITNESSES: '+g('dincStaff')+'\nWHAT HAPPENED: '+g('dincWhat')+'\nACTION TAKEN: '+g('dincAction')+'\nPARENT NOTIFIED: '+g('dincParent')+'\nFOLLOW-UP: '+g('dincFollow');var now=new Date();var fields={'School':SCHOOL,'Room / Classroom':room,'Form Type':'🚨 Incident Report','Staff Name':name,'Date':now.toISOString().slice(0,10),'Submitted At':now.toISOString(),'Overall Status':'🚨 Incident','Details':details,'Status':'🟡 Pending','Submission':SCHOOL+' · '+room+' · INCIDENT · '+now.toLocaleString('en-US',{month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit'})};var res=await api({action:'create',table:'Facility Submissions',fields:fields});var ok=res&&(res.id||(res.records&&res.records[0]&&res.records[0].id));if(ok){document.getElementById('dfBody').innerHTML='<div class="fok">🚨 Incident logged. Mrs. Bear is notified.</div>';document.getElementById('dfForm').value='';toast('Incident logged 🚨');loadFacility();}else toast("Didn't save — "+((res&&res.error)||'try again'));};
 
 function injectNoteBoxes(){
   Object.keys(TAB_LABELS).forEach(id=>{
