@@ -816,7 +816,7 @@ if(typeof window!=="undefined"){ window.LPW_generate = LPW_generate; }
   };
 
   function upsellHTML(){
-    return '<div class="upsell"><div class="up-txt"><b>Buzz members get more.</b> Unlock a full <b>Monday&ndash;Friday daily plan</b> with <b>two printable at-home activities every day</b> &amp; weekly Home Den packets &mdash; right here in this planner. <b>Launching August 1st;</b> join now to lock in your spot (Infant &middot; September sample live today).</div>'
+    return '<div class="upsell"><div class="up-txt"><b>Buzz members get more.</b> Unlock a full <b>Monday&ndash;Friday daily plan</b> with <b>two printable at-home activities every day</b> &amp; weekly Home Den packets &mdash; right here in this planner. <b>Launching August 1st;</b> join now to lock in your spot (Infant &middot; September already live for members).</div>'
      +'<div class="up-actions"><a class="up-btn" href="https://payhip.com/b/Kcw8r" target="_blank" rel="noopener">Become a Buzz member &rarr;</a>'
      +'<button type="button" class="up-login" onclick="TPP_showLogin()">Already a member? Log in</button></div>'
      +'<div class="up-loginrow" id="loginrow" style="display:none;"><input id="mpin" type="password" placeholder="Your Buzz PIN" autocomplete="off" onkeydown="if(event.key===\'Enter\')TPP_doLogin()"><button type="button" onclick="TPP_doLogin()">Unlock</button><span class="mpinerr" id="mpinerr"></span></div>'
@@ -826,7 +826,7 @@ if(typeof window!=="undefined"){ window.LPW_generate = LPW_generate; }
     return '<div class="mfoot"><span class="mok">&#10004; Buzz member</span> &middot; One login per membership &mdash; please don&rsquo;t share &middot; <a href="#" onclick="TPP_logout();return false;">Log out</a></div>';
   }
   function comingSoonHTML(band,month){
-    return '<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>Daily activities &amp; Home Den packets &mdash; arriving August 1st</h2><p>You&rsquo;re a Buzz member! The Monday&ndash;Friday at-home activities &amp; printable Home Den packets for '+cap(band)+' &middot; '+month.toUpperCase()+' arrive by <b>August 1st</b> (start of the school year). Enjoy the full monthly plan above &mdash; and try the Infant &middot; September sample &mdash; in the meantime.</p></div>'+memberFoot()+'</div>';
+    return '<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>Daily activities &amp; Home Den packets &mdash; arriving August 1st</h2><p>You&rsquo;re a Buzz member! The Monday&ndash;Friday at-home activities &amp; printable Home Den packets for '+cap(band)+' &middot; '+month.toUpperCase()+' arrive by <b>August 1st</b> (start of the school year). Enjoy the full monthly plan above &mdash; and try the Infant &middot; September Weekly Planner, live now for members &mdash; in the meantime.</p></div>'+memberFoot()+'</div>';
   }
   function dailyHTML(band,month,d){
     var h='<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>This Week, Day by Day</h2><p>'+d.week+' &nbsp;&middot;&nbsp; '+d.theme+' &nbsp;&middot;&nbsp; pick one option each day</p><p class="dstd">Every activity is matched to the Florida Early Learning &amp; Developmental Standards (Birth&ndash;K).</p></div>';
