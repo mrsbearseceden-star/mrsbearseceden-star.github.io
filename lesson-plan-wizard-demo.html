@@ -228,6 +228,12 @@
   .box .lib-btn{display:inline-block;background:var(--sage);color:var(--white);font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13px;padding:7px 14px;border-radius:8px;text-decoration:none;margin-top:8px;}
   .box .lib-btn:hover{background:#5c7758;}
   @media print{ .box .lib-btn{border:1px solid #000;color:#000;} }
+  /* ---------- Free-version upsell to The Buzz ---------- */
+  .upsell{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;background:var(--creamhl);border:1px solid var(--honey);border-radius:12px;padding:14px 18px;margin:0 0 16px;}
+  .upsell .up-txt{font-family:Helvetica,Arial,sans-serif;font-size:14px;color:var(--ink);flex:1 1 300px;line-height:1.45;}
+  .upsell .up-btn{display:inline-block;background:var(--honey);color:var(--white);font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:14px;padding:10px 18px;border-radius:9px;text-decoration:none;white-space:nowrap;}
+  .upsell .up-btn:hover{background:var(--honeyd);}
+  @media print{ .upsell{display:none !important;} }
   .takehome .thfoot .thbrand{font-family:Georgia,serif;color:var(--ink);font-weight:bold;}
 
   #results.hide-plan .plan,
@@ -294,6 +300,11 @@
       <button type="button" class="again" id="againBtn">&larr; Choose another plan</button>
       <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF</button>
     </div>
+  </div>
+
+  <div class="upsell" id="upsell" style="display:none;">
+    <div class="up-txt"><b>Buzz members get more.</b> Unlock a full <b>Monday&ndash;Friday daily plan</b> with <b>two printable at-home activities every day</b> &mdash; all in this same planner, no jumping around.</div>
+    <a class="up-btn" href="https://payhip.com/b/Kcw8r" target="_blank" rel="noopener">Become a Buzz member &rarr;</a>
   </div>
 
   <div id="results">
@@ -589,6 +600,7 @@ function LPW_currentMonth(){
 function LPW_hideAll(){
   var ps = document.querySelectorAll(".plan, .reader, .takehome, #plan-comingsoon");
   for(var i=0;i<ps.length;i++){ ps[i].style.display="none"; }
+  var _up=document.getElementById("upsell"); if(_up){ _up.style.display="none"; }
 }
 function LPW_prompt(msg){
   var p=document.getElementById("lpwPrompt");
@@ -615,7 +627,7 @@ function LPW_generate(){
         var rd=document.getElementById(_ids.r); if(rd){ rd.style.display=_hasReader?"block":"none"; }
         var _rl=document.getElementById("incReaderLabel"); if(_rl){ _rl.style.display=_hasReader?"":"none"; }
         var th=document.getElementById(_ids.t); if(th){ th.style.display="block"; }
-        if(pb){ pb.style.display="flex"; }
+        if(pb){ pb.style.display="flex"; } var _up2=document.getElementById("upsell"); if(_up2){ _up2.style.display="block"; }
         if(sec.scrollIntoView){ try{ sec.scrollIntoView({behavior:"smooth",block:"start"}); }catch(e){ sec.scrollIntoView(); } }
       } else { LPW_prompt("That plan isn’t ready yet."); }
     } else {
