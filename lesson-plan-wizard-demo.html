@@ -234,6 +234,58 @@
   .upsell .up-btn{display:inline-block;background:var(--honey);color:var(--white);font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:14px;padding:10px 18px;border-radius:9px;text-decoration:none;white-space:nowrap;}
   .upsell .up-btn:hover{background:var(--honeyd);}
   @media print{ .upsell{display:none !important;} }
+  /* ---------- Member zone (login + inline daily planner) ---------- */
+  #memberzone{margin-top:8px;}
+  .up-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px;}
+  .up-login{background:none;border:1px solid var(--honey);color:var(--honeyd);font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13px;padding:9px 14px;border-radius:9px;cursor:pointer;}
+  .up-loginrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%;margin-top:10px;}
+  .up-loginrow input{padding:9px 12px;font-size:15px;border:2px solid #e7d9bd;border-radius:8px;letter-spacing:2px;}
+  .up-loginrow button{background:var(--honey);color:#fff;border:none;font-weight:bold;font-size:14px;padding:9px 16px;border-radius:8px;cursor:pointer;}
+  .mpinerr{color:#b3261e;font-size:13px;font-weight:bold;}
+  .up-disc{width:100%;font-size:12px;color:var(--inks);margin-top:8px;font-style:italic;}
+  .daily{background:var(--cream2);border:1px dashed var(--honey);border-radius:14px;padding:18px;margin-top:8px;}
+  .dailyhead{text-align:center;border-bottom:2px solid var(--honey);padding-bottom:10px;margin-bottom:14px;}
+  .dtag{display:inline-block;background:var(--honey);color:#fff;font-size:11px;font-weight:bold;padding:3px 10px;border-radius:16px;}
+  .dailyhead h2{font-family:Georgia,serif;margin:8px 0 2px;font-size:22px;}
+  .dailyhead p{margin:0;color:var(--inks);font-size:13px;}
+  .dailyhead .dstd{font-style:italic;margin-top:4px;}
+  .daily .daycard{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(43,33,23,.06);padding:16px;margin-bottom:14px;}
+  .daily .dayrow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-bottom:2px solid var(--honey);padding-bottom:8px;margin-bottom:10px;}
+  .daily .dayrow .dl{font-family:Georgia,serif;font-size:18px;}
+  .daily .dayrow .df{color:var(--sage);font-weight:bold;font-size:14px;}
+  .daily .doms{margin:0 0 10px;font-size:11px;color:var(--inks);}
+  .dlbl{font-weight:bold;color:var(--sage);text-transform:uppercase;letter-spacing:.4px;margin-right:4px;}
+  .dom{display:inline-block;background:var(--sagebg);border:1px solid #dbe6d8;border-radius:10px;padding:2px 8px;margin:2px 3px 0 0;font-weight:bold;color:var(--ink);}
+  .daily .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:560px){.daily .opts{grid-template-columns:1fr;}}
+  .daily .opt{background:var(--sagebg);border:1px solid #dbe6d8;border-radius:10px;padding:12px 14px;}
+  .daily .opt .on{font-size:11px;font-weight:bold;letter-spacing:.5px;color:var(--sage);text-transform:uppercase;}
+  .daily .opt .ot{font-weight:bold;font-size:15px;margin:2px 0 4px;}
+  .daily .opt .od{font-size:13.5px;color:var(--inks);}
+  .daily .printbtn{margin-top:12px;background:var(--honey);color:#fff;border:none;font-weight:bold;font-size:13px;padding:9px 16px;border-radius:9px;cursor:pointer;}
+  .daily .printbtn:hover{background:var(--honeyd);}
+  .daily .dden{background:#fff;border:2px solid var(--honey);border-radius:12px;padding:16px;margin-bottom:6px;}
+  .daily .dden h2{font-family:Georgia,serif;margin:0 0 4px;font-size:19px;}
+  .daily .dden .dl{color:var(--inks);font-size:13px;font-style:italic;margin:0 0 8px;}
+  .daily .dden ul{margin:0;padding-left:20px;} .daily .dden li{font-size:14px;margin-bottom:4px;}
+  .mfoot{text-align:center;font-size:12px;color:var(--inks);margin-top:10px;}
+  .mfoot .mok{color:var(--sage);font-weight:bold;}
+  .dhandout{display:none;}
+  .dhandout .hh{text-align:center;border-bottom:2px solid var(--honey);padding-bottom:10px;margin-bottom:14px;}
+  .dhandout .hh .htag{display:inline-block;background:var(--honey);color:#fff;font-size:11px;font-weight:bold;padding:3px 10px;border-radius:16px;}
+  .dhandout .hh h1{font-family:Georgia,serif;font-size:24px;margin:8px 0 2px;}
+  .dhandout .hh p{margin:0;color:var(--inks);font-size:13px;}
+  .dhandout .ho{border:1px solid #e7d9bd;border-radius:10px;padding:14px 16px;margin-bottom:12px;background:var(--cream2);}
+  .dhandout .ho .on{font-size:11px;font-weight:bold;letter-spacing:.5px;color:var(--sage);text-transform:uppercase;}
+  .dhandout .ho .ot{font-family:Georgia,serif;font-size:18px;margin:2px 0 4px;}
+  .dhandout .ho .od{font-size:14px;color:var(--inks);}
+  .dhandout .hf{margin-top:16px;border-top:1px solid #e7d9bd;padding-top:10px;text-align:center;font-size:11px;color:var(--inks);}
+  @media print{
+    #memberzone{display:none !important;}
+    .dhandout{display:none !important;}
+    body.printing-daily header.top, body.printing-daily .wrap, body.printing-daily footer.site{display:none !important;}
+    body.printing-daily .dhandout.active{display:block !important;page-break-after:always;}
+  }
   .takehome .thfoot .thbrand{font-family:Georgia,serif;color:var(--ink);font-weight:bold;}
 
   #results.hide-plan .plan,
@@ -300,11 +352,6 @@
       <button type="button" class="again" id="againBtn">&larr; Choose another plan</button>
       <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF</button>
     </div>
-  </div>
-
-  <div class="upsell" id="upsell" style="display:none;">
-    <div class="up-txt"><b>Buzz members get more.</b> Unlock a full <b>Monday&ndash;Friday daily plan</b> with <b>two printable at-home activities every day</b> &mdash; all in this same planner, no jumping around.</div>
-    <a class="up-btn" href="https://payhip.com/b/Kcw8r" target="_blank" rel="noopener">Become a Buzz member &rarr;</a>
   </div>
 
   <div id="results">
@@ -568,6 +615,7 @@
       <p>This month is part of the approved 12-month theme arc. September is fully built and tappable across all six age bands in this demo — the remaining eleven months will follow this exact format once September is approved.</p>
       <span class="pill">Pick September to see a full plan</span>
     </div>
+    <div id="memberzone" style="display:none;"></div>
   </div>
 
 </div>
@@ -600,7 +648,7 @@ function LPW_currentMonth(){
 function LPW_hideAll(){
   var ps = document.querySelectorAll(".plan, .reader, .takehome, #plan-comingsoon");
   for(var i=0;i<ps.length;i++){ ps[i].style.display="none"; }
-  var _up=document.getElementById("upsell"); if(_up){ _up.style.display="none"; }
+  var _mz=document.getElementById("memberzone"); if(_mz){ _mz.style.display="none"; }
 }
 function LPW_prompt(msg){
   var p=document.getElementById("lpwPrompt");
@@ -627,7 +675,7 @@ function LPW_generate(){
         var rd=document.getElementById(_ids.r); if(rd){ rd.style.display=_hasReader?"block":"none"; }
         var _rl=document.getElementById("incReaderLabel"); if(_rl){ _rl.style.display=_hasReader?"":"none"; }
         var th=document.getElementById(_ids.t); if(th){ th.style.display="block"; }
-        if(pb){ pb.style.display="flex"; } var _up2=document.getElementById("upsell"); if(_up2){ _up2.style.display="block"; }
+        if(pb){ pb.style.display="flex"; } if(window.renderMemberZone){ renderMemberZone(band,month); }
         if(sec.scrollIntoView){ try{ sec.scrollIntoView({behavior:"smooth",block:"start"}); }catch(e){ sec.scrollIntoView(); } }
       } else { LPW_prompt("That plan isn’t ready yet."); }
     } else {
@@ -713,6 +761,111 @@ if(typeof window!=="undefined"){ window.LPW_generate = LPW_generate; }
   }
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); }
   else { init(); }
+})();
+</script>
+
+<div id="dhandouts"></div>
+<script>
+(function(){
+  var BUZZ_PIN="BUZZ-2026";
+  function isMember(){ try{return localStorage.getItem('tpp_buzz_member')==='1';}catch(e){return false;} }
+  function setMember(v){ try{ if(v){localStorage.setItem('tpp_buzz_member','1');} else {localStorage.removeItem('tpp_buzz_member');} }catch(e){} }
+  function cap(x){ return x.charAt(0).toUpperCase()+x.slice(1); }
+  function domHtml(list){ return '<span class="dlbl">Builds:</span> '+list.map(function(x){return '<span class="dom">'+x+'</span>';}).join(''); }
+  function optHtml(o,n){ return '<div class="opt"><div class="on">Option '+n+'</div><div class="ot">'+o.t+'</div><div class="od">'+o.d+'</div></div>'; }
+
+  var DAILY={
+    infant:{ sep:{
+      theme:"All About Me &amp; My Family",
+      week:"Week 1 &mdash; This Is Me &amp; My Family",
+      days:[
+        {day:"Monday",focus:"Face to Face",domains:["Social &amp; Emotional Development","Language &amp; Literacy"],opts:[
+          {t:"Mirror Play",d:"Hold baby up to a mirror. Point and gently name &ldquo;eyes&hellip; nose&hellip; mouth,&rdquo; and smile together. Babies love faces &mdash; especially yours."},
+          {t:"Family Photo Peek",d:"Show 2&ndash;3 family photos up close. Name each face: &ldquo;That&rsquo;s Mama! That&rsquo;s <i>you</i>!&rdquo; Naming builds belonging."}]},
+        {day:"Tuesday",focus:"Name &amp; Voice",domains:["Language &amp; Literacy","Approaches to Learning"],opts:[
+          {t:"Hello Name Song",d:"Sing softly while you cuddle: &ldquo;Hello, hello, hello baby ___.&rdquo; Hearing their name sung builds connection and language."},
+          {t:"Narrate the Day",d:"Use baby&rsquo;s name as you go: &ldquo;___ is having a bath!&rdquo; Words grow from hearing them all day long."}]},
+        {day:"Wednesday",focus:"Little Senses",domains:["Scientific Inquiry","Physical Development"],opts:[
+          {t:"Texture Touch",d:"Let baby feel a soft blanket, then a crinkly toy. Watch their face change &mdash; that curiosity <i>is</i> learning. (Always supervise.)"},
+          {t:"Rattle &amp; Wait",d:"Shake a rattle, then pause. Give baby a moment to &lsquo;answer&rsquo; with a wiggle or sound. Back-and-forth wires the brain."}]},
+        {day:"Thursday",focus:"Serve &amp; Return",domains:["Approaches to Learning","Language &amp; Literacy"],opts:[
+          {t:"Coo Conversation",d:"Copy the sound baby makes, then wait. Copy it again. This gentle back-and-forth is powerful brain-building."},
+          {t:"Peekaboo Scarf",d:"Hide your face with a light scarf, then &ldquo;peekaboo!&rdquo; Repeat as long as the smiles last &mdash; it teaches that you always come back."}]},
+        {day:"Friday",focus:"Cuddle &amp; Connect",domains:["Social &amp; Emotional Development","Creative Expression"],opts:[
+          {t:"Lap-Time Song",d:"Bounce gently to &ldquo;This Little Piggy&rdquo; or &ldquo;The More We Get Together.&rdquo; Rhythm + closeness = happy learning."},
+          {t:"Snuggle Read-Aloud",d:"Read in a soft, sing-song voice &mdash; a family board book or <i>Your Feelings Matter</i>. Babies drink in the sound of your voice."}]}
+      ],
+      homeden:{title:"The Home Den &mdash; This Week", lead:"Pop these in the diaper bag &mdash; little moments, big bonding.",
+        items:["A family photo card to keep near baby&rsquo;s crib.","A &lsquo;serve-and-return&rsquo; tip card (copy baby&rsquo;s sounds, then pause).","A lullaby list for the car and bedtime.","A &lsquo;sign MORE with me&rsquo; half-sheet for mealtimes."]}
+    }}
+  };
+
+  function upsellHTML(){
+    return '<div class="upsell"><div class="up-txt"><b>Buzz members get more.</b> Unlock a full <b>Monday&ndash;Friday daily plan</b> with <b>two printable at-home activities every day</b> &mdash; right here in this planner, no jumping around.</div>'
+     +'<div class="up-actions"><a class="up-btn" href="https://payhip.com/b/Kcw8r" target="_blank" rel="noopener">Become a Buzz member &rarr;</a>'
+     +'<button type="button" class="up-login" onclick="TPP_showLogin()">Already a member? Log in</button></div>'
+     +'<div class="up-loginrow" id="loginrow" style="display:none;"><input id="mpin" type="password" placeholder="Your Buzz PIN" autocomplete="off" onkeydown="if(event.key===\'Enter\')TPP_doLogin()"><button type="button" onclick="TPP_doLogin()">Unlock</button><span class="mpinerr" id="mpinerr"></span></div>'
+     +'<div class="up-disc">One login per membership &mdash; please keep your PIN private and do not share it.</div></div>';
+  }
+  function memberFoot(){
+    return '<div class="mfoot"><span class="mok">&#10004; Buzz member</span> &middot; One login per membership &mdash; please don&rsquo;t share &middot; <a href="#" onclick="TPP_logout();return false;">Log out</a></div>';
+  }
+  function comingSoonHTML(band,month){
+    return '<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>Day-by-day planner &mdash; coming soon</h2><p>You&rsquo;re a Buzz member! The Monday&ndash;Friday activities &amp; printouts for '+cap(band)+' &middot; '+month.toUpperCase()+' are being built. Enjoy the full monthly plan above for now.</p></div>'+memberFoot()+'</div>';
+  }
+  function dailyHTML(band,month,d){
+    var h='<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>This Week, Day by Day</h2><p>'+d.week+' &nbsp;&middot;&nbsp; '+d.theme+' &nbsp;&middot;&nbsp; pick one option each day</p><p class="dstd">Every activity is matched to the Florida Early Learning &amp; Developmental Standards (Birth&ndash;K).</p></div>';
+    d.days.forEach(function(dd,i){
+      h+='<div class="daycard"><div class="dayrow"><span class="dl">'+dd.day+'</span><span class="df">'+dd.focus+'</span></div>'
+       +'<div class="doms">'+domHtml(dd.domains)+'</div>'
+       +'<div class="opts">'+optHtml(dd.opts[0],1)+optHtml(dd.opts[1],2)+'</div>'
+       +'<button type="button" class="printbtn" onclick="TPP_print(\'dh-'+i+'\')">Print '+dd.day+'&rsquo;s activity &rarr;</button></div>';
+    });
+    var hd=d.homeden;
+    h+='<div class="dden"><h2>'+hd.title+'</h2><p class="dl">'+hd.lead+'</p><ul>'+hd.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><button type="button" class="printbtn" onclick="TPP_print(\'dh-den\')">Print the Home Den &rarr;</button></div>';
+    h+=memberFoot()+'</div>';
+    return h;
+  }
+  function renderHandouts(band,month,d){
+    var ho=document.getElementById('dhandouts'); var out='';
+    d.days.forEach(function(dd,i){
+      out+='<div class="dhandout" id="dh-'+i+'"><div class="hh"><span class="htag">The Weekly Planner &middot; '+cap(band)+'</span><h1>'+dd.day+' &middot; '+dd.focus+'</h1><p>'+month.toUpperCase()+' &middot; '+d.theme+' &middot; '+d.week+'</p><div class="doms">'+domHtml(dd.domains)+'</div></div>'
+       +'<div class="ho"><div class="on">Option 1</div><div class="ot">'+dd.opts[0].t+'</div><div class="od">'+dd.opts[0].d+'</div></div>'
+       +'<div class="ho"><div class="on">Option 2</div><div class="ot">'+dd.opts[1].t+'</div><div class="od">'+dd.opts[1].d+'</div></div>'
+       +'<div class="hf"><b>The Preschool Professional</b> &middot; The Buzz member benefit &middot; One login per membership &mdash; please do not share.</div></div>';
+    });
+    var hd=d.homeden;
+    out+='<div class="dhandout" id="dh-den"><div class="hh"><span class="htag">Home Den &middot; This Week</span><h1>'+hd.title+'</h1><p>'+d.theme+' &middot; '+cap(band)+'</p></div><div class="ho"><div class="od"><i>'+hd.lead+'</i></div><ul style="margin:8px 0 0;padding-left:20px;">'+hd.items.map(function(x){return '<li style="margin-bottom:5px;">'+x+'</li>';}).join('')+'</ul></div><div class="hf"><b>The Preschool Professional</b> &middot; The Buzz member benefit &middot; One login per membership &mdash; please do not share.</div></div>';
+    ho.innerHTML=out;
+  }
+
+  window.renderMemberZone=function(band,month){
+    var mz=document.getElementById('memberzone'); if(!mz)return;
+    if(!isMember()){ mz.innerHTML=upsellHTML(); document.getElementById('dhandouts').innerHTML=''; }
+    else {
+      var d=(DAILY[band]||{})[month];
+      if(d){ mz.innerHTML=dailyHTML(band,month,d); renderHandouts(band,month,d); }
+      else { mz.innerHTML=comingSoonHTML(band,month); document.getElementById('dhandouts').innerHTML=''; }
+    }
+    mz.style.display='block';
+  };
+  window.TPP_showLogin=function(){ var r=document.getElementById('loginrow'); if(r){ r.style.display='flex'; var p=document.getElementById('mpin'); if(p)p.focus(); } };
+  window.TPP_doLogin=function(){
+    var v=(document.getElementById('mpin').value||'').trim().toUpperCase();
+    if(v===BUZZ_PIN){ setMember(true); renderMemberZone(LPW_currentBand(),LPW_currentMonth()); }
+    else { var e=document.getElementById('mpinerr'); if(e){ e.textContent='That PIN didn’t work.'; } }
+  };
+  window.TPP_logout=function(){ setMember(false); renderMemberZone(LPW_currentBand(),LPW_currentMonth()); };
+  window.TPP_print=function(id){
+    var hs=document.querySelectorAll('#dhandouts .dhandout');
+    for(var i=0;i<hs.length;i++){ hs[i].classList.remove('active'); }
+    var t=document.getElementById(id); if(t){ t.classList.add('active'); }
+    document.body.classList.add('printing-daily'); window.print();
+  };
+  window.addEventListener('afterprint',function(){
+    document.body.classList.remove('printing-daily');
+    var hs=document.querySelectorAll('#dhandouts .dhandout'); for(var i=0;i<hs.length;i++){ hs[i].classList.remove('active'); }
+  });
 })();
 </script>
 </body>
