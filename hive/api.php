@@ -25,16 +25,16 @@ header('X-Robots-Tag: noindex, nofollow');
 $SCHOOL_BY_ROLE = ['director-sanford' => 'Sanford', 'director-deland' => 'DeLand 2', 'parent-sanford' => 'Sanford', 'parent-deland' => 'DeLand 2'];
 
 // Tables that carry a School field (server injects the school filter for directors)
-$SCHOOL_TABLES = ['Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links','Inventory','Parent Messages','Facility Checklists','Facility Submissions'];
+$SCHOOL_TABLES = ['Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links','Inventory','Parent Messages','Facility Checklists','Facility Submissions','Buzz Board','Buzz Board — Directors','Buzz Board — Director Weekly'];
 
 $DIRECTOR_PERMS = [
-  'read'  => ['Lesson Plan Index','Forms Library','Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links','Parent Messages','Inventory','Facility Checklists','Facility Submissions'],
+  'read'  => ['Lesson Plan Index','Forms Library','Briefing Checklist','Ratio Snapshots','FTE & Occupancy','Task Board','ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Staff Roster','Staff Hours Snapshot','Food Program Log','Email Automation Requests','Tab Notes','Sign-In Log','Weekly Schedule','Teacher Questions','Resource Links','Parent Messages','Inventory','Facility Checklists','Facility Submissions','Buzz Board','Buzz Board — Directors','Buzz Board — Director Weekly'],
   'create'=> ['ProCare Message Requests','Staff Time Corrections','Onboarding Tracker','Email Automation Requests','Tab Notes','Inventory','Facility Submissions'],
   'update'=> ['Briefing Checklist' => ['Done','Director Notes'], 'Onboarding Tracker' => ['Current Step','Status','Notes'], 'Parent Messages' => ['Status'], 'Inventory' => ['On-Hand Qty','Par / Reorder Level','Notes','Last Updated'], 'Facility Checklists' => ['Checked','Checked By','Time','Notes','Status','Room / Classroom']]
 ];
 $PARENT_PERMS = ['read' => ['Resource Links'], 'create'=>['Parent Messages'], 'update'=>[]];
 $PERMS = [
-  'teacher' => ['read' => ['Lesson Plan Index','Resource Links','Facility Checklists','Facility Submissions'], 'create'=>['Teacher Questions','Facility Submissions'], 'update'=>['Facility Checklists' => ['Checked','Checked By','Time','Notes','Status','Room / Classroom']]],
+  'teacher' => ['read' => ['Lesson Plan Index','Resource Links','Facility Checklists','Facility Submissions','Buzz Board'], 'create'=>['Teacher Questions','Facility Submissions'], 'update'=>['Facility Checklists' => ['Checked','Checked By','Time','Notes','Status','Room / Classroom']]],
   'parent' => $PARENT_PERMS,
   'parent-sanford' => $PARENT_PERMS,
   'parent-deland'  => $PARENT_PERMS,
