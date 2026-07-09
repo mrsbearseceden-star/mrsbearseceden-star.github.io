@@ -48,49 +48,49 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
 <body>
 <a class="back" href="index.html">← exit</a>
 <header>
-  <h1>🍎 Teacher Portal</h1>
-  <div class="sub">Hi, teacher friend! Grab your plans & forms in two taps 💛</div>
+<h1>🍎 Teacher Portal</h1>
+<div class="sub">Hi, teacher friend! Grab your plans & forms in two taps 💛</div>
 </header>
 <nav>
-  <div class="tab t-lesson active" onclick="show('lesson',this)">📚 Lesson Plan Wizard</div>
-  <div class="tab" style="background:linear-gradient(90deg,#5a4cc9,#9b6bff)" onclick="show('mc',this)">🎛 Mission Control</div>
-  <div class="tab t-forms" onclick="show('ask',this)">💬 Ask Mrs. Bear & Charles</div>
+<div class="tab t-lesson active" onclick="show('lesson',this)">📚 Lesson Plan Wizard</div>
+<div class="tab" style="background:linear-gradient(90deg,#5a4cc9,#9b6bff)" onclick="show('mc',this)">🎛 Mission Control</div>
+<div class="tab t-forms" onclick="show('ask',this)">💬 Ask Mrs. Bear & Charles</div>
 <div class="tab t-facil" onclick="show('facil',this)">🧹 Facility Checklists</div>
 </nav>
 <main>
-  <div class="panel show" id="p-lesson">
-    <div class="step">1️⃣ Pick your month</div>
-    <div class="grid" id="months"></div>
-    <div class="step">2️⃣ Pick your age group</div>
-    <div class="grid age" id="ages"></div>
-    <div class="result" id="result">
-      <h2 id="rTitle"></h2>
-      <div class="note" id="rNote"></div>
-      <div class="btns" id="rBtns"></div>
-    </div>
-  </div>
-  <div class="panel" id="p-mc">
-    <div class="step">🎛 Your links & tools — Slack, hubs, music for every part of the day 🎶</div>
-    <div id="mcList" class="empty">Loading your links… 🐝</div>
-  </div>
+<div class="panel show" id="p-lesson">
+<div class="step">1️⃣ Pick your month</div>
+<div class="grid" id="months"></div>
+<div class="step">2️⃣ Pick your age group</div>
+<div class="grid age" id="ages"></div>
+<div class="result" id="result">
+<h2 id="rTitle"></h2>
+<div class="note" id="rNote"></div>
+<div class="btns" id="rBtns"></div>
+</div>
+</div>
+<div class="panel" id="p-mc">
+<div class="step">🎛 Your links & tools — Slack, hubs, music for every part of the day 🎶</div>
+<div id="mcList" class="empty">Loading your links… 🐝</div>
+</div>
 
-  <style>#p-facil .fcard{background:#fff;border-left:5px solid #e5d9c8;border-radius:12px;padding:12px 14px;margin:8px 0;box-shadow:0 1px 4px rgba(0,0,0,.06);}#p-facil .frow2{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}#p-facil .frow2 .search{margin:0;flex:1;min-width:140px;}#p-facil .fbtn{border:none;border-radius:12px;padding:12px 20px;color:#fff;font-weight:800;cursor:pointer;background:#2fc4b2;font-size:16px;margin:6px 0;}#p-facil .fsubmit{display:block;width:100%;background:#12946c;margin-top:14px;font-size:17px;}#p-facil .fformhead{font-weight:900;font-size:18px;margin:14px 0 8px;}#p-facil .fitemrow{background:#fff;border-radius:10px;padding:10px 12px;margin:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.05);}#p-facil .fitemtxt{font-weight:600;font-size:15px;margin-bottom:6px;}#p-facil .fbtns{display:flex;gap:6px;margin-bottom:6px;}#p-facil .ftog{border:2px solid #ddd;background:#fafafa;border-radius:8px;padding:5px 10px;font-weight:700;cursor:pointer;font-size:13px;color:#888;}#p-facil .ftog.ok.on{background:#d5f0e2;border-color:#12946c;color:#0a6b4f;}#p-facil .ftog.bad.on{background:#ffd9d4;border-color:#e74c3c;color:#c0392b;}#p-facil .fnote{width:100%;border:1px solid #e5d9c8;border-radius:8px;padding:6px 8px;font-size:14px;font-family:inherit;}#p-facil .fnote.big{min-height:70px;}#p-facil .flbl{display:block;font-weight:700;margin:10px 0 3px;font-size:14px;}#p-facil .fhisthead{font-weight:900;font-size:17px;margin:20px 0 8px;border-top:2px dashed #e5d9c8;padding-top:14px;}#p-facil .fhist{background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;box-shadow:0 1px 3px rgba(0,0,0,.05);}#p-facil .fmeta{color:#8a7c66;font-size:13px;}#p-facil .fwarn{background:#fff6d9;border-left:4px solid #ffb13d;padding:10px 12px;border-radius:8px;}#p-facil .fok{background:#d5f0e2;border-left:4px solid #12946c;padding:14px;border-radius:10px;font-weight:700;}#p-facil .empty{color:#999;text-align:center;padding:16px;}</style><div id="p-facil" class="panel"><div class="fcard"><b>🧹 Facility Checklists.</b> Finished cleaning or inspecting your room? Submit it here — it's saved, logged for DCF, and your director gets it. Add your name, pick your room &amp; form, and go.</div><div class="frow2"><input class="search" id="ftName" placeholder="Your name"><select class="search" id="ftSchool"><option value="">Your school…</option><option>Sanford</option><option>DeLand 2</option></select><select class="search" id="ftRoom"><option value="">Your room…</option><option>Infant Room</option><option>Ones</option><option>Twos</option><option>Threes</option><option>Fours / VPK</option><option>School Age</option><option>Kitchen</option><option>Playground</option><option>Whole Building / Common Areas</option></select><select class="search" id="ftForm"><option value="">Which form?…</option><option>🚽 Bathroom Cleaning</option><option>🧹 Classroom Cleaning</option><option>🏠 Indoor Inspection</option><option>🛝 Outdoor / Playground Inspection</option><option>🧼 Sanitation & Safety</option><option>🌙 End of Day Building Sweep</option><option>🚨 Incident Report</option></select></div><button class="fbtn" onclick="ftStart()">Start form →</button><div id="ftBody"></div><div id="ftHist"><div class="empty">Pick your school &amp; room to see today's submitted forms.</div></div></div>
+<style>#p-facil .fcard{background:#fff;border-left:5px solid #e5d9c8;border-radius:12px;padding:12px 14px;margin:8px 0;box-shadow:0 1px 4px rgba(0,0,0,.06);}#p-facil .frow2{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}#p-facil .frow2 .search{margin:0;flex:1;min-width:140px;}#p-facil .fbtn{border:none;border-radius:12px;padding:12px 20px;color:#fff;font-weight:800;cursor:pointer;background:#2fc4b2;font-size:16px;margin:6px 0;}#p-facil .fsubmit{display:block;width:100%;background:#12946c;margin-top:14px;font-size:17px;}#p-facil .fformhead{font-weight:900;font-size:18px;margin:14px 0 8px;}#p-facil .fitemrow{background:#fff;border-radius:10px;padding:10px 12px;margin:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.05);}#p-facil .fitemtxt{font-weight:600;font-size:15px;margin-bottom:6px;}#p-facil .fbtns{display:flex;gap:6px;margin-bottom:6px;}#p-facil .ftog{border:2px solid #ddd;background:#fafafa;border-radius:8px;padding:5px 10px;font-weight:700;cursor:pointer;font-size:13px;color:#888;}#p-facil .ftog.ok.on{background:#d5f0e2;border-color:#12946c;color:#0a6b4f;}#p-facil .ftog.bad.on{background:#ffd9d4;border-color:#e74c3c;color:#c0392b;}#p-facil .fnote{width:100%;border:1px solid #e5d9c8;border-radius:8px;padding:6px 8px;font-size:14px;font-family:inherit;}#p-facil .fnote.big{min-height:70px;}#p-facil .flbl{display:block;font-weight:700;margin:10px 0 3px;font-size:14px;}#p-facil .fhisthead{font-weight:900;font-size:17px;margin:20px 0 8px;border-top:2px dashed #e5d9c8;padding-top:14px;}#p-facil .fhist{background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;box-shadow:0 1px 3px rgba(0,0,0,.05);}#p-facil .fmeta{color:#8a7c66;font-size:13px;}#p-facil .fwarn{background:#fff6d9;border-left:4px solid #ffb13d;padding:10px 12px;border-radius:8px;}#p-facil .fok{background:#d5f0e2;border-left:4px solid #12946c;padding:14px;border-radius:10px;font-weight:700;}#p-facil .empty{color:#999;text-align:center;padding:16px;}</style><div id="p-facil" class="panel"><div class="fcard"><b>🧹 Facility Checklists.</b> Finished cleaning or inspecting your room? Submit it here — it's saved, logged for DCF, and your director gets it. Add your name, pick your room &amp; form, and go.</div><div class="frow2"><input class="search" id="ftName" placeholder="Your name"><select class="search" id="ftSchool"><option value="">Your school…</option><option>Sanford</option><option>DeLand 2</option></select><select class="search" id="ftRoom"><option value="">Your room…</option><option>Infant Room</option><option>Ones</option><option>Twos</option><option>Threes</option><option>Fours / VPK</option><option>School Age</option><option>Kitchen</option><option>Playground</option><option>Whole Building / Common Areas</option></select><select class="search" id="ftForm"><option value="">Which form?…</option><option>🚽 Bathroom Cleaning</option><option>🧹 Classroom Cleaning</option><option>🏠 Indoor Inspection</option><option>🛝 Outdoor / Playground Inspection</option><option>🧼 Sanitation & Safety</option><option>🌙 End of Day Building Sweep</option><option>🚨 Incident Report</option></select></div><button class="fbtn" onclick="ftStart()">Start form →</button><div id="ftBody"></div><div id="ftHist"><div class="empty">Pick your school &amp; room to see today's submitted forms.</div></div></div>
 <div class="panel" id="p-ask">
-    <div class="result show" style="border-top-color:var(--pink)">
-      <h2>💬 Got a question? Ask away!</h2>
-      <div class="note">Need activity ideas for your theme? Wondering about a lesson plan? Want advice on anything classroom? Send it here — <b>Charles or Mrs. Bear will message you personally on Slack</b>, usually within the hour on weekdays. 💛</div>
-      <form onsubmit="return sendQuestion(event)">
-        <div style="margin-bottom:12px"><label style="display:block;font-weight:800;margin-bottom:5px;">Your name</label>
-          <input class="search" style="border-color:var(--pink);margin:0" type="text" id="qName" required placeholder="So we know who to message!"></div>
-        <div style="margin-bottom:12px"><label style="display:block;font-weight:800;margin-bottom:5px;">Your school</label>
-          <select class="search" style="border-color:var(--pink);margin:0" id="qSchool" required><option value="">Pick your school…</option><option>Sanford</option><option>DeLand 2</option></select></div>
-        <div style="margin-bottom:14px"><label style="display:block;font-weight:800;margin-bottom:5px;">Your question ✏️</label>
-          <textarea class="search" style="border-color:var(--pink);margin:0;min-height:110px;resize:vertical" id="qText" required placeholder="e.g. I need a fun water-theme activity for my Twos this Friday — any ideas?"></textarea></div>
-        <button class="go g1" style="border:none;cursor:pointer;width:100%;font-family:inherit">Send my question 🐝</button>
-      </form>
-      <div class="note" id="qSent" style="margin-top:12px;"></div>
-    </div>
-  </div>
+<div class="result show" style="border-top-color:var(--pink)">
+<h2>💬 Got a question? Ask away!</h2>
+<div class="note">Need activity ideas for your theme? Wondering about a lesson plan? Want advice on anything classroom? Send it here — <b>Charles or Mrs. Bear will message you personally on Slack</b>, usually within the hour on weekdays. 💛</div>
+<form onsubmit="return sendQuestion(event)">
+<div style="margin-bottom:12px"><label style="display:block;font-weight:800;margin-bottom:5px;">Your name</label>
+<input class="search" style="border-color:var(--pink);margin:0" type="text" id="qName" required placeholder="So we know who to message!"></div>
+<div style="margin-bottom:12px"><label style="display:block;font-weight:800;margin-bottom:5px;">Your school</label>
+<select class="search" style="border-color:var(--pink);margin:0" id="qSchool" required><option value="">Pick your school…</option><option>Sanford</option><option>DeLand 2</option></select></div>
+<div style="margin-bottom:14px"><label style="display:block;font-weight:800;margin-bottom:5px;">Your question ✏️</label>
+<textarea class="search" style="border-color:var(--pink);margin:0;min-height:110px;resize:vertical" id="qText" required placeholder="e.g. I need a fun water-theme activity for my Twos this Friday — any ideas?"></textarea></div>
+<button class="go g1" style="border:none;cursor:pointer;width:100%;font-family:inherit">Send my question 🐝</button>
+</form>
+<div class="note" id="qSent" style="margin-top:12px;"></div>
+</div>
+</div>
 </main>
 <script>
 const PIN = sessionStorage.getItem('hivePin');
@@ -98,76 +98,76 @@ if(!PIN) location.href='index.html';
 const esc = s => (s??'').toString().replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 async function api(payload){ const r = await fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:PIN,...payload})}); return r.json(); }
 function show(id, el){ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
-  document.getElementById('p-'+id).classList.add('show');
-  document.querySelectorAll('nav .tab').forEach(t=>t.classList.remove('active')); el.classList.add('active'); }
+document.getElementById('p-'+id).classList.add('show');
+document.querySelectorAll('nav .tab').forEach(t=>t.classList.remove('active')); el.classList.add('active'); }
 
 // ---- LESSON PLAN WIZARD ----
 let plans = [], selMonth = null, selAge = null;
 const MONTH_EMOJI = {'January':'⛄','February — Dinosaur Theme':'🦕','February — Real & Make-Believe':'🦄','March':'☘️','April':'🌷','May':'🌞','June':'🏖️','July':'🎆','August':'✏️','September':'🍂','October':'🎃','November':'🦃','December':'🎄','Extra Summer Fun':'🍉'};
 const AGE_EMOJI = {'Infant':'👶','Ones':'🧸','Twos':'🚂','Threes':'🖍️','Fours':'🎒','School Age':'⚽'};
 async function loadPlans(){
-  const d = await api({action:'list', table:'Lesson Plan Index', maxRecords:120});
-  plans = (d.records||[]).map(r=>r.fields);
-  const months = [...new Set(plans.map(p=>p.Month?.name||p.Month).filter(Boolean))];
-  const order = Object.keys(MONTH_EMOJI);
-  months.sort((a,b)=>order.indexOf(a)-order.indexOf(b));
-  document.getElementById('months').innerHTML = months.map((m,i)=>`<div class="pick m${i%7}" onclick="pickMonth('${esc(m)}',this)">${MONTH_EMOJI[m]||'📅'}<br>${esc(m.replace('February — ','Feb: '))}</div>`).join('');
-  const ages = ['Infant','Ones','Twos','Threes','Fours','School Age'];
-  document.getElementById('ages').innerHTML = ages.map((a,i)=>`<div class="pick m${(i+2)%7}" onclick="pickAge('${a}',this)">${AGE_EMOJI[a]}<br>${a}</div>`).join('');
+const d = await api({action:'list', table:'Lesson Plan Index', maxRecords:120});
+plans = (d.records||[]).map(r=>r.fields);
+const months = [...new Set(plans.map(p=>p.Month?.name||p.Month).filter(Boolean))];
+const order = Object.keys(MONTH_EMOJI);
+months.sort((a,b)=>order.indexOf(a)-order.indexOf(b));
+document.getElementById('months').innerHTML = months.map((m,i)=>`<div class="pick m${i%7}" onclick="pickMonth('${esc(m)}',this)">${MONTH_EMOJI[m]||'📅'}<br>${esc(m.replace('February — ','Feb: '))}</div>`).join('');
+const ages = ['Infant','Ones','Twos','Threes','Fours','School Age'];
+document.getElementById('ages').innerHTML = ages.map((a,i)=>`<div class="pick m${(i+2)%7}" onclick="pickAge('${a}',this)">${AGE_EMOJI[a]}<br>${a}</div>`).join('');
 }
 function pickMonth(m, el){ selMonth=m; document.querySelectorAll('#months .pick').forEach(p=>p.classList.remove('sel')); el.classList.add('sel'); showResult(); }
 function pickAge(a, el){ selAge=a; document.querySelectorAll('#ages .pick').forEach(p=>p.classList.remove('sel')); el.classList.add('sel'); showResult(); }
 function showResult(){
-  if(!selMonth || !selAge) return;
-  const p = plans.find(x => (x.Month?.name||x.Month)===selMonth && (x['Age Group']?.name||x['Age Group'])===selAge);
-  const box = document.getElementById('result'); box.classList.add('show');
-  const folderField = Object.keys(p||{}).find(k=>k.includes('Month Folder'));
-  if(!p){ document.getElementById('rTitle').textContent='🤔 No plan for that combo';
-    document.getElementById('rNote').textContent='That month doesn\'t have a plan for this age group (like School Age in summer). Try another pick!';
-    document.getElementById('rBtns').innerHTML=''; return; }
-  document.getElementById('rTitle').textContent = '🎉 ' + (p.Plan || (selMonth+' — '+selAge));
-  document.getElementById('rNote').textContent = p.Notes || 'Your weekly plan is ready to print, and the month folder has instructions, resources, and take-home sheets.';
-  let b = '';
-  if(p['File Link']) b += `<a class="go g1" href="${esc(p['File Link'])}" target="_blank" rel="noopener">🖨️ Open & Print My Plan</a>`;
-  if(folderField && p[folderField]) b += `<a class="go g2" href="${esc(p[folderField])}" target="_blank" rel="noopener">📂 Instructions, Resources & Take-Homes</a>`;
-  document.getElementById('rBtns').innerHTML = b || '<div class="note">Links coming soon for this one — ask Mrs. Bear!</div>';
-  box.scrollIntoView({behavior:'smooth', block:'nearest'});
+if(!selMonth || !selAge) return;
+const p = plans.find(x => (x.Month?.name||x.Month)===selMonth && (x['Age Group']?.name||x['Age Group'])===selAge);
+const box = document.getElementById('result'); box.classList.add('show');
+const folderField = Object.keys(p||{}).find(k=>k.includes('Month Folder'));
+if(!p){ document.getElementById('rTitle').textContent='🤔 No plan for that combo';
+document.getElementById('rNote').textContent='That month doesn\'t have a plan for this age group (like School Age in summer). Try another pick!';
+document.getElementById('rBtns').innerHTML=''; return; }
+document.getElementById('rTitle').textContent = '🎉 ' + (p.Plan || (selMonth+' — '+selAge));
+document.getElementById('rNote').textContent = p.Notes || 'Your weekly plan is ready to print, and the month folder has instructions, resources, and take-home sheets.';
+let b = '';
+if(p['File Link']) b += `<a class="go g1" href="${esc(p['File Link'])}" target="_blank" rel="noopener">🖨️ Open & Print My Plan</a>`;
+if(folderField && p[folderField]) b += `<a class="go g2" href="${esc(p[folderField])}" target="_blank" rel="noopener">📂 Instructions, Resources & Take-Homes</a>`;
+document.getElementById('rBtns').innerHTML = b || '<div class="note">Links coming soon for this one — ask Mrs. Bear!</div>';
+box.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
 // ---- MISSION CONTROL (Resource Links) ----
 async function loadMC(){
-  const d = await api({action:'list', table:'Resource Links', sortField:'Order', maxRecords:60});
-  const box = document.getElementById('mcList'); const recs = d.records||[];
-  box.classList.remove('empty');
-  const secOrder = ['❤️ General','⭐ Most Used','🎶 Music & Songs'];
-  const groups = {};
-  recs.forEach(r=>{ const s = (r.fields.Section?.name||r.fields.Section)||'Other'; (groups[s]=groups[s]||[]).push(r.fields); });
-  box.innerHTML = secOrder.filter(s=>groups[s]).map(s=>`
-    <div class="step">${esc(s)}</div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
-    ${groups[s].map(f=>`<div class="pick" style="text-align:left;cursor:default;display:flex;flex-direction:column">
-      <div style="font-size:1.6rem">${esc(f.Emoji||'🔗')}</div>
-      <b style="margin:4px 0;font-size:.92rem">${esc(f.Title)}</b>
-      <div style="font-size:.76rem;color:var(--soft);font-weight:600;flex:1;margin-bottom:10px">${esc(f.Description||'')}</div>
-      ${f.URL?`<a class="open" style="text-align:center;background:var(--purple)" href="${esc(f.URL)}" target="_blank" rel="noopener">Open →</a>`:''}
-    </div>`).join('')}
-    </div>`).join('') || '<div class="empty">Links land here shortly 🐝</div>';
+const d = await api({action:'list', table:'Resource Links', sortField:'Order', maxRecords:60});
+const box = document.getElementById('mcList'); const recs = d.records||[];
+box.classList.remove('empty');
+const secOrder = ['❤️ General','⭐ Most Used','🎶 Music & Songs'];
+const groups = {};
+recs.forEach(r=>{ const s = (r.fields.Section?.name||r.fields.Section)||'Other'; (groups[s]=groups[s]||[]).push(r.fields); });
+box.innerHTML = secOrder.filter(s=>groups[s]).map(s=>`
+<div class="step">${esc(s)}</div>
+<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+${groups[s].map(f=>`<div class="pick" style="text-align:left;cursor:default;display:flex;flex-direction:column">
+<div style="font-size:1.6rem">${esc(f.Emoji||'🔗')}</div>
+<b style="margin:4px 0;font-size:.92rem">${esc(f.Title)}</b>
+<div style="font-size:.76rem;color:var(--soft);font-weight:600;flex:1;margin-bottom:10px">${esc(f.Description||'')}</div>
+${f.URL?`<a class="open" style="text-align:center;background:var(--purple)" href="${esc(f.URL)}" target="_blank" rel="noopener">Open →</a>`:''}
+</div>`).join('')}
+</div>`).join('') || '<div class="empty">Links land here shortly 🐝</div>';
 }
 loadMC();
 
 // ---- ASK MRS. BEAR & CHARLES ----
 document.getElementById('qName').value = localStorage.getItem('hiveName')||'';
 async function sendQuestion(e){ e.preventDefault();
-  const name = document.getElementById('qName').value.trim();
-  const school = document.getElementById('qSchool').value;
-  const text = document.getElementById('qText').value.trim();
-  localStorage.setItem('hiveName', name);
-  await api({action:'create', table:'Teacher Questions', fields:{
-    'Question': text.slice(0,90), 'Full Question': text, 'Teacher Name': name, 'School': school,
-    'When': new Date().toISOString(), 'Status':'🟡 New'}});
-  document.getElementById('qText').value='';
-  document.getElementById('qSent').innerHTML = '🎉 <b>Sent!</b> Watch your Slack — Charles or Mrs. Bear will message you personally, usually within the hour on weekdays.';
-  return false; }
+const name = document.getElementById('qName').value.trim();
+const school = document.getElementById('qSchool').value;
+const text = document.getElementById('qText').value.trim();
+localStorage.setItem('hiveName', name);
+await api({action:'create', table:'Teacher Questions', fields:{
+'Question': text.slice(0,90), 'Full Question': text, 'Teacher Name': name, 'School': school,
+'When': new Date().toISOString(), 'Status':'🟡 New'}});
+document.getElementById('qText').value='';
+document.getElementById('qSent').innerHTML = '🎉 <b>Sent!</b> Watch your Slack — Charles or Mrs. Bear will message you personally, usually within the hour on weekdays.';
+return false; }
 window.ftToast=function(m){var t=document.getElementById('ftToastBox');if(!t){t=document.createElement('div');t.id='ftToastBox';t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 18px;border-radius:20px;z-index:9999;font-weight:700;transition:opacity .3s';document.body.appendChild(t);}t.textContent=m;t.style.opacity='1';clearTimeout(window.__ftT);window.__ftT=setTimeout(function(){t.style.opacity='0';},2600);};
 window.ftPick=function(el,ok){var row=el.closest('.fitemrow');row.querySelectorAll('.ftog').forEach(function(b){b.classList.remove('on');});el.classList.add('on');row.setAttribute('data-ok',ok?'1':'0');};
 window.ftIncidentForm=function(){return '<div class="fformhead">🚨 Incident Report</div>'+'<label class="flbl">When did it happen?</label><input id="incWhen" class="search" placeholder="e.g. Today ~10:30 AM">'+'<label class="flbl">Child(ren) involved</label><input id="incChild" class="search" placeholder="First names">'+'<label class="flbl">Staff / witnesses present</label><input id="incStaff" class="search" placeholder="Names">'+'<label class="flbl">What happened?</label><textarea id="incWhat" class="fnote big" placeholder="Describe the incident in detail…"></textarea>'+'<label class="flbl">Action taken</label><textarea id="incAction" class="fnote big" placeholder="First aid, comfort, separation, etc."></textarea>'+'<label class="flbl">Parent / guardian notified?</label><select id="incParent" class="search"><option>Not yet</option><option>Yes — in person</option><option>Yes — by phone</option><option>Yes — by ProCare</option></select>'+'<label class="flbl">Follow-up needed</label><input id="incFollow" class="search" placeholder="e.g. Watch the area / call parent again">'+'<button class="fbtn fsubmit" style="background:#e74c3c" onclick="ftSubmitIncident()">Submit Incident Report 🚨</button>';};
@@ -179,5 +179,6 @@ window.ftInit=function(){var g=function(id){return document.getElementById(id);}
 
 loadPlans(); ftInit();
 </script>
+<script src="buzz.js"></script>
 </body>
 </html>
