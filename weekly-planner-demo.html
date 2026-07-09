@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weekly Planner — The Buzz (Members)</title>
+<style>
+  :root{--honey:#E8A317;--honeyd:#C6820C;--ink:#2B2117;--inks:#5C4D3A;--cream:#FBF6EC;--cream2:#FDF9F0;--creamhl:#FCF3DD;--sage:#6E8B6A;--sagebg:#F1F4EF;--rose:#F7E9EC;--white:#fff;--line:#EAD9BD;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:Helvetica,Arial,sans-serif;line-height:1.5;}
+  a{color:var(--honeyd);}
+  .bwm{display:inline-flex;flex-direction:column;align-items:center;line-height:1;margin-bottom:10px;}
+  .bwm-a{font-family:Georgia,serif;font-weight:bold;color:var(--honeyd);font-size:16px;letter-spacing:.5px;}
+  .bwm-b{font-family:Georgia,serif;font-weight:bold;color:var(--ink);font-size:20px;letter-spacing:3px;text-transform:uppercase;}
+  /* ---- PIN gate ---- */
+  .gate{position:fixed;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50;}
+  .gatecard{background:var(--white);max-width:460px;width:100%;border-radius:16px;box-shadow:0 6px 30px rgba(43,33,23,.14);padding:30px 26px;text-align:center;}
+  .tag{display:inline-block;background:var(--honey);color:var(--white);font-size:12px;font-weight:bold;letter-spacing:.5px;padding:4px 12px;border-radius:20px;}
+  .gatecard h1{font-family:Georgia,serif;margin:10px 0 4px;font-size:28px;}
+  .gsub{color:var(--inks);font-size:14px;margin:0 0 16px;}
+  .disc{background:var(--rose);border:1px solid #e6cdd3;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--inks);text-align:left;margin-bottom:16px;}
+  #pin{width:100%;padding:12px 14px;font-size:16px;border:2px solid var(--line);border-radius:10px;text-align:center;letter-spacing:2px;}
+  .gatecard button{margin-top:12px;width:100%;background:var(--honey);color:var(--white);border:none;font-size:16px;font-weight:bold;padding:13px;border-radius:10px;cursor:pointer;}
+  .gatecard button:hover{background:var(--honeyd);}
+  .ghint{font-size:12px;color:var(--inks);margin:12px 0 4px;}
+  .gjoin{font-size:13px;margin:4px 0 0;}
+  .gerr{color:#b3261e;font-size:13px;min-height:18px;margin:8px 0 0;font-weight:bold;}
+  /* ---- planner ---- */
+  header.top{background:linear-gradient(180deg,var(--cream2),var(--cream));text-align:center;padding:26px 16px 10px;border-bottom:1px solid var(--line);}
+  header.top h1{font-family:Georgia,serif;margin:6px 0 2px;font-size:26px;}
+  header.top .sub{color:var(--inks);font-size:14px;margin:0;}
+  .wrap{max-width:820px;margin:0 auto;padding:18px 16px 40px;}
+  .weekhead{background:var(--creamhl);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px;text-align:center;}
+  .weekhead h2{font-family:Georgia,serif;margin:0 0 2px;font-size:20px;color:var(--ink);}
+  .weekhead p{margin:0;color:var(--inks);font-size:13px;}
+  .daycard{background:var(--white);border-radius:14px;box-shadow:0 2px 12px rgba(43,33,23,.07);padding:18px 18px 14px;margin-bottom:16px;}
+  .dayrow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-bottom:2px solid var(--honey);padding-bottom:8px;margin-bottom:12px;}
+  .dayrow .dl{font-family:Georgia,serif;font-size:19px;color:var(--ink);}
+  .dayrow .df{color:var(--sage);font-weight:bold;font-size:14px;}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media (max-width:560px){ .opts{grid-template-columns:1fr;} }
+  .opt{background:var(--sagebg);border:1px solid #dbe6d8;border-radius:10px;padding:12px 14px;}
+  .opt .on{font-size:11px;font-weight:bold;letter-spacing:.5px;color:var(--sage);text-transform:uppercase;}
+  .opt .ot{font-weight:bold;font-size:15px;color:var(--ink);margin:2px 0 4px;}
+  .opt .od{font-size:13.5px;color:var(--inks);}
+  .doms{margin:0 0 12px;font-size:11px;color:var(--inks);}
+  .dlbl{font-weight:bold;color:var(--sage);text-transform:uppercase;letter-spacing:.4px;margin-right:4px;}
+  .dom{display:inline-block;background:var(--sagebg);border:1px solid #dbe6d8;border-radius:10px;padding:2px 8px;margin:2px 3px 0 0;font-weight:bold;color:var(--ink);}
+  .stdnote{font-size:12px;color:var(--inks);margin:6px 0 0;font-style:italic;}
+  .handout .doms{text-align:center;margin-top:6px;}
+  .printbtn{margin-top:12px;background:var(--honey);color:var(--white);border:none;font-weight:bold;font-size:13px;padding:9px 16px;border-radius:9px;cursor:pointer;}
+  .printbtn:hover{background:var(--honeyd);}
+  .den{background:var(--cream2);border:2px solid var(--honey);border-radius:14px;padding:18px;margin-bottom:8px;}
+  .den h2{font-family:Georgia,serif;margin:0 0 4px;font-size:20px;}
+  .den .dl{color:var(--inks);font-size:13px;margin:0 0 10px;font-style:italic;}
+  .den ul{margin:0;padding-left:20px;}
+  .den li{font-size:14px;margin-bottom:4px;}
+  .memberfoot{text-align:center;font-size:12px;color:var(--inks);margin-top:18px;border-top:1px solid var(--line);padding-top:12px;}
+  /* ---- print handouts ---- */
+  .handout{display:none;}
+  .handout .hh{text-align:center;border-bottom:2px solid var(--honey);padding-bottom:10px;margin-bottom:14px;}
+  .handout .hh .htag{display:inline-block;background:var(--honey);color:var(--white);font-size:11px;font-weight:bold;padding:3px 10px;border-radius:16px;}
+  .handout .hh h1{font-family:Georgia,serif;font-size:24px;margin:8px 0 2px;}
+  .handout .hh p{margin:0;color:var(--inks);font-size:13px;}
+  .handout .ho{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:12px;background:var(--cream2);}
+  .handout .ho .on{font-size:11px;font-weight:bold;letter-spacing:.5px;color:var(--sage);text-transform:uppercase;}
+  .handout .ho .ot{font-family:Georgia,serif;font-size:18px;margin:2px 0 4px;}
+  .handout .ho .od{font-size:14px;color:var(--inks);}
+  .handout .hf{margin-top:16px;border-top:1px solid var(--line);padding-top:10px;text-align:center;font-size:11px;color:var(--inks);}
+  .handout .hf b{font-family:Georgia,serif;color:var(--ink);}
+  @media print{
+    @page{size:letter portrait;margin:0.5in;}
+    .gate,.screen{display:none !important;}
+    body{background:#fff;}
+    .handout{page-break-after:always;}
+  }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gatecard">
+    <div class="bwm"><span class="bwm-a">The Preschool</span><span class="bwm-b">Professional</span></div>
+    <span class="tag">The Buzz &middot; Members Only</span>
+    <h1>The Weekly Planner</h1>
+    <p class="gsub">Daily at-home activities + a weekly Home Den, matched to this week&rsquo;s lesson plan.</p>
+    <div class="disc"><b>One login per membership.</b> Please keep your PIN private and do <b>not</b> share it. Your access is for your own family or classroom only &mdash; sharing your login is a violation of your Buzz membership.</div>
+    <input id="pin" type="password" placeholder="Enter your Buzz PIN" autocomplete="off" onkeydown="if(event.key==='Enter')unlock()">
+    <button onclick="unlock()">Unlock the Planner</button>
+    <p class="gerr" id="gerr"></p>
+    <p class="ghint">Members receive their PIN by email after joining The Buzz. <br>(Demo PIN for testing: <b>BUZZ-2026</b>)</p>
+    <p class="gjoin">Not a member yet? <a href="https://payhip.com/b/Kcw8r" target="_blank" rel="noopener">Join The Buzz &rarr;</a></p>
+  </div>
+</div>
+
+<div class="screen" id="screen" style="display:none;">
+  <header class="top">
+    <div class="bwm"><span class="bwm-a">The Preschool</span><span class="bwm-b">Professional</span></div>
+    <h1>The Weekly Planner &middot; Infant</h1>
+    <p class="sub">A member benefit of The Buzz</p>
+  </header>
+  <div class="wrap">
+    <div class="weekhead" id="weekhead"></div>
+    <div id="days"></div>
+    <div id="homeden"></div>
+    <div class="memberfoot"><b>Member access only.</b> One login per membership &mdash; please don&rsquo;t share your PIN. &copy; The Preschool Professional &middot; Built with love by Mrs. Bear.</div>
+  </div>
+</div>
+
+<div id="handouts"></div>
+
+<script>
+/* =========================================================
+   THE WEEKLY PLANNER — Infant sample (proof of concept).
+   Each day/option below maps 1:1 to a future Airtable row
+   (Band, Month, Week, Day, Option, Title, Instructions).
+   ========================================================= */
+var DEMO_PIN="BUZZ-2026";
+var WEEK={
+  band:"Infant", month:"September",
+  theme:"All About Me &amp; My Family",
+  week:"Week 1 &mdash; This Is Me &amp; My Family",
+  days:[
+    {day:"Monday", focus:"Face to Face", domains:["Social &amp; Emotional Development","Language &amp; Literacy"], opts:[
+      {t:"Mirror Play", d:"Hold baby up to a mirror. Point and gently name &ldquo;eyes&hellip; nose&hellip; mouth,&rdquo; and smile together. Babies love faces &mdash; especially yours."},
+      {t:"Family Photo Peek", d:"Show 2&ndash;3 family photos up close. Name each face: &ldquo;That&rsquo;s Mama! That&rsquo;s <i>you</i>!&rdquo; Naming builds belonging."}
+    ]},
+    {day:"Tuesday", focus:"Name &amp; Voice", domains:["Language &amp; Literacy","Approaches to Learning"], opts:[
+      {t:"Hello Name Song", d:"Sing softly while you cuddle: &ldquo;Hello, hello, hello baby ___.&rdquo; Hearing their name sung builds connection and language."},
+      {t:"Narrate the Day", d:"Use baby&rsquo;s name as you go: &ldquo;___ is having a bath!&rdquo; Words grow from hearing them all day long."}
+    ]},
+    {day:"Wednesday", focus:"Little Senses", domains:["Scientific Inquiry","Physical Development"], opts:[
+      {t:"Texture Touch", d:"Let baby feel a soft blanket, then a crinkly toy. Watch their face change &mdash; that curiosity <i>is</i> learning. (Always supervise.)"},
+      {t:"Rattle &amp; Wait", d:"Shake a rattle, then pause. Give baby a moment to &lsquo;answer&rsquo; with a wiggle or sound. Back-and-forth wires the brain."}
+    ]},
+    {day:"Thursday", focus:"Serve &amp; Return", domains:["Approaches to Learning","Language &amp; Literacy"], opts:[
+      {t:"Coo Conversation", d:"Copy the sound baby makes, then wait. Copy it again. This gentle back-and-forth is powerful brain-building."},
+      {t:"Peekaboo Scarf", d:"Hide your face with a light scarf, then &ldquo;peekaboo!&rdquo; Repeat as long as the smiles last &mdash; it teaches that you always come back."}
+    ]},
+    {day:"Friday", focus:"Cuddle &amp; Connect", domains:["Social &amp; Emotional Development","Creative Expression"], opts:[
+      {t:"Lap-Time Song", d:"Bounce gently to &ldquo;This Little Piggy&rdquo; or &ldquo;The More We Get Together.&rdquo; Rhythm + closeness = happy learning."},
+      {t:"Snuggle Read-Aloud", d:"Read in a soft, sing-song voice &mdash; a family board book or <i>Your Feelings Matter</i>. Babies drink in the sound of your voice."}
+    ]}
+  ],
+  homeden:{
+    title:"The Home Den &mdash; This Week",
+    lead:"Pop these in the diaper bag &mdash; little moments, big bonding.",
+    items:[
+      "A family photo card to keep near baby&rsquo;s crib.",
+      "A &lsquo;serve-and-return&rsquo; tip card (copy baby&rsquo;s sounds, then pause).",
+      "A lullaby list for the car and bedtime.",
+      "A &lsquo;sign MORE with me&rsquo; half-sheet for mealtimes."
+    ]
+  }
+};
+
+function domHtml(list){return '<span class="dlbl">Builds:</span> '+list.map(function(x){return '<span class="dom">'+x+'</span>';}).join('');}
+function el(html){var d=document.createElement('div');d.innerHTML=html;return d.firstChild;}
+function optHtml(o,n){return '<div class="opt"><div class="on">Option '+n+'</div><div class="ot">'+o.t+'</div><div class="od">'+o.d+'</div></div>';}
+
+function render(){
+  document.getElementById('weekhead').innerHTML='<h2>'+WEEK.month+' &middot; '+WEEK.theme+'</h2><p>'+WEEK.week+' &nbsp;&middot;&nbsp; Infant &nbsp;&middot;&nbsp; pick one option each day</p><p class="stdnote">Every activity is matched to the Florida Early Learning &amp; Developmental Standards (Birth&ndash;K). Infants learn through connection, senses &amp; play &mdash; no worksheets.</p>';
+  var daysEl=document.getElementById('days'); daysEl.innerHTML='';
+  var hEl=document.getElementById('handouts'); hEl.innerHTML='';
+  WEEK.days.forEach(function(dd,i){
+    var id='day'+i;
+    var card='<div class="daycard"><div class="dayrow"><span class="dl">'+dd.day+'</span><span class="df">'+dd.focus+'</span></div>'
+      +'<div class="doms">'+domHtml(dd.domains)+'</div>'
+      +'<div class="opts">'+optHtml(dd.opts[0],1)+optHtml(dd.opts[1],2)+'</div>'
+      +'<button class="printbtn" onclick="printItem(\''+'h-'+id+'\')">Print '+dd.day+'&rsquo;s activity &rarr;</button></div>';
+    daysEl.appendChild(el(card));
+    var ho='<div class="handout" id="h-'+id+'"><div class="hh"><span class="htag">The Weekly Planner &middot; Infant</span>'
+      +'<h1>'+dd.day+' &middot; '+dd.focus+'</h1><p>'+WEEK.month+' &middot; '+WEEK.theme+' &middot; '+WEEK.week+'</p><div class="doms">'+domHtml(dd.domains)+'</div></div>'
+      +'<div class="ho"><div class="on">Option 1</div><div class="ot">'+dd.opts[0].t+'</div><div class="od">'+dd.opts[0].d+'</div></div>'
+      +'<div class="ho"><div class="on">Option 2</div><div class="ot">'+dd.opts[1].t+'</div><div class="od">'+dd.opts[1].d+'</div></div>'
+      +'<div class="hf"><b>The Preschool Professional</b> &middot; The Buzz member benefit &middot; One login per membership &mdash; please do not share.</div></div>';
+    hEl.appendChild(el(ho));
+  });
+  var hd=WEEK.homeden;
+  var denHtml='<div class="den"><h2>'+hd.title+'</h2><p class="dl">'+hd.lead+'</p><ul>'+hd.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'
+    +'<button class="printbtn" onclick="printItem(\'h-den\')">Print the Home Den &rarr;</button></div>';
+  document.getElementById('homeden').appendChild(el(denHtml));
+  var denHo='<div class="handout" id="h-den"><div class="hh"><span class="htag">Home Den &middot; This Week</span><h1>'+hd.title+'</h1><p>'+WEEK.month+' &middot; '+WEEK.theme+' &middot; Infant</p></div>'
+    +'<div class="ho"><div class="od"><i>'+hd.lead+'</i></div><ul style="margin:8px 0 0;padding-left:20px;">'+hd.items.map(function(x){return '<li style="margin-bottom:5px;">'+x+'</li>';}).join('')+'</ul></div>'
+    +'<div class="hf"><b>The Preschool Professional</b> &middot; The Buzz member benefit &middot; One login per membership &mdash; please do not share.</div></div>';
+  document.getElementById('handouts').appendChild(el(denHo));
+}
+
+function unlock(){
+  var v=(document.getElementById('pin').value||'').trim().toUpperCase();
+  if(v===DEMO_PIN){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('screen').style.display='block';
+    render();
+    window.scrollTo(0,0);
+  } else {
+    document.getElementById('gerr').textContent='That PIN didn’t work. Check your Buzz welcome email.';
+  }
+}
+function printItem(id){
+  var hs=document.querySelectorAll('#handouts .handout');
+  for(var i=0;i<hs.length;i++){ hs[i].style.display='none'; }
+  var t=document.getElementById(id); if(t){ t.style.display='block'; }
+  window.print();
+}
+window.onafterprint=function(){
+  var hs=document.querySelectorAll('#handouts .handout');
+  for(var i=0;i<hs.length;i++){ hs[i].style.display='none'; }
+};
+</script>
+</body>
+</html>
