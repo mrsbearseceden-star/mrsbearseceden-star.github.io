@@ -779,44 +779,43 @@ if(typeof window!=="undefined"){ window.LPW_generate = LPW_generate; }
 })();
 </script>
 
+<style>
+.wktabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px;}
+.wktab{border:1.5px solid #E5D6B8;background:#FFFDF7;color:#6B5836;font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer;font-family:inherit;}
+.wktab.active{background:#C9821A;border-color:#C9821A;color:#fff;}
+.wkload{padding:26px 0;text-align:center;color:#8A7A5C;font-weight:600;}
+</style>
 <div id="dhandouts"></div>
 <script>
 (function(){
   var BUZZ_PIN="BUZZ-2026";
+  window.TPP_DAILY = window.TPP_DAILY || {};
+  var LOADING = {};
   function isMember(){ try{return localStorage.getItem('tpp_buzz_member')==='1';}catch(e){return false;} }
   function setMember(v){ try{ if(v){localStorage.setItem('tpp_buzz_member','1');} else {localStorage.removeItem('tpp_buzz_member');} }catch(e){} }
   function cap(x){ return x.charAt(0).toUpperCase()+x.slice(1); }
-  function domHtml(list){ return '<span class="dlbl">Builds:</span> '+list.map(function(x){return '<span class="dom">'+x+'</span>';}).join(''); }
-  function optHtml(o,n){ return '<div class="opt"><div class="on">Option '+n+'</div><div class="ot">'+o.t+'</div><div class="od">'+o.d+'</div></div>'; }
-
-  var DAILY={
-    infant:{ sep:{
-      theme:"All About Me &amp; My Family",
-      week:"Week 1 &mdash; This Is Me &amp; My Family",
-      days:[
-        {day:"Monday",focus:"Face to Face",domains:["Social &amp; Emotional Development","Language &amp; Literacy"],opts:[
-          {t:"Mirror Play",d:"Hold baby up to a mirror. Point and gently name &ldquo;eyes&hellip; nose&hellip; mouth,&rdquo; and smile together. Babies love faces &mdash; especially yours."},
-          {t:"Family Photo Peek",d:"Show 2&ndash;3 family photos up close. Name each face: &ldquo;That&rsquo;s Mama! That&rsquo;s <i>you</i>!&rdquo; Naming builds belonging."}]},
-        {day:"Tuesday",focus:"Name &amp; Voice",domains:["Language &amp; Literacy","Approaches to Learning"],opts:[
-          {t:"Hello Name Song",d:"Sing softly while you cuddle: &ldquo;Hello, hello, hello baby ___.&rdquo; Hearing their name sung builds connection and language."},
-          {t:"Narrate the Day",d:"Use baby&rsquo;s name as you go: &ldquo;___ is having a bath!&rdquo; Words grow from hearing them all day long."}]},
-        {day:"Wednesday",focus:"Little Senses",domains:["Scientific Inquiry","Physical Development"],opts:[
-          {t:"Texture Touch",d:"Let baby feel a soft blanket, then a crinkly toy. Watch their face change &mdash; that curiosity <i>is</i> learning. (Always supervise.)"},
-          {t:"Rattle &amp; Wait",d:"Shake a rattle, then pause. Give baby a moment to &lsquo;answer&rsquo; with a wiggle or sound. Back-and-forth wires the brain."}]},
-        {day:"Thursday",focus:"Serve &amp; Return",domains:["Approaches to Learning","Language &amp; Literacy"],opts:[
-          {t:"Coo Conversation",d:"Copy the sound baby makes, then wait. Copy it again. This gentle back-and-forth is powerful brain-building."},
-          {t:"Peekaboo Scarf",d:"Hide your face with a light scarf, then &ldquo;peekaboo!&rdquo; Repeat as long as the smiles last &mdash; it teaches that you always come back."}]},
-        {day:"Friday",focus:"Cuddle &amp; Connect",domains:["Social &amp; Emotional Development","Creative Expression"],opts:[
-          {t:"Lap-Time Song",d:"Bounce gently to &ldquo;This Little Piggy&rdquo; or &ldquo;The More We Get Together.&rdquo; Rhythm + closeness = happy learning."},
-          {t:"Snuggle Read-Aloud",d:"Read in a soft, sing-song voice &mdash; a family board book or <i>Your Feelings Matter</i>. Babies drink in the sound of your voice."}]}
-      ],
-      homeden:{title:"The Home Den &mdash; This Week", lead:"Pop these in the diaper bag &mdash; little moments, big bonding.",
-        items:["A family photo card to keep near baby&rsquo;s crib.","A &lsquo;serve-and-return&rsquo; tip card (copy baby&rsquo;s sounds, then pause).","A lullaby list for the car and bedtime.","A &lsquo;sign MORE with me&rsquo; half-sheet for mealtimes."]}
-    }}
-  };
-
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function domHtml(list){ return '<span class="dlbl">Builds:</span> '+list.map(function(x){return '<span class="dom">'+esc(x)+'</span>';}).join(''); }
+  function optHtml(o,n){ return '<div class="opt"><div class="on">Option '+n+'</div><div class="ot">'+esc(o.t)+'</div><div class="od">'+esc(o.d)+'</div></div>'; }
+  function normalize(d){
+    if(!d) return null;
+    if(d.weeks && d.weeks.length) return d;
+    if(d.days) return {theme:d.theme, weeks:[{label:d.week||'Week 1', days:d.days, homeden:d.homeden}]};
+    return null;
+  }
+  function loadBand(band, cb){
+    if(window.TPP_DAILY[band]){ cb(true); return; }
+    if(LOADING[band]){ LOADING[band].push(cb); return; }
+    LOADING[band]=[cb];
+    var s=document.createElement('script');
+    s.src='wiz-daily-'+band+'.js?v=1';
+    s.onload=function(){ var q=LOADING[band]||[]; delete LOADING[band]; for(var i=0;i<q.length;i++){ q[i](!!window.TPP_DAILY[band]); } };
+    s.onerror=function(){ var q=LOADING[band]||[]; delete LOADING[band]; for(var i=0;i<q.length;i++){ q[i](false); } };
+    document.body.appendChild(s);
+  }
+  var CUR={band:'',month:'',week:0};
   function upsellHTML(){
-    return '<div class="upsell"><div class="up-txt"><b>Buzz members get more.</b> Unlock a full <b>Monday&ndash;Friday daily plan</b> with <b>two printable at-home activities every day</b> &amp; weekly Home Den packets &mdash; right here in this planner. <b>Launching August 1st;</b> join now to lock in your spot (Infant &middot; September already live for members).</div>'
+    return '<div class="upsell"><div class="up-txt"><b>Buzz members get more.</b> Unlock the full <b>Weekly Planner</b> &mdash; a Monday&ndash;Friday daily plan with <b>two printable at-home activities every day</b> plus a printable <b>Home Den</b> family packet for every week &mdash; right here in this planner. <b>Live now for every age group and every month.</b></div>'
      +'<div class="up-actions"><a class="up-btn" href="https://payhip.com/b/Kcw8r" target="_blank" rel="noopener">Become a Buzz member &rarr;</a>'
      +'<button type="button" class="up-login" onclick="TPP_showLogin()">Already a member? Log in</button></div>'
      +'<div class="up-loginrow" id="loginrow" style="display:none;"><input id="mpin" type="password" placeholder="Your Buzz PIN" autocomplete="off" onkeydown="if(event.key===\'Enter\')TPP_doLogin()"><button type="button" onclick="TPP_doLogin()">Unlock</button><span class="mpinerr" id="mpinerr"></span></div>'
@@ -826,44 +825,63 @@ if(typeof window!=="undefined"){ window.LPW_generate = LPW_generate; }
     return '<div class="mfoot"><span class="mok">&#10004; Buzz member</span> &middot; One login per membership &mdash; please don&rsquo;t share &middot; <a href="#" onclick="TPP_logout();return false;">Log out</a></div>';
   }
   function comingSoonHTML(band,month){
-    return '<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>Daily activities &amp; Home Den packets &mdash; arriving August 1st</h2><p>You&rsquo;re a Buzz member! The Monday&ndash;Friday at-home activities &amp; printable Home Den packets for '+cap(band)+' &middot; '+month.toUpperCase()+' arrive by <b>August 1st</b> (start of the school year). Enjoy the full monthly plan above &mdash; and try the Infant &middot; September Weekly Planner, live now for members &mdash; in the meantime.</p></div>'+memberFoot()+'</div>';
+    return '<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>Daily activities &amp; Home Den packets &mdash; on their way</h2><p>You&rsquo;re a Buzz member! The Monday&ndash;Friday at-home activities &amp; printable Home Den packets for '+cap(band)+' &middot; '+month.toUpperCase()+' couldn&rsquo;t load just now. Please refresh the page &mdash; if it keeps happening, email us and we&rsquo;ll make it right.</p></div>'+memberFoot()+'</div>';
+  }
+  function weekTabs(d){
+    var h='<div class="wktabs">';
+    for(var i=0;i<d.weeks.length;i++){
+      h+='<button type="button" class="wktab'+(i===CUR.week?' active':'')+'" onclick="TPP_setWeek('+i+')">Week '+(i+1)+'</button>';
+    }
+    return h+'</div>';
   }
   function dailyHTML(band,month,d){
-    var h='<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>This Week, Day by Day</h2><p>'+d.week+' &nbsp;&middot;&nbsp; '+d.theme+' &nbsp;&middot;&nbsp; pick one option each day</p><p class="dstd">Every activity is matched to the Florida Early Learning &amp; Developmental Standards (Birth&ndash;K).</p></div>';
-    d.days.forEach(function(dd,i){
-      h+='<div class="daycard"><div class="dayrow"><span class="dl">'+dd.day+'</span><span class="df">'+dd.focus+'</span></div>'
+    var wk=d.weeks[CUR.week];
+    var h='<div class="daily"><div class="dailyhead"><span class="dtag">The Weekly Planner &middot; Buzz member</span><h2>This Month, Week by Week</h2><p>'+esc(wk.label)+' &nbsp;&middot;&nbsp; '+esc(d.theme)+' &nbsp;&middot;&nbsp; pick one option each day</p><p class="dstd">Every activity is matched to the Florida Early Learning &amp; Developmental Standards (Birth&ndash;K).</p>'+weekTabs(d)+'</div>';
+    wk.days.forEach(function(dd,i){
+      h+='<div class="daycard"><div class="dayrow"><span class="dl">'+esc(dd.day)+'</span><span class="df">'+esc(dd.focus)+'</span></div>'
        +'<div class="doms">'+domHtml(dd.domains)+'</div>'
        +'<div class="opts">'+optHtml(dd.opts[0],1)+optHtml(dd.opts[1],2)+'</div>'
-       +'<button type="button" class="printbtn" onclick="TPP_print(\'dh-'+i+'\')">Print '+dd.day+'&rsquo;s activity &rarr;</button></div>';
+       +'<button type="button" class="printbtn" onclick="TPP_print(\'dh-'+i+'\')">Print '+esc(dd.day)+'&rsquo;s activity &rarr;</button></div>';
     });
-    var hd=d.homeden;
-    h+='<div class="dden"><h2>'+hd.title+'</h2><p class="dl">'+hd.lead+'</p><ul>'+hd.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><button type="button" class="printbtn" onclick="TPP_print(\'dh-den\')">Print the Home Den &rarr;</button></div>';
+    var hd=wk.homeden;
+    h+='<div class="dden"><h2>'+esc(hd.title)+'</h2><p class="dl">'+esc(hd.lead)+'</p><ul>'+hd.items.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul><button type="button" class="printbtn" onclick="TPP_print(\'dh-den\')">Print the Home Den &rarr;</button></div>';
     h+=memberFoot()+'</div>';
     return h;
   }
   function renderHandouts(band,month,d){
     var ho=document.getElementById('dhandouts'); var out='';
-    d.days.forEach(function(dd,i){
-      out+='<div class="dhandout" id="dh-'+i+'"><div class="hh"><span class="htag">The Weekly Planner &middot; '+cap(band)+'</span><h1>'+dd.day+' &middot; '+dd.focus+'</h1><p>'+month.toUpperCase()+' &middot; '+d.theme+' &middot; '+d.week+'</p><div class="doms">'+domHtml(dd.domains)+'</div></div>'
-       +'<div class="ho"><div class="on">Option 1</div><div class="ot">'+dd.opts[0].t+'</div><div class="od">'+dd.opts[0].d+'</div></div>'
-       +'<div class="ho"><div class="on">Option 2</div><div class="ot">'+dd.opts[1].t+'</div><div class="od">'+dd.opts[1].d+'</div></div>'
+    var wk=d.weeks[CUR.week];
+    wk.days.forEach(function(dd,i){
+      out+='<div class="dhandout" id="dh-'+i+'"><div class="hh"><span class="htag">The Weekly Planner &middot; '+cap(band)+'</span><h1>'+esc(dd.day)+' &middot; '+esc(dd.focus)+'</h1><p>'+month.toUpperCase()+' &middot; '+esc(d.theme)+' &middot; '+esc(wk.label)+'</p><div class="doms">'+domHtml(dd.domains)+'</div></div>'
+       +'<div class="ho"><div class="on">Option 1</div><div class="ot">'+esc(dd.opts[0].t)+'</div><div class="od">'+esc(dd.opts[0].d)+'</div></div>'
+       +'<div class="ho"><div class="on">Option 2</div><div class="ot">'+esc(dd.opts[1].t)+'</div><div class="od">'+esc(dd.opts[1].d)+'</div></div>'
        +'<div class="hf"><b>The Preschool Professional</b> &middot; The Buzz member benefit &middot; One login per membership &mdash; please do not share.</div></div>';
     });
-    var hd=d.homeden;
-    out+='<div class="dhandout" id="dh-den"><div class="hh"><span class="htag">Home Den &middot; This Week</span><h1>'+hd.title+'</h1><p>'+d.theme+' &middot; '+cap(band)+'</p></div><div class="ho"><div class="od"><i>'+hd.lead+'</i></div><ul style="margin:8px 0 0;padding-left:20px;">'+hd.items.map(function(x){return '<li style="margin-bottom:5px;">'+x+'</li>';}).join('')+'</ul></div><div class="hf"><b>The Preschool Professional</b> &middot; The Buzz member benefit &middot; One login per membership &mdash; please do not share.</div></div>';
+    var hd=wk.homeden;
+    out+='<div class="dhandout" id="dh-den"><div class="hh"><span class="htag">Home Den &middot; '+esc(wk.label)+'</span><h1>'+esc(hd.title)+'</h1><p>'+esc(d.theme)+' &middot; '+cap(band)+'</p></div><div class="ho"><div class="od"><i>'+esc(hd.lead)+'</i></div><ul style="margin:8px 0 0;padding-left:20px;">'+hd.items.map(function(x){return '<li style="margin-bottom:5px;">'+esc(x)+'</li>';}).join('')+'</ul></div><div class="hf"><b>The Preschool Professional</b> &middot; The Buzz member benefit &middot; One login per membership &mdash; please do not share.</div></div>';
     ho.innerHTML=out;
   }
-
+  function renderMember(band,month){
+    var mz=document.getElementById('memberzone'); if(!mz)return;
+    var d=normalize((window.TPP_DAILY[band]||{})[month]);
+    if(d){ if(CUR.week>=d.weeks.length){CUR.week=0;} mz.innerHTML=dailyHTML(band,month,d); renderHandouts(band,month,d); }
+    else { mz.innerHTML=comingSoonHTML(band,month); document.getElementById('dhandouts').innerHTML=''; }
+  }
   window.renderMemberZone=function(band,month){
     var mz=document.getElementById('memberzone'); if(!mz)return;
-    if(!isMember()){ mz.innerHTML=upsellHTML(); document.getElementById('dhandouts').innerHTML=''; }
-    else {
-      var d=(DAILY[band]||{})[month];
-      if(d){ mz.innerHTML=dailyHTML(band,month,d); renderHandouts(band,month,d); }
-      else { mz.innerHTML=comingSoonHTML(band,month); document.getElementById('dhandouts').innerHTML=''; }
+    if(band!==CUR.band||month!==CUR.month){ CUR.week=0; }
+    CUR.band=band; CUR.month=month;
+    if(!isMember()){ mz.innerHTML=upsellHTML(); document.getElementById('dhandouts').innerHTML=''; mz.style.display='block'; return; }
+    if(!window.TPP_DAILY[band]){
+      mz.innerHTML='<div class="daily"><div class="wkload">Loading this week&rsquo;s activities&hellip;</div></div>';
+      mz.style.display='block';
+      loadBand(band,function(){ if(CUR.band===band){ renderMember(CUR.band,CUR.month); } });
+      return;
     }
+    renderMember(band,month);
     mz.style.display='block';
   };
+  window.TPP_setWeek=function(i){ CUR.week=i; renderMember(CUR.band,CUR.month); var mz=document.getElementById('memberzone'); if(mz){var t=mz.querySelector('.daily'); if(t&&t.scrollIntoView){/* keep scroll position */}} };
   window.TPP_showLogin=function(){ var r=document.getElementById('loginrow'); if(r){ r.style.display='flex'; var p=document.getElementById('mpin'); if(p)p.focus(); } };
   window.TPP_doLogin=function(){
     var v=(document.getElementById('mpin').value||'').trim().toUpperCase();
