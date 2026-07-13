@@ -549,7 +549,7 @@ window.dfStart=async function(){
  localStorage.setItem('hiveName',name);
  body.innerHTML='<div class="empty">Loading…</div>';
  if(form.indexOf('Incident')>-1){ body.innerHTML=dfIncidentForm(); return; }
- var d=await api({action:'list',table:'Facility Checklists',filterByFormula:"AND(IS_SAME({Week Of},TODAY(),'week'),{Chart}='"+form+"')",maxRecords:500});
+ var d=await api({action:'list',table:'Facility Checklists',filterByFormula:"{Chart}='"+form+"'",maxRecords:500});
  var seen={},items=[];(d.records||[]).forEach(function(r){var f=r.fields;if(f.Item&&!seen[f.Item]){seen[f.Item]=1;items.push({item:f.Item,order:f.Order||0});}});
  items.sort(function(a,b){return a.order-b.order;});
  if(!items.length){ body.innerHTML='<div class="fwarn">No items for this form yet.</div>'; return; }
