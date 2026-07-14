@@ -1,7 +1,8 @@
 /* The Buzz Board — self-injecting add-on for The Hive teacher & director portals.
 Loads after the portal's inline script, so it reuses the page's global api()/esc()/show().
 Teacher portal: one 🐝 tab (both schools). Director portal: 🐝 Team Buzz + 👑 My Buzz Board (school-scoped by api.php).
-v3: adds an All-Time Leaders board (never resets) and a 30-day history dropdown for the weekly chart. */
+v3: adds an All-Time Leaders board (never resets) and a 30-day history dropdown for the weekly chart.
+v4: date keys use LOCAL time (not UTC) - fixes the after-8PM-ET day shift that made the board look empty at night. */
 (function(){
 var path = location.pathname.toLowerCase();
 var isDir = path.indexOf('director.html') > -1;
@@ -40,9 +41,10 @@ var DCOLS = [['Clock In','Clock In'],['Clock Out','Clock Out'],['Daily To-Dos','
 var WCOLS = [['Tuition · Wed AM','Tuition Paid (Wed AM)'],['FTE Reports · Thu','FTE Reports (Thu)'],['Billing · Thu','Billing (Thu)']];
 var bzDay = null;
 
-function monday(){ var d=new Date(); var wd=(d.getDay()+6)%7; d.setDate(d.getDate()-wd); return d.toISOString().slice(0,10); }
+function bzYmd(d){var m=d.getMonth()+1,dd=d.getDate();return d.getFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dd<10?'0'+dd:dd);}
+function monday(){ var d=new Date(); var wd=(d.getDay()+6)%7; d.setDate(d.getDate()-wd); return bzYmd(d); }
 function sel(v){ return v && v.name ? v.name : (v||''); }
-function state(f,name,dateStr){ if(f[name]===true) return 'g'; var now=new Date(); var cutoff=new Date(dateStr+'T18:00:00'); var today=now.toISOString().slice(0,10); if(dateStr<today) return 'r'; if(dateStr===today && now>=cutoff) return 'r'; return 'p'; }
+function state(f,name,dateStr){ if(f[name]===true) return 'g'; var now=new Date(); var cutoff=new Date(dateStr+'T18:00:00'); var today=bzYmd(now); if(dateStr<today) return 'r'; if(dateStr===today && now>=cutoff) return 'r'; return 'p'; }
 function dot(s){ var m={g:['bz-g','✓'],r:['bz-r','✕'],p:['bz-p','·'],na:['bz-na','–']}; var x=m[s]||m.p; return '<span class="bz-dot '+x[0]+'">'+x[1]+'</span>'; }
 function todayName(){ var n=DAYNAMES[(new Date().getDay()+6)%7]; return DAYNAMES.indexOf(n)>-1?n:'Monday'; }
 function fmtWeek(w){ if(!w) return ''; var d=new Date(w+'T00:00:00'); return (d.getMonth()+1)+'/'+d.getDate(); }
