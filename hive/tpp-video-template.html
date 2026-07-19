@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<!--
+  TPP TikTok Video Template
+  ─────────────────────────
+  To create a new video, update the CONFIG block below.
+  Everything else stays the same.
+
+  SCENES: array of scene objects
+    bg:      CSS background color (pick from brand palette below)
+    eyebrow: small label at top (e.g. "Free Resource")
+    headline: main bold serif text
+    type:    "text" | "pills" | "stat" | "list" | "cta"
+    sub:     supporting paragraph (optional)
+    stat:    big number (type:"stat" only)
+    statSub: text below big number (type:"stat" only)
+    items:   array of {text, color:"g"|"t"|"s"} for pills/list
+    tagline: tagline below sub (type:"cta" only)
+    btn:     button label (type:"cta" only)
+    url:     button link (type:"cta" only)
+
+  CAPS: array of {t: ms, html: "caption text"}
+    Use <em> for honey-gold highlight
+    Use <strong> for sage-green highlight
+
+  Brand palette:
+    #2A1D12  espresso (warm dark)
+    #1C1408  dark amber
+    #0B1517  dark teal
+    #17120A  dark brown
+    #101A0B  dark sage
+    #0B1416  deep teal
+    #1E1409  warm brown
+    #221608  deep espresso
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TPP Video — Milestone Wizard</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --honey:    #C9821A;
+  --amber:    #E0A02E;
+  --cream:    #FBF3E5;
+  --sage:     #A9C86F;
+  --teal:     #3E8C93;
+  --espresso: #2A1D12;
+  --cd:       rgba(251,243,229,.68);
+  --page:     #0e0e0e;
+  --card:     #1a1a1a;
+  --ct:       rgba(255,255,255,.7);
+  --ch:       #fff;
+  --cb:       rgba(255,255,255,.08);
+}
+@media(prefers-color-scheme:light){:root{--page:#f0ece7;--card:#fff;--ct:#555;--ch:#1a1a1a;--cb:rgba(0,0,0,.08);}}
+:root[data-theme="light"]{--page:#f0ece7;--card:#fff;--ct:#555;--ch:#1a1a1a;--cb:rgba(0,0,0,.08);}
+:root[data-theme="dark"]{--page:#0e0e0e;--card:#1a1a1a;--ct:rgba(255,255,255,.7);--ch:#fff;--cb:rgba(255,255,255,.08);}
+
+body{background:var(--page);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 56px;gap:28px;font-family:system-ui,-apple-system,sans-serif;transition:background .3s;}
+
+.page-lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--honey);opacity:.8;}
+
+#phone{position:relative;width:min(320px,100%);aspect-ratio:9/16;border-radius:20px;overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06);flex-shrink:0;}
+
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:52px 26px 130px;text-align:center;opacity:0;transition:opacity .5s ease;z-index:1;}
+.scene.active{opacity:1;z-index:2;}
+.scene::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 55% at 50% 45%,rgba(200,130,26,.09) 0%,transparent 70%);}
+.scene>*{position:relative;z-index:1;}
+
+.eyebrow{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--honey);opacity:0;margin-bottom:9px;}
+.scene.active .eyebrow{animation:fadeUp .5s ease .1s forwards;}
+
+.headline{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,5.4vw,24px);font-weight:700;color:var(--cream);line-height:1.22;text-wrap:balance;opacity:0;margin-bottom:12px;}
+.scene.active .headline{animation:fadeUp .6s ease .25s forwards;}
+
+.sub{font-size:clamp(10px,3vw,12px);color:var(--cd);line-height:1.6;opacity:0;max-width:245px;}
+.scene.active .sub{animation:fadeUp .6s ease .45s forwards;}
+
+.rule{width:0;height:2px;background:linear-gradient(90deg,var(--honey),var(--amber));border-radius:2px;margin:0 auto 12px;opacity:0;}
+.scene.active .rule{animation:growLine .7s ease .35s forwards;}
+
+.stat{font-family:Georgia,serif;font-size:clamp(48px,16vw,68px);font-weight:700;color:var(--honey);line-height:1;opacity:0;margin:4px 0 8px;}
+.scene.active .stat{animation:pop .65s cubic-bezier(.34,1.56,.64,1) .3s forwards;}
+
+.pills{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:12px;max-width:265px;}
+.pill{padding:4px 11px;border-radius:100px;font-size:9px;font-weight:600;letter-spacing:.02em;opacity:0;}
+.pg{background:rgba(200,130,26,.14);border:1px solid rgba(200,130,26,.38);color:var(--amber);}
+.pt{background:rgba(62,140,147,.13);border:1px solid rgba(62,140,147,.35);color:var(--teal);}
+.ps{background:rgba(169,200,111,.12);border:1px solid rgba(169,200,111,.33);color:var(--sage);}
+.scene.active .pill:nth-child(1){animation:fadeUp .35s ease .50s forwards;}
+.scene.active .pill:nth-child(2){animation:fadeUp .35s ease .60s forwards;}
+.scene.active .pill:nth-child(3){animation:fadeUp .35s ease .70s forwards;}
+.scene.active .pill:nth-child(4){animation:fadeUp .35s ease .80s forwards;}
+.scene.active .pill:nth-child(5){animation:fadeUp .35s ease .90s forwards;}
+.scene.active .pill:nth-child(6){animation:fadeUp .35s ease 1.00s forwards;}
+
+.list{display:flex;flex-direction:column;gap:6px;margin-top:12px;text-align:left;align-self:stretch;padding:0 4px;}
+.li{display:flex;align-items:center;gap:8px;color:var(--cd);font-size:10px;opacity:0;}
+.li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--teal);flex-shrink:0;}
+.scene.active .li:nth-child(1){animation:fadeUp .35s ease .45s forwards;}
+.scene.active .li:nth-child(2){animation:fadeUp .35s ease .55s forwards;}
+.scene.active .li:nth-child(3){animation:fadeUp .35s ease .65s forwards;}
+.scene.active .li:nth-child(4){animation:fadeUp .35s ease .75s forwards;}
+.scene.active .li:nth-child(5){animation:fadeUp .35s ease .85s forwards;}
+
+.tagline{font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--sage);opacity:0;margin-top:14px;}
+.scene.active .tagline{animation:fadeUp .6s ease .9s forwards;}
+.cta-btn{display:inline-block;margin-top:16px;padding:10px 22px;background:var(--honey);color:var(--espresso);font-weight:700;font-size:12px;letter-spacing:.05em;border-radius:4px;text-decoration:none;opacity:0;}
+.scene.active .cta-btn{animation:fadeUp .6s ease 1.1s forwards;}
+.url{font-size:8px;letter-spacing:.1em;color:rgba(251,243,229,.25);margin-top:8px;opacity:0;}
+.scene.active .url{animation:fadeUp .4s ease 1.3s forwards;}
+
+#cap-zone{position:absolute;bottom:26px;left:12px;right:12px;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;z-index:9;pointer-events:none;text-align:center;}
+.cap-text{display:inline-block;padding:7px 16px 8px;border-radius:8px;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);border:1px solid rgba(200,130,26,.18);font-size:clamp(12px,4vw,15px);font-weight:800;color:#fff;line-height:1.45;letter-spacing:.01em;text-shadow:0 1px 6px rgba(0,0,0,.5);animation:capIn .22s cubic-bezier(.34,1.4,.64,1) forwards;max-width:100%;}
+.cap-text em{font-style:normal;color:var(--amber);}
+.cap-text strong{font-style:normal;color:var(--sage);}
+
+#prog-track{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,.07);z-index:10;}
+#prog-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--honey),var(--amber));transition:width .1s linear;}
+
+#dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:10;}
+.dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.18);transition:background .3s,transform .3s;}
+.dot.on{background:var(--honey);transform:scale(1.4);}
+
+#ctrls{position:absolute;top:10px;right:10px;display:flex;gap:5px;z-index:10;}
+.cb{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.32);color:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s;}
+.cb:hover{border-color:var(--honey);color:var(--honey);}
+.cb svg{width:11px;height:11px;fill:currentColor;}
+
+#overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;z-index:20;transition:opacity .4s;}
+#overlay.gone{opacity:0;pointer-events:none;}
+.play-ring{width:62px;height:62px;border-radius:50%;background:var(--honey);display:flex;align-items:center;justify-content:center;margin-bottom:12px;animation:pulse 2s ease infinite;}
+.play-ring svg{width:23px;height:23px;fill:var(--espresso);margin-left:3px;}
+.play-lbl{color:var(--cream);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;}
+
+#script-wrap{width:min(560px,100%);}
+.script-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.script-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--honey);white-space:nowrap;}
+.script-rule{flex:1;height:1px;background:var(--cb);}
+.script-note{font-size:11px;color:var(--ct);line-height:1.6;margin-bottom:16px;}
+.scene-block{background:var(--card);border:1px solid var(--cb);border-radius:10px;padding:14px 16px;margin-bottom:8px;}
+.sb-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.sb-name{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--honey);}
+.sb-time{font-size:9px;color:var(--ct);opacity:.45;font-variant-numeric:tabular-nums;}
+.sb-line{font-size:12px;line-height:1.65;color:var(--ch);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes growLine{from{opacity:0;width:0}to{opacity:1;width:44px}}
+@keyframes pop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
+@keyframes capIn{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,130,26,.45)}50%{box-shadow:0 0 0 10px rgba(200,130,26,0)}}
+@media(prefers-reduced-motion:reduce){.scene,.scene*,.cap-text{animation-duration:.01s !important;transition-duration:.01s !important;}}
+</style>
+</head>
+<body>
+
+<div class="page-lbl" id="page-lbl"></div>
+
+<div id="phone">
+  <div id="scenes-container"></div>
+  <div id="cap-zone"></div>
+  <div id="prog-track"><div id="prog-bar"></div></div>
+  <div id="dots"></div>
+  <div id="ctrls">
+    <button class="cb" id="btnPlay" title="Play / Pause" aria-label="Play or Pause">
+      <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+    <button class="cb" id="btnReset" title="Restart" aria-label="Restart">
+      <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+    </button>
+  </div>
+  <div id="overlay">
+    <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="play-lbl">Play Video</div>
+  </div>
+</div>
+
+<div id="script-wrap">
+  <div class="script-header">
+    <div class="script-title">Voiceover Script</div>
+    <div class="script-rule"></div>
+  </div>
+  <p class="script-note">Read each line as its scene plays. Warm and conversational — like you're talking to a fellow educator.</p>
+  <div id="script-blocks"></div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   CONFIG — edit this block to create a new video
+   ═══════════════════════════════════════════════ */
+const CONFIG = {
+  title: 'Milestone Wizard — Free Resource',
+  duration: 30000, // ms (30000 = 30 sec, 60000 = 60 sec)
+
+  scenes: [
+    {
+      bg: '#1A1208',
+      eyebrow: 'Free Resource Library',
+      headline: 'Do you know what your students should be doing — right now, for their age?',
+      type: 'text',
+      sub: null,
+    },
+    {
+      bg: '#101A0B',
+      eyebrow: 'The Milestone Wizard',
+      headline: 'Milestones, activities & materials — by age and state.',
+      type: 'pills',
+      items: [
+        { text: 'Infants', color: 's' },
+        { text: 'Toddlers', color: 's' },
+        { text: 'Twos', color: 's' },
+        { text: 'Threes', color: 's' },
+        { text: 'Fours & VPK', color: 's' },
+      ],
+    },
+    {
+      bg: '#0B1517',
+      eyebrow: 'How It Works',
+      headline: 'Pick your state. Pick the age. Done.',
+      type: 'list',
+      items: [
+        { text: 'Developmentally appropriate milestones' },
+        { text: 'Activity suggestions per milestone' },
+        { text: 'Recommended classroom materials' },
+        { text: 'Aligned to your state standards' },
+        { text: 'Use for lesson plans & parent conferences' },
+      ],
+    },
+    {
+      bg: '#17120A',
+      eyebrow: 'No Purchase Needed',
+      headline: 'It\'s completely free. No strings. No catch.',
+      type: 'text',
+      sub: 'Built for new teachers, seasoned directors, and everyone in between.',
+    },
+    {
+      bg: '#221608',
+      eyebrow: 'The Preschool Professional',
+      headline: 'Tools like this — waiting for you in the Free Library.',
+      type: 'cta',
+      sub: 'Open the Wizard today.',
+      tagline: 'Normalize · Elevate · Thrive',
+      btn: 'Get Free Access →',
+      url: 'https://www.thepreschoolprofessional.net',
+    },
+  ],
+
+  captions: [
+    { t: 400,  html: 'Do you actually know what your students' },
+    { t: 2000, html: 'should be doing <em>right now</em> — for their age?' },
+    { t: 4000, html: 'Because there\'s a <em>free tool</em> for that.' },
+
+    { t: 6300, html: 'The <em>Milestone Wizard</em>' },
+    { t: 7500, html: 'gives you milestones, activities, and materials' },
+    { t: 9500, html: '<strong>by age and by state.</strong>' },
+    { t: 11000,html: 'Infants through VPK — <em>every classroom.</em>' },
+
+    { t: 13000,html: 'Pick your state. Pick the age.' },
+    { t: 14800,html: '<em>Done.</em>' },
+    { t: 15800,html: 'Activities, materials, <strong>state standards</strong> —' },
+    { t: 17500,html: 'all right there. <em>Ready to use.</em>' },
+
+    { t: 19200,html: 'And it\'s <em>completely free.</em>' },
+    { t: 21000,html: 'No purchase. No strings. No catch.' },
+    { t: 23000,html: 'Built for every educator,' },
+    { t: 24500,html: 'from <em>first-year teachers</em> to seasoned directors.' },
+
+    { t: 26500,html: 'Open the <em>Milestone Wizard</em> today.' },
+    { t: 28000,html: 'Free Library at <em>thepreschoolprofessional.net</em>' },
+  ],
+
+  script: [
+    { label: 'Hook',           time: '0 – 6 sec',  line: 'Do you actually know what your students should be doing right now — for their age? Because there\'s a free tool for that.' },
+    { label: 'What It Is',     time: '6 – 13 sec', line: 'The Milestone Wizard gives you milestones, activities, and materials by age and by state. Infants through VPK — every classroom.' },
+    { label: 'How It Works',   time: '13 – 19 sec',line: 'Pick your state. Pick the age. Done. Activities, materials, and state standards — all right there, ready to use.' },
+    { label: 'It\'s Free',     time: '19 – 26 sec',line: 'And it\'s completely free. No purchase. No strings. No catch. Built for every educator — from first-year teachers to seasoned directors.' },
+    { label: 'Call to Action', time: '26 – 30 sec',line: 'Open the Milestone Wizard today. Free Library at thepreschoolprofessional.net.' },
+  ],
+};
+/* ═══════════════════════════════════════════════
+   END CONFIG — do not edit below this line
+   ═══════════════════════════════════════════════ */
+
+(function () {
+  const C = CONFIG;
+  const N = C.scenes.length;
+  const STEP = C.duration / N;
+
+  document.title = 'TPP Video — ' + C.title;
+  document.getElementById('page-lbl').textContent =
+    'The Preschool Professional · ' + C.title;
+
+  // Build scene timing
+  const TIMES = C.scenes.map((_, i) => ({ t0: i * STEP, t1: (i + 1) * STEP }));
+
+  // Build dots
+  const dotsEl = document.getElementById('dots');
+  C.scenes.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' on' : '');
+    dotsEl.appendChild(d);
+  });
+  const dots = Array.from(dotsEl.querySelectorAll('.dot'));
+
+  // Build scenes
+  const container = document.getElementById('scenes-container');
+  C.scenes.forEach((sc, i) => {
+    const div = document.createElement('div');
+    div.className = 'scene' + (i === 0 ? ' active' : '');
+    div.style.background = sc.bg;
+    let html = '';
+    if (sc.eyebrow) html += `<div class="eyebrow">${sc.eyebrow}</div>`;
+    html += `<div class="headline">${sc.headline}</div>`;
+    html += `<div class="rule"></div>`;
+    if (sc.sub && sc.type !== 'cta') html += `<div class="sub">${sc.sub}</div>`;
+    if (sc.type === 'pills' && sc.items) {
+      html += '<div class="pills">';
+      sc.items.forEach(it => { html += `<span class="pill p${it.color}">${it.text}</span>`; });
+      html += '</div>';
+    }
+    if (sc.type === 'list' && sc.items) {
+      html += '<div class="list">';
+      sc.items.forEach(it => { html += `<div class="li">${it.text}</div>`; });
+      html += '</div>';
+    }
+    if (sc.type === 'cta') {
+      if (sc.sub) html += `<div class="sub">${sc.sub}</div>`;
+      if (sc.tagline) html += `<div class="tagline">${sc.tagline}</div>`;
+      if (sc.btn) html += `<a class="cta-btn" href="${sc.url}" target="_blank">${sc.btn}</a>`;
+      html += `<div class="url">${sc.url.replace('https://','')}</div>`;
+    }
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+  const sceneEls = Array.from(container.querySelectorAll('.scene'));
+
+  // Build script
+  const scriptEl = document.getElementById('script-blocks');
+  C.script.forEach(s => {
+    scriptEl.innerHTML += `<div class="scene-block">
+      <div class="sb-head"><span class="sb-name">${s.label}</span><span class="sb-time">${s.time}</span></div>
+      <div class="sb-line">${s.line}</div>
+    </div>`;
+  });
+
+  const progBar  = document.getElementById('prog-bar');
+  const overlay  = document.getElementById('overlay');
+  const capZone  = document.getElementById('cap-zone');
+  const btnPlay  = document.getElementById('btnPlay');
+  const btnReset = document.getElementById('btnReset');
+
+  const PAUSE_ICO = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+  const PLAY_ICO  = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+
+  let cur=0, elapsed=0, raf=null, playing=false, startTs=null, lastCap=-1;
+
+  function activate(idx) {
+    if (idx===cur) return;
+    sceneEls[cur].classList.remove('active'); dots[cur].classList.remove('on');
+    cur = idx;
+    void sceneEls[cur].offsetHeight;
+    sceneEls[cur].classList.add('active'); dots[cur].classList.add('on');
+  }
+
+  function updateCap(ms) {
+    let idx=-1;
+    for (let i=0;i<C.captions.length;i++) { if (ms>=C.captions[i].t) idx=i; else break; }
+    if (idx!==lastCap) {
+      lastCap=idx;
+      capZone.innerHTML = idx>=0 ? `<div class="cap-text">${C.captions[idx].html}</div>` : '';
+    }
+  }
+
+  function tick(ts) {
+    if (startTs===null) startTs=ts;
+    elapsed=ts-startTs;
+    if (elapsed>=C.duration) {
+      elapsed=C.duration; progBar.style.width='100%';
+      activate(N-1); updateCap(C.duration); stop(); return;
+    }
+    progBar.style.width=(elapsed/C.duration*100).toFixed(2)+'%';
+    for (let i=0;i<TIMES.length;i++) {
+      if (elapsed>=TIMES[i].t0 && elapsed<TIMES[i].t1) { if (i!==cur) activate(i); break; }
+    }
+    updateCap(elapsed);
+    raf=requestAnimationFrame(tick);
+  }
+
+  function play() {
+    playing=true; overlay.classList.add('gone');
+    btnPlay.innerHTML=PAUSE_ICO; btnPlay.title='Pause';
+    const off=elapsed; startTs=null;
+    raf=requestAnimationFrame(function r(ts){startTs=ts-off;raf=requestAnimationFrame(tick);});
+  }
+
+  function stop() {
+    playing=false; btnPlay.innerHTML=PLAY_ICO; btnPlay.title='Play';
+    if (raf){cancelAnimationFrame(raf);raf=null;}
+  }
+
+  function reset() {
+    stop(); elapsed=0; startTs=null; lastCap=-1;
+    progBar.style.width='0%'; capZone.innerHTML='';
+    sceneEls.forEach(s=>s.classList.remove('active'));
+    dots.forEach(d=>d.classList.remove('on'));
+    cur=0; void sceneEls[0].offsetHeight;
+    sceneEls[0].classList.add('active'); dots[0].classList.add('on');
+    play();
+  }
+
+  overlay.addEventListener('click', play);
+  btnPlay.addEventListener('click', ()=>playing?stop():play());
+  btnReset.addEventListener('click', reset);
+  document.addEventListener('keydown', e=>{
+    if (e.key===' '){e.preventDefault();playing?stop():play();}
+    if (e.key==='r'||e.key==='R') reset();
+  });
+})();
+</script>
+</body>
+</html>
