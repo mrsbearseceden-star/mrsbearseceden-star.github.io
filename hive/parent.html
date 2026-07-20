@@ -14,7 +14,7 @@ h1{font-size:1.7rem;}
 nav{display:flex;gap:10px;justify-content:center;padding:14px;flex-wrap:wrap;}
 .tab{padding:11px 24px;border-radius:16px;font-weight:800;cursor:pointer;color:#fff;opacity:.55;box-shadow:0 4px 12px rgba(74,58,48,.15);transition:.12s;}
 .tab.active{opacity:1;transform:scale(1.06);}
-.t-res{background:var(--blue);} .t-msg{background:var(--pink);}
+.t-res{background:var(--blue);} .t-msg{background:var(--pink);} .t-fund{background:linear-gradient(90deg,#ffb13d,#ff6b9d);}
 main{max-width:820px;margin:0 auto;padding:8px 16px;}
 .panel{display:none;} .panel.show{display:block;animation:pop .25s;}
 @keyframes pop{from{opacity:0;transform:translateY(8px);}to{opacity:1;}}
@@ -49,6 +49,7 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
 <nav>
 <div class="tab t-res active" onclick="show('res',this)">📚 Resources & Documents</div>
 <div class="tab t-msg" onclick="show('msg',this)">💬 Send Us a Message</div>
+<div class="tab t-fund" onclick="show('fund',this)">🐝 Fundraiser</div>
 </nav>
 <main>
 <div class="panel show" id="p-res">
@@ -92,6 +93,16 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
 <button class="go g1">Send 🐝</button>
 </form>
 <div class="note" id="mSent" style="margin-top:12px;font-weight:800;"></div>
+</div>
+</div>
+
+<div class="panel" id="p-fund">
+<img src="files/fundraiser-banner.svg" alt="Year-Round Fundraiser — help our hive grow" style="width:100%;border-radius:20px;margin-bottom:16px;box-shadow:0 8px 24px rgba(74,58,48,.14)">
+<div class="result" style="border-top-color:#ffb13d">
+<h2>🐝 Shop &amp; Grow Our Hive</h2>
+<div class="note">Every purchase from <b>The Preschool Professional</b> shop helps power early childhood education — <b>10% of profit from every order</b> goes right back into programs that support early childhood education, all year long.</div>
+<div class="note">This is a year-round fundraiser, not a one-time drive — share it with grandparents, alumni families, and anyone who wants to help. Every purchase counts, from anywhere. 💛</div>
+<a class="go g1" href="https://the-preschool-professional.myshopify.com/" target="_blank" rel="noopener">🛍️ Shop Now &amp; Support →</a>
 </div>
 </div>
 </main>
