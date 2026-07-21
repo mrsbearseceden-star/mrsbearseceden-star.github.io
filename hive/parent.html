@@ -14,7 +14,7 @@ h1{font-size:1.7rem;}
 nav{display:flex;gap:10px;justify-content:center;padding:14px;flex-wrap:wrap;}
 .tab{padding:11px 24px;border-radius:16px;font-weight:800;cursor:pointer;color:#fff;opacity:.55;box-shadow:0 4px 12px rgba(74,58,48,.15);transition:.12s;}
 .tab.active{opacity:1;transform:scale(1.06);}
-.t-res{background:var(--blue);} .t-msg{background:var(--pink);} .t-fund{background:linear-gradient(90deg,#ffb13d,#ff6b9d);}
+.t-res{background:var(--blue);} .t-bp{background:var(--purple);} .t-msg{background:var(--pink);} .t-fund{background:linear-gradient(90deg,#ffb13d,#ff6b9d);}
 main{max-width:820px;margin:0 auto;padding:8px 16px;}
 .panel{display:none;} .panel.show{display:block;animation:pop .25s;}
 @keyframes pop{from{opacity:0;transform:translateY(8px);}to{opacity:1;}}
@@ -48,6 +48,7 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
 </header>
 <nav>
 <div class="tab t-res active" onclick="show('res',this)">📚 Resources & Documents</div>
+<div class="tab t-bp" onclick="show('bp',this)">🐻 Bear Phonics</div>
 <div class="tab t-msg" onclick="show('msg',this)">💬 Send Us a Message</div>
 <div class="tab t-fund" onclick="show('fund',this)">🐝 Fundraiser</div>
 </nav>
@@ -59,6 +60,45 @@ a.back{position:absolute;left:14px;top:14px;text-decoration:none;font-weight:800
 <div class="spick" data-s="DeLand 2" onclick="pickSchool('DeLand 2',this)">DeLand 2</div>
 </div>
 <div id="resList" class="empty">Loading your resources… 🐝</div>
+</div>
+
+<div class="panel" id="p-bp">
+<div class="result" style="border-top-color:var(--purple);">
+<h2>🐻 Bear Phonics — learn to read with Mrs. Bear!</h2>
+<div class="note">B.E.A.R. Phonics (Bee Elite Academy of Reading) is Mrs. Bear's very own story-based reading program — the same one we use in our classrooms — and it's <b>free for every Kid City USA family</b> on YouTube. Join Claudia and Mrs. Bear on their listening adventures: your little bestie will hear each sound in a fun story, learn how their mouth makes it, and start blending sounds into real words and sentences. Children as young as three can learn to read! 💛</div>
+<a class="go g1" href="https://www.youtube.com/@bearseceden" target="_blank" rel="noopener" style="display:block;">▶️ Open the Bear Phonics YouTube Channel</a>
+</div>
+
+<div class="section">🎬 The Lessons — watch in order with your child</div>
+<div class="reslist">
+<a class="rescard" href="https://www.youtube.com/watch?v=WZchhYszvEs" target="_blank" rel="noopener"><div class="em">1️⃣</div><div class="txt"><h3>Lesson 1 — M, E &amp; S</h3><p>First sounds, first words, and your child's very first sentence: "See me."</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=jdwrmQdJru0" target="_blank" rel="noopener"><div class="em">2️⃣</div><div class="txt"><h3>Lesson 2 — T</h3><p>The ticking-clock sound! Builds the first Phonics Word Wall: eat, sat, meat &amp; more.</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=7T7EiUlqpzM" target="_blank" rel="noopener"><div class="em">3️⃣</div><div class="txt"><h3>Lesson 3 — H &amp; W</h3><p>New sounds, new words: he, we, heat — "He eats meat."</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=jsN67JgllE8" target="_blank" rel="noopener"><div class="em">4️⃣</div><div class="txt"><h3>Lesson 4 — F &amp; TH</h3><p>Feet and teeth! Learning how our mouths make the tricky sounds.</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=HJ_cm8DWrHY" target="_blank" rel="noopener"><div class="em">5️⃣</div><div class="txt"><h3>Lesson 5 — L &amp; D</h3><p>The word wall grows to 20 words: feed, leaf, heel — "Feed me!"</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=RrQSLZB-dkM" target="_blank" rel="noopener"><div class="em">6️⃣</div><div class="txt"><h3>Lesson 6 — R &amp; Z</h3><p>Roaring lions and buzzing bees — plus the first sight word: "the."</p></div><div class="arrow">→</div></a>
+</div>
+
+<div class="section">👨‍👩‍👧 For Grown-Ups — "Teach Your Child to Read" versions</div>
+<div class="note" style="margin-bottom:10px;">Same lessons, with extra "Pause &amp; Ask" coaching moments so YOU can be the teacher at home.</div>
+<div class="reslist">
+<a class="rescard" href="https://www.youtube.com/watch?v=44gPgsUxUfE" target="_blank" rel="noopener"><div class="em">🍎</div><div class="txt"><h3>Teach Lesson 1 — M, E &amp; S</h3><p>The parent &amp; educator cut, with coaching prompts.</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=bRHw1tzcnH4" target="_blank" rel="noopener"><div class="em">🍎</div><div class="txt"><h3>Teach Lesson 2 — T</h3><p>The parent &amp; educator cut, with coaching prompts.</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=NptyduyVnRY" target="_blank" rel="noopener"><div class="em">🍎</div><div class="txt"><h3>Teach Lesson 3 — H &amp; W</h3><p>The parent &amp; educator cut, with coaching prompts.</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=aLtPaPdk_j0" target="_blank" rel="noopener"><div class="em">🍎</div><div class="txt"><h3>Teach Lesson 4 — F &amp; TH</h3><p>The parent &amp; educator cut, with coaching prompts.</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=aw728SjaWT8" target="_blank" rel="noopener"><div class="em">🍎</div><div class="txt"><h3>Teach Lesson 5 — L &amp; D</h3><p>The parent &amp; educator cut, with coaching prompts.</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=2alBYfdc9Nk" target="_blank" rel="noopener"><div class="em">🍎</div><div class="txt"><h3>Teach Lesson 6 — R &amp; Z</h3><p>The parent &amp; educator cut, with coaching prompts.</p></div><div class="arrow">→</div></a>
+</div>
+
+<div class="section">🎵 Sing-Alongs &amp; Extra Fun</div>
+<div class="reslist">
+<a class="rescard" href="https://www.youtube.com/watch?v=AG64i9oe9jQ" target="_blank" rel="noopener"><div class="em">🎤</div><div class="txt"><h3>The BEAR Phonics Anthem</h3><p>The song that closes every lesson — "Watch me learn how to read!"</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=1M1Abuj7wu8" target="_blank" rel="noopener"><div class="em">🛒</div><div class="txt"><h3>Little Besties: Mrs. Bear Goes to the Grocery Store</h3><p>A full classroom adventure with songs, counting &amp; feelings — our most-watched video!</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=e6jDHnR41QM" target="_blank" rel="noopener"><div class="em">🦁</div><div class="txt"><h3>Learning the R Sound</h3><p>A quick 2-minute sing-along clip — rrrroar like a lion!</p></div><div class="arrow">→</div></a>
+<a class="rescard" href="https://www.youtube.com/watch?v=dXpa3TXFRkU" target="_blank" rel="noopener"><div class="em">🐝</div><div class="txt"><h3>Learning the Z Sound</h3><p>A quick 2-minute sing-along clip — buzz buzz buzz!</p></div><div class="arrow">→</div></a>
+</div>
+
+<div class="note" style="background:#f3edff;border-left:5px solid var(--purple);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:600;margin-top:16px;">💡 <b>Tips from Mrs. Bear:</b> watch one lesson at a time and let your child answer out loud — the videos pause on purpose so they can respond! A lesson a week is plenty. Repeating a lesson is wonderful, not "behind." And when the Anthem plays… dance! 🐻💛</div>
 </div>
 
 <div class="panel" id="p-msg">
@@ -160,6 +200,9 @@ html += `<a class="rescard" href="javascript:void(0)" onclick="openMsg('${esc(t)
 <div class="txt"><h3>${esc(r.Title)}</h3><p>${esc(r.Description||'')}</p></div>
 <div class="arrow">→</div></a>`;
 } else {
+// Our own portal sub-pages (menu, lesson plans) link back to parent.html, which needs the PIN in
+// sessionStorage. Opening them in a NEW tab loses the PIN (→ "logged out" on Back), so open those
+// same-origin /hive/ .html pages in the SAME tab. PDFs and outside links still open in a new tab.
 let sameTab=false;
 try{ const abs=new URL(url, location.href); if(abs.origin===location.origin && /\/hive\/.*\.html$/i.test(abs.pathname)) sameTab=true; }catch(e){}
 const attrs = sameTab ? '' : ' target="_blank" rel="noopener"';
